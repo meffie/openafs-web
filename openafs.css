@@ -5,6 +5,8 @@ BODY                 { background: #ffffff; color: #000000 }
 
 BODY.top             { background: #003399; color: #ffffff }
 TABLE.top            { background: #003399; color: #ffffff }
+TD.top               { background: #003399; color: #ffffff }
+TH.top               { background: #003399; color: #ffffff }
 
 BODY.navbar          { background: #003399; color: #ffff00 }
 TABLE.navbar         { background: #003399; color: #ffff00 }
