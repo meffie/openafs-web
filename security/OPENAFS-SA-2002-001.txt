@@ -1,3 +1,5 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
 		  OpenAFS Security Advisory 2002-001
 
 Topic: Remote root vulnerability in OpenAFS servers
@@ -62,13 +64,13 @@ RCS file: /cvs/openafs/src/rx/Makefile.in,v
 retrieving revision 1.4.2.1
 retrieving revision 1.4.2.2
 diff -u -r1.4.2.1 -r1.4.2.2
---- openafs/src/rx/Makefile.in	2002/01/20 08:38:38	1.4.2.1
+- --- openafs/src/rx/Makefile.in	2002/01/20 08:38:38	1.4.2.1
 +++ openafs/src/rx/Makefile.in	2002/08/02 02:45:14	1.4.2.2
 @@ -38,7 +38,7 @@
  # Generic xdr objects (or, at least, xdr stuff that's not newly defined for rx).
  # Really the xdr stuff should be in its own directory.
  #
--XDROBJS = xdr_arrayn.o xdr_rx.o xdr_afsuuid.o
+- -XDROBJS = xdr_arrayn.o xdr_rx.o xdr_afsuuid.o
 +XDROBJS = xdr.o xdr_array.o xdr_arrayn.o xdr_rx.o xdr_afsuuid.o
  
  RXOBJS = rx_clock.o rx_event.o rx_user.o rx_lwp.o rx.o rx_null.o rx_globals.o \
@@ -78,7 +80,7 @@ RCS file: /cvs/openafs/src/rx/xdr.c,v
 retrieving revision 1.4
 retrieving revision 1.5
 diff -u -r1.4 -r1.5
---- openafs/src/rx/xdr.c	2002/06/08 04:43:38	1.4
+- --- openafs/src/rx/xdr.c	2002/06/08 04:43:38	1.4
 +++ openafs/src/rx/xdr.c	2002/07/31 23:13:09	1.5
 @@ -558,6 +558,8 @@
  	u_int size;
@@ -94,13 +96,13 @@ RCS file: /cvs/openafs/src/rx/xdr_array.c,v
 retrieving revision 1.4
 retrieving revision 1.5
 diff -u -r1.4 -r1.5
---- openafs/src/rx/xdr_array.c	2001/08/08 00:03:57	1.4
+- --- openafs/src/rx/xdr_array.c	2001/08/08 00:03:57	1.4
 +++ openafs/src/rx/xdr_array.c	2002/07/31 23:13:09	1.5
 @@ -84,7 +84,10 @@
  	register caddr_t target = *addrp;
  	register u_int c;  /* the actual element count */
  	register bool_t stat = TRUE;
--	register int nodesize;
+- -	register int nodesize;
 +	register u_int nodesize;
 +
 +        i = ((~0) >> 1) / elsize;
@@ -113,13 +115,13 @@ RCS file: /cvs/openafs/src/rx/xdr_arrayn.c,v
 retrieving revision 1.4
 retrieving revision 1.5
 diff -u -r1.4 -r1.5
---- openafs/src/rx/xdr_arrayn.c	2001/08/08 00:03:57	1.4
+- --- openafs/src/rx/xdr_arrayn.c	2001/08/08 00:03:57	1.4
 +++ openafs/src/rx/xdr_arrayn.c	2002/07/31 23:13:09	1.5
 @@ -89,7 +89,10 @@
  	register caddr_t target = *addrp;
  	register u_int c;  /* the actual element count */
  	register bool_t stat = TRUE;
--	register int nodesize;
+- -	register int nodesize;
 +	register u_int nodesize;
 +
 +        i = ((~0) >> 1) / elsize;
@@ -184,3 +186,11 @@ code on the server under attack, possibly leading to unauthorized root
 access.  Similarly a rogue server may be able to use the buffer overflow
 to attack a client which makes one of the RPC's with unsafe output
 arguments.
+
+-----BEGIN PGP SIGNATURE-----
+Version: PGP 6.5.8
+
+iQBVAwUBPUxo8bD+655x7JNnAQGOYAH/ZzSzw5FyLI8YTmgJH4qSO7rKQVpy8F+L
+aIU3Xy4HngBpYALsOrJLkCI7h966Li00YhyXgsm4UW9NzbCORc80Kw==
+=iILR
+-----END PGP SIGNATURE-----
