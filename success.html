@@ -127,6 +127,47 @@ Computing Services rolled out OpenAFS to both clients and servers early, and now
 Despite often using pre-release versions of the software few problems have been experienced, and fixes have generally been quickly forthcoming, either internally done and contributed back to the community, or thanks to the many active contributors to the ongoing success of the project.
 </p>
 </dd>
+<dt>Matthew E. Hoskins, New Jersey Institute of Technology University Information Systems, shared:</dt>
+<dd>
+<p>
+University Information Systems (UIS) started testing OpenAFS about 7
+months ago for the purpose of binary standardization across our web,
+application, and database servers. Those 7 months have been very stable
+and we are starting to roll our cell into production.  We currently have
+~140gb of vicep space across four servers (2 linux, 2 solaris8).  The
+cell gracefully handled two events of failed disks without interruption. 
+<p>
+OpenAFS has and will continue to help me keep our 45 web, application,
+and database servers running the same versions of binaries and scripts. 
+<p>
+As our programmers learn of the features and capabilities of OpenAFS
+they increasingly want their workstations added as clients also (mixture
+of sun and linux boxes).  As trust builds in OpenAFS we will also start
+moving production data into volumes rather than local storage. This will
+allow applications to "float" between nodes as necessary. 
+<p>
+Our site has been a long time Transarc customer for our academic cell
+(2.6Tb, 6 fileservers, 17000 users, 100s of workstations), The OpenAFS
+project and its contributors are breathing new life into a wonderful
+technology.
+<p>
+Some features that would be of value:
+<p>
+<ul>
+<li>OpenAFS documentation on kaserver -> krb5 migration</li>
+<li>OpenAFS documentation on setup for new krb5 cells</li>
+<li>Integrated krb5 kdc</li>
+<li>R/W replicated volumes</li>
+<li>All logging via syslog</li>
+<li>better end-user command line utilities (An "ls" replacement that
+better described ACLs would be awesome)</li>
+</ul>
+<p>
+I am working on converting all my various perl scripts into a perl
+module so i can contribute it and open it up for community development.  
+</p>
+<dd>
+<p>
 </dl>
 <h2>Sharing your OpenAFS Story</h2>
 Please contact <A HREF="mailto:shadow@dementia.org">Derrick Brashear</A> for details.
