@@ -28,13 +28,19 @@ The following are items known to be in progress, and, where available, a point o
 <dd><p>No timeline available.</p>
 </dd>
 <dt><p>OpenBSD port</p></dt>
-<dd><p>Expected by mid-August.</p>
+<dd><p>In progress. No cache manager support yet available.</p>
 </dd>
 <dt><p>autoconf/automake support</p></dt>
 <dd><p>In progress. Contact Derrick Brashear (shadow@dementia.org)</p>
 </dd>
 <dt><p>AFSDB DNS resource record support</p></dt>
-<dd><p>Substantially complete. Contact Nickolai Zeldovich (kolya@mit.edu)</p>
+<dd><p>Available for all ports</p></dt>
+</dd>
+<dt><p>Dynamic root (/afs) support</p></dt>
+<dd><p>Available for all UNIX ports (Windows includes similar "Freelance" support)</p></dt>
+</dd>
+<dt><p>Freelance client support</p></dt>
+<dd><p>Available for Windows (UNIX clients include similar "Dynamic root" support)</p></dt>
 </dd>
 <dt><p>@sys expansion from list</p></dt>
 <dd><p>Substantially complete. Contact Ted McCabe (ted@mit.edu)</p>
@@ -56,7 +62,7 @@ The following are items which have been proposed, but which are not yet in progr
 <dd><p>Add Kerberos v5 and additional encryption type support. Contact Jeff Hutzelman (jhutz@cmu.edu)</p>
 </dd>
 <dt><p>Large files and volumes</p></dt>
-<dd><p>Support for files over 2gb and large volumes (limit is currently >8gb)</p>
+<dd><p>Support for files over 2gb and large volumes (limit is currently >8gb for volumes)</p>
 </dd>
 <dt><p>Multiple volume versions</p></dt>
 <dd><p>Support for multiple "clones" of a single volume.</p>
@@ -69,6 +75,15 @@ The following are items which have been proposed, but which are not yet in progr
 </dd>
 <dt><p>Windows installable file system support</p></dt>
 <dd><p>Implement AFS as a Windows file system instead of as a virtual SMB server.</p>
+</dd>
+<dt><p>Better server preference support</p></dt>
+<dd><p>Allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact Derrick Brashear (shadow@dementia.org)</p>
+</dd>
+<dt><p>AFS/NFS translator</p></dt>
+<dd><p>Create an AFS/NFS translator for OpenAFS. A shell of one for Solaris only is in the source tree but needs more work before it will be useful. Contact Derrick Brashear (shadow@dementia.org). Another approach is a user-mode implementation. Contact Jeff Hutzelman (jhutz+@cmu.edu)</p>
+</dd>
+<dt><p>Partition UUIDs</p></dt>
+<dd><p>Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact Derrick Brashear (shadow@dementia.org).
 </dd>
 </dl>
 
