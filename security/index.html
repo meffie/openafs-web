@@ -17,6 +17,49 @@ are also included.
 At the end of this document is a <a href="#salist">table of all
 OpenAFS security advisories</a>.
 
+<p>If you want to report security problems or issues with OpenAFS,
+you may send mail to the OpenAFS security officer at
+<a href="mailto:security@openafs.org">security@openafs.org</a>.
+When sending sensitive information, we ask that you encrypt it
+with PGP, using the <a href="sec-key.asc">PGP key for
+security@openafs.org</a>.
+
+<hr>
+
+<a name="OPENAFS-SA-2003-001"></a>
+<h2>OPENAFS-SA-2003-001 - Cryptographic weakness in Kerberos v4</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>25-Mar-2003</td></tr>
+<tr><th align="left">Last Update:</th><td>25-Mar-2003</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.2.8, OpenAFS 1.3.0-1.3.2</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2003-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2003-001.txt</a>
+<tr><th align="left">Patch:</th><td>
+  <a href="kaserver-disable-krb4-crossrealm-20030317.delta">
+  http://www.openafs.org/security/kaserver-disable-krb4-crossrealm-20030317.delta</a>
+  <a href="kaserver-disable-krb4-crossrealm-20030317.delta.asc">(PGP signature)</a>
+</td></tr>
+</table>
+
+<p>A cryptographic weakness in version 4 of the Kerberos protocol allows an
+attacker to use a chosen-plaintext attack to impersonate any principal in
+a realm.  OpenAFS kaserver implements version 4 of the Kerberos protocol,
+and therefore is vulnerable.  An attacker that knows a shared cross-realm
+key between any remote realm and the local realm can impersonate any
+principal in the local realm to AFS database servers and file servers in
+the local cell, and other services in the local realm.  An attacker that
+can create arbitrary principal names in a realm can also impersonate any
+principal in that realm.
+
+<p>If your realm has no shared keys, and does not allow users to create
+arbitrary principal names, you are not exposed to this vulnerability.
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time.
+
 <hr>
 
 <a name="OPENAFS-SA-2002-001"></a>
@@ -62,6 +105,11 @@ for this vulnerability.
   <td>2002-001</td><td>03-Aug-2002</td><td>03-Aug-2002</td>
   <td>High</td><td>1.0-1.2.5, 1.3.0-1.3.2</td>
   <td><a href="#OPENAFS-SA-2002-001">xdr_array integer overflow</a></td>
+</tr>
+<tr>
+  <td>2003-001</td><td>25-Mar-2003</td><td>25-Mar-2003</td>
+  <td>High</td><td>1.0-1.2.8, 1.3.0-1.3.2</td>
+  <td><a href="#OPENAFS-SA-2003-001">Cryptographic weakness in Kerberos v4</a></td>
 </tr>
 </table>
 
