@@ -4,9 +4,9 @@
 if (window.name != "openafs_main") {
   x=location.pathname.substring(0,11);
   y=location.pathname.substring(0,14);
-  if (x != "/frameless" && y != "/sb/frameless") {
+  if (x != "/frameless/" && y != "/sb/frameless/") {
     location.href =
-      "http://www.openafs.org/frameset.html?site=openafs&content=" + location.pathname;
+      "http://www.openafs.org/fset.shtml" + location.pathname;
   }
 }
 

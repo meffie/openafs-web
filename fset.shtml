@@ -1,0 +1,20 @@
+<!--NO-FRAMELESS-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+             "http://www.w3c.org/TR/html4/frameset.dtd">
+<html><head>
+<title>OpenAFS</title>
+<link href="openafs.css" rel="stylesheet" type="text/css">
+</head>
+<!--#if expr="$PATH_INFO = /^\/sb\//" -->
+<!--#set var="base" value="/sb/" -->
+<!--#else -->
+<!--#set var="base" value="/" -->
+<!--#endif -->
+<frameset rows="100,*" border=0>
+  <frame src="<!--#echo var="base" -->top.html" scrolling=no name="top">
+  <frameset cols="165,*" border=0>
+    <frame src="<!--#echo var="base" -->navbar.html" name="navbar">
+    <frame src="<!--#echo var="PATH_INFO" -->" name="openafs_main">
+  </frameset>
+</frameset>
+</html>
