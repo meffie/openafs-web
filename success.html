@@ -117,6 +117,42 @@ middle-layer web page.
 At the moment we do not buy any commercial support. But we are trying to extend
 our cell through the whole city with 160 sites and 50000 users. At that
 time we will need some help.
+</p><p>
+Since writing this story two years passed by.
+</p><p>
+Currently we have 1733 volumes on-line, 1585 of them user-volumes. The
+aggregated quota is 210GB with 90GB used. The initial user-qouta is
+50MB. With the help of a PHP-based web-tool the qouta can be changed by
+a teacher. Basic fs- and vos-operations (setacl, mkmount, release) are
+done by this teacher manually at command line-shell.
+</p><p>
+In this 2 years of operation there was not a single-data-loss because of
+AFS (not that there has been any data-loss at all :-) Even the sudden
+death of a file-server-machine didn't corrupt data. The second incident
+of this kind wasn't event noticed for some time.
+</p><p>
+The 4 AFS-server-machines (Athlon 1400, 1GB RAM, E1000-Network) still
+have an avg-load of 0.02. Obviously there is no need in replacing them
+in near future.
+</p><p>
+3 Months ago we performed an update from RedHat Linux 7.2 to Fedora Core 1.
+Except some minor troubles with the NFS-reexporters and the cfengine it
+worked seamlessly. At the same time OpenAFS 1.2.11 was installed without
+any pain at all. OpenAFS 1.2.3 was used before.
+</p><p>
+We use our file-servers not only for user-files but also for backup and
+system-maintainance files. Daily system-backup of all servers (mail,
+ldap, ...) is done to an AFS-volume for each server. The volume is
+replicated to another fileserver. We use cfengine for administrative
+tasks. The cfengine-repository is stored in AFS and distributed by AFS
+and not the cfengine-file-server.
+</p><p>
+The balancer is used to spread load between fileservers by moving
+volumes in respect of week-usage and number of volumes.
+</p><p>
+As a next step we will add an fifth fileserver on a remote location (only
+connected with 128 kbit). We hope that by replicating a ro-db-server and 
+many volumes to that server will be sufficient to keep things working.
 </p>
 </dd>
 <dt>Derrick Brashear, Carnegie Mellon University Computing Services Division and OpenAFS volunteer, shared:</dt>
