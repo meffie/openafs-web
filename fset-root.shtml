@@ -1,7 +1,7 @@
 <!--NO-FRAMELESS-->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
              "http://www.w3c.org/TR/html4/frameset.dtd">
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 <!--
 if (window.name == "openafs_main") {
   top.location = location;
@@ -12,11 +12,11 @@ if (window.name == "openafs_main") {
 <title>OpenAFS</title>
 <link href="/openafs.css" rel="stylesheet" type="text/css">
 </head>
-<frameset rows="100,*" border=0>
-  <frame src="/top.html" scrolling=no name="top">
-  <frameset cols="165,*" border=0>
-    <frame src="/navbar.html" name="navbar">
-    <frame src="/pages<!--#echo var="PATH_INFO" -->" name="openafs_main">
+<frameset rows="100,*">
+  <frame src="/top.html" scrolling=no name="top" frameborder=0>
+  <frameset cols="165,*">
+    <frame src="/navbar.html" name="navbar" frameborder=0>
+    <frame src="/pages<!--#echo var="PATH_INFO" -->" name="openafs_main" frameborder=0>
   </frameset>
 </frameset>
 </html>
