@@ -1,0 +1,12 @@
+BODY      { background: #ffffff; color: #000000 }
+A:link    { background: #ffffff; color: #000fff }
+A:visited { background: #ffffff; color: #0000ff }
+A:active  { background: #ffffff; color: #ff0000 }
+
+BODY.top          { background: #003399; color: #ffffff }
+
+BODY.navbar       { background: #003399; color: #ffffff }
+.navbar A:link    { background: #003399; color: #ffff00 }
+.navbar A:visited { background: #003399; color: #ffff00 }
+.navbar A:active  { background: #003399; color: #ffff00 }
+.navbar TH        { background: #ff9900; color: #000000 }
