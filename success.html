@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3c.org/TR/html4/loose.dtd">
+<html><head>
+<title>Build Success with OpenAFS!</title>
+<link href="/openafs.css" rel="stylesheet" type="text/css">
+</head>
+<body bgcolor="#ffffff" text="#000000"
+      link="#000fff" vlink="#0000ff" alink="#0000ff">
+
+<h1>Build Success with OpenAFS!</h1>
+
+<h2>OpenAFS Success Stories</h2>
+<dl>
+<dt>Robert Carter, Duke University Office of Information Technology, shared:</dt>
+<dd>
+<p>We're using the OpenAFS client code pretty extensively, and
+have been since fairly early in its release cycle.  We're running the
+OpenAFS client on all of our Windows lab machines (we cheered the day the
+Windows clients became available, since we'd never found the funding to put
+Transarc clients on our Windows machines, and since the students had been
+clammoring for access to their AFS home directories for quite a while).
+We're also using the OpenAFS client on our MacOS X systems, although it
+will be summer before we actually roll out OS X in our campus lab
+environments.  We've recently started a publicity campaign on campus to get
+students and faculty to take advantage of the OpenAFS client installation
+on their personal computers wherever possible, viewing AFS access from
+desktop systems throughout the campus as one of the primary ways to move
+toward decomissioning insecure FTP access to our central facilities -- we
+find that running AFS clients on desktop systems greatly simplifies our
+users' use of web development tools like DreamWeaver, since with the
+client, they can publish changes directly into their AFS home directories.
+</p><p>
+On the whole, we've had very few problems with the client -- most of
+them related to the installer or to versioning issues with earlier versions
+of the code.  We're still working on completing our integration work with
+Windows 2000 and XP -- we've established cross-realm trust between our
+nascent Active Directory and our existing K5 realm, and we've been working
+on trying to arrange to have AFS tokens derived locally from the K5 tickets
+granted to users on our Windows systems at login time.  So far, that's not
+worked quite as well as we'd hoped, but that's purely a Windows problem,
+not an OpenAFS problem -- we've worked around it with some simple scripting
+at the client end for now, but I'm hopeful that when we get a chance to do
+some more developement work over the summer, we may find a means to make
+tokenization transparent on our Win2K/XP systems.
+</p><p>
+We're hoping to do some testing early in the summer with the OpenAFS
+server, and provided that we can get everything to work out, to start
+migrating our server farm from the Transarc server code to the OpenAFS
+server code.  We've been using AFS at our site since the early 1990s and we 
+have a modestly-large AFS cell comprising Solaris servers of various vintage
+(Solaris 2.6, mostly, with some Solaris 8 on our more recent acquisitions).
+</p>
+</dd>
+<dt>Jimmy Engelbrecht, Kungliga Tekniska Högskolan Elektro Department, shared:</dt>
+<dd>
+<p>
+Our cell runs on OpenAFS fileservers on Tru64 5.0a. We have 0.5 - 1 TB of data
+and about 250-400 clients. We are VERY pleased with the fileserver, it's quite stable, no crashes in the 6 months we've been running them.
+</p><p>
+Our 15 Solaris clients are running OpenAFS, we are very pleased with
+this one. (We plan to have about 100 Solaris hosts in a few months.)
+</p>
+</dd>
+<dt>Derrick Brashear, Carnegie Mellon University Computing Services Division and OpenAFS volunteer, shared:</dt>
+<dd>
+<p>
+Computing Services rolled out OpenAFS to both clients and servers early, and now runs modern versions on Solaris 2.6 servers, as well as on Solaris 7 and 8 and locally-updated Redhat 6.1 clients. Additionally, the OpenAFS Windows NT client is being tested general rollout.</p>
+<p>
+Despite often using pre-release versions of the software few problems have been experienced, and fixes have generally been quickly forthcoming, either internally done and contributed back to the community, or thanks to the many active contributors to the ongoing success of the project.
+</p>
+</dd>
+</dl>
+
+<div id="footer"><hr>
+<address>&lt;webmaster@openafs.org&gt;</address>
+<address>Last modified: $Date$</address>
+</div></body></html>
