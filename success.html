@@ -61,6 +61,64 @@ Our 15 Solaris clients are running OpenAFS, we are very pleased with
 this one. (We plan to have about 100 Solaris hosts in a few months.)
 </p>
 </dd>
+<dt>Chris Huebsch, volunteer administrator for Dr. Wilhelm Andre Gymnasium, Chemnitz, Germany, shared:</dt>
+<dd>
+<p>
+I first used AFS in 1995 during my first year as a student. Now I am a
+member of the academic staff at Chemnitz University of Technology.
+Two years ago I started helping the Dr. Wilhelm Andre Gymnasium
+(Gymnasium is the German word for high school) to build up their
+computer lab. At that time we had only 30 workstations and one server
+using NFS.
+</p><p>
+Last year (2001) we were very lucky and got enough money to build up a large
+intranet. At least large for a school. We now have 4 fileservers (each
+with 400 GB hardware RAID) with a total of 1.6 TB AFS space. Normal
+school-installations have to live with 50 to 100 GB on Windows NT or Novell.
+</p><p>
+We have 1500 users and 100 clients (the next 50 clients are in sight).
+The primary platform is Linux. Some workstations run Windows 2000 for 
+the sake of legacy applications.
+</p><p>
+Before OpenAFS, we used NFS and Samba. There were no real problems with that
+solution because we had very little filespace (20 GB) on one
+server. But we saw the problems arising with 4 servers and much more
+capacity: The load on the server would rise and there was no transparent
+way to reorganize the location of the directories without heavy work on
+the users side due to absolute path names in configuration files!
+Neither NFS nor Samba provide ACLs in a smooth way. It would have required 
+patching and installing lots of additional software. And quotas are not really
+easy to use. And last but not least: AFS is just cool :-)
+</p><p>
+OpenAFS saves us a lot of time. This starts with the installation of our
+workstations via RedHat KickStart and NFS. Installing 100 clients in
+parallel (each requiring about 1.5 GB of binaries) produced an
+insustainable load on one server. So we decided to create an install
+volume and have it replicated on each AFS server. Each AFS Server
+machine runs a NFS re-exporter. With a round robin DNS-entry for the
+NFS installation server we can quadruple the capacity of our install
+source without writing cryptic KickStart configurations.
+</p><p>
+Of course all the well known benefits of AFS (automatic backups, fault
+tolerance, etc.) help us save a lot of time and stress.
+</p><p>
+One of the school specific problems with AFS is that we need an operation
+mode for our workstations and servers allowing users to log in using
+AFS authentication, but without allowing access to the home volumes of 
+the users. We need this mode for writing "electronic tests". We try to solve 
+this with negative ACLs for a special test-writing-group.
+</p><p>
+The next problem is to distribute some of the rights of
+system:adminstrators without making users members of that group. For
+instance we like to give teachers the right to change quotas of their
+puplis' volumes but not their own. We think we will solve this with a
+middle-layer web page.
+</p><p>
+At the moment we do not buy any commercial support. But we are trying to extend
+our cell through the whole city with 160 sites and 50000 users. At that
+time we will need some help.
+</p>
+</dd>
 <dt>Derrick Brashear, Carnegie Mellon University Computing Services Division and OpenAFS volunteer, shared:</dt>
 <dd>
 <p>
@@ -70,7 +128,8 @@ Despite often using pre-release versions of the software few problems have been 
 </p>
 </dd>
 </dl>
-
+<h2>Sharing your OpenAFS Story</h2>
+Please contact <A HREF="mailto:shadow@dementia.org">Derrick Brashear</A> for details.
 <div id="footer"><hr>
 <address>&lt;webmaster@openafs.org&gt;</address>
 <address>Last modified: $Date$</address>
