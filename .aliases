@@ -1,0 +1,18 @@
+# Special files at the root
+navbar.html
+top.html
+gco.css
+frameless
+pages
+
+# Global aliases
+cgi-bin
+icons
+manual
+mailman
+pipermail
+rt
+
+# Aliased directories
+dl
+images
