@@ -30,6 +30,9 @@ The following are items known to be in progress, and, where available, a point o
 <dt><p>Windows symlink behavior</p></dt>
 <dd><p>Known to be flawed; No known fixes.
 </dd>
+<dt><p>Fakestat</p></dt>
+<dd><p>The cache manager can fake mountpoint directory information so clients which stat all of /afs will not need to time out all the cells. Introduced in 1.2.6.
+</dd>
 </dl>
 
 
@@ -37,9 +40,6 @@ The following are items known to be in progress, and, where available, a point o
 The following are items which involve fundamental behavior changes or are not expected to be advanced enough to be included in 1.2 releases.
 
 <dl>
-<dt><p>Fakestat</p></dt>
-<dd><p>The cache manager can fake mountpoint directory information so clients which stat all of /afs will not need to time out all the cells. Not yet tested on all platforms, and will not fix MacOS X Finder issues.
-</dd>
 </dl>
 
 <div id="footer"><hr>
