@@ -3,15 +3,18 @@ BODY                 { background: #ffffff; color: #000000 }
 :visited             { background: #ffffff; color: #0000ff }
 :active              { background: #ffffff; color: #0000ff }
 
-BODY.top             { background: #003399; color: #ffffff }
-TABLE.top            { background: #003399; color: #ffffff }
-TD.top               { background: #003399; color: #ffffff }
-TH.top               { background: #003399; color: #ffffff }
+BODY.top             { background: #ffffff; color: #000000 }
+TABLE.top            { background: #ffffff; color: #000000 }
+TD.top               { background: #ffffff; color: #000000 }
+TH.top               { background: #ffffff; color: #000000 }
 
-BODY.navbar          { background: #003399; color: #ffff00 }
-TABLE.navbar         { background: #003399; color: #ffff00 }
-TD.navbar            { background: #003399; color: #ffff00 }
-TD.navbar :link      { background: #003399; color: #ffff00 }
-TD.navbar :visited   { background: #003399; color: #ffff00 }
-TD.navbar :active    { background: #003399; color: #ffff00 }
-TH.navbar            { background: #ff9900; color: #000000 }
+BODY.navbar          { background: #99ccff; color: #000000 }
+TABLE.navbar         { background: #99ccff; color: #000000 }
+TD.navbar            { background: #99ccff; color: #000000 }
+TD.navbar :link      { background: #99ccff; color: #000fff }
+TD.navbar :visited   { background: #99ccff; color: #0000ff }
+TD.navbar :active    { background: #99ccff; color: #0000ff }
+TH.navbar            { background: #99ccff; color: #000000 }
+TH.navbar :link      { background: #99ccff; color: #000fff }
+TH.navbar :visited   { background: #99ccff; color: #0000ff }
+TH.navbar :active    { background: #99ccff; color: #0000ff }
