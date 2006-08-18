@@ -9,6 +9,7 @@ if (window.name == "openafs_main") {
 //-->
 </script>
 <html><head>
+<META name="verify-v1" content="VMsthPusbXnedJuKjM0/lhH0uzVj79aQ/lPfk2FLXsA=" />
 <title>OpenAFS</title>
 <link href="/openafs.css" rel="stylesheet" type="text/css">
 </head>
