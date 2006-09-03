@@ -15,7 +15,7 @@ solution.&nbsp; The OpenAFS Project provides binary installation packages
 appropriate for both individual users and organizations with thousands
 of members.<br>
 <br>
-<h2>Current Release: OpenAFS for Windows 1.4.1</h2>
+<h2>Current Stable Release: OpenAFS for Windows 1.4.1</h2>
 (released 23 April 2006)<br>
 <h3>Features:</h3>
 <ul>
@@ -51,6 +51,28 @@ Firewall</li>
   <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/frames.htm">1.4.1 Release Notes</a><br>
   </li>
 </ul>
+<h3>Known Bugs:</h3>
+<ul>
+<li>The pthread library, <b>afspthread.dll</b>, is not safe to unload.  This can cause a crash in applications which load AFS libraries and then unload them when they are no longer required.
+<li>ANSI filename support is broken.
+<li>Rapid creation and destruction of SMB virtual circuits can result in a deadlock that will require the AFS service to be terminated via the Task Manager and manually restarted.
+<li>When the smb_SendPacket routine fails, it may release a reference to the SMB virtual circuit object that it doesn't hold.  This can result in a panic condition.
+<li>There is a known deadlock condition between two locks in the SMB server.
+<li><b>fs flushXXX</b> will cause the AFS cache manager to release references to the wrong stat cache entries.  This can cause some stat cache entries to never be freed and the resulting file system objects may become inaccessible.
+<li>volume server failover does not work when mounting the 'root.afs' volume in the default cell.  (Freelance mode off.)
+<li>The help files for the AFS system tray and control panel applications are inaccessible.
+<li>Mount points to volumes that do not exist can result in a crash of the AFS client service.
+<li>Over quota and Disk full errors are not returned to the caller.
+<li>The Integrated Logon DLL can cause applications started by CreateProcessAsUser() to crash.  This is known to be a problem with remote installations performed by the System Management Service.
+<li>Message Box dialogs displayed when a network failure is reported by the bound LAN adapter prevents the automatic restarting of the afsd_service.exe
+<li>The Integrated Login DLL can cause winlogin.exe to produce a Windows blue screen if it is called with a Windows Domain that does not exist.  This can happen during a SysPrep operation.
+<li>Accessing more than the maximum number of volumes (5000 by default) will result in a panic condition since volume entries are not recycled within the cache manager.
+<li>The AFS Shell Extension does not always find its resource library resulting in a menu without text strings.
+<li>An error in the generation of the BackConnectionHostNames registry value can trigger a bug in all versions of Windows that can deadlock the kernel during authentication attempts.
+<li>The export list from <B>afsauthent.dll</b> is incorrect resulting in third party applications that call pr_End crashing.
+<li>The winsock library is improperly initialized and released by the RX library causing random network errors in third party applications which load and unload the library as necessary.
+<li>Directory searches performed by Windows Vista can fail as InfoLevels 0x105 and 0x0106 are not supported but no error is returned.
+</ul>
 <h3>Downloads:</h3>
 <ul>
   <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/OpenAFSforWindows-1-4-1.exe">
@@ -65,36 +87,29 @@ EXE installer (debug build)</a></li>
 MSI installer (debug build)</a></li>
 </ul>
 <br>
-<h2>Test Release: OpenAFS for Windows 1.4.2 Release Candidate 2</h2>
+<h2>Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 2</h2>
 (released 30 August 2006)<br>
 <h3>Features:</h3>
 <ul>
-  <li>Removes race condition and deadlock introduced in 1.4.1</li>
+  <li>Fixes all known bugs in 1.4.1</li>
   <li>Thread priorities are adjusted based upon age of CIFS requst</li>
   <li>Improved CIFS Server performance due to finer grained locking</li>
   <li>Improved resource recycling</li>
   <li>Works with Microsoft Vista Build 5536</li>
   <li>Implements Inline Bulk Status RPCs which speeds up directory listings</li>
-  <li>Fixes ANSI filenames option.</li>
-  <li>Fixes vlserver failover when mounting 'root.afs' volume (Freelance mode disabled)</li>
-  <li>Installs help files in the correct location for use by AFS System Tray and Control Panel</li>
-  <li>Improved reporting of "over quota" and "disk full" errors</li>
-  <li>Prevents crash when evaluating mount points to volumes that do not exist</li>
-  <li>Prevents crash in Integrated Logon DLL when loaded and unloaded by applications which call the Win32 CreateProcessAsUser API</li>
   <li>SDK is now installed at \Program Files\OpenAFS\SDK</li>
   <li>NSIS and WiX installer frameworks updated to the latest versions</li>
   <li>Improved Kerberos Logon Integration</li>
-  <li>Prevent exception in Integrated Logon DLL during SysPrep</li>
-  <li>Prevent displays of MessageBox dialogs in response to Network Adapter errors</li>
-  <li>Correct writing of BackConnectionsHostNames registry value.</li>
-  <li>Enable AFS Explorer Shell Extension to always find its resource library</li>
-  <li>Fix volume entry reuse</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
   <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc2/winnt/relnotes-frames.htm">1.4.2 RC2 Release Notes</a><br>
   <li><a href="http://dl.openafs.org/dl/openafs/candidate/1.4.2fc2/winnt/afs-changes-since-1.2.txt">1.4.2 RC2 ChangeLog</a></li>
   </li>
+</ul>
+<h3>Known Bugs:</h3>
+<ul>
+<li>None
 </ul>
 <h3>Downloads:</h3>
 <ul>
@@ -131,6 +146,14 @@ MSI installer (debug build)</a></li>
 <ul>
   <li><a href="http://www.openafs.org/dl/openafs/1.5.7/winnt/relnotes-frames.htm">1.5.7 Release Notes</a><br>
   <li><a href="http://dl.openafs.org/dl/openafs/1.5.7/winnt/afs-changes-since-1.2.txt">1.5.7 ChangeLog</a></li>
+</ul>
+<h3>Known Bugs;</h3>
+<ul>
+  <li>The length of a file can be unexpectedly truncated.
+  <li>Directory searches performed by Windows Vista can fail as InfoLevels 0x105 and 0x0106 are not supported but no error is returned.
+<li>Accessing more than the maximum number of volumes (5000 by default) will result in a panic condition since volume entries are not recycled within the cache manager.
+<li>The AFS Shell Extension does not always find its resource library resulting in a menu without text strings.
+<li>The winsock library is improperly initialized and released by the RX library causing random network errors in third party applications which load and unload the library as necessary.
 </ul>
 <h3>Downloads for 32-bit Windows 2000/XP/2003/R2/Vista:</h3>
 <ul>
