@@ -137,17 +137,14 @@ MSI installer (debug build)</a></li>
   <li>Supports DebugOutputString debugging of the RX Library</li>
   <li>New command: fs uuid [-generate]</li>
   <li>Improved CIFS protocol capatibility</li>
-  <li>Prevent exception in Integrated Logon DLL during SysPrep</li>
-  <li>Prevent displays of MessageBox dialogs in response to Network Adapter errors</li>
   <li>Hard Dead and Connection Timeout values restricted to the CIFS Session Timeout value.</li>
-  <li>Correct writing of BackConnectionsHostNames registry value.</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
   <li><a href="http://www.openafs.org/dl/openafs/1.5.7/winnt/relnotes-frames.htm">1.5.7 Release Notes</a><br>
   <li><a href="http://dl.openafs.org/dl/openafs/1.5.7/winnt/afs-changes-since-1.2.txt">1.5.7 ChangeLog</a></li>
 </ul>
-<h3>Known Bugs;</h3>
+<h3>Known Bugs:</h3>
 <ul>
   <li>The length of a file can be unexpectedly truncated.
   <li>Directory searches performed by Windows Vista can fail as InfoLevels 0x105 and 0x0106 are not supported but no error is returned.
@@ -155,6 +152,9 @@ MSI installer (debug build)</a></li>
 <li>The AFS Shell Extension does not always find its resource library resulting in a menu without text strings.
 <li>The winsock library is improperly initialized and released by the RX library causing random network errors in third party applications which load and unload the library as necessary.
 </ul>
+<h3>Compatibility with Microsoft Vista RC1</h3>
+In order for OpenAFS to be used on Vista RC1, the Windows SMB service must be disabled.  This can be done by executing the command <b>sc config smb start= disabled</b> from an elevated Command Prompt session.
+
 <h3>Downloads for 32-bit Windows 2000/XP/2003/R2/Vista:</h3>
 <ul>
   <li><a href="http://dl.openafs.org/dl/openafs/1.5.7/winnt/OpenAFSforWindows-1-5-7.exe">
