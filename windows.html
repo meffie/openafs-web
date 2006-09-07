@@ -33,7 +33,7 @@ be installed only when you are already experiencing a problem and you need to as
 the OpenAFS developers in debuging the problem.  The non-debug version is optimized for
 performance, does not generate logging information by default, and does not install 
 symbol files.
-<br>
+<p>
 <b>Digital Signatures:</b> All of the installers are produced and signed by <a href="https://www.secure-endpoints.com">
 Secure Endpoints Inc.</a>.  If the signature is missing do not complete the installation 
 process and send e-mail to <a href="mailto:openafs-security@openafs.org">openafs-security@openafs.org</a>
@@ -171,11 +171,7 @@ MSI installer (debug build)</a></li>
 </ul>
 <h3>Known Bugs:</h3>
 <ul>
-  <li>The length of a file can be unexpectedly truncated.
-  <li>Directory searches performed by Windows Vista can fail as InfoLevels 0x105 and 0x0106 are not supported but no error is returned.
-<li>Accessing more than the maximum number of volumes (5000 by default) will result in a panic condition since volume entries are not recycled within the cache manager.
-<li>The AFS Shell Extension does not always find its resource library resulting in a menu without text strings.
-<li>The winsock library is improperly initialized and released by the RX library causing random network errors in third party applications which load and unload the library as necessary.
+<li>None</li>
 </ul>
 <h3>Compatibility with Microsoft Vista RC1</h3>
 In order for OpenAFS to be used on Vista RC1, the Windows SMB service must be disabled.  This can be done by executing the command <b>sc config smb start= disabled</b> from an elevated Command Prompt session.
