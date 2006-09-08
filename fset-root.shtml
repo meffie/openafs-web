@@ -9,9 +9,9 @@ if (window.name == "openafs_main") {
 //-->
 </script>
 <html><head>
-<META name="verify-v1" content="VMsthPusbXnedJuKjM0/lhH0uzVj79aQ/lPfk2FLXsA=" />
-<META name="verify-v1" owner=cg2v  content="THAFicQcPIBMrawRwzaJg3JK8FArpvoecAy5Zx7v9DM=" />
-<META name="verify-v1" owner=jhutz content="fijqhqC5PvhJOATNi4e6h2uSK0v1deFiKXL+yItw/5w=" />
+<META name="verify-v1" content="THAFicQcPIBMrawRwzaJg3JK8FArpvoecAy5Zx7v9DM=" /><!-- cg2v    -->
+<META name="verify-v1" content="VMsthPusbXnedJuKjM0/lhH0uzVj79aQ/lPfk2FLXsA=" /><!-- jaltman -->
+<META name="verify-v1" content="fijqhqC5PvhJOATNi4e6h2uSK0v1deFiKXL+yItw/5w=" /><!-- jhutz   -->
 <title>OpenAFS</title>
 <link href="/openafs.css" rel="stylesheet" type="text/css">
 </head>
