@@ -1,0 +1,9 @@
+http://www.openafs.org/pages/
+http://www.openafs.org/pages/main.html
+http://www.openafs.org/pages/projects.html
+http://www.openafs.org/pages/roadmap.html
+http://www.openafs.org/pages/success.html
+http://www.openafs.org/pages/macos.html
+http://www.openafs.org/pages/windows.html
+http://www.openafs.org/pages/release/
+http://www.openafs.org/pages/elders/
