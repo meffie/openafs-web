@@ -38,6 +38,9 @@ has been made possible in part by support from SGI.
 <dt><p>RxTCP</p></dt>
 <dd><p><a href="http://www.pmw.org/afsbpw06/talks/kenh-rxtcp.pdf">In progress.</a> Implement Rx API on top of TCP/IP in order to gain performance on high speed networks.  Contact Ken Hornstein></p>
 </dd>
+<dt><p>HostAFSd<p></dt>
+<dd><p>In progress. Implement an AFS server that exports portions of the local file system to AFS clients.  Contact Derrick Brashear.
+</dd>
 </dl>
 
 <h2>Proposed projects</h2>
@@ -56,8 +59,8 @@ The following are items which have been proposed, but which are not yet in progr
 <dt><p>Volume dump editor</p></dt>
 <dd><p>Tool to allow editing volume dumps.</p>
 </dd>
-<dt><p>Windows installable file system support</p></dt>
-<dd><p>Implement AFS as a Windows file system instead of as a virtual SMB server.</p>
+<dt><p>Native Windows file system support</p></dt>
+<dd><p>Implement AFS as a Windows Network Redirector and File System Filter instead of as a virtual SMB server.</p>
 </dd>
 <dt><p>Better server preference support</p></dt>
 <dd><p>Allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact Derrick Brashear (shadow@dementia.org)</p>
@@ -65,9 +68,16 @@ The following are items which have been proposed, but which are not yet in progr
 <dt><p>Partition UUIDs</p></dt>
 <dd><p>Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact Derrick Brashear (shadow@dementia.org).
 </dd>
+<dt><p>Directory format extensions to support Unicode filenames</dt>
+<dd><p>http://www.afsig.se/afsig/space/AFS+directory+format+extensions</dd>
+<dt><p>Protection Server database extensions and RPCs</dt>
+<dd><p>To support multiple security class authentication name to AFS ID associations</dd>
 </dl>
 
 <div id="footer"><hr>
 <address>&lt;webmaster@openafs.org&gt;</address>
 <address>Last modified: $Date$</address>
 </div></body></html>
+
+
+
