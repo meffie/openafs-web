@@ -20,7 +20,7 @@ of members.<br>
 <h2>Contents:</h2>
 <ul>
 <li><a href="#stable">Current Stable Release: OpenAFS for Windows 1.4.1</a>
-<li><a href="#stable_candidate">Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 3</a>
+<li><a href="#stable_candidate">Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 4</a>
 <li><a href="#devel">Development Release: OpenAFS for Windows 1.5.8</a>
 </ul>
 <br>
@@ -100,6 +100,7 @@ Firewall</li>
 <li>The export list from <B>afsauthent.dll</b> is incorrect resulting in third party applications that call pr_End crashing.
 <li>The winsock library is improperly initialized and released by the RX library causing random network errors in third party applications which load and unload the library as necessary.
 <li>Directory searches performed by Windows Vista can fail as InfoLevels 0x105 and 0x0106 are not supported but no error is returned.
+<li>Loopback Adapter installer fails to disable DNS auto-registration for the adapter.
 </ul>
 <h3>Downloads:</h3>
 <ul>
@@ -115,8 +116,8 @@ EXE installer (debug build)</a></li>
 MSI installer (debug build)</a></li>
 </ul>
 <br>
-<h2><a name="stable_candidate">Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 3</a></h2>
-(released 6 September 2006)<br>
+<h2><a name="stable_candidate">Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 4</a></h2>
+(released 21 September 2006)<br>
 <h3>Features:</h3>
 <ul>
   <li>Fixes all known bugs in 1.4.1</li>
@@ -130,11 +131,12 @@ MSI installer (debug build)</a></li>
   <li>Improved Kerberos Logon Integration</li>
   <li>Better handling of dot directory in <b>fs</b> command</li>
   <li><b>fs setquota</b> and <b>fs mkmount</b> now behave the same as the UNIX versions</li>
+  <li>Improved Loopback Adapter installer</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc3/winnt/relnotes-frames.htm" title="OpenAFS for Windows 1.4.2 Release Notes">1.4.2 RC3 Release Notes</a><br>
-  <li><a href="http://dl.openafs.org/dl/openafs/candidate/1.4.2fc3/winnt/afs-changes-since-1.2.txt">1.4.2 RC3 ChangeLog</a></li>
+  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/relnotes-frames.htm" title="OpenAFS for Windows 1.4.2 Release Notes">1.4.2 RC4 Release Notes</a><br>
+  <li><a href="http://dl.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/afs-changes-since-1.2.txt">1.4.2 RC4 ChangeLog</a></li>
   </li>
 </ul>
 <h3>Known Bugs:</h3>
@@ -143,15 +145,15 @@ MSI installer (debug build)</a></li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc3/winnt/OpenAFSforWindows-1-4-2-rc3.exe">
+  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/OpenAFSforWindows-1-4-2-rc4.exe">
 EXE installer for individual installations (optimized build)</a><br>
   </li>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc3/winnt/openafs-en_US-1-4-2-rc3.msi">
+  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/openafs-en_US-1-4-2-rc4.msi">
 MSI installer for managed installations (optimized build)</a><br>
   </li>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc3/winnt/OpenAFSforWindows-DEBUG-1-4-2-rc3.exe">
+  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/OpenAFSforWindows-DEBUG-1-4-2-rc4.exe">
 EXE installer (debug build)</a></li>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc3/winnt/openafs-en_US-DEBUG-1-4-2-rc3.msi">
+  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/openafs-en_US-DEBUG-1-4-2-rc4.msi">
 MSI installer (debug build)</a></li>
 </ul>
 <br>
