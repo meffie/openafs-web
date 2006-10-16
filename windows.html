@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta content="text/html; charset=windows-1252"
- http-equiv="content-type">
+ http-equiv="Content-Type">
   <title>OpenAFS Summary for Microsoft Windows Users</title>
   <meta content="jaltman@secure-endpoints.com" name="author">
   <meta name="keywords" content="windows,openafs,afs,secure endpoints,openafs windows,afs kerberos,kerberos 5, mit kerberos windows,krb5">
@@ -19,9 +19,8 @@ of members.<br>
 <br>
 <h2>Contents:</h2>
 <ul>
-<li><a href="#stable">Current Stable Release: OpenAFS for Windows 1.4.1</a>
-<li><a href="#stable_candidate">Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 4</a>
-<li><a href="#devel">Development Release: OpenAFS for Windows 1.5.8</a>
+<li><a href="#stable">Current Stable Release: OpenAFS for Windows 1.4.2</a>
+<li><a href="#devel">Development Release: OpenAFS for Windows 1.5.9</a>
 </ul>
 <br>
 The following guidelines should be used for choosing an installer.  If you are upgrading
@@ -38,13 +37,15 @@ symbol files.
 <p>
 <b>Digital Signatures:</b> All of the installers are produced and signed by <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">
 Secure Endpoints Inc.</a>.  If the signature is missing do not complete the installation 
-process and send e-mail to <a href="mailto:openafs-security@openafs.org">openafs-security@openafs.org</a>
+process and send e-mail to 
+<a href="mailto:openafs-security@openafs.org?subject=Missing or Incorrect Digital Signature">openafs-security@openafs.org</a>
 <br>
 <p>
-<b>Status Reports:</b> <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">Secure Endpoints Inc.</a> periodically publishes a report on the current status of OpenAFS for Windows development.  The most recent report was published in September 2006.  <a href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Sep-2006-Status-Report.pdf" title="OpenAFS for Windows Status Report - September 2006">Read it today!</a>
+<b>Status Reports:</b> <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">Secure Endpoints Inc.</a> periodically publishes a report on the current status of OpenAFS for Windows development.  The 
+<a href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Sep-2006-Status-Report.pdf">most recent report</a> was published in September 2006.  <a href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Sep-2006-Status-Report.pdf" title="OpenAFS for Windows Status Report - September 2006">Read it today!</a>
 <p>
-<h2><a name="stable">Current Stable Release: OpenAFS for Windows 1.4.1</a></h2>
-(released 23 April 2006)<br>
+<h2><a name="stable">Current Stable Release: OpenAFS for Windows 1.4.2</a></h2>
+(released 16 October 2006)<br>
 <h3>Features:</h3>
 <ul>
   <li>The OpenAFS Client Service provides access seamless access to the
@@ -73,59 +74,9 @@ Firewall</li>
   <li>Improved detection of AFS servers brought back into service</li>
   <li>Improved maintenance of NAT port mappings</li>
   <li>Implements Windows Byte Range Locking without use of AFS File Locks</li>
-</ul>
-<h3>Documentation:</h3>
-<ul>
-  <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/frames.htm" title="OpenAFS for Windows 1.4.1 Release Notes">1.4.1 Release Notes</a><br>
-  </li>
-</ul>
-<h3>Known Bugs:</h3>
-<ul>
-<li>The pthread library, <b>afspthread.dll</b>, is not safe to unload.  This can cause a crash in applications which load AFS libraries and then unload them when they are no longer required.
-<li>ANSI filename support is broken.
-<li>Rapid creation and destruction of SMB virtual circuits can result in a deadlock that will require the AFS service to be terminated via the Task Manager and manually restarted.
-<li>When the smb_SendPacket routine fails, it may release a reference to the SMB virtual circuit object that it doesn't hold.  This can result in a panic condition.
-<li>There is a known deadlock condition between two locks in the SMB server.
-<li><b>fs flushXXX</b> will cause the AFS cache manager to release references to the wrong stat cache entries.  This can cause some stat cache entries to never be freed and the resulting file system objects may become inaccessible.
-<li>volume server failover does not work when mounting the 'root.afs' volume in the default cell.  (Freelance mode off.)
-<li>The help files for the AFS system tray and control panel applications are inaccessible.
-<li>Mount points to volumes that do not exist can result in a crash of the AFS client service.
-<li>Over quota and Disk full errors are not returned to the caller.
-<li>The Integrated Logon DLL can cause applications started by CreateProcessAsUser() to crash.  This is known to be a problem with remote installations performed by the System Management Service.
-<li>Message Box dialogs displayed when a network failure is reported by the bound LAN adapter prevents the automatic restarting of the afsd_service.exe
-<li>The Integrated Login DLL can cause winlogin.exe to produce a Windows blue screen if it is called with a Windows Domain that does not exist.  This can happen during a SysPrep operation.
-<li>Accessing more than the maximum number of volumes (5000 by default) will result in a panic condition since volume entries are not recycled within the cache manager.
-<li>The AFS Shell Extension does not always find its resource library resulting in a menu without text strings.
-<li>An error in the generation of the BackConnectionHostNames registry value can trigger a bug in all versions of Windows that can deadlock the kernel during authentication attempts.
-<li>The export list from <B>afsauthent.dll</b> is incorrect resulting in third party applications that call pr_End crashing.
-<li>The winsock library is improperly initialized and released by the RX library causing random network errors in third party applications which load and unload the library as necessary.
-<li>Directory searches performed by Windows Vista can fail as InfoLevels 0x105 and 0x0106 are not supported but no error is returned.
-<li>Loopback Adapter installer fails to disable DNS auto-registration for the adapter.
-</ul>
-<h3>Downloads:</h3>
-<ul>
-  <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/OpenAFSforWindows-1-4-1.exe">
-EXE installer for individual installations (optimized build)</a><br>
-  </li>
-  <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/openafs-en_US-1-4-1.msi">
-MSI installer for managed installations (optimized build)</a><br>
-  </li>
-  <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/OpenAFSforWindows-DEBUG-1-4-1.exe">
-EXE installer (debug build)</a></li>
-  <li><a href="http://www.openafs.org/dl/openafs/1.4.1/winnt/openafs-en_US-DEBUG-1-4-1.msi">
-MSI installer (debug build)</a></li>
-</ul>
-<br>
-<h2><a name="stable_candidate">Stable Release Candidate: OpenAFS for Windows 1.4.2 Release Candidate 4</a></h2>
-(released 21 September 2006)<br>
-<h3>Features:</h3>
-<ul>
-  <li>Fixes all known bugs in 1.4.1</li>
   <li>Thread priorities are adjusted based upon age of CIFS requst</li>
   <li>Improved CIFS Server performance due to finer grained locking</li>
   <li>Improved resource recycling</li>
-  <li>Works with Microsoft Vista Build 5536</li>
-  <li>Implements Inline Bulk Status RPCs which speeds up directory listings</li>
   <li>SDK is now installed at \Program Files\OpenAFS\SDK</li>
   <li>NSIS and WiX installer frameworks updated to the latest versions</li>
   <li>Improved Kerberos Logon Integration</li>
@@ -135,8 +86,12 @@ MSI installer (debug build)</a></li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/relnotes-frames.htm" title="OpenAFS for Windows 1.4.2 Release Notes">1.4.2 RC4 Release Notes</a><br>
-  <li><a href="http://dl.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/afs-changes-since-1.2.txt">1.4.2 RC4 ChangeLog</a></li>
+  <li>
+	<a title="OpenAFS for Windows 1.4.2 Release Notes" href="http://www.openafs.org/dl/openafs/1.4.2/winnt/relnotes-frames.htm">
+	1.4.2 Release Notes</a><br>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.4.2/winnt/afs-changes-since-1.2.txt">
+	1.4.2 ChangeLog</a></li>
   </li>
 </ul>
 <h3>Known Bugs:</h3>
@@ -145,71 +100,83 @@ MSI installer (debug build)</a></li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/OpenAFSforWindows-1-4-2-rc4.exe">
-EXE installer for individual installations (optimized build)</a><br>
+  <li>
+	<a href="http://www.openafs.org/dl/openafs/1.4.2/winnt/OpenAFSforWindows-1-4-2-rc4.exe">EXE installer for individual installations (optimized build)</a><br>
   </li>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/openafs-en_US-1-4-2-rc4.msi">
-MSI installer for managed installations (optimized build)</a><br>
+  <li>
+	<a href="http://www.openafs.org/dl/openafs/1.4.2/winnt/openafs-en_US-1-4-2-rc4.msi">MSI installer for managed installations (optimized build)</a><br>
   </li>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/OpenAFSforWindows-DEBUG-1-4-2-rc4.exe">
-EXE installer (debug build)</a></li>
-  <li><a href="http://www.openafs.org/dl/openafs/candidate/1.4.2fc4/winnt/openafs-en_US-DEBUG-1-4-2-rc4.msi">
-MSI installer (debug build)</a></li>
+  <li>
+	<a href="http://www.openafs.org/dl/openafs/1.4.2/winnt/OpenAFSforWindows-DEBUG-1-4-2-rc4.exe">EXE installer (debug build)</a></li>
+  <li>
+	<a href="http://www.openafs.org/dl/openafs/1.4.2/winnt/openafs-en_US-DEBUG-1-4-2-rc4.msi">MSI installer (debug build)</a></li>
 </ul>
-<br>
-<h2><a name="devel">Development Release: OpenAFS for Windows 1.5.8</a></h2>
-(updated 6 September 2006)<br>
+<h2><a name="devel">Development Release: OpenAFS for Windows 1.5.9</a></h2>
+(updated 16 October 2006)<br>
 <h3>Features post-1.4.2:</h3>
 <ul>
   <li>Support for 64-bit Large Files</li>
   <li>Support for 64-bit Windows XP/2003/R2/Vista</li>
   <li>Implements Windows Byte Range Locking backed by AFS File Server Locks</li>
+  <li>Implements Inline Bulk Status RPCs which speeds up directory listings</li>
   <li>Uses GetCapabilities RPCs to probe the server status</li>
   <li>Logs <i>fs crypt</i> state to the Windows Event Log</li>
   <li>Supports DebugOutputString debugging of the RX Library</li>
   <li>New command: fs uuid [-generate]</li>
   <li>Improved CIFS protocol capatibility</li>
   <li>Hard Dead and Connection Timeout values restricted to the CIFS Session Timeout value.</li>
+	<li>Best choice for use with Microsoft Vista</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li><a href="http://www.openafs.org/dl/openafs/1.5.8/winnt/relnotes-frames.htm" title="OpenAFS for Windows 1.5.8 Release Notes">1.5.8 Release Notes</a><br>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/afs-changes-since-1.2.txt">1.5.8 ChangeLog</a></li>
+  <li>
+	<a title="OpenAFS for Windows 1.5.8 Release Notes" href="http://www.openafs.org/dl/openafs/1.5.9/winnt/relnotes-frames.htm">
+	1.5.9 Release Notes</a><br>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/afs-changes-since-1.2.txt">
+	1.5.9 ChangeLog</a></li>
 </ul>
 <h3>Known Bugs:</h3>
 <ul>
 <li>None</li>
 </ul>
-<h3>Compatibility with Microsoft Vista RC1</h3>
-In order for OpenAFS to be used on Vista RC1, the Windows SMB service must be disabled.  This can be done by executing the command <b>sc config smb start= disabled</b> from an elevated Command Prompt session.
-
-<h3>Downloads for 32-bit Windows 2000/XP/2003/R2/Vista:</h3>
+<h3>Compatibility with Microsoft Vista RC2</h3>
+Microsoft has been working with <a href="https://www.secure-endpoints.com/">
+Secure Endpoints Inc.</a> to ensure that OpenAFS for Windows will work on 
+Microsoft Vista when it is released.&nbsp; OpenAFS for Windows is known to work 
+on Vista Build 5748.&nbsp; Please send bug reports both to Microsoft and to
+<a href="mailto:openafs-bugs@openafs.org?subject=Microsoft Vista Bug Report">
+openafs-bugs@openafs.org</a>.<h3>Downloads for 32-bit Windows 2000/XP/2003/R2/Vista:</h3>
 <ul>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/OpenAFSforWindows-1-5-8.exe">
-EXE installer for individual installations (optimized build)</a><br>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/OpenAFSforWindows-1-5-8.exe">EXE installer for individual installations (optimized build)</a><br>
   </li>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/openafs-en_US-1-5-8.msi">
-MSI installer for managed installations (optimized build)</a><br>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/openafs-en_US-1-5-8.msi">MSI installer for managed installations (optimized build)</a><br>
   </li>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/OpenAFSforWindows-DEBUG-1-5-8.exe">
-EXE installer (debug build)</a></li>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/openafs-en_US-DEBUG-1-5-8.msi">
-MSI installer (debug build)</a></li>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/OpenAFSforWindows-DEBUG-1-5-8.exe">EXE installer (debug build)</a></li>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/openafs-en_US-DEBUG-1-5-8.msi">MSI installer (debug build)</a></li>
 </ul>
 
 <h3>Downloads for 64-bit Windows XP/2003/R2/Vista:</h3>
 <ul>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/openafs-en_US-64bit-1-5-8.msi">
-64-bit MSI installer (optimized build)</a><br>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/openafs-en_US-64bit-1-5-8.msi">64-bit MSI installer (optimized build)</a><br>
   </li>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/openafs-en_US-64bit-DEBUG-1-5-8.msi">
-64-bit MSI installer (debug build)</a></li>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/openafs-32bit-tools-en_US-1-5-8.msi">
-32-bit tools MSI installer (optimized build)</a><br>
-  </li>
-  <li><a href="http://dl.openafs.org/dl/openafs/1.5.8/winnt/openafs-32bit-tools-en_US-DEBUG-1-5-8.msi">
-32-bit tools MSI installer (debug build)</a></li>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/openafs-en_US-64bit-DEBUG-1-5-8.msi">64-bit MSI installer (debug build)</a></li>
 </ul>
-<br>
+<blockquote>
+	<h4>32-bit Windows on 64-bit Windows</h4>
+	<ul>
+		<li>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/openafs-32bit-tools-en_US-1-5-8.msi">32-bit tools MSI installer (optimized build)</a><br>
+		</li>
+		<li>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/openafs-32bit-tools-en_US-DEBUG-1-5-8.msi">32-bit tools MSI installer (debug build)</a></li>
+	</ul>
+</blockquote>
 </body>
 </html>
