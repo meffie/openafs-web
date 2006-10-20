@@ -8,10 +8,62 @@
       link="#000fff" vlink="#0000ff" alink="#0000ff">
 
 <h1>Development Roadmap for OpenAFS</h1>
-
-<A HREF="http://www.secure-endpoints.com/#oafw_status_report" title="OpenAFS for Windows Status Report">OpenAFS for Windows Status Reports</A>
-
-<div id="footer"><hr>
+<p>This page describes a list of on-going <a href="projects.html">projects</a> 
+and their estimated completion dates.&nbsp; The purpose of this page is to 
+provide the OpenAFS community a rough idea of direction current development 
+efforts are taking OpenAFS.&nbsp; The estimated completion dates are not hard 
+commitments.&nbsp; Instead they are rough estimates that are based upon the 
+OpenAFS Gatekeeper's expectations for the availability of development resources.&nbsp;
+</p>
+<h2>Solaris</h2>
+<ul>
+	<li>update client to use system inodes instead of private inode pool 
+	(2Q2007)</li>
+</ul>
+<h2>MacOS</h2>
+<ul>
+	<li>10.5 port (ongoing)</li>
+	<li>improved Finder hinting (1Q2007)</li>
+</ul>
+<h2>AIX</h2>
+<ul>
+	<li>kcred PAG support (1Q2007)</li>
+</ul>
+<h2>Microsoft Windows</h2>
+<ul>
+	<li>Please read the
+	<A HREF="http://www.secure-endpoints.com/#oafw_status_report" title="OpenAFS for Windows Status Report">OpenAFS for Windows Status Report</A> 
+	published by Secure Endpoints Inc.</li>
+</ul>
+<h2>Generic</h2>
+<ul>
+	<li>test, integrate RxK5 (GSSAPI/Kerberos 5) support including multiple 
+	encryption types (3Q2007)</li>
+	<li>Rx IPV6 support (1Q2008)</li>
+	<li>Rx TCP support (2Q2007)</li>
+	<li>PTS rpc changes for alternate principal naming (1/2Q2007)</li>
+	<li>VOS rpc changes (2Q2007)</li>
+	<li>FS rpc changes for new directory object format needed for unicode 
+	(1Q2007)</li>
+</ul>
+<h2>All clients</h2>
+<ul>
+	<li>split readonly readwrite cache usage limits (testing needed)</li>
+	<li>disconnected AFS (3Q2007)</li>
+	<li>intermediate fileserver - client as fileserver (3Q2007)</li>
+</ul>
+<h2>All servers</h2>
+<ul>
+	<li>ptserver enhancements for alternate principal names (3Q2007)</li>
+	<li>vlserver enhancements for large volume names (3Q2007)</li>
+	<li>server CellServDB changes for alternate ubik ordering, true multihoming 
+	(1Q2008)</li>
+	<li>fileserver directory object handling enhancement to allow for compatible</li>
+	<li>upgrading of directories (2Q2007)</li>
+</ul>
+<p>Please send queries and comments regarding this roadmap to
+<a href="mailto:openafs-gatekeepers@openafs.org?subject=OpenAFS Roadmap Feedback">
+openafs-gatekeepers@openafs.org</a></p>&nbsp;<div id="footer"><hr>
 <address>&lt;webmaster@openafs.org&gt;</address>
 <address>Last modified: $Date$</address>
 </div></body></html>
