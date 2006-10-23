@@ -89,7 +89,7 @@ process and send e-mail to
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.5.8 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.9/winnt/relnotes-frames.htm">1.5.9 Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.5.9 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.9/winnt/relnotes-frames.htm">1.5.9 Release Notes</a><br>
   <li>
 	<a href="http://dl.openafs.org/dl/openafs/1.5.9/winnt/afs-changes-since-1.2.txt">
 	1.5.9 ChangeLog</a></li>
@@ -108,7 +108,9 @@ process and send e-mail to
 </ul>
 <h3>Known Bugs:</h3>
 <ul>
-<li>None</li>
+<li>There is a deadlock condition which can be triggered when applications query path information</li>
+<li>Entering Standby/Hibernate mode can be blocked if there are dirty buffers in the AFS cache 
+    manager and there is no connectivity to the file servers</li>
 </ul>
 <h3>Compatibility with Microsoft Vista RC2</h3>
 Microsoft has been working with <a href="https://www.secure-endpoints.com/">
