@@ -114,12 +114,16 @@ process and send e-mail to
 uninstalled before OpenAFS 1.5.10 is installed</li>
 <li>The AFS plug-in for KFW provided as part of OpenAFS 1.5.10 only works with 
 KFW 3.1 Beta 2 or above.</li>
+<li><b><font color="#FF0000">The SMB ReceiveCoreFlush function returns an error 
+even when it succeeds.&nbsp; This will be fixed in 1.5.11 to be released 10 
+November 2006.</font></b></li>
 </ul>
-<h3>Compatibility with Microsoft Vista RC2</h3>
+<h3>Compatibility with Microsoft Vista</h3>
 Microsoft has been working with <a href="https://www.secure-endpoints.com/">
 Secure Endpoints Inc.</a> to ensure that OpenAFS for Windows will work on 
 Microsoft Vista when it is released.&nbsp; OpenAFS for Windows is known to work 
-on Vista Build 5748.&nbsp; Please send bug reports both to Microsoft and to
+on Vista RTM except for a bug in Vista that will cause OpenAFS to panic when the 
+machine is suspended.&nbsp; Please send bug reports both to Microsoft and to
 <a href="mailto:openafs-bugs@openafs.org?subject=Microsoft Vista Bug Report">
 openafs-bugs@openafs.org</a>.<h3>Downloads for 32-bit Windows 2000/XP/2003/R2/Vista:</h3>
 <ul>
