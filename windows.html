@@ -7,22 +7,25 @@
   <meta content="jaltman@secure-endpoints.com" name="author">
   <meta name="keywords" content="windows,openafs,afs,secure endpoints,openafs windows,afs kerberos,kerberos 5,mit kerberos windows,krb5">
   <meta name="description" content="A summary of the most recent builds of OpenAFS for Windows">
+	<meta name="Microsoft Theme" content="none, default">
 </head>
 <body>
-<h1 style="text-align: center;">OpenAFS for Windows</h1>
+<h1 style="text-align: center;"> 
+<img src="images/oafw-logo.jpg" width="184" height="127" align="left">OpenAFS for Windows</h1>
 OpenAFS is the world's foremost location independent file system.&nbsp;
 With OpenAFS for Windows, users of Microsoft Windows 2000, XP, 2003 and Vista
 (32-bit and 64-bit editions) can make the most of this proven data sharing
 solution.&nbsp; The OpenAFS Project provides binary installation packages
 appropriate for both individual users and organizations with thousands
 of members.<br>
+<br>
 <h2>Contents:</h2>
 <ul>
 <li><a href="#whichversion">How to Decide Which Version to Install</a>
 <li><a href="#signatures">Digital Signatures</a>
 <li><a href="#reports">Status Reports</a>
-<li><a href="#devel">Features Release: OpenAFS for Windows 1.5.13a</a>
-<li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.2a</a>
+<li><a href="#devel">Features Release: OpenAFS for Windows 1.5.14</a>
+<li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.3rc1</a>
 <li><a href="#kfw">MIT Kerberos for Windows</a>
 </ul>
 <h2><a name="whichversion">How to Decide Which Version to Install</a></h2>
@@ -52,8 +55,7 @@ Each installer is provided in debug and non-debug versions.  The debug versions 
 be installed only when you are experiencing a problem and you need to assist
 the OpenAFS developers in debugging the problem.  The non-debug version is optimized for
 performance, does not generate logging information by default, and does not install 
-symbol files.
-<h3><a name="signatures">Digital Signatures</a></h3>
+symbol files.<h3><a name="signatures">Digital Signatures</a></h3>
 <p>
 All of the installers are produced and signed by <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">
 Secure Endpoints Inc.</a>.  If the signature is missing do not complete the installation 
@@ -68,9 +70,9 @@ process and send e-mail to
 was published in December 2006.  
 <a title="OpenAFS for Windows Status Report - December 2006" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Dec-2006-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="devel">Features Release: OpenAFS for Windows 1.5.13a (1.5.1302)</a>
+<h2><a name="devel">Features Release: OpenAFS for Windows 1.5.14 (1.5.1400)</a>
 <font color="#FF0000">**Recommended**</font></h2>
-(updated 29 December 2006)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+(updated 19 January 2007)<p>&nbsp;<img border="0" src="wVista-Works.png" width="209" height="93"></p>
 <h3>Features:</h3>
 <ul>
   <li>All the features of the <a href="#stable">maintenance release</a></li>
@@ -91,22 +93,23 @@ was published in December 2006.
 	<li>Improved handling of Windows Standby/Hibernate modes when network access 
 	is not available</li>
 	<li>Significant performance improvements when searching directories 
-	containing thousands of files or sub-directories</li>
+	containing hundreds or thousands of files and sub-directories</li>
 	<li>Reduced time required for file open operations</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.5.13a Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.13/winxp/relnotes-frames.htm">1.5.13a Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.5.14 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.14/winxp/relnotes-frames.htm">
+	1.5.14 Release Notes</a><br>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.13/winxp/afs-changes-since-1.2.txt">
-	1.5.13a ChangeLog</a></li>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.14/winxp/afs-changes-since-1.2.txt">
+	1.5.14 ChangeLog</a></li>
 </ul>
 <h3>Supported Platforms::</h3>
 <ul>
 	<li>Windows Vista (X86 and AMD64)</li>
-	<li>Windows 2003 64</li>
-	<li>Windows XP 64</li>
+	<li>Windows 2003 64 (AMD64)</li>
+	<li>Windows XP 64 (AMD64)</li>
 	<li>Windows 2003 R2</li>
 	<li>Windows 2003 including SP1</li>
 	<li>Windows XP including SP2</li>
@@ -114,20 +117,20 @@ was published in December 2006.
 </ul>
 <h3>Known Issues:</h3>
 <ul>
-<li>If a *beta* AFS plug-in for Kerberos for Windows is installed, it must be uninstalled before OpenAFS 1.5.13a is 
+<li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must be uninstalled before OpenAFS 
+1.5.14 is 
 installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
-<li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 1.5.13a requires MIT Kerberos for Windows 3.1 Beta 2 or above.</li>
-<li>Vista Explorer Shell is unable to browse directories when the user only has
-<i>lookup</i> privilege and not <i>read</i> privilege.</li>
+<li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 
+1.5.14 requires MIT Kerberos for Windows 3.1 Beta 2 or above.</li>
 </ul>
 <h3>Downloads for 32-bit Windows operating systems: Vista/R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.13/winxp/OpenAFSforWindows-1-5-13a.exe">32-bit EXE installer for individual installations</a>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.14/winxp/OpenAFSforWindows-1-5-14.exe">32-bit EXE installer for individual installations</a> 
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.13/winxp/openafs-en_US-1-5-13a.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.14/winxp/openafs-en_US-1-5-14.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
@@ -140,19 +143,20 @@ Panel be used to initiate installations on 64-bit Microsoft Windows operating
 systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.13/winxp/openafs-en_US-64bit-1-5-13a.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.14/winxp/openafs-en_US-64bit-1-5-14.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
 	<h4>Support for 32-bit Windows Applications on 64-bit Windows operating systems</h4>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.5.13/winxp/openafs-32bit-tools-en_US-1-5-13a.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.14/winxp/openafs-32bit-tools-en_US-1-5-14.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
-<h2><a name="stable">Maintenance Release: OpenAFS for Windows 1.4.2a (1.4.206)</a></h2>
-(released 17 October 2006)<br>
+<h2><a name="stable">Maintenance Release: OpenAFS for Windows 1.4.3rc1 
+(1.4.0300)</a></h2>
+(released 19 January 2007)<br>
 <h3>Features:</h3>
 <ul>
   <li>The OpenAFS Client Service provides access seamless access to the
@@ -194,10 +198,10 @@ Firewall</li>
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.4.2 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.4.2/winnt/relnotes-frames.htm">1.4.2a Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.4.3 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/candidate/1.4.3rc1/winxp/relnotes-frames.htm">
+	1.4.3 Release Notes</a><br>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.4.2/winnt/afs-changes-since-1.2.txt">
-	1.4.2a ChangeLog</a></li>
+	<a href="http://wwwl.openafs.org/dl/openafs/candidate/1.4.3rc1/winxp/afs-changes-since-1.2.txt">1.4.3rc1 ChangeLog</a></li>
   </li>
 </ul>
 <h3>Supported Platforms:</h3>
@@ -220,10 +224,10 @@ applications are writing to the same file at the same time.
 <h3>Downloads:</h3>
 <ul>
   <li>
-	<a href="http://www.openafs.org/dl/openafs/1.4.2/winnt/OpenAFSforWindows-1-4-2a.exe">EXE installer for individual installations</a><br>
+	<a href="http://www.openafs.org/dl/openafs/candidate/1.4.3rc1/winxp/OpenAFSforWindows-1-4-3-rc1.exe">EXE installer for individual installations</a><br>
   </li>
   <li>
-	<a href="http://www.openafs.org/dl/openafs/1.4.2/winnt/openafs-en_US-1-4-2a.msi">MSI installer for managed installations</a><br>
+	<a href="http://www.openafs.org/dl/openafs/candidate/1.4.3rc1/winxp/openafs-en_US-1-4-3-rc1.msi">MSI installer for managed installations</a><br>
   </li>
 </ul>
 <h2><a name=kfw>MIT Kerberos for Windows</a></h2>
@@ -231,9 +235,10 @@ OpenAFS for
 Windows depends on 
 <a target="_self" href="http://web.mit.edu/kerberos/dist/index.html">MIT 
 Kerberos for Windows (KFW)</a>&nbsp; to provide Kerberos 5 functionality.&nbsp; The 
-recommended version of KFW for use with <a href="#stable">OpenAFS for Windows 1.4.2a
-</a> is version 2.6.5.  The recommended version of KFW for <a href="#devel">
-OpenAFS for Windows 1.5.13a</a> is version 3.1.0.  KFW 3.1.0 includes the Network Identity Manager 
-which requires an AFS plug-in that is not available in <a href="#stable">OpenAFS for Windows 1.4.2a</a>.
+recommended version of KFW for use with <a href="#stable">OpenAFS for Windows 
+1.4.3rc1</a>is version 2.6.5.  The recommended version of KFW for <a href="#devel">
+OpenAFS for Windows 1.5.14</a> is version 3.1.0.&nbsp; KFW 3.1.0 includes the Network Identity Manager 
+which requires an AFS plug-in that is not available in <a href="#stable">OpenAFS 
+for Windows 1.4.3rc1</a>.
 </body>
 </html>
