@@ -56,11 +56,16 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 <ul>
   <li>increases the amount of reported free disk space</li>
   <li>AFSDB record lookup improvements</li>
-  <li>???</li>
+  <li>pts chown and pts rename crash fixes</li>
+  <li>avoid issues with tokens being discarded erroneously</li>
+</ul>
+<h3>Known Issues:</h3>
+<ul>
+<li>When authentication state changes, Finder may cache stale data (files appear unaccessible or do not appear)</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/candidate/1.4.3rc1/RELNOTES-1.4.3">1.4.3 Release Notes</A><br>
+  <li>1.4.3 Release Notes (not yet available)<br>
   </li>
 </ul>
 <h3>Downloads:</h3>
@@ -91,6 +96,10 @@ Kerberos for Mac</a> for Kerberos 5 authentication support</li>
   <li>Improved detection of AFS servers brought back into service</li>
   <li>Persistent caches storing up to 20GB of data</li>
 </ul>
+<h3>Known Issues:</h3>
+<ul>
+<li>When authentication state changes, Finder may cache stale data (files appear unaccessible or do not appear)</li>
+</ul>
 <h3>Documentation:</h3>
 <ul>
   <li><A HREF="http://www.openafs.org/frameset/dl/openafs/1.4.1/RELNOTES-1.4.1">1.4.1 Release Notes</A><br>
@@ -109,9 +118,13 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 <br>
 <h2><a name="devel">Features Release: OpenAFS 1.5.14 for MacOS 10.4</a></h2>
 (updated 18 January 2007)<br>
+<h3>Known Issues:</h3>
+<ul>
+<li>When authentication state changes, Finder may cache stale data (files appear unaccessible or do not appear)</li>
+</ul>
 <h3>Features since 1.4.2:</h3>
 <ul>
-  <li>None</li>
+  <li>Split cache (ability to devote a fixed portion of cache to readonly data)</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
