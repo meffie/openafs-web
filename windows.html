@@ -24,7 +24,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a>
 <li><a href="#signatures">Digital Signatures</a>
 <li><a href="#reports">Status Reports</a>
-<li><a href="#devel">Features Release: OpenAFS for Windows 1.5.15</a>
+<li><a href="#devel">Features Release: OpenAFS for Windows 1.5.16</a>
 <li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.3rc3</a>
 <li><a href="#kfw">MIT Kerberos for Windows</a>
 </ul>
@@ -70,26 +70,27 @@ process and send e-mail to
 was published in December 2006.  
 <a title="OpenAFS for Windows Status Report - December 2006" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Dec-2006-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="devel">Features Release: OpenAFS for Windows 1.5.15 (1.5.1500)</a>
+<h2><a name="devel">Features Release: OpenAFS for Windows 1.5.16 (1.5.1600)</a>
 <font color="#FF0000">**Highly Recommended**</font></h2>
-(updated 14 February 2007 - Valentine's Day)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+(updated 8 March 2007)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
 <h3>Features:</h3>
 <ul>
   <li>All the features of the <a href="#stable">maintenance release</a></li>
 	<li>Support for all editions of Windows Vista</li>
+	<li>2007 Daylight Savings Time corrected C Runtime Library DLLs</li>
 	<li>AFS credentials module for MIT Kerberos for Windows Network Identity 
 	Manager </li>
 	<li>Support for 64-bit File Sizes on both 32-bit and 64-bit versions of 
 	Microsoft Windows</li>
-  <li>Support for 64-bit Windows XP/2003/R2/Vista</li>
+	<li>Support for 64-bit Windows XP/2003/R2/Vista</li>
 	<li>Implements Windows Byte Range Locking backed by AFS File Server Locks</li>
-  <li>Implements Inline Bulk Status RPCs which speeds up directory listings</li>
-  <li>Uses GetCapabilities RPCs to probe the server status</li>
-  <li>Logs <i>fs crypt</i> state to the Windows Event Log</li>
-  <li>Supports OutputDebugString debugging of the RX Library</li>
-  <li>New command: fs uuid [-generate]</li>
-  <li>Improved CIFS protocol compatibility</li>
-  <li>Hard Dead and Connection Timeout values restricted to the CIFS Session Timeout value.</li>
+	<li>Implements Inline Bulk Status RPCs which speeds up directory listings</li>
+	<li>Uses GetCapabilities RPCs to probe the server status</li>
+	<li>Logs <i>fs crypt</i> state to the Windows Event Log</li>
+	<li>Supports OutputDebugString debugging of the RX Library</li>
+	<li>New command: fs uuid [-generate]</li>
+	<li>Improved CIFS protocol compatibility</li>
+	<li>Hard Dead and Connection Timeout values restricted to the CIFS Session Timeout value.</li>
 	<li>Improved handling of Windows Standby/Hibernate modes when network access 
 	is not available</li>
 	<li>Significant performance improvements when searching directories 
@@ -103,11 +104,11 @@ was published in December 2006.
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.5.15 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.15/winxp/relnotes-frames.htm">
-	1.5.15 Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.5.16 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.16/winxp/relnotes-frames.htm">
+	1.5.16 Release Notes</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.5.15 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.15/winxp/afs-changes-since-1.2.txt">
-	1.5.15 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.5.16 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.16/winxp/afs-changes-since-1.2.txt">
+	1.5.16 ChangeLog</a></li>
 </ul>
 <h3>Supported Platforms::</h3>
 <ul>
@@ -122,13 +123,13 @@ was published in December 2006.
 <h3>Known Issues:</h3>
 <ul>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must be uninstalled before OpenAFS 
-1.5.15 is 
+1.5.16 is 
 installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
 <li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 
-1.5.15 requires MIT Kerberos for Windows 3.1 Beta 2 or above.</li>
-<li>Attempts to remove a directory containing files will fail with the wrong 
-error code.&nbsp; To be fixed in 1.5.16.</li>
+1.5.16 requires MIT Kerberos for Windows 3.1 Beta 2 or above.</li>
+<li>Directory and File Change Notifications are ignored when accessing AFS via 
+UNC paths</li>
 <li>Windows Vista Specific Issues<ul>
 	<li>The help files provided with OpenAFS are in .HLP format.&nbsp;
 	<a href="http://support.microsoft.com/kb/917607">Windows Vista does not include 
@@ -143,10 +144,10 @@ be &quot;Run as Administrator&quot;.</li>
 <h3>Downloads for 32-bit Windows operating systems: Vista/R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.15/winxp/OpenAFSforWindows-1-5-15.exe">32-bit EXE installer for individual installations</a> 
+	<a href="http://dl.openafs.org/dl/openafs/1.5.16/winxp/OpenAFSforWindows-1-5-16.exe">32-bit EXE installer for individual installations</a> 
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.15/winxp/openafs-en_US-1-5-15.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.16/winxp/openafs-en_US-1-5-16.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
@@ -159,14 +160,14 @@ Panel be used to initiate installations on 64-bit Microsoft Windows operating
 systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.15/winxp/openafs-en_US-64bit-1-5-15.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.16/winxp/openafs-en_US-64bit-1-5-16.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
 	<h4>Support for 32-bit Windows Applications on 64-bit Windows operating systems</h4>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.5.15/winxp/openafs-32bit-tools-en_US-1-5-15.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.16/winxp/openafs-32bit-tools-en_US-1-5-16.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
@@ -235,7 +236,7 @@ Firewall</li>
 server is lost while background write operations have been queued, the writes 
 will not succeed and that data will not be written to the file server.&nbsp; 
 This leaves a hole in the file filled with NULs.&nbsp; This will be fixed in 
-1.5.15.</li>
+1.5.16.</li>
 <li>The AFS Servers (bos, file, ...) do not work<li>Directories with large 
 numbers of files or subdirectories will results in very high CPU utilization 
 when searched</li>
@@ -259,7 +260,7 @@ Windows depends on
 Kerberos for Windows (KFW)</a>&nbsp; to provide Kerberos 5 functionality.&nbsp; The 
 recommended version of KFW for use with <a href="#stable">OpenAFS for Windows 
 1.4.3rc3</a> is version 2.6.5.  The recommended version of KFW for <a href="#devel">
-OpenAFS for Windows 1.5.15</a> is version 3.1.0.&nbsp; KFW 3.1.0 includes the Network Identity Manager 
+OpenAFS for Windows 1.5.16</a> is version 3.1.0.&nbsp; KFW 3.1.0 includes the Network Identity Manager 
 which requires an AFS plug-in that is not available in <a href="#stable">OpenAFS 
 for Windows 1.4.3rc3</a>.
 </body>
