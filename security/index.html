@@ -21,8 +21,35 @@ OpenAFS security advisories</a>.
 you may send mail to the OpenAFS security officer at
 <a href="mailto:security@openafs.org">security@openafs.org</a>.
 When sending sensitive information, we ask that you encrypt it
-with PGP, using the <a href="sec-key.asc">PGP key for
-security@openafs.org</a>.
+with PGP.
+
+<hr>
+
+<a name="OPENAFS-SA-2007-001"></a>
+<h2>OPENAFS-SA-2007-001 - setuid (privilege escalation) in OpenAFS Unix based clients</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>20-Mar-2007</td></tr>
+<tr><th align="left">Last Update:</th><td>20-Mar-2007</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.4.3, OpenAFS 1.5.0-1.5.16</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2007-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2007-001.txt</a>
+</td></tr>
+</table>
+
+<p>Because AFS cache managers do not use authenticated connections for 
+non-user-authenticated sessions, checks for cache coherency are done 
+over an unprotected connection if they are not being done for an
+authenticated user. Because of this it is possible to spoof a false
+status for files in the cache.
+
+<p>The AFS cache manager on platforms which offer privilege based on file modes
+are vulnerable to such attacks.  
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
 
 <hr>
 
