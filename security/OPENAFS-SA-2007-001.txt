@@ -6,7 +6,7 @@ Hash: SHA1
 Topic: setuid (privilege escalation) in OpenAFS Unix based clients
 
 Issued:		20-Mar-2007
-Last Update:	20-Mar-2007
+Last Update:	21-Mar-2007
 Affected:	OpenAFS 1.0 - 1.4.3, OpenAFS 1.5.0 - 1.5.16
 
 A user with network access and knowledge of client cache contents can
@@ -23,6 +23,11 @@ status for files in the cache.
 
 The AFS cache manager on platforms which offer privilege based on file modes
 are vulnerable to such attacks.  
+
+As such we recommend disabling setuid for all cells. Beginning in OpenAFS
+1.4.4 and 1.5.17 this is the default. You can opt for the unsafe behavior 
+as before, however, we cannot recommend this step unless all local users
+have local root anyway.
 
 There are no known publicly-available exploits for this vulnerability at
 this time.
