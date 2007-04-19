@@ -24,7 +24,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a>
 <li><a href="#signatures">Digital Signatures</a>
 <li><a href="#reports">Status Reports</a>
-<li><a href="#release">OpenAFS for Windows 1.5.18</a>
+<li><a href="#release">OpenAFS for Windows 1.5.19</a>
 <!--
 <li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.4</a>
 -->
@@ -75,8 +75,8 @@ process and send e-mail to
 was published in April 2007.  
 <a title="OpenAFS for Windows Status Report - April 2007" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Apr-2007-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="release">OpenAFS for Windows 1.5.18 (1.5.1800)</a></h2>
-(updated 4 April 2007)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+<h2><a name="release">OpenAFS for Windows 1.5.19 (1.5.1900)</a></h2>
+(updated 19 April 2007)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
 <h3>Features:</h3>
 <ul>
   <li>All the features of the <a href="#stable">maintenance release</a></li>
@@ -100,23 +100,26 @@ was published in April 2007.
 	<li>Significant performance improvements when searching directories 
 	containing hundreds or thousands of files and sub-directories</li>
 	<li>Reduced time required for file open operations</li>
-	<li>Fixes a write data corruption error that exists in all versions of 
-	OpenAFS prior to 1.5.15</li>
+	<li><i><b>Fixes a write data corruption error that exists in all versions of 
+	OpenAFS prior to 1.5.15</b></i></li>
 	<li>Increased cache hit ratio for data written to AFS by the local client</li>
 	<li>Eliminates &quot;out of volumes&quot; and &quot;out of buffers&quot; panic conditions</li>
 	<li>Improved behavior when used from behind Network Address Translation 
 	(NAT) devices</li>
 	<li>As of 1.5.18, OpenAFS for Windows no longer attempts to push Kerberos v5 tickets into the logon session.  
 	    This functionality is available in MIT Kerberos for Windows 3.1 and above.</li>
+	<li><i><b>Fixes a bug that could result in a failure of Microsoft Windows to 
+	boot successfully.&nbsp; See <a href="http://www.openafs.org/security">
+	Security Advisory OPENAFS-SA-2007-002</a></b></i></li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.5.18 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.18/winxp/relnotes-frames.htm">
-	1.5.18 Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.5.19 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.19/winxp/relnotes-frames.htm">
+	1.5.19 Release Notes</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.5.18 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.18/winxp/afs-changes-since-1.2.txt">
-	1.5.18 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.5.19 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/afs-changes-since-1.2.txt">
+	1.5.19 ChangeLog</a></li>
 </ul>
 <h3>Supported Platforms::</h3>
 <ul>
@@ -131,10 +134,10 @@ was published in April 2007.
 <h3>Known Issues:</h3>
 <ul>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must be uninstalled before OpenAFS 
-1.5.18 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
+1.5.19 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
 <li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 
-1.5.18 requires MIT Kerberos for Windows 3.1 or above.</li>
+1.5.19 requires MIT Kerberos for Windows 3.1 or above.</li>
 <li>Directory and File Change Notifications are ignored when accessing AFS via 
 UNC paths</li>
 <li>Windows Vista Specific Issues<ul>
@@ -151,10 +154,10 @@ be &quot;Run as Administrator&quot;.</li>
 <h3>Downloads for 32-bit Windows operating systems: Vista/R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.18/winxp/OpenAFSforWindows-1-5-18.exe">32-bit EXE installer for individual installations</a> 
+	<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/OpenAFSforWindows-1-5-19.exe">32-bit EXE installer for individual installations</a> 
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.18/winxp/openafs-en_US-1-5-18.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/openafs-en_US-1-5-19.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
@@ -167,14 +170,17 @@ Panel be used to initiate installations on 64-bit Microsoft Windows operating
 systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.18/winxp/openafs-en_US-64bit-1-5-18.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/openafs-en_US-64bit-1-5-19.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
 	<h4>Support for 32-bit Windows Applications on 64-bit Windows operating systems</h4>
+		<p>This installer is required for any 32-bit applications that require use of 
+	AFS libraries.&nbsp; This includes 32-bit versions of MIT Kerberos for 
+	Windows.</p>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.5.18/winxp/openafs-32bit-tools-en_US-1-5-18.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/openafs-32bit-tools-en_US-1-5-19.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
@@ -268,7 +274,7 @@ OpenAFS for Windows depends on
 <a target="_self" href="http://web.mit.edu/kerberos/dist/index.html">MIT 
 Kerberos for Windows (KFW)</a>&nbsp; to provide Kerberos 5 functionality.&nbsp; 
 The recommended version of KFW for <a href="#release">
-OpenAFS for Windows 1.5.18</a> is version 3.1.0.&nbsp;  KFW Version 3.2.0 is
+OpenAFS for Windows 1.5.19</a> is version 3.1.0.&nbsp;  KFW Version 3.2.0 is
 being beta tested. 
 <!--
 KFW 3.1.0 includes the Network Identity Manager 
