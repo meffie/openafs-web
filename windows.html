@@ -24,7 +24,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a>
 <li><a href="#signatures">Digital Signatures</a>
 <li><a href="#reports">Status Reports</a>
-<li><a href="#release">OpenAFS for Windows 1.5.19</a>
+<li><a href="#release">OpenAFS for Windows 1.5.20</a>
 <!--
 <li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.4</a>
 -->
@@ -75,8 +75,8 @@ process and send e-mail to
 was published in April 2007.  
 <a title="OpenAFS for Windows Status Report - April 2007" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Apr-2007-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="release">OpenAFS for Windows 1.5.19 (1.5.1900)</a></h2>
-(updated 19 April 2007)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+<h2><a name="release">OpenAFS for Windows 1.5.20 (1.5.2000)</a></h2>
+(updated 18 May 2007)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
 <h3>Features:</h3>
 <ul>
   <li>All the features of the <a href="#stable">maintenance release</a></li>
@@ -111,15 +111,17 @@ was published in April 2007.
 	<li><i><b>Fixes a bug that could result in a failure of Microsoft Windows to 
 	boot successfully.&nbsp; See <a href="http://www.openafs.org/security">
 	Security Advisory OPENAFS-SA-2007-002</a></b></i></li>
+	<li>Improved Explorer Shell behavior when viewing directories without &quot;read&quot; 
+	permission.</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.5.19 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.19/winxp/relnotes-frames.htm">
-	1.5.19 Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.5.20 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.20/winxp/relnotes-frames.htm">
+	1.5.20 Release Notes</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.5.19 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/afs-changes-since-1.2.txt">
-	1.5.19 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.5.20 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.20/winxp/afs-changes-since-1.2.txt">
+	1.5.20 ChangeLog</a></li>
 </ul>
 <h3>Supported Platforms::</h3>
 <ul>
@@ -134,16 +136,17 @@ was published in April 2007.
 <h3>Known Issues:</h3>
 <ul>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must be uninstalled before OpenAFS 
-1.5.19 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
+1.5.20 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
 <li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 
-1.5.19 requires MIT Kerberos for Windows 3.1 or above.</li>
+1.5.20 requires MIT Kerberos for Windows 3.1 or above.</li>
 <li>Directory and File Change Notifications are ignored when accessing AFS via 
 UNC paths</li>
+<li>Windows Vista Specific Issues</li>
 <li>Windows Vista Specific Issues<ul>
 	<li>The help files provided with OpenAFS are in .HLP format.&nbsp;
-	<a href="http://support.microsoft.com/kb/917607">Windows Vista does not include 
-a help engine for this format.</a>&nbsp; Secure Endpoints Inc. is funding the 
+	<a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=6ebcfad9-d3f5-4365-8070-334cd175d4bb&DisplayLang=en">WinHlp32.exe must be 
+	downloaded separately from Microsoft.</a>&nbsp; Secure Endpoints Inc. is funding the 
 development of compatible HtmlHelp (.CHM) files.</li>
 	<li>The AFS Systray Tool (afscreds.exe) and AFS Control Panel (afs_config.exe) 
 are not User Account Control (UAC) compatible.&nbsp; In order to start/stop the 
@@ -154,10 +157,10 @@ be &quot;Run as Administrator&quot;.</li>
 <h3>Downloads for 32-bit Windows operating systems: Vista/R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/OpenAFSforWindows-1-5-19.exe">32-bit EXE installer for individual installations</a> 
+	<a href="http://dl.openafs.org/dl/openafs/1.5.20/winxp/OpenAFSforWindows-1-5-20.exe">32-bit EXE installer for individual installations</a> 
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/openafs-en_US-1-5-19.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.20/winxp/openafs-en_US-1-5-20.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
@@ -170,7 +173,7 @@ Panel be used to initiate installations on 64-bit Microsoft Windows operating
 systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/openafs-en_US-64bit-1-5-19.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.20/winxp/openafs-en_US-64bit-1-5-20.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
@@ -180,7 +183,7 @@ systems.</p>
 	Windows.</p>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.5.19/winxp/openafs-32bit-tools-en_US-1-5-19.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.20/winxp/openafs-32bit-tools-en_US-1-5-20.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
@@ -274,13 +277,6 @@ OpenAFS for Windows depends on
 <a target="_self" href="http://web.mit.edu/kerberos/dist/index.html">MIT 
 Kerberos for Windows (KFW)</a>&nbsp; to provide Kerberos 5 functionality.&nbsp; 
 The recommended version of KFW for <a href="#release">
-OpenAFS for Windows 1.5.19</a> is version 3.1.0.&nbsp;  KFW Version 3.2.0 is
-being beta tested. 
-<!--
-KFW 3.1.0 includes the Network Identity Manager 
-which requires an AFS plug-in that is not available in <a href="#stable">OpenAFS 
-for Windows 1.4.4</a>. The recommended version of KFW for use with <a href="#stable">OpenAFS for Windows 
-1.4.4</a> is version 2.6.5.
--->  
+OpenAFS for Windows 1.5.20</a> is version 3.2.0.  
 </body>
 </html>
