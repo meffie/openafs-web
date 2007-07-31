@@ -16,17 +16,18 @@ done to turn AFS into a first class file system, especially for MacOS X and Micr
 Windows end users.&nbsp; The work to be accomplished on OpenAFS falls into six 
 broad categories:</p>
 <ul>
-	<li>Core Client Functionality</li>
-	<li>Human Interfaces</li>
-	<li>AFSv3 Remote Procedure Call Extensions</li>
-<li>Server Enhancements and Management Tools</li>
-	<li>High Performance Computing Extensions</li>
-	<li>Miscellaneous</li>
+	<li><a href="#core">Core Client Functionality</a></li>
+	<li><a href="#HI">Human Interfaces</a></li>
+	<li><a href="#protocol">AFSv3 Remote Procedure Call Extensions</a></li>
+<li><a href="#server">Server Enhancements and Management Tools</a></li>
+	<li><a href="#HPC">High Performance Computing Extensions</a></li>
+	<li><a href="#misc">Miscellaneous</a></li>
+	<li><a href="#documentation">Documentation</a></li>
 </ul>
 <p>It is the goal of the OpenAFS Elders to raise resources from the OpenAFS 
 Community and others to successfully implement all of these functions over the next three 
 to five years.</p>
-<h2 wrap>1. Core Client Functionality</h2>
+<h2 wrap><a name="core"></a>1. Core Client Functionality</h2>
 <p wrap>Core client functionality encompasses the AFS cache manager, file system 
 interfaces, pioctl interfaces, and credential management.</p>
 <h3 wrap>Microsoft Windows:</h3>
@@ -82,8 +83,7 @@ potential.</p>
 	is known by the data version change that no other client has modified the 
 	directory in the mean time.</p></li>
 	<li>
-	<p wrap><b>Read-only or Read-write 
-disconnected mode:</b><br>
+	<p wrap><b>Read-only or Read-write disconnected mode:</b><br>
 	Microsoft Windows users are used to the &quot;Windows Offline Folders&quot; 
 	functionality which permits them to synchronize local copies of files or 
 	folders from a CIFS server to their local disk for use when disconnected 
@@ -219,7 +219,7 @@ disconnected mode:</b><br>
 	<li>Port the cache manager to BSD<br>
 	Estimate: 3 to 4 months</li>
 </ul>
-<h2 wrap>2. Human Interfaces 
+<h2 wrap><a name="HI"></a>2. Human Interfaces 
 </h2>
 <p wrap>There have been many discussions about how hard AFS is to use, how end users 
 don't want AFS and really want a WebDAV solution.&nbsp;&nbsp; What do those statements really mean?&nbsp; First, AFS isn't 
@@ -306,7 +306,7 @@ AFS context menus. Likewise, certain other graphical interfaces which will
 become available in Leopard provide opportunities for customization to ease use 
 of AFS.</p>
 
-<h2 wrap>3. AFS3 Protocol Feature Enhancements 
+<h2 wrap><a name="protocol"></a>3. AFS3 Protocol Feature Enhancements 
  
 </h2>
 <p wrap>In order for AFS to be treated as a first class file system for MacOS X 
@@ -414,7 +414,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	<li><b>partition UUIDs:</b><br>
 	Estimate: 1 to 2 weeks</li>
 </ul>
-<h2 wrap>4. Server Enhancements and Management Tools</h2>
+<h2 wrap><a name="server"></a>4. Server Enhancements and Management Tools</h2>
 <h3 wrap>All Platforms </h3>
 <ul>
 	<li><b>LDAP integration:</b><br>
@@ -464,9 +464,7 @@ For more details ...</a><br>
 <br>
 Estimate: 4 to 6 weeks</p>  
  
-<h2>
- 
-5. High Performance Computing Extensions</h2>
+<h2><a name="HPC"></a>5. High Performance Computing Extensions</h2>
 <ul>
 	<li><b>Rx/TCP and IPv6:<br>
 	</b>The networking protocol used by OpenAFS was developed in the late 
@@ -711,7 +709,7 @@ limitations:<ul>
 <p><b>rxk5</b> is significantly stronger than <b>rxkad</b> when it comes to 
 security and requires relatively minor changes to the OpenAFS architecture.</li>
 </ul>
-<h2>6. Miscellaneous</h2>
+<h2><a name="misc"></a>6. Miscellaneous</h2>
 <ul>
 	<li><b>HostAFSD and Peer-to-Peer AFS:<br>
 	</b>One of the things that the Gatekeepers are frequently asked by AFS 
@@ -762,7 +760,7 @@ security and requires relatively minor changes to the OpenAFS architecture.</li>
 	<br>
 	Estimate: 2 weeks</li>
 </ul>
-<h2>7. Documentation</h2>
+<h2><a name="documentation"></a>7. Documentation</h2>
 <ul>
 	<li>Installation and Maintenance</li>
 	<li>Reference Manuals</li>
@@ -776,5 +774,5 @@ dependent upon resource availability.&nbsp; </p>
 <a href="mailto:openafs-gatekeepers@openafs.org?subject=OpenAFS Roadmap Feedback">
 openafs-gatekeepers@openafs.org</a></p>&nbsp;<div id="footer"><hr>
 <address>&lt;webmaster@openafs.org&gt;</address>
-<address>Last modified: 2007/07/19 17:41:14 EDT</address>
+<address>Last modified: 2007/07/31 10:41:14 EDT</address>
 </div></body></html>
