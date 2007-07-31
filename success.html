@@ -9,7 +9,8 @@
 
 <h1>OpenAFS Success Stories</h1>
 <h2 align="left"><a name="case-slac"></a>Stanford Linear Accelerator Center</h2>
-AFS supports all of the following projects in that most of the tools (compilers, 
+<dl>
+<dd>AFS supports all of the following projects in that most of the tools (compilers, 
 CVS code trees, etc.) are in AFS as well as some of the data input and output for 
 their simulations (some Monte Carlo type simulations but mostly data for GEANT simulations).
 <p></p>
@@ -74,8 +75,10 @@ How many volumes?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb
 How many file servers?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 15 fileservers<br>
 How much storage per file server?&nbsp;&nbsp; 34GB to 1.6TB</p>
+</dd></dl>
 <h2 wrap><a name="case-pdc"></a>ParallellDatorCentrum, Center for Parallel Computers 
 at KTH </h2>
+<dl><dd>
 One of the computing centers in Sweden for research. Situated at KTH, Royal Institute 
 of Technology, Stockholm.&nbsp; Written by Harald Barth.
 <p></p>
@@ -160,7 +163,9 @@ Number of files: Approx 65 000 000.<br>
 Number of file servers: 11<br>
 Approx storage per server: 1TB<br>
 <p></p>
+</dd></dl>
 <h2 wrap><a name="case-pictage"></a>Pictage Inc. </h2>
+<dl><dd>
 <p wrap><a href="http://www.pictage.com/">http://www.pictage.com/</a></p>
 <p wrap>Pictage&#39;s business is worldwide.&nbsp; They provide services to wedding 
 photographers who upload the photos they have taken. Pictage then makes the 
@@ -198,7 +203,9 @@ Approx storage per server: depending on age of server 1.2TB to 25TB<p>
 (statistics as of 22 May 2007)<br>
 </p>
 <p></p>
+</dd></dl>
 <h2 wrap><a name="case-ncsa"></a>NCSA at UIUC</h2>
+<dl><dd>
 <p wrap>HDF is a project that helps support the research projects that NCSA provides 
 computing services for.<br>
 <br>
@@ -215,7 +222,7 @@ They&#39;ve recently split off from NCSA to form The HDF Group: <br>
 <a class="moz-txt-link-freetext" href="http://www.hdfgroup.org/HDF5/release/platforms5.html">
 http://www.hdfgroup.org/HDF5/release/platforms5.html</a> <br>
 <br>
-Their source tree and everything is in the NCSA AFS&nbsp; cell and the build process 
+Their source tree and everything is in the NCSA AFS cell and the build process 
 is scripted for all the different architectures they support.&nbsp; Their build 
 systems range from clusters to servers to desktop systems and the binaries can be 
 dropped right into AFS which users grab via ftp.&nbsp; They need an authenticated 
@@ -225,30 +232,31 @@ with off-site users.</p>
 <p wrap>And some comments from Christopher Lindsey about future directions:</p>
 <p wrap>&quot;I can tell you about possible future direction.<br>
 <br>
-&quot;We&#39;ve all noticed that the stand-alone University model doesn&#39;t work.<br>
+&quot;We&#39;ve all noticed that the stand-alone University model doesn&#39;t work.&nbsp;
 Just like businesses that merge, Universities are finding that they need<br>
-to collaborate with other research institutions to make their proposals<br>
+to collaborate with other research institutions to make their proposals
 competitive.&nbsp; You throw in concepts like grid computing (i.e. TeraGrid)<br>
-and you suddenly have a diverse, disparate set of sites that need to<br>
+and you suddenly have a diverse, disparate set of sites that need to
 collaborate.<br>
 <br>
 &quot;This is where AFS becomes a player.<br>
 <br>
-&quot;I believe that we currently use it as a giant swap file space for <br>
+&quot;I believe that we currently use it as a giant swap file space for 
 different projects -- one supercomputer site needs access to security <br>
 net flows, so we put them out there, set the acls, and voila.<br>
 <br>
-&quot;Future projects on supercomputers will leverage AFS as well.&nbsp; I don&#39;t<br>
+&quot;Future projects on supercomputers will leverage AFS as well.&nbsp; I don&#39;t
 know how much detail I can go into, but there is a proposal that will <br>
-be submitted on Jan 22 that will revolutionize how HPC resources within<br>
+be submitted on Jan 22 that will revolutionize how HPC resources within
 the TeraGrid are used.&nbsp; The ubiquity and security of AFS make it the <br>
-perfect foundation for this project.<br>
-<br>
-&quot;As far as timings, we might be able to do some dprof timings between here<br>
+perfect foundation for this project.</p>
+<p wrap>&quot;As far as timings, we might be able to do some dprof timings between here
 and Argonne Labs over iwire (<a class="moz-txt-link-freetext" href="http://www.iwire.org/">http://www.iwire.org/</a>).&nbsp; 
-Ironically, the<br>
+Ironically, the
 bottleneck there will be the GigE NIC on the AFS servers.&quot;</p>
+</dd></dl>
 <h2 wrap><a name="case-usgs"></a>United States Geological Survey</h2>
+<dl><dd>
 <h4>Background</h4>
 <p>The use of AFS at the United States Geological 
 Survey, USGS, started in response to a requirement to provide natural hazard 
@@ -340,7 +348,7 @@ employees, 1 part-time employee, and one manager. These individuals manage the
 budget, hardware, operating system maintenance, security, software updates, 
 custom programming and user support for both the AFS and Web components of the 
 service.</p>
-
+</dd></dl>
 <h2>Robert Carter, Duke University Office of Information Technology, shared:</h2>
 <dl>
 <dd>
@@ -527,7 +535,6 @@ project and its contributors are breathing new life into a wonderful
 technology.
 <p>
 Some features that would be of value:
-<p>
 <ul>
 <li>OpenAFS documentation on kaserver -> krb5 migration</li>
 <li>OpenAFS documentation on setup for new krb5 cells</li>
@@ -545,8 +552,8 @@ module so i can contribute it and open it up for community development.
 <p>
 </dl>
 <h1>Sharing your OpenAFS Story</h1>
-Please contact the <a href="mailto:openafs-gatekeepers@openafs.org">openafs 
-gatekeepers</a> to share your success story.<div id="footer"><hr>
+Please contact the <a href="mailto:openafs-gatekeepers@openafs.org">OpenAFS 
+Gatekeepers</a> to share your success story.<div id="footer"><hr>
 <address>&lt;webmaster@openafs.org&gt;</address>
 <address>Last modified: $Date$</address>
 </div></body></html>
