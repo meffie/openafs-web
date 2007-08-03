@@ -1,193 +1,200 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
                       "http://www.w3c.org/TR/html4/loose.dtd">
-<html><head>
+<html>
+
+<head>
 <title>OpenAFS Development Roadmap</title>
 <link href="/openafs.css" rel="stylesheet" type="text/css">
 </head>
-<body bgcolor="#ffffff" text="#000000"
-      link="#000fff" vlink="#0000ff" alink="#0000ff">
+
+<body bgcolor="#ffffff" text="#000000" link="#000fff" vlink="#0000ff" alink="#0000ff">
 
 <h1 align="center">Development Road Map for OpenAFS</h1>
-<p>In its seven plus years as an open source project, OpenAFS has established 
-AFS as one of the open source success stories.&nbsp; OpenAFS provides clients 
-for all of the major operating system distributions and servers on all 
-UNIX/Linux variants.&nbsp; Even so, there is still a great deal that could be 
-done to turn AFS into a first class file system, especially for MacOS X and Microsoft 
-Windows end users.&nbsp; The work to be accomplished on OpenAFS falls into six 
-broad categories:</p>
+<p>In its seven plus years as an open source project, OpenAFS has established AFS 
+as one of the open source success stories.&nbsp; OpenAFS provides clients for all 
+of the major operating system distributions and servers on all UNIX/Linux variants.&nbsp; 
+Even so, there is still a great deal that could be done to turn AFS into a first 
+class file system, especially for MacOS X and Microsoft Windows end users.&nbsp; 
+The work to be accomplished on OpenAFS falls into six broad categories:</p>
 <ul>
 	<li><a href="#core">Core Client Functionality</a></li>
 	<li><a href="#HI">Human Interfaces</a></li>
 	<li><a href="#protocol">AFSv3 Remote Procedure Call Extensions</a></li>
-<li><a href="#server">Server Enhancements and Management Tools</a></li>
+	<li><a href="#server">Server Enhancements and Management Tools</a></li>
 	<li><a href="#HPC">High Performance Computing Extensions</a></li>
 	<li><a href="#misc">Miscellaneous</a></li>
 	<li><a href="#documentation">Documentation</a></li>
 </ul>
-<p>It is the goal of the OpenAFS Elders to raise resources from the OpenAFS 
-Community and others to successfully implement all of these functions over the next three 
+<p>It is the goal of the OpenAFS Elders to raise resources from the OpenAFS Community 
+and others to successfully implement all of these functions over the next three 
 to five years.</p>
 <h2 wrap><a name="core"></a>1. Core Client Functionality</h2>
 <p wrap>Core client functionality encompasses the AFS cache manager, file system 
 interfaces, pioctl interfaces, and credential management.</p>
 <h3 wrap>Microsoft Windows:</h3>
 <p wrap>The Microsoft Windows client has received significant attention over the 
-last four years.&nbsp; It is a fully functional client that works on all 
-Microsoft Windows releases from Windows 2000 SP4 through Windows Vista.&nbsp; For a summary, see the
-<a href="http://www.secure-endpoints.com/#oafw_status_report">OpenAFS for 
+last four years.&nbsp; It is a fully functional client that works on all Microsoft 
+Windows releases from Windows 2000 SP4 through Windows Vista.&nbsp; For a summary, 
+see the <a href="http://www.secure-endpoints.com/#oafw_status_report">OpenAFS for 
 Windows Status Report</a>.&nbsp; Still, there are a number of deficiencies that 
-adversely impact the ability of end users to use AFS to its full existing 
-potential.</p>
+adversely impact the ability of end users to use AFS to its full existing potential.</p>
 <ul>
 	<li>
 	<p wrap><b>Unicode object names support:</b><br>
-	The existing cache manager and the SMB server interface only support the 
-	local workstation's OEM code page.&nbsp; For a United States - English or 
-	Western European workstation this will be
-	<a href="http://en.wikipedia.org/wiki/Code_page_850">CP850</a>.&nbsp; Any 
-	attempt to store or access a file/directory that contains characters that 
-	are not in the local code page will result in a ERROR_NO_UNICODE_TRANSLATION 
-	error.&nbsp; If this error occurs during an attempt to store a roaming 
-	profile, it will cause the profile storage operation to fail midway without 
-	any opportunity for the end user to correct it.&nbsp;&nbsp; Failure to 
-	support Unicode also adversely affects the usefulness of AFS on Microsoft 
-	Windows in Asia and the Middle East.<br>
+	The existing cache manager and the SMB server interface only support the local 
+	workstation&#39;s OEM code page.&nbsp; For a United States - English or Western 
+	European workstation this will be
+	<a href="http://en.wikipedia.org/wiki/Code_page_850">CP850</a>.&nbsp; Any attempt 
+	to store or access a file/directory that contains characters that are not in 
+	the local code page will result in a ERROR_NO_UNICODE_TRANSLATION error.&nbsp; 
+	If this error occurs during an attempt to store a roaming profile, it will cause 
+	the profile storage operation to fail midway without any opportunity for the 
+	end user to correct it.&nbsp;&nbsp; Failure to support Unicode also adversely 
+	affects the usefulness of AFS on Microsoft Windows in Asia and the Middle East.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#unicode">
-	For more details ...</a></p></li>
+	For more details ...</a></p>
+	</li>
 	<li>
 	<p wrap><b>Directory search optimizations:</b><br>
-	Microsoft Windows is a case-insensitive operating system that supports the 
-	use of case-sensitive file systems such as AFS.&nbsp; In a case insensitive 
-	environment it is necessary for the cache manager to protect against 
-	performing requested operations when there are ambiguous name matches.&nbsp; 
-	One of the other negative results is that the Windows client cannot treat 
-	the failure of an AFS directory hash table lookup to mean that the requested 
-	object does not exist.&nbsp; Instead, the cache manager must perform a 
-	linear search of the directory contents in order to determine if there are 
-	zero, one or more case-insensitive matches.&nbsp; This results in 
-	significant performance penalties in the form of CPU utilization and clock 
-	time for negative matches.<br>
+	Microsoft Windows is a case-insensitive operating system that supports the use 
+	of case-sensitive file systems such as AFS.&nbsp; In a case insensitive environment 
+	it is necessary for the cache manager to protect against performing requested 
+	operations when there are ambiguous name matches.&nbsp; One of the other negative 
+	results is that the Windows client cannot treat the failure of an AFS directory 
+	hash table lookup to mean that the requested object does not exist.&nbsp; Instead, 
+	the cache manager must perform a linear search of the directory contents in 
+	order to determine if there are zero, one or more case-insensitive matches.&nbsp; 
+	This results in significant performance penalties in the form of CPU utilization 
+	and clock time for negative matches.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#directory search">
-	For more details ...</a></p></li>
+	For more details ...</a></p>
+	</li>
 	<li>
 	<p wrap><b>Directory change optimizations:</b><br>
-	When a directory change operation is performed against a file server the 
-	cache manager reads the modified directory contents after the operation has 
-	been completed.&nbsp; The clock time required to perform this refresh is 
-	dependent upon the network performance as well as the number of entries in 
-	the directory.&nbsp; The more entries and the slower the network, the longer 
-	the operation takes.&nbsp; A directory with ten thousand entries over a 
-	high-end cable modem service has seen clock time per update of up to 6.5 
-	seconds.&nbsp;&nbsp; This is a significant cost that can be mitigated by 
-	updating the cache manager to locally modify the directory contents when it 
-	is known by the data version change that no other client has modified the 
-	directory in the mean time.</p></li>
+	When a directory change operation is performed against a file server the cache 
+	manager reads the modified directory contents after the operation has been completed.&nbsp; 
+	The clock time required to perform this refresh is dependent upon the network 
+	performance as well as the number of entries in the directory.&nbsp; The more 
+	entries and the slower the network, the longer the operation takes.&nbsp; A 
+	directory with ten thousand entries over a high-end cable modem service has 
+	seen clock time per update of up to 6.5 seconds.&nbsp;&nbsp; This is a significant 
+	cost that can be mitigated by updating the cache manager to locally modify the 
+	directory contents when it is known by the data version change that no other 
+	client has modified the directory in the mean time.</p>
+	</li>
 	<li>
 	<p wrap><b>Read-only or Read-write disconnected mode:</b><br>
-	Microsoft Windows users are used to the &quot;Windows Offline Folders&quot; 
-	functionality which permits them to synchronize local copies of files or 
-	folders from a CIFS server to their local disk for use when disconnected 
-	from the network.&nbsp; UMichigan long ago implemented a read-write 
-	disconnected mode for the UNIX AFS client which permits users to continue 
-	using data within the AFS cache while in an offline mode.&nbsp; Once the 
-	client is restored to an online state the modifications made to the cache 
-	buffers are written back to the file server provided that there are no 
-	conflicts.&nbsp;&nbsp; If there are conflicts a manual conflict resolution 
-	process must be initiated.&nbsp; Conflict resolution is hard but AFS users 
-	would gain a great deal even if the contents of the AFS cache were available 
-	when disconnected from the file servers in a read-only manner.</p></li>
+	Microsoft Windows users are used to the &quot;Windows Offline Folders&quot; functionality 
+	which permits them to synchronize local copies of files or folders from a CIFS 
+	server to their local disk for use when disconnected from the network.&nbsp; 
+	UMichigan long ago implemented a read-write disconnected mode for the UNIX AFS 
+	client which permits users to continue using data within the AFS cache while 
+	in an offline mode.&nbsp; Once the client is restored to an online state the 
+	modifications made to the cache buffers are written back to the file server 
+	provided that there are no conflicts.&nbsp;&nbsp; If there are conflicts a manual 
+	conflict resolution process must be initiated.&nbsp; Conflict resolution is 
+	hard but AFS users would gain a great deal even if the contents of the AFS cache 
+	were available when disconnected from the file servers in a read-only manner.</p>
+	</li>
 	<li>
 	<p wrap><b>Executable pre-fetching:</b><br>
-	The Windows client is often used to run applications out of the AFS name 
-	space.&nbsp;&nbsp; When a file server becomes unreachable while an 
-	application is running it will crash if it attempts to load a page that is 
-	not currently in the AFS cache.&nbsp; This problem can be mitigated by 
-	modifying the AFS client to pre-fetch the entire file if the file is likely 
-	to be an executable.&nbsp; </p></li>
+	The Windows client is often used to run applications out of the AFS name space.&nbsp;&nbsp; 
+	When a file server becomes unreachable while an application is running it will 
+	crash if it attempts to load a page that is not currently in the AFS cache.&nbsp; 
+	This problem can be mitigated by modifying the AFS client to pre-fetch the entire 
+	file if the file is likely to be an executable.&nbsp; </p>
+	</li>
 	<li>
 	<p wrap><b>Native file system driver interface (aka IFS):</b> <br>
-	The existing OpenAFS Client relies on an SMB server implementation (similar 
-	to Samba) to export the AFS name space to Windows Applications.&nbsp; This has a 
-	number of negative side effects that would be avoided if the OpenAFS for 
-	Windows client were to be implemented via a combination of Network 
-	Redirector and File System Filter drivers.&nbsp; The current OpenAFS client on 
-	Windows is not a true Windows file system.&nbsp; Instead it operates as a SMB 
-	translator service.&nbsp; The Windows OpenAFS client creates a SMB fileserver on 
-	the client machine, and Windows accesses this SMB server as a normal Windows 
-	shared volume.&nbsp; For each I/O operation made to this virtual SMB server, the 
-	OpenAFS client translates the SMB request into a comparable operation on the 
-	OpenAFS fileserver.&nbsp; This impacts the Windows OpenAFS client in a number of 
-	negative ways:</p>
-	<p>The semantics of the CIFS file system are different than the semantics 
-	provided by OpenAFS.&nbsp; Because Windows sees the OpenAFS file system as an 
-	CIFS share, it has no way of acquiring the true capabilities or semantics of 
-	OpenAFS.&nbsp; This causes some applications to perform poorly when they expect 
-	the semantics of CIFS, which OpenAFS does not necessarily provide.</p>
-	<p>The use of the translator service requires data to be received by the 
-	OpenAFS client via RX, translated into SMB packets, and then sent over the 
-	virtual loopback interface to the actual SMB server on the same machine.&nbsp; 
-	This results in a number of extra data copies, which greatly reduces OpenAFS 
-	performance.&nbsp; Making OpenAFS a native Windows file system will reduce the 
-	number of data copies and protocol translations, which will increase 
-	performance.</p>
-	<p>The CIFS/SMB protocol does not provide any mechanism for the server to 
-	inform a client that an operation is actively being processed even if it is 
-	taking a long time to complete.&nbsp; The CIFS clients in Windows 2000 and above 
-	implement a dynamic timeout algorithm that estimates how long a request 
-	should take based upon the prior response time of the server and the amount 
-	of data being transferred.&nbsp; As the OpenAFS SMB server and cache manager are 
-	local to the machine, it is frequently the case that the response time in on 
-	the order of hundreds of microseconds.&nbsp; When a request to read or write 
-	large amounts of data from/to a file server occurs or if the needed volume 
-	is temporarily busy, the CIFS client will frequently timeout the request and 
-	tear down the SMB virtual circuit.&nbsp; This has a negative impact on 
-	applications as it results in all file handles being invalidated and all 
-	locks being dropped which must then be re-established.&nbsp; </p>
-	<p>In order for the UNC server name &quot;AFS&quot; to be visible on all clients, the 
-	Microsoft Loopback Adapter (MLA) must be installed in order to provide a 
-	private network adapter to which the &quot;AFS&quot; Netbios name can be bound.&nbsp; The 
-	installation of the MLA adversely effects several popular software licensing 
-	and anti-spyware products which use the network adapter MAC address as a 
-	unique key.</p>
-	<p>The solution is to replace the SMB server with a native Windows File 
-	System Redirector that can be supported on Windows 2000 SP4, Windows XP SP2, 
-	Windows 2003 SP2, Windows XP 64 SP2, Windows 2003 R2, and Windows Vista.<br>
-	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#file system redirector">For more details ...</a><br>
-	Estimate: 10 to 11 months</li>
+	The current OpenAFS client on Windows is not a 
+	true Windows file system.&nbsp; Instead it operates as a SMB translator service.&nbsp; 
+	The Windows OpenAFS client creates a SMB fileserver on the client machine, and 
+	Windows accesses this SMB server as a normal Windows shared volume.&nbsp; For 
+	each I/O operation made to this virtual SMB server, the OpenAFS client translates 
+	the SMB request into a comparable operation on the OpenAFS fileserver.&nbsp; 
+	This impacts the Windows OpenAFS client in a number of negative ways:</p>
+<ul>
+	<li>The semantics of the CIFS file system are different than the semantics provided 
+	by OpenAFS.&nbsp; Because Windows sees the OpenAFS file system as an CIFS share, 
+	it has no way of acquiring the true capabilities or semantics of OpenAFS.&nbsp; 
+	This causes some applications to perform poorly when they expect the semantics 
+	of CIFS, which OpenAFS does not necessarily provide.</li>
+	<li>The use of the translator service requires data to be received by the OpenAFS 
+	client via RX, translated into SMB packets, and then sent over the virtual loopback 
+	interface to the actual SMB server on the same machine.&nbsp; This results in 
+	a number of extra data copies, which greatly reduces OpenAFS performance.&nbsp; 
+	Making OpenAFS a native Windows file system will reduce the number of data copies 
+	and protocol translations, which will increase performance.</li>
+	<li>The CIFS/SMB protocol does not provide any mechanism for the server to inform 
+	a client that an operation is actively being processed even if it is taking 
+	a long time to complete.&nbsp; The CIFS clients in Windows 2000 and above implement 
+	a dynamic timeout algorithm that estimates how long a request should take based 
+	upon the prior response time of the server and the amount of data being transferred.&nbsp; 
+	As the OpenAFS SMB server and cache manager are local to the machine, it is 
+	frequently the case that the response time in on the order of hundreds of microseconds.&nbsp; 
+	When a request to read or write large amounts of data from/to a file server 
+	occurs or if the needed volume is temporarily busy, the CIFS client will frequently 
+	timeout the request and tear down the SMB virtual circuit.&nbsp; This has a 
+	negative impact on applications as it results in all file handles being invalidated 
+	and all locks being dropped which must then be re-established.&nbsp; </li>
+	<li>In order for the UNC server name &quot;AFS&quot; to be visible on all clients, the 
+	Microsoft Loopback Adapter (MLA) must be installed in order to provide a private 
+	network adapter to which the &quot;AFS&quot; Netbios name can be bound.&nbsp; The installation 
+	of the MLA adversely effects several popular software licensing and anti-spyware 
+	products which use the network adapter MAC address as a unique key.</li>
+</ul>
+	<p>The existing OpenAFS Client relies on an SMB server implementation (similar 
+	to Samba) to export the AFS name space to Windows Applications.&nbsp; This has 
+	a number of negative side effects that would be avoided if the OpenAFS for Windows 
+	client were to be implemented via a combination of File System Redirector, File 
+	System Filter driver, and a Network Provider.&nbsp; </p>
+	<p>The solution is to replace the SMB server with a native File System 
+	Redirector, a File 
+	System Filter driver, and a Network Provider that can be supported on Windows XP SP2, Windows 
+	2003 SP1, Windows XP 64, Windows 2003 R2, Windows Vista, and Windows Server 
+	2008.&nbsp; This project requires Unicode Object Name Support as a 
+	prerequisite.<br>
+	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#file system redirector">For more details ...</a><br>Estimate: 10 to 11 months</p>
+	</li>
 	<li>
-	<p wrap><b>Rx Connection Pools:</b><br>The AFS cache manager establishes a 
-	separate Rx connection to the file server for each user.&nbsp; Each 
-	connection can be used to process up to a maximum of four simultaneous 
-	remote procedure calls.&nbsp; This can be a problem a web server that serves 
-	large numbers of users but issues all requests to the AFS cache manager 
-	using the same credentials (or no credentials at all.)&nbsp; For these 
-	environments it would be nice to support Rx Connection Pools which would 
+	<p wrap><b>Rx Connection Pools:</b><br>
+	The AFS cache manager establishes a separate Rx connection to the file server 
+	for each user.&nbsp; Each connection can be used to process up to a maximum 
+	of four simultaneous remote procedure calls.&nbsp; This can be a problem a web 
+	server that serves large numbers of users but issues all requests to the AFS 
+	cache manager using the same credentials (or no credentials at all.)&nbsp; For 
+	these environments it would be nice to support Rx Connection Pools which would 
 	permit a greater number of simultaneous RPCs.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#connection pools">
-	For more details ...</a> </p></li>
+	For more details ...</a> </p>
+	</li>
 </ul>
 <h3 wrap>All UNIX platforms:</h3>
 <ul>
 	<li><b>split readonly/readwrite cache usage limits:</b><br>
-	Some usage scenarios make it desirable to ensure that a certain amount of 
-	the available cache space is reserved for read-only data in order to reduce 
-	the likelihood that the cached data will be swapped out.<br>
-		(testing needed)</li>
-	<li><b>demand prefetch:</b> <br>In order to reduce wait time while streaming 
-	files, it is desirable to allow for a sliding prefetch window when a file is 
-	opened and being read. (testing needed)</li>
-	<li><b>read/write disconnected AFS:</b> <br>UMichigan's CITI developed read/write disconnected mode in 1993 as a 
-	research project.&nbsp; This code has never been integrated into the 
-	mainstream AFS distribution.&nbsp;
-	<a href="http://www.google.com/search?q=cache:PI5VE0Ty9NQJ:www.citi.umich.edu/techreports/reports/citi-tr-93-3.ps.gz+afs+disconnected+mode&hl=en&ct=clnk&cd=1&gl=us&client=firefox-a">The original paper &quot;Disconnected Operation for AFS&quot; can be found in the 
-	Google Cache.</a> <br>
-	Estimate: (read/only) 2 weeks / (read/write) 6 to 7 weeks<br>(3Q2007)</li>
-	<li><b>intermediate fileserver - client as fileserver:</b><br>Each AFS cache contains up-to-date copies of data when a callback is 
-	registered with a file server.&nbsp; In a cluster of clients that are 
-	reading the same data over a low bandwidth network, it would be more 
-	efficient if the AFS cache manager could obtain data from a nearby 
-	up-to-date copy as opposed to reading it from the file server on the slow 
-	link.<br>(3Q2007)</li>
+	Some usage scenarios make it desirable to ensure that a certain amount of the 
+	available cache space is reserved for read-only data in order to reduce the 
+	likelihood that the cached data will be swapped out.<br>
+	(testing needed)</li>
+	<li><b>demand prefetch:</b> <br>
+	In order to reduce wait time while streaming files, it is desirable to allow 
+	for a sliding prefetch window when a file is opened and being read. (testing 
+	needed)</li>
+	<li><b>read/write disconnected AFS:</b> <br>
+	UMichigan&#39;s CITI developed read/write disconnected mode in 1993 as a research 
+	project.&nbsp; This code has never been integrated into the mainstream AFS distribution.&nbsp;
+	<a href="http://www.google.com/search?q=cache:PI5VE0Ty9NQJ:www.citi.umich.edu/techreports/reports/citi-tr-93-3.ps.gz+afs+disconnected+mode&hl=en&ct=clnk&cd=1&gl=us&client=firefox-a">
+	The original paper &quot;Disconnected Operation for AFS&quot; can be found in the Google 
+	Cache.</a> <br>
+	Estimate: (read/only) 2 weeks / (read/write) 6 to 7 weeks<br>
+	(3Q2007)</li>
+	<li><b>intermediate fileserver - client as fileserver:</b><br>
+	Each AFS cache contains up-to-date copies of data when a callback is registered 
+	with a file server.&nbsp; In a cluster of clients that are reading the same 
+	data over a low bandwidth network, it would be more efficient if the AFS cache 
+	manager could obtain data from a nearby up-to-date copy as opposed to reading 
+	it from the file server on the slow link.<br>
+	(3Q2007)</li>
 </ul>
 <h3 wrap>MacOS X:</h3>
 <ul>
@@ -203,12 +210,14 @@ potential.</p>
 <ul>
 	<li>
 	<p wrap>On-going maintenance necessary to keep up with backward incompatible 
-	changes to the Linux kernel and new interfaces provided and used therein.</p></li>
+	changes to the Linux kernel and new interfaces provided and used therein.</p>
+	</li>
 </ul>
 <h3 wrap>Solaris:</h3>
 <ul>
 	<li>
-	<p wrap>update client to use system inodes instead of private inode pool.</p></li>
+	<p wrap>update client to use system inodes instead of private inode pool.</p>
+	</li>
 </ul>
 <h3 wrap>AIX:</h3>
 <ul>
@@ -219,198 +228,180 @@ potential.</p>
 	<li>Port the cache manager to BSD<br>
 	Estimate: 3 to 4 months</li>
 </ul>
-<h2 wrap><a name="HI"></a>2. Human Interfaces 
-</h2>
+<h2 wrap><a name="HI"></a>2. Human Interfaces </h2>
 <p wrap>There have been many discussions about how hard AFS is to use, how end users 
-don't want AFS and really want a WebDAV solution.&nbsp;&nbsp; What do those statements really mean?&nbsp; First, AFS isn't 
-any harder use than any other authenticated file 
-system from the perspective of end users.&nbsp; If a user has an &quot;encrypted&quot; 
-local disk she has to authenticate herself by providing her password.&nbsp; With the single sign-on solutions 
-available for OpenAFS there really 
-isn't much reason for users today to be running without tokens when they 
-have network access.&nbsp; Second, the statement that end users don't want AFS 
-(as opposed to some other centralize storage solution) really makes no sense.&nbsp; 
-End users don't ask for technologies, they ask for functionality.&nbsp; If a 
-user wants centralized storage then the user wants centralized storage.&nbsp; </p>
-<p wrap>Users describe their desires using the technologies that are most 
-familiar to them which today most often means Windows Shares (CIFS) and Browser 
-based services.&nbsp;
-Why?&nbsp; Because those are the technologies the user has thrown in his face every time 
-he looks at his OS desktop. </p>
-<h3> 
-Microsoft Windows:</h3>
-
-<p> 
-The Secure Endpoints Inc.
-<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html"><i>OpenAFS Windows Road Map</i> web page</a> provides 
-an number of mock ups of Explorer Shell extensions that can be used to 
-not only make AFS much more accessible to end users but also significantly 
-improve its ease of use.&nbsp; By making the Explorer Shell AFS aware users will 
-find it much easier to make use of.&nbsp; No longer will users have to use 
-command line techniques to access AFS and manage its contents and 
-metadata.  
+don&#39;t want AFS and really want a WebDAV solution.&nbsp;&nbsp; What do those statements 
+really mean?&nbsp; First, AFS isn&#39;t any harder use than any other authenticated 
+file system from the perspective of end users.&nbsp; If a user has an &quot;encrypted&quot; 
+local disk she has to authenticate herself by providing her password.&nbsp; With 
+the single sign-on solutions available for OpenAFS there really isn&#39;t much reason 
+for users today to be running without tokens when they have network access.&nbsp; 
+Second, the statement that end users don&#39;t want AFS (as opposed to some other centralize 
+storage solution) really makes no sense.&nbsp; End users don&#39;t ask for technologies, 
+they ask for functionality.&nbsp; If a user wants centralized storage then the user 
+wants centralized storage.&nbsp; </p>
+<p wrap>Users describe their desires using the technologies that are most familiar 
+to them which today most often means Windows Shares (CIFS) and Browser based services.&nbsp; 
+Why?&nbsp; Because those are the technologies the user has thrown in his face every 
+time he looks at his OS desktop. </p>
+<h3>Microsoft Windows:</h3>
+<p>The Secure Endpoints Inc.
+<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html"><i>OpenAFS 
+Windows Road Map</i> web page</a> provides an number of mock ups of Explorer Shell 
+extensions that can be used to not only make AFS much more accessible to end users 
+but also significantly improve its ease of use.&nbsp; By making the Explorer Shell 
+AFS aware users will find it much easier to make use of.&nbsp; No longer will users 
+have to use command line techniques to access AFS and manage its contents and metadata.
 </p>
-
-<p> 
-One of the most important ideas that was the result of discussions with 
-Stanford University's Help Desk staff is the concept of Custom Name 
-Spaces.&nbsp; On Microsoft Windows a Name Space is a virtual folder that appears 
-as part of the Explorer Shell.&nbsp; The objects &quot;My Computer&quot;, &quot;My Documents&quot;, &quot;Control 
-Panel&quot;, My Network Places&quot;, &quot;My Sharing Folders&quot;, etc. are all name 
-spaces.&nbsp; Stanford University has been shipping for many years variations of an 
-application now called &quot;Stanford Desktop Tools&quot;.&nbsp; One of the features of SDT 
-is the ability to search for classes, users, departments, and projects 
-and map a drive letter to the associated AFS volume.&nbsp; Another feature is 
-the ability to quickly map a drive letter to &quot;my home directory&quot;.&nbsp; A final 
-feature is the most recently used volume list.  
-</p>
-<p> 
-With Name Spaces, we can implement all of this functionality.&nbsp; We can 
-define a &quot;recently used volumes list&quot; which is always populated with the 
-volumes the user most recently read or stored data to.&nbsp; We can define a 
-&quot;My Stanford Home Directory&quot; name space that always contains a shortcut 
-to the volume associated with the user's token for the ir.stanford.edu cell.&nbsp; 
-We can also create name spaces for &quot;Stanford Users&quot;, &quot;Stanford Classes&quot;, 
-&quot;Stanford Departments&quot;, etc.&nbsp; Other organizations can distribute their own 
-AFS name spaces that represent important data that is stored in their cell.&nbsp; 
-AFS name spaces from multiple organizations can co-exist on the same system.&nbsp; 
-Since name spaces are built into the Explorer Shell they are always 
-easily accessible to the end user because they become a part of the 
-Desktop.</p>
-<p> 
+<p>One of the most important ideas that was the result of discussions with Stanford 
+University&#39;s Help Desk staff is the concept of Custom Name Spaces.&nbsp; On Microsoft 
+Windows a Name Space is a virtual folder that appears as part of the Explorer Shell.&nbsp; 
+The objects &quot;My Computer&quot;, &quot;My Documents&quot;, &quot;Control Panel&quot;, My Network Places&quot;, 
+&quot;My Sharing Folders&quot;, etc. are all name spaces.&nbsp; Stanford University has been 
+shipping for many years variations of an application now called &quot;Stanford Desktop 
+Tools&quot;.&nbsp; One of the features of SDT is the ability to search for classes, users, 
+departments, and projects and map a drive letter to the associated AFS volume.&nbsp; 
+Another feature is the ability to quickly map a drive letter to &quot;my home directory&quot;.&nbsp; 
+A final feature is the most recently used volume list. </p>
+<p>With Name Spaces, we can implement all of this functionality.&nbsp; We can define 
+a &quot;recently used volumes list&quot; which is always populated with the volumes the user 
+most recently read or stored data to.&nbsp; We can define a &quot;My Stanford Home Directory&quot; 
+name space that always contains a shortcut to the volume associated with the user&#39;s 
+token for the ir.stanford.edu cell.&nbsp; We can also create name spaces for &quot;Stanford 
+Users&quot;, &quot;Stanford Classes&quot;, &quot;Stanford Departments&quot;, etc.&nbsp; Other organizations 
+can distribute their own AFS name spaces that represent important data that is stored 
+in their cell.&nbsp; AFS name spaces from multiple organizations can co-exist on 
+the same system.&nbsp; Since name spaces are built into the Explorer Shell they 
+are always easily accessible to the end user because they become a part of the Desktop.</p>
+<p>
 <a href="https://www.secure-endpoints.com/netidmgr/proposal-afs-namespace.pdf">A 
-detailed proposal describing an AFS Name Spaces implementation is available in 
-PDF.</a></p>
-<p> 
-Users expect to find a Control Panel for Services that support per-user 
-configuration.&nbsp; For OpenAFS users can configure the behavior of the AFS 
-Credential Provider for Network Identity Manager and their Protection Service 
-Groups.&nbsp;
+detailed proposal describing an AFS Name Spaces implementation is available in PDF.</a></p>
+<p>Users expect to find a Control Panel for Services that support per-user configuration.&nbsp; 
+For OpenAFS users can configure the behavior of the AFS Credential Provider for 
+Network Identity Manager and their Protection Service Groups.&nbsp;
 <a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#control panel">
 For more details ...</a></p>
-<p> 
-System-wide configuration of Services are performed via Microsoft Management 
+<p>System-wide configuration of Services are performed via Microsoft Management 
 Console plug-ins.&nbsp;
 <a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#client service mmc">
 For more details ...</a></p>
-<p> 
-Microsoft Windows Vista User Account Control Privilege Separation.&nbsp;
+<p>Microsoft Windows Vista User Account Control Privilege Separation.&nbsp;
 <a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#vista_uac">
 For more details ...</a></p>
-<h3> 
-MacOS X:</h3>
-<p> 
-Apple doesn't permit the same degree of customization of the Finder as Microsoft 
-does for the Explorer Shell.&nbsp; However, the Finder can be customized with an AFS virtual folder and 
-AFS context menus. Likewise, certain other graphical interfaces which will 
-become available in Leopard provide opportunities for customization to ease use 
-of AFS.</p>
-
-<h2 wrap><a name="protocol"></a>3. AFS3 Protocol Feature Enhancements 
- 
-</h2>
+<h3>MacOS X:</h3>
+<p>Apple doesn&#39;t permit the same degree of customization of the Finder as Microsoft 
+does for the Explorer Shell.&nbsp; However, the Finder can be customized with an 
+AFS virtual folder and AFS context menus. Likewise, certain other graphical interfaces 
+which will become available in Leopard provide opportunities for customization to 
+ease use of AFS.</p>
+<h2 wrap><a name="protocol"></a>3. AFS3 Protocol Feature Enhancements </h2>
 <p wrap>In order for AFS to be treated as a first class file system for MacOS X 
 and Microsoft Windows it must gain the following functionality: </p>
 <ul>
 	<li>
 	<p wrap><b>Removing Directory Limitations:</b><br>
-	The current AFS directory format and RPCs suffer from a number of 
-	limitations that adversely affect the user experience.&nbsp; A directory has a 
-	maximum of 64,000 entries if all file names are 16 or fewer bytes.&nbsp; Longer 
-	names are implemented by sacrificing an entry for each additional 32 bytes 
-	of file name.&nbsp; Given the ever increasing length of file names some cells are 
-	filling the directory with as few as 10,000 entries.&nbsp;&nbsp; Some scientific 
-	research projects require the use of hundreds of thousands of files perhaps 
-	containing a single data byte within a single directory.</p>
+	The current AFS directory format and RPCs suffer from a number of limitations 
+	that adversely affect the user experience.&nbsp; A directory has a maximum of 
+	64,000 entries if all file names are 16 or fewer bytes.&nbsp; Longer names are 
+	implemented by sacrificing an entry for each additional 32 bytes of file name.&nbsp; 
+	Given the ever increasing length of file names some cells are filling the directory 
+	with as few as 10,000 entries.&nbsp;&nbsp; Some scientific research projects 
+	require the use of hundreds of thousands of files perhaps containing a single 
+	data byte within a single directory.</p>
 	<p>The current AFS directory format is very inefficient for searching.&nbsp; 
-	Searching is linear.&nbsp; Many modern file systems implement the directory as a 
-	B+ tree to permit O(log n) searching.&nbsp; The existing format places a heavy 
-	burden on each and every cache manager.&nbsp; Each client must download a copy of 
-	the directory buffers and perform linear searching.&nbsp; This results in heavy 
-	use of the CPU when searching directories with 500 or more entries.</p>
+	Searching is linear.&nbsp; Many modern file systems implement the directory 
+	as a B+ tree to permit O(log n) searching.&nbsp; The existing format places 
+	a heavy burden on each and every cache manager.&nbsp; Each client must download 
+	a copy of the directory buffers and perform linear searching.&nbsp; This results 
+	in heavy use of the CPU when searching directories with 500 or more entries.</p>
 	<p>Another issue is the lack of support for internationalization.&nbsp; In the 
-	current directory format directory entries are stores as a sequence of 
-	octets without any character set hinting.&nbsp; As a result a file stored 
-	via the Microsoft Windows client might not be accessible on MacOS X and vice 
-	versa as the Windows client will store the file using CP850 and MacOS X with 
-	UTF-8.&nbsp; Even if both clients store file names using UTF-8 it is 
-	important to recognize that depending on the input mechanisms it is possible 
-	for a user to enter the same semantic string using different sequences of 
-	characters.&nbsp; Therefore it is crucial that any implementation of Unicode 
-	file names support
-	<a href="http://en.wikipedia.org/wiki/Unicode_normalization">normalized 
-	forms</a> for comparison.&nbsp; &nbsp; </p>
+	current directory format directory entries are stores as a sequence of octets 
+	without any character set hinting.&nbsp; As a result a file stored via the Microsoft 
+	Windows client might not be accessible on MacOS X and vice versa as the Windows 
+	client will store the file using CP850 and MacOS X with UTF-8.&nbsp; Even if 
+	both clients store file names using UTF-8 it is important to recognize that 
+	depending on the input mechanisms it is possible for a user to enter the same 
+	semantic string using different sequences of characters.&nbsp; Therefore it 
+	is crucial that any implementation of Unicode file names support
+	<a href="http://en.wikipedia.org/wiki/Unicode_normalization">normalized forms</a> 
+	for comparison.&nbsp;&nbsp;&nbsp; </p>
 	<p>Finally, Microsoft Windows and MacOS X are now requiring that first class 
 	file systems support the concept of multiple data streams per file.&nbsp; These 
-	streams are used to store extended attributes, security zone information, 
-	resource forks, and other forms of meta data in addition to providing a 
-	general purpose storage mechanism for applications.&nbsp;
-	<a href="http://en.wikipedia.org/wiki/Fork_(filesystem)">For more details 
-	...</a></p>
-	<p>At the 2004 AFS Hackathon in Stockholm there was much discussion of 
-	potential methods of extending the existing directory format to support 
-	Unicode.&nbsp;&nbsp;
-	<a href="http://www.afsig.se/afsig/space/AFS+directory+format+extensions">
-	http://www.afsig.se/afsig/space/AFS+directory+format+extensions</a>&nbsp; 
-	However, these approaches did not address the directory search performance 
-	issues, the entry limitations or multiple data streams.&nbsp; </p>
+	streams are used to store extended attributes, security zone information, resource 
+	forks, and other forms of meta data in addition to providing a general purpose 
+	storage mechanism for applications.&nbsp;
+	<a href="http://en.wikipedia.org/wiki/Fork_(filesystem)">For more details ...</a></p>
+	<p>At the 2004 AFS Hackathon in Stockholm there was much discussion of potential 
+	methods of extending the existing directory format to support Unicode.&nbsp;&nbsp;
+	<a href="http://www.afsig.se/afsig/space/AFS+directory+format+extensions">http://www.afsig.se/afsig/space/AFS+directory+format+extensions</a>&nbsp; 
+	However, these approaches did not address the directory search performance issues, 
+	the entry limitations or multiple data streams.&nbsp; </p>
 	<p>The current direction under consideration is to completely replace the on 
-	disk directory format with an entirely new one consisting of data blocks 
-	representing nodes in a B+ tree with each block containing a variable number 
-	of entries.&nbsp; The new data structure would be Unicode aware and support 
-	multiple data streams.&nbsp; Microsoft Windows clients would implement extended 
-	attributes in a reserved data stream.&nbsp; MacOS X clients would use a reserved 
-	stream for the resource fork.</p>
+	disk directory format with an entirely new one consisting of data blocks representing 
+	nodes in a B+ tree with each block containing a variable number of entries.&nbsp; 
+	The new data structure would be Unicode aware and support multiple data streams.&nbsp; 
+	Microsoft Windows clients would implement extended attributes in a reserved 
+	data stream.&nbsp; MacOS X clients would use a reserved stream for the resource 
+	fork.</p>
 	<p>New versions of all of the directory RPCs would be implemented to support 
 	the new data structure.&nbsp; Clients that use the new APIs would be delivered 
-	directory buffers which construct a B+ tree which in turn would 
-	significantly improve directory search times.&nbsp; </p>
-	<p>For old clients, new implementations of the old RPCs would deliver 
-	directory data translated to the old linear format up to the maximum number 
-	of directory entries.&nbsp; It is possible that old clients will not be able to 
-	see all the files in a given directory.&nbsp; <br>
-	Estimate: 3 to 4 months</li>
+	directory buffers which construct a B+ tree which in turn would significantly 
+	improve directory search times.&nbsp; </p>
+	<p>For old clients, new implementations of the old RPCs would deliver directory 
+	data translated to the old linear format up to the maximum number of directory 
+	entries.&nbsp; It is possible that old clients will not be able to see all the 
+	files in a given directory.&nbsp; <br>
+	Estimate: 3 to 4 months</p>
+	</li>
 	<li>
 	<p wrap><b>Extended Attributes:</b><br>
-	<a href="http://en.wikipedia.org/wiki/Extended_file_attributes">For more 
-	details ...</a></p></li>
-	<li>
-	<p wrap><b>Per-file ACLs:</b><br>AFS supports per-directory ACLs.&nbsp; Per-file ACLs would make it possible 
-	to apply a different set of access constraints on a single object within a 
-	directory.&nbsp; At the present time storing multiple objects with different 
-	access controls requires that they be stored in separate directories.&nbsp;The 
-	AFS protocol provides partial support for this from the AFS/DFS translator, 
-	and this is supported in clients going back to IBM AFS. </p></li>
-	<li>
-	<p wrap><b>Mandatory Locking and Byte range locks:<br></b>Platforms such as Microsoft Windows and MacOS X require that their first 
-	class file systems support mandatory lock semantics and byte ranges.&nbsp; 
-	Applications which rely on these capabilities such as Microsoft Office and 
-	databases risk data corruption if their data files are altered while they 
-	are assumed to be under a lock.&nbsp;&nbsp; AFS only provides advisory full file locks 
-	and provides no upgradeable lock type.&nbsp; The existing AFS file server lock 
-	implementation doesn't keep track of which clients were issued locks which 
-	results a number of situations in which lock counts can become incorrect and 
-	produce a denial of service on a given file.</p>
-	<p>The Windows AFS client in the 1.5 series has added a localized 
-	implementation of mandatory locking and byte range locks.&nbsp; Each time an 
-	application requests a byte range to be locked, the cache manager ensures 
-	that it has an appropriate full lock on the object.&nbsp; The cache manager than 
-	accepts the responsibility of tracking each of the locks and doling out a 
-	range at a time.<br>
-	Estimate: 2 months</li>
-	<li><b>ptserver enhancements for alternate principal names:</b><br>The AFS Protection Service maintains a database that maps user names to AFS 
-	IDs.&nbsp; This table needs to be extended to a many-to-one relationship of 
-	user names to AFS IDs.&nbsp; In addition, multiple name forms must be 
-	supported in order to permit different types of user authentication.<br>
-	Estimate: 2.5 to 3.5 months</li>
-	<li><b>vlserver enhancements for large volume names:</b><br>Volume names within the existing RPCs and database are too short given the 
-	number of volumes that are now being deployed in existing cells.<br>
-	Estimate: 1 week</li>
-	<li><b>vlserver enhancements for split horizon addressing:</b><br>Many sites now provide services from hosts which
-	exist behind a NAT to hosts both inside and outside that NAT. The vlserver should provide interfaces to allow returning 
-	only some addresses to queries when responding to volume location requests.
+	<a href="http://en.wikipedia.org/wiki/Extended_file_attributes">For more details 
+	...</a></p>
 	</li>
-	<li><b>ubik enhancements for true server multi-homing:<br></b>server CellServDB changes are required to allow for alternate ubik ordering</li>
+	<li>
+	<p wrap><b>Per-file ACLs:</b><br>
+	AFS supports per-directory ACLs.&nbsp; Per-file ACLs would make it possible 
+	to apply a different set of access constraints on a single object within a directory.&nbsp; 
+	At the present time storing multiple objects with different access controls 
+	requires that they be stored in separate directories. The AFS protocol provides 
+	partial support for this from the AFS/DFS translator, and this is supported 
+	in clients going back to IBM AFS. </p>
+	</li>
+	<li>
+	<p wrap><b>Mandatory Locking and Byte range locks:<br>
+	</b>Platforms such as Microsoft Windows and MacOS X require that their first 
+	class file systems support mandatory lock semantics and byte ranges.&nbsp; Applications 
+	which rely on these capabilities such as Microsoft Office and databases risk 
+	data corruption if their data files are altered while they are assumed to be 
+	under a lock.&nbsp;&nbsp; AFS only provides advisory full file locks and provides 
+	no upgradeable lock type.&nbsp; The existing AFS file server lock implementation 
+	doesn&#39;t keep track of which clients were issued locks which results a number 
+	of situations in which lock counts can become incorrect and produce a denial 
+	of service on a given file.</p>
+	<p>The Windows AFS client in the 1.5 series has added a localized implementation 
+	of mandatory locking and byte range locks.&nbsp; Each time an application requests 
+	a byte range to be locked, the cache manager ensures that it has an appropriate 
+	full lock on the object.&nbsp; The cache manager than accepts the responsibility 
+	of tracking each of the locks and doling out a range at a time.<br>
+	Estimate: 2 months</p>
+	</li>
+	<li><b>ptserver enhancements for alternate principal names:</b><br>
+	The AFS Protection Service maintains a database that maps user names to AFS 
+	IDs.&nbsp; This table needs to be extended to a many-to-one relationship of 
+	user names to AFS IDs.&nbsp; In addition, multiple name forms must be supported 
+	in order to permit different types of user authentication.<br>
+	Estimate: 2.5 to 3.5 months</li>
+	<li><b>vlserver enhancements for large volume names:</b><br>
+	Volume names within the existing RPCs and database are too short given the number 
+	of volumes that are now being deployed in existing cells.<br>
+	Estimate: 1 week</li>
+	<li><b>vlserver enhancements for split horizon addressing:</b><br>
+	Many sites now provide services from hosts which exist behind a NAT to hosts 
+	both inside and outside that NAT. The vlserver should provide interfaces to 
+	allow returning only some addresses to queries when responding to volume location 
+	requests. </li>
+	<li><b>ubik enhancements for true server multi-homing:<br>
+	</b>server CellServDB changes are required to allow for alternate ubik ordering</li>
 	<li><b>partition UUIDs:</b><br>
 	Estimate: 1 to 2 weeks</li>
 </ul>
@@ -418,148 +409,142 @@ and Microsoft Windows it must gain the following functionality: </p>
 <h3 wrap>All Platforms </h3>
 <ul>
 	<li><b>LDAP integration:</b><br>
-	Protection Server to LDAP Proxy implementation and Direct File Server to 
-	LDAP implementation.&nbsp; Separate schemas will be necessary depending on 
-	whether the LDAP server is OpenLDAP or Active Directory.<br>
+	Protection Server to LDAP Proxy implementation and Direct File Server to LDAP 
+	implementation.&nbsp; Separate schemas will be necessary depending on whether 
+	the LDAP server is OpenLDAP or Active Directory.<br>
 	<br>
 	Brett Trotter <a class="moz-txt-link-rfc2396E" href="mailto:blt@iastate.edu">
 	&lt;blt@iastate.edu&gt;</a> wrote an implementation called <b>ptsldap</b>.&nbsp; In 
 	July 2005 he had working code using the Mozilla LDAP library and was porting 
-	it to use OpenLDAP instead.<p>Additionally, Volker Lendecke implemented a 
-	similar project for use with Samba, which is not known to have been 
-	completed.</p>
-	<p>Luke Howard (<a href="http://www.padl.com">PADL 
-	Ltd.</a>) developed an AFS Protection Service as part of his Active 
-	Directory clone, XAD.&nbsp; Ownership of XAD has since been transferred to 
-	Novell.&nbsp; However, it is expected that Luke will assist us in developing 
-	a new implementation in the coming months.</li>
+	it to use OpenLDAP instead.<p>Additionally, Volker Lendecke implemented a similar 
+	project for use with Samba, which is not known to have been completed.</p>
+	<p>Luke Howard (<a href="http://www.padl.com">PADL Ltd.</a>) developed an AFS 
+	Protection Service as part of his Active Directory clone, XAD.&nbsp; Ownership 
+	of XAD has since been transferred to Novell.&nbsp; However, it is expected that 
+	Luke will assist us in developing a new implementation in the coming months.</p>
+	</li>
 	<li><b>Multiple back-end file server:</b><br>
-	Current file servers must be built to support one type of file partition, 
-	either <i>inode</i> or <i>namei</i>.&nbsp; This makes it impossible to mix 
-	partition types on the same machine for the purpose of performance 
-	comparison or conversion. This project will make the storage backend 
-	modular, and allow for additional backends to be provided.<br>
+	Current file servers must be built to support one type of file partition, either
+	<i>inode</i> or <i>namei</i>.&nbsp; This makes it impossible to mix partition 
+	types on the same machine for the purpose of performance comparison or conversion. 
+	This project will make the storage backend modular, and allow for additional 
+	backends to be provided.<br>
 	Estimate: 1 month</li>
 	<li><b>Demand Attach File Server:</b><br>
 	<br>
 	Estimated: 2 weeks</li>
 </ul>
 <h3 wrap>Microsoft Windows</h3>
-<p wrap>Once AFS is capable of being used as a first class file system for 
-Microsoft Windows clients it will make sense to support the AFS servers on the Windows 
-Server platform as there are a large number of Microsoft Windows only IT 
-organizations that do not have the expertise to manage UNIX/Linux systems.&nbsp; The servers are 
-mostly there already.&nbsp; There is work that needs to be done on the NTFS 
-Namei implementation and there needs to be much better integration with 
-power management, plug-n-play networking, and Windows Event Logging.</p>  
- 
-<p>Of course if you want to host services on Windows, you must provide a 
-Microsoft Management Console plug-in to manage them.</p>
- 
-<p>The primary reason that we haven't spent the time and energy to get the AFS servers in tip top shape is that without the protocol feature 
-enhancements, users that attempt to deploy AFS in an all Windows 
-environment are bound to be disappointed.<p wrap>
+<p wrap>Once AFS is capable of being used as a first class file system for Microsoft 
+Windows clients it will make sense to support the AFS servers on the Windows Server 
+platform as there are a large number of Microsoft Windows only IT organizations 
+that do not have the expertise to manage UNIX/Linux systems.&nbsp; The servers are 
+mostly there already.&nbsp; There is work that needs to be done on the NTFS Namei 
+implementation and there needs to be much better integration with power management, 
+plug-n-play networking, and Windows Event Logging.</p>
+<p>Of course if you want to host services on Windows, you must provide a Microsoft 
+Management Console plug-in to manage them.</p>
+<p>The primary reason that we haven&#39;t spent the time and energy to get the AFS servers 
+in tip top shape is that without the protocol feature enhancements, users that attempt 
+to deploy AFS in an all Windows environment are bound to be disappointed.</p>
+<p wrap>
 <a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#afs servers">
 For more details ...</a><br>
 <br>
-Estimate: 4 to 6 weeks</p>  
- 
+Estimate: 4 to 6 weeks</p>
 <h2><a name="HPC"></a>5. High Performance Computing Extensions</h2>
 <ul>
 	<li><b>Rx/TCP and IPv6:<br>
-	</b>The networking protocol used by OpenAFS was developed in the late 
-	1980s.&nbsp; It is a Remote Procedure Call transport called Rx that provides a 
-	stream interface that runs over UDP/IP.&nbsp; This protocol was designed to 
-	address the traditionally poor performance of TCP implementations at the 
-	time, and to be scalable to large numbers of clients.<p>Since that time, a 
-	large amount of networking research has been done on TCP performance, and 
-	modern TCP implementations are capable of good performance on high-speed 
-	networks.&nbsp; Also, other protocols such as Infiniband and SCTP have emerged as 
-	alternative transports to TCP.&nbsp; The growth of the World Wide Web has pushed 
-	operating system vendors to develop interfaces that allow applications to 
-	manage thousands of clients simultaneously in a scalable manner.&nbsp; While 
-	incremental improvements have been made to the Rx protocol since it was 
-	first developed, it has not been able to take advantage of the performance 
-	available in modern networks.</p>
+	</b>The networking protocol used by OpenAFS was developed in the late 1980s.&nbsp; 
+	It is a Remote Procedure Call transport called Rx that provides a stream interface 
+	that runs over UDP/IP.&nbsp; This protocol was designed to address the traditionally 
+	poor performance of TCP implementations at the time, and to be scalable to large 
+	numbers of clients.<p>Since that time, a large amount of networking research 
+	has been done on TCP performance, and modern TCP implementations are capable 
+	of good performance on high-speed networks.&nbsp; Also, other protocols such 
+	as Infiniband and SCTP have emerged as alternative transports to TCP.&nbsp; 
+	The growth of the World Wide Web has pushed operating system vendors to develop 
+	interfaces that allow applications to manage thousands of clients simultaneously 
+	in a scalable manner.&nbsp; While incremental improvements have been made to 
+	the Rx protocol since it was first developed, it has not been able to take advantage 
+	of the performance available in modern networks.</p>
 	<p>Our proposal includes the following work items:</p>
 	<p style="text-indent: -18pt; margin-left: 18pt;">
 	<span style="font-family: Symbol;">·<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</span></span>Develop an Rx protocol that uses TCP as a transport (RxTCP).&nbsp; 
-	As part of an earlier project, Kenneth Hornstein has developed a prototype 
-	of RxTCP; our goal is to complete this work and integrate it properly into 
-	the OpenAFS distribution.<br>
+	As part of an earlier project, Kenneth Hornstein has developed a prototype of 
+	RxTCP; our goal is to complete this work and integrate it properly into the 
+	OpenAFS distribution.<br>
 	<br>
-	There are many challenges with this approach.&nbsp; Much of the OpenAFS code has 
-	an implicit assumption that the transport protocol is the traditional Rx 
+	There are many challenges with this approach.&nbsp; Much of the OpenAFS code 
+	has an implicit assumption that the transport protocol is the traditional Rx 
 	interface.&nbsp; This is further complicated by the lack of any formal API for 
-	Rx.&nbsp; As a result of this, many OpenAFS programs use what normally would be 
-	considered internal interfaces, and perform internal operations such as 
-	directly manipulate queues of packets.&nbsp; The Rx API has no way to indicate 
-	such things as connection types, so new API functions will need to be 
-	created.&nbsp; The Rx library makes heavy uses of threads, but uses two distinct 
-	threading libraries (pthreads and a custom thread library called LWP).&nbsp; Any 
-	new transport must not only be thread-safe, but also present the same 
-	threading model to applications so that they do not need to be rewritten.&nbsp; 
-	To maintain compatibility with existing clients and servers, the original 
-	UDP transport must still function simultaneously with the new transport.<br>
+	Rx.&nbsp; As a result of this, many OpenAFS programs use what normally would 
+	be considered internal interfaces, and perform internal operations such as directly 
+	manipulate queues of packets.&nbsp; The Rx API has no way to indicate such things 
+	as connection types, so new API functions will need to be created.&nbsp; The 
+	Rx library makes heavy uses of threads, but uses two distinct threading libraries 
+	(pthreads and a custom thread library called LWP).&nbsp; Any new transport must 
+	not only be thread-safe, but also present the same threading model to applications 
+	so that they do not need to be rewritten.&nbsp; To maintain compatibility with 
+	existing clients and servers, the original UDP transport must still function 
+	simultaneously with the new transport.<br>
 	<br>
 	Despite these obstacles, much work has been completed.&nbsp; The RxTCP transport 
 	has been implemented, and tests have shown excellent performance on Gigabit 
-	networks.&nbsp; The remaining challenge is to integrate this transport into the 
-	actual OpenAFS clients and servers.&nbsp; This new transport protocol addresses a 
-	number of deficiencies in the original Rx protocol and implementation:</p>
+	networks.&nbsp; The remaining challenge is to integrate this transport into 
+	the actual OpenAFS clients and servers.&nbsp; This new transport protocol addresses 
+	a number of deficiencies in the original Rx protocol and implementation:</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>The original Rx protocol was (with one exception) limited in 
-	packet size to one Ethernet MTU (1500 bytes).&nbsp; In general, research has 
-	shown that larger packet sizes facilitate higher performance due to the 
-	overall reduction in per-packet processing time and the need to process 
-	fewer packets in order to send the same amount of data.&nbsp; With the current 
-	networking APIs available to applications today, programs cannot query the 
-	size of the MTU on a networking interface, nor can they determine the MTU of 
-	a particular network path (even though the operating system may have 
-	determined that already).<br>
+	</span></span>The original Rx protocol was (with one exception) limited in packet 
+	size to one Ethernet MTU (1500 bytes).&nbsp; In general, research has shown 
+	that larger packet sizes facilitate higher performance due to the overall reduction 
+	in per-packet processing time and the need to process fewer packets in order 
+	to send the same amount of data.&nbsp; With the current networking APIs available 
+	to applications today, programs cannot query the size of the MTU on a networking 
+	interface, nor can they determine the MTU of a particular network path (even 
+	though the operating system may have determined that already).<br>
 	<br>
-	With the use of TCP, the operating system can make use of knowledge not 
-	available to the application, such as accurate estimates of round trip time, 
-	network path MTU, and interface MTU, and as a result can take advantage of 
-	the capabilities of modern networks, such as Ethernet jumbo frames.&nbsp; The 
-	exception to this 1500 byte packet limit is that Rx has a concept called a “jumbogram”, 
-	which places multiple Rx packets into one UDP datagram.&nbsp; Unfortunately, in 
-	practice this results in no net gain in performance, since the Rx per-packet 
-	processing is not reduced.</p>
+	With the use of TCP, the operating system can make use of knowledge not available 
+	to the application, such as accurate estimates of round trip time, network path 
+	MTU, and interface MTU, and as a result can take advantage of the capabilities 
+	of modern networks, such as Ethernet jumbo frames.&nbsp; The exception to this 
+	1500 byte packet limit is that Rx has a concept called a “jumbogram”, which 
+	places multiple Rx packets into one UDP datagram.&nbsp; Unfortunately, in practice 
+	this results in no net gain in performance, since the Rx per-packet processing 
+	is not reduced.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</span></span>Since Rx utilizes a datagram transport but provides a reliable 
-	stream interface, it must implement many of the features that are already 
-	provided by TCP, such as a windowing algorithm, packet loss detection and 
-	retransmission, and congestion control.&nbsp; While incremental improvements have 
-	been made to the Rx implementation since it was first developed, it has not 
-	received the attention that TCP performance has had during the same time 
-	period.&nbsp; The use of TCP as the basis for Rx allows us to leverage the 
-	serious engineering work that has been done on TCP, rather than requiring 
-	that same level of effort be placed into Rx.</p>
+	stream interface, it must implement many of the features that are already provided 
+	by TCP, such as a windowing algorithm, packet loss detection and retransmission, 
+	and congestion control.&nbsp; While incremental improvements have been made 
+	to the Rx implementation since it was first developed, it has not received the 
+	attention that TCP performance has had during the same time period.&nbsp; The 
+	use of TCP as the basis for Rx allows us to leverage the serious engineering 
+	work that has been done on TCP, rather than requiring that same level of effort 
+	be placed into Rx.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>The Rx implementation is very large and monolithic.&nbsp; Part of 
-	the size of Rx results in having to perform many of the same functions of 
+	</span></span>The Rx implementation is very large and monolithic.&nbsp; Part 
+	of the size of Rx results in having to perform many of the same functions of 
 	TCP.&nbsp; This size and complexity makes it extremely difficult to understand 
-	and follow the code.&nbsp; In addition, most of the Rx work is done by a 
-	relatively small number of extremely complicated functions.&nbsp; In addition to 
-	lacking modularity, this makes profiling extremely difficult, as most of the 
-	time spent by Rx takes place in few functions, and it becomes difficult to 
-	get further granularity by profiling since most profiling tools operate on a 
-	function basis.<br>
+	and follow the code.&nbsp; In addition, most of the Rx work is done by a relatively 
+	small number of extremely complicated functions.&nbsp; In addition to lacking 
+	modularity, this makes profiling extremely difficult, as most of the time spent 
+	by Rx takes place in few functions, and it becomes difficult to get further 
+	granularity by profiling since most profiling tools operate on a function basis.<br>
 	<br>
 	In contrast, RxTCP has a much smaller implementation, and is very modular.&nbsp; 
 	Since the overall complexity is reduced, this makes it easier to profile and 
 	understand.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>All data transmitted or received by Rx is divided internally 
-	into per-packet buffers, which means data that is delivered to an 
-	application must undergo two copies to reach its destination (kernel to Rx 
-	buffers, Rx buffers to application buffers).<br>
+	</span></span>All data transmitted or received by Rx is divided internally into 
+	per-packet buffers, which means data that is delivered to an application must 
+	undergo two copies to reach its destination (kernel to Rx buffers, Rx buffers 
+	to application buffers).<br>
 	<br>
 	RxTCP eliminates this copy completely on writes; data is sent directly from 
 	the application buffer to the network stack.&nbsp; On reads data is delivered 
@@ -569,190 +554,188 @@ Estimate: 4 to 6 weeks</p>
 	an application buffer becomes available.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Since Rx is a custom protocol, any tool used to analyze Rx 
-	performance must be designed specifically for Rx use, or we must make 
-	modifications to an existing tool.&nbsp; With the use of TCP, we can use any one 
-	of a number of off-the-shelf tools to analyze TCP performance.</p>
+	</span></span>Since Rx is a custom protocol, any tool used to analyze Rx performance 
+	must be designed specifically for Rx use, or we must make modifications to an 
+	existing tool.&nbsp; With the use of TCP, we can use any one of a number of 
+	off-the-shelf tools to analyze TCP performance.</p>
 	<p style="text-indent: -18pt; margin-left: 18pt;">
 	<span style="font-family: Symbol;">·<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Analyze remaining AFS performance deficiencies.&nbsp; Under an SBIR 
-	grant, Sine Nomine has already conducted a formal analysis of AFS 
-	performance.&nbsp; Poor Rx behavior was identified as the number one item 
-	impacting performance.&nbsp; Our strategy for dealing with Rx performance is to 
-	utilize RxTCP, as detailed above.<br>
+	</span></span>Analyze remaining AFS performance deficiencies.&nbsp; Under an 
+	SBIR grant, Sine Nomine has already conducted a formal analysis of AFS performance.&nbsp; 
+	Poor Rx behavior was identified as the number one item impacting performance.&nbsp; 
+	Our strategy for dealing with Rx performance is to utilize RxTCP, as detailed 
+	above.<br>
 	<br>
-	Aside from Rx, a number of other bottlenecks were identified in the UNIX 
-	OpenAFS client.&nbsp;&nbsp; After the integration of RxTCP, we will perform another 
+	Aside from Rx, a number of other bottlenecks were identified in the UNIX OpenAFS 
+	client.&nbsp;&nbsp; After the integration of RxTCP, we will perform another 
 	series of benchmarks to mimic the ones in the Sine Nomine report to analyze 
-	the issues reported by Sine Nomine, and to see if any new issues arise.&nbsp; The 
-	issues identified by the Sine Nomine research were as follows:</p>
+	the issues reported by Sine Nomine, and to see if any new issues arise.&nbsp; 
+	The issues identified by the Sine Nomine research were as follows:</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Write performance is hurt by UNIX OpenAFS’s sync-on-close 
-	semantics.&nbsp; Currently the UNIX OpenAFS client performs data synchronization 
-	when a file is closed by an application, or the client cache dirty blocks 
-	have exceeded a high-water mark threshold.&nbsp; For large files, this results in 
-	large time periods during writes where the network is quiescent, and the 
-	application must wait either when the file is closed or during a write for 
-	all of the outstanding data to be written to the fileserver.<br>
+	</span></span>Write performance is hurt by UNIX OpenAFS’s sync-on-close semantics.&nbsp; 
+	Currently the UNIX OpenAFS client performs data synchronization when a file 
+	is closed by an application, or the client cache dirty blocks have exceeded 
+	a high-water mark threshold.&nbsp; For large files, this results in large time 
+	periods during writes where the network is quiescent, and the application must 
+	wait either when the file is closed or during a write for all of the outstanding 
+	data to be written to the fileserver.<br>
 	<br>
 	One proposal offered in the Sine Nomine paper was to relax the sync-on-close 
 	semantics as offered by the AFS client today.&nbsp; Multi-client data consistency 
 	has never been an area where AFS has excelled, but our long-term experience 
 	has shown this is not a necessary function of OpenAFS.&nbsp; Especially for 
-	larger files, a more intelligent scheme would be to implement a relaxed 
-	consistency model where synchronization could occur between the client and 
-	server at any arbitrary time.&nbsp; In the case of HPC or video applications, an 
-	adaptive write-behind mechanism would be the most desirable option.&nbsp; We 
-	recognize that not all users desire the same semantics, so after a 
-	write-behind mechanism has been implemented the next step will be to develop 
-	the ability to select the data consistency model on a per-volume basis.<br>
+	larger files, a more intelligent scheme would be to implement a relaxed consistency 
+	model where synchronization could occur between the client and server at any 
+	arbitrary time.&nbsp; In the case of HPC or video applications, an adaptive 
+	write-behind mechanism would be the most desirable option.&nbsp; We recognize 
+	that not all users desire the same semantics, so after a write-behind mechanism 
+	has been implemented the next step will be to develop the ability to select 
+	the data consistency model on a per-volume basis.<br>
 	<br>
 	In addition, write-on-close semantics are incompatible with file locks.&nbsp; 
-	There is a strong desire in the AFS community to support mandatory file 
-	locking, byte range locks, and optimistic locking algorithms.&nbsp; This desire 
-	is primarily the result of wishing AFS to be a first class file system on 
-	the Microsoft Windows and MacOS X operating systems which require those 
-	semantics.&nbsp; When locks are obtained and released, the buffers affected by 
-	the locks must be flushed to the file server prior to the completion of the 
-	lock release.<br>
+	There is a strong desire in the AFS community to support mandatory file locking, 
+	byte range locks, and optimistic locking algorithms.&nbsp; This desire is primarily 
+	the result of wishing AFS to be a first class file system on the Microsoft Windows 
+	and MacOS X operating systems which require those semantics.&nbsp; When locks 
+	are obtained and released, the buffers affected by the locks must be flushed 
+	to the file server prior to the completion of the lock release.<br>
 	<br>
-	The Windows OpenAFS client does not implement write-on-close semantics 
-	because of the heavy use of byte range file locks.</p>
+	The Windows OpenAFS client does not implement write-on-close semantics because 
+	of the heavy use of byte range file locks.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>If the client cache fills up during writes, the UNIX OpenAFS 
-	client blocks the process performing writes until the cache is completely 
-	flushed to the low-water mark.&nbsp; A better strategy would be to dispatch the 
-	truncation daemon in advance of the cache reaching a high-water mark 
-	threshold, using one of the many I/O prediction algorithms available in the 
-	common literature.</p>
+	</span></span>If the client cache fills up during writes, the UNIX OpenAFS client 
+	blocks the process performing writes until the cache is completely flushed to 
+	the low-water mark.&nbsp; A better strategy would be to dispatch the truncation 
+	daemon in advance of the cache reaching a high-water mark threshold, using one 
+	of the many I/O prediction algorithms available in the common literature.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Read performance of both OpenAFS client implementations are 
-	hampered by an inability to read more than a single chunk per RPC.&nbsp; When 
-	flushing dirty buffers to the file server, the client is able to send 
-	multiple contiguous chunks at a time thereby reducing the number of RPCs.&nbsp; 
-	On operating systems that provide hints as to the usage patterns of the 
-	file, performance can be improved by optimistically reading chunks whose 
-	need is anticipated.</p>
+	</span></span>Read performance of both OpenAFS client implementations are hampered 
+	by an inability to read more than a single chunk per RPC.&nbsp; When flushing 
+	dirty buffers to the file server, the client is able to send multiple contiguous 
+	chunks at a time thereby reducing the number of RPCs.&nbsp; On operating systems 
+	that provide hints as to the usage patterns of the file, performance can be 
+	improved by optimistically reading chunks whose need is anticipated.</p>
 	<p style="text-indent: -18pt; margin-left: 72pt;">
 	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	</span></span>
 	<span style="font-style: normal; font-variant: normal; font-weight: normal;">
 	T</span>he restriction that no more than four RPCs may be outstanding on any 
-	Rx connection is another observed bottleneck.&nbsp; This is particularly 
-	troublesome when AFS is being used primarily to serve a single service such 
-	as a web server as only one Rx connection is created for any collection of 
-	client, server, and authentication ID.</p>
-	<p>Given the limitations imposed by network processing overhead, available 
-	network APIs, and system bus limitations we do not expect to achieve line 
-	rate performance at network speeds past 1 Gigabit.&nbsp; We believe that 
-	performance faster than 1 Gigabit is achievable, but we do not know what the 
-	practical limits are beyond that.&nbsp; One of our out year tasks is to 
-	investigate work being done at CERN in using “off-line storage”, where an 
-	OpenAFS client bypasses the OpenAFS fileserver completely and retrieves 
-	files via direct communication with disk hardware.<br>
-	Estimated: 20 to 25 months</li>
-<li><b>rxgk:<br>
-rxgk</b> is a security class based upon the Generic Security Service Application 
-Programming Interface (GSS-API) that attempts to address a much broader range of 
-security weaknesses in AFS; not simply the use of single DES encryption 
-ciphers.&nbsp; These include issues such as:<ul>
-	<li>users can impersonate the server to the cache manager since the user 
-	knows the key obtained from the Kerberos service ticket</li>
-	<li>neither the AFS clients nor the servers contribute any random data to 
-	the construction of the key </li>
-	<li>the desire to support individual keys per service per host instead of a 
-	single key for all services on all hosts within a given cell</li>
-	<li>the desire to provide data confidentiality and integrity protection on 
-	anonymous connections as well as authenticated ones</li>
-	<li>the desire to provide for algorithm agility</li>
-	<li>the desire to allow the server to require the use of crypto by the 
-	clients</li>
-	<li>the desire to map multiple authentication names to a single AFS ID 
-	within the protection database</li>
-</ul>
-<p><b>rxgk</b> is designed but has not yet been fully implemented.&nbsp; Love Hörnquist 
-Åstrand, Magnus Ahltorp, Jeffrey Hutzelman, Derrick Brashear and Jeffrey Altman met at KTH the 
-week of 22 Jan 2007 to begin implementation of <b>rxgk</b> and modify as many of 
-the AFS services as possible.&nbsp; Love presented 
-<a href="http://www.pmw.org/afsbpw07/talks/lha.pdf">a status report</a> at the 
-2007 AFS &amp; Kerberos Best Practice Workshop and did more work with Derrick the 
-following week.</li>
-<li><b>rxk5:</b><br>
-<b>rxk5</b> is a Kerberos v5 based replacement for the existing security class,
-<b>rxkad</b>, developed by Marcus Watts (UMich) and Matt Benjamin (LinuxBox).&nbsp; 
-This is desirable because <b>rxkad</b> only works with DES,<br>
-which is an increasingly insecure choice. The goal here is to provide the 
-highest quality cryptography<br>
-possible using code and standards that exist today.<br>
-A key sub-goal of this project is to keep the code footprint as small<br>
-as possible. Less code should produce better code reliability,<br>
-and should also facilitate running this code inside a kernel<br>
-environment, such as the AFS cache manager.<p><b>rxk5</b> has several minor 
-limitations:<ul>
-	<li>no support for Kerberos v5 tickets containing authorization data (aka 
-	Microsoft PAC data)</li>
-	<li>there is no enc-type negotiation separate from the Kerberos ticket 
-	session key enc-type</li>
-	<li>the client chooses the checksum type and the server has no influence</li>
-	<li>it doesn't use the Kerberos v5 pseudo-random function due to limited 
-	availability</li>
-	<li>it requires functionality not currently exported from MIT Kerberos as of 
-	release 1.6.1</li>
-	<li>it cannot be implemented on platforms such as Solaris which do not ship 
-	a public Kerberos API</li>
-	<li>implementation on MacOS requires access to functions which are not 
-	currently exported</li>
-</ul>
-<p><b>rxk5</b> is significantly stronger than <b>rxkad</b> when it comes to 
-security and requires relatively minor changes to the OpenAFS architecture.</li>
+	Rx connection is another observed bottleneck.&nbsp; This is particularly troublesome 
+	when AFS is being used primarily to serve a single service such as a web server 
+	as only one Rx connection is created for any collection of client, server, and 
+	authentication ID.</p>
+	<p>Given the limitations imposed by network processing overhead, available network 
+	APIs, and system bus limitations we do not expect to achieve line rate performance 
+	at network speeds past 1 Gigabit.&nbsp; We believe that performance faster than 
+	1 Gigabit is achievable, but we do not know what the practical limits are beyond 
+	that.&nbsp; One of our out year tasks is to investigate work being done at CERN 
+	in using “off-line storage”, where an OpenAFS client bypasses the OpenAFS fileserver 
+	completely and retrieves files via direct communication with disk hardware.<br>
+	Estimated: 20 to 25 months</p>
+	</li>
+	<li><b>rxgk:<br>
+	rxgk</b> is a security class based upon the Generic Security Service Application 
+	Programming Interface (GSS-API) that attempts to address a much broader range 
+	of security weaknesses in AFS; not simply the use of single DES encryption ciphers.&nbsp; 
+	These include issues such as:<ul>
+		<li>users can impersonate the server to the cache manager since the user 
+		knows the key obtained from the Kerberos service ticket</li>
+		<li>neither the AFS clients nor the servers contribute any random data to 
+		the construction of the key </li>
+		<li>the desire to support individual keys per service per host instead of 
+		a single key for all services on all hosts within a given cell</li>
+		<li>the desire to provide data confidentiality and integrity protection 
+		on anonymous connections as well as authenticated ones</li>
+		<li>the desire to provide for algorithm agility</li>
+		<li>the desire to allow the server to require the use of crypto by the clients</li>
+		<li>the desire to map multiple authentication names to a single AFS ID within 
+		the protection database</li>
+	</ul>
+	<p><b>rxgk</b> is designed but has not yet been fully implemented.&nbsp; Love 
+	Hörnquist Åstrand, Magnus Ahltorp, Jeffrey Hutzelman, Derrick Brashear and Jeffrey 
+	Altman met at KTH the week of 22 Jan 2007 to begin implementation of <b>rxgk</b> 
+	and modify as many of the AFS services as possible.&nbsp; Love presented
+	<a href="http://www.pmw.org/afsbpw07/talks/lha.pdf">a status report</a> at the 
+	2007 AFS &amp; Kerberos Best Practice Workshop and did more work with Derrick the 
+	following week.</p>
+	</li>
+	<li><b>rxk5:</b><br>
+	<b>rxk5</b> is a Kerberos v5 based replacement for the existing security class,
+	<b>rxkad</b>, developed by Marcus Watts (UMich) and Matt Benjamin (LinuxBox).&nbsp; 
+	This is desirable because <b>rxkad</b> only works with DES,<br>
+	which is an increasingly insecure choice. The goal here is to provide the highest 
+	quality cryptography<br>
+	possible using code and standards that exist today.<br>
+	A key sub-goal of this project is to keep the code footprint as small<br>
+	as possible. Less code should produce better code reliability,<br>
+	and should also facilitate running this code inside a kernel<br>
+	environment, such as the AFS cache manager.<p><b>rxk5</b> has several minor 
+	limitations:</p>
+	<ul>
+		<li>no support for Kerberos v5 tickets containing authorization data (aka 
+		Microsoft PAC data)</li>
+		<li>there is no enc-type negotiation separate from the Kerberos ticket session 
+		key enc-type</li>
+		<li>the client chooses the checksum type and the server has no influence</li>
+		<li>it doesn&#39;t use the Kerberos v5 pseudo-random function due to limited 
+		availability</li>
+		<li>it requires functionality not currently exported from MIT Kerberos as 
+		of release 1.6.1</li>
+		<li>it cannot be implemented on platforms such as Solaris which do not ship 
+		a public Kerberos API</li>
+		<li>implementation on MacOS requires access to functions which are not currently 
+		exported</li>
+	</ul>
+	<p><b>rxk5</b> is significantly stronger than <b>rxkad</b> when it comes to 
+	security and requires relatively minor changes to the OpenAFS architecture.</p>
+	</li>
 </ul>
 <h2><a name="misc"></a>6. Miscellaneous</h2>
 <ul>
 	<li><b>HostAFSD and Peer-to-Peer AFS:<br>
-	</b>One of the things that the Gatekeepers are frequently asked by AFS 
-	newbies is &quot;why can't I share my local files by AFS?&quot;&nbsp; Many users have 
-	experienced either CIFS or NFSv3 file sharing and wish to be able to do the 
-	same using AFS.&nbsp; The existing AFS file server back ends store files within 
-	physical files known as volumes which can be migrated, cloned, replicated to 
-	any AFS file server within the same cell regardless of the operating system, 
-	partition file system, or hardware.&nbsp; 
-	<p>For users that are willing to give up the location independence of the 
-	data, there isn't much preventing the construction of a file server back end 
-	that reads and writes from the native file system provided that native file 
-	system has some way of notifying AFS when a file changed.&nbsp; Change 
-	notification is required for the file server to be able to callback the 
-	clients and report the invalidation of their data.</p>
-	<p>Another question that needs to be addressed is how to provide for 
-	authenticated access and access control lists.&nbsp; Finally, location discovery 
-	is a challenge that might be addressed with Apple's Bonjour and/or dyndns; 
-	this work can be extended to provide similar ability to discover a local 
-	cell for any client.<br>
-	Estimate: 2 months</li>
+	</b>One of the things that the Gatekeepers are frequently asked by AFS newbies 
+	is &quot;why can&#39;t I share my local files by AFS?&quot;&nbsp; Many users have experienced 
+	either CIFS or NFSv3 file sharing and wish to be able to do the same using AFS.&nbsp; 
+	The existing AFS file server back ends store files within physical files known 
+	as volumes which can be migrated, cloned, replicated to any AFS file server 
+	within the same cell regardless of the operating system, partition file system, 
+	or hardware.&nbsp;
+	<p>For users that are willing to give up the location independence of the data, 
+	there isn&#39;t much preventing the construction of a file server back end that 
+	reads and writes from the native file system provided that native file system 
+	has some way of notifying AFS when a file changed.&nbsp; Change notification 
+	is required for the file server to be able to callback the clients and report 
+	the invalidation of their data.</p>
+	<p>Another question that needs to be addressed is how to provide for authenticated 
+	access and access control lists.&nbsp; Finally, location discovery is a challenge 
+	that might be addressed with Apple&#39;s Bonjour and/or dyndns; this work can be 
+	extended to provide similar ability to discover a local cell for any client.<br>
+	Estimate: 2 months</p>
+	</li>
 	<li><b>Backup solutions:</b><br>
-	Backup systems in large organizations are often quite institution 
-	dependent.&nbsp; When backing up AFS there are two different views.&nbsp; There is how 
-	the directory tree is viewed by the end user and the AFS volume view.&nbsp; It is 
-	the mapping of these two views that frequently results in differing 
-	requirements on the backup systems that an organization wants to deploy.<p>
-	Most off the shelf backup systems only see file systems from the viewpoint 
-	of the user.&nbsp; Whereas backing up AFS so that a given volume can be restored 
-	as needed in a location independent manner is much more similar to backing 
-	up a distributed database.&nbsp; Backing up the files that the database writes 
-	does not allow for the necessary granularity of restores that are required.&nbsp; 
-	In addition, backing up the database files while they are in use results in 
-	data inconsistencies.</p>
-	<p>Teradactyl is one of the few remaining commercial offerings that have 
-	integrated support for AFS. VERITAS Net Backup and Tivoli Storage Manager 
-	have both dropped integrated AFS support.&nbsp; Teradactyl have been a sponsor of 
-	the AFS &amp; Kerberos Best Practice Workshops for the last couple of years.<br>
-	<a href="http://www.teradactyl.com/Documents/OpenAFSbasics.html">
-	http://www.teradactyl.com/Documents/OpenAFSbasics.html</a></p>
+	Backup systems in large organizations are often quite institution dependent.&nbsp; 
+	When backing up AFS there are two different views.&nbsp; There is how the directory 
+	tree is viewed by the end user and the AFS volume view.&nbsp; It is the mapping 
+	of these two views that frequently results in differing requirements on the 
+	backup systems that an organization wants to deploy.<p>Most off the shelf backup 
+	systems only see file systems from the viewpoint of the user.&nbsp; Whereas 
+	backing up AFS so that a given volume can be restored as needed in a location 
+	independent manner is much more similar to backing up a distributed database.&nbsp; 
+	Backing up the files that the database writes does not allow for the necessary 
+	granularity of restores that are required.&nbsp; In addition, backing up the 
+	database files while they are in use results in data inconsistencies.</p>
+	<p>Teradactyl is one of the few remaining commercial offerings that have integrated 
+	support for AFS. VERITAS Net Backup and Tivoli Storage Manager have both dropped 
+	integrated AFS support.&nbsp; Teradactyl have been a sponsor of the AFS &amp; Kerberos 
+	Best Practice Workshops for the last couple of years.<br>
+	<a href="http://www.teradactyl.com/Documents/OpenAFSbasics.html">http://www.teradactyl.com/Documents/OpenAFSbasics.html</a></p>
 	<p>There have also been various efforts to contribute AFS support to Amanda,
 	<a href="http://www.amanda.org/">http://www.amanda.org/</a>, and there have 
-	been efforts to provide an AFS wrapper to Legato Networker.</li>
+	been efforts to provide an AFS wrapper to Legato Networker.</p>
+	</li>
 	<li><b>Instrumentation:</b><br>
 	<br>
 	Estimated: 2 months</li>
@@ -768,11 +751,19 @@ security and requires relatively minor changes to the OpenAFS architecture.</li>
 	<li>End User Guides</li>
 </ul>
 <h1 align="center">Implementation Schedule</h1>
-<p align="left">The implementation schedule for these projects is entirely 
-dependent upon resource availability.&nbsp; </p>
+<p align="left">The implementation schedule for these projects is entirely dependent 
+upon resource availability.&nbsp; </p>
 <p>Please send inquiries, comments, and offers of support to
 <a href="mailto:openafs-gatekeepers@openafs.org?subject=OpenAFS Roadmap Feedback">
-openafs-gatekeepers@openafs.org</a></p>&nbsp;<div id="footer"><hr>
-<address>&lt;webmaster@openafs.org&gt;</address>
-<address>Last modified: 2007/07/31 10:41:14 EDT</address>
-</div></body></html>
+openafs-gatekeepers@openafs.org</a></p>
+&nbsp;<div id="footer">
+	<hr>
+	<address>
+		&lt;webmaster@openafs.org&gt;</address>
+	<address>
+		Last modified: 2007/07/31 10:41:14 EDT</address>
+</div>
+
+</body>
+
+</html>
