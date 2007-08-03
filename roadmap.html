@@ -52,7 +52,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	end user to correct it.&nbsp;&nbsp; Failure to support Unicode also adversely 
 	affects the usefulness of AFS on Microsoft Windows in Asia and the Middle East.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#unicode">
-	For more details ...</a></p>
+	For more details ...</a><br>
+	Estimate: 3 months</p>
 	</li>
 	<li>
 	<p wrap><b>Directory search optimizations:</b><br>
@@ -67,7 +68,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	This results in significant performance penalties in the form of CPU utilization 
 	and clock time for negative matches.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#directory search">
-	For more details ...</a></p>
+	For more details ...</a><br>
+	Estimate: 2 weeks</p>
 	</li>
 	<li>
 	<p wrap><b>Directory change optimizations:</b><br>
@@ -80,7 +82,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	seen clock time per update of up to 6.5 seconds.&nbsp;&nbsp; This is a significant 
 	cost that can be mitigated by updating the cache manager to locally modify the 
 	directory contents when it is known by the data version change that no other 
-	client has modified the directory in the mean time.</p>
+	client has modified the directory in the mean time.<br>
+	Estimate: 2 weeks</p>
 	</li>
 	<li>
 	<p wrap><b>Read-only or Read-write disconnected mode:</b><br>
@@ -94,7 +97,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	provided that there are no conflicts.&nbsp;&nbsp; If there are conflicts a manual 
 	conflict resolution process must be initiated.&nbsp; Conflict resolution is 
 	hard but AFS users would gain a great deal even if the contents of the AFS cache 
-	were available when disconnected from the file servers in a read-only manner.</p>
+	were available when disconnected from the file servers in a read-only manner.<br>
+	Estimate: 1 month</p>
 	</li>
 	<li>
 	<p wrap><b>Executable pre-fetching:</b><br>
@@ -102,7 +106,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	When a file server becomes unreachable while an application is running it will 
 	crash if it attempts to load a page that is not currently in the AFS cache.&nbsp; 
 	This problem can be mitigated by modifying the AFS client to pre-fetch the entire 
-	file if the file is likely to be an executable.&nbsp; </p>
+	file if the file is likely to be an executable.&nbsp;<br>
+	Estimate: 2 days </p>
 	</li>
 	<li>
 	<p wrap><b>Native file system driver interface (aka IFS):</b> <br>
@@ -166,7 +171,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	these environments it would be nice to support Rx Connection Pools which would 
 	permit a greater number of simultaneous RPCs.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#connection pools">
-	For more details ...</a> </p>
+	For more details ...</a><br>
+	Estimate: TBD </p>
 	</li>
 </ul>
 <h3 wrap>All UNIX platforms:</h3>
@@ -178,7 +184,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	(testing needed)</li>
 	<li><b>demand prefetch:</b> <br>
 	In order to reduce wait time while streaming files, it is desirable to allow 
-	for a sliding prefetch window when a file is opened and being read. (testing 
+	for a sliding prefetch window when a file is opened and being read. <br>
+	(testing 
 	needed)</li>
 	<li><b>read/write disconnected AFS:</b> <br>
 	UMichigan&#39;s CITI developed read/write disconnected mode in 1993 as a research 
@@ -187,14 +194,14 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	The original paper &quot;Disconnected Operation for AFS&quot; can be found in the Google 
 	Cache.</a> <br>
 	Estimate: (read/only) 2 weeks / (read/write) 6 to 7 weeks<br>
-	(3Q2007)</li>
+	(4Q2007)</li>
 	<li><b>intermediate fileserver - client as fileserver:</b><br>
 	Each AFS cache contains up-to-date copies of data when a callback is registered 
 	with a file server.&nbsp; In a cluster of clients that are reading the same 
 	data over a low bandwidth network, it would be more efficient if the AFS cache 
 	manager could obtain data from a nearby up-to-date copy as opposed to reading 
 	it from the file server on the slow link.<br>
-	(3Q2007)</li>
+	(4Q2007)</li>
 </ul>
 <h3 wrap>MacOS X:</h3>
 <ul>
