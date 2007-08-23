@@ -151,6 +151,9 @@ was published in August 2007.
 
 <h3>Known Issues:</h3>
 <ul>
+<li><b>In 1.5.22, accessing symlinks to absolute paths (e.g. /afs/cell/volume/path) 
+will result in an access denied error.&nbsp; Evaluating a symlink via ./symlink 
+or ../symlink will also result in an access denied error.</b></li>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must be uninstalled before OpenAFS 
 1.5.22 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
