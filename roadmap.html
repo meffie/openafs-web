@@ -55,6 +55,7 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	For more details ...</a><br>
 	Estimate: 3 months</p>
 	</li>
+	<!--  Implemented
 	<li>
 	<p wrap><b>Directory search optimizations:</b><br>
 	Microsoft Windows is a case-insensitive operating system that supports the use 
@@ -71,6 +72,8 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	For more details ...</a><br>
 	Estimate: 2 weeks</p>
 	</li>
+-->
+	<!-- Implemented	
 	<li>
 	<p wrap><b>Directory change optimizations:</b><br>
 	When a directory change operation is performed against a file server the cache 
@@ -85,6 +88,7 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	client has modified the directory in the mean time.<br>
 	Estimate: 2 weeks</p>
 	</li>
+--></li>
 	<li>
 	<p wrap><b>Read-only or Read-write disconnected mode:</b><br>
 	Microsoft Windows users are used to the &quot;Windows Offline Folders&quot; functionality 
@@ -100,6 +104,7 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	were available when disconnected from the file servers in a read-only manner.<br>
 	Estimate: 1 month</p>
 	</li>
+	<!-- Implemented	
 	<li>
 	<p wrap><b>Executable pre-fetching:</b><br>
 	The Windows client is often used to run applications out of the AFS name space.&nbsp;&nbsp; 
@@ -109,57 +114,63 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	file if the file is likely to be an executable.&nbsp;<br>
 	Estimate: 2 days </p>
 	</li>
+--></li>
 	<li>
 	<p wrap><b>Native file system driver interface (aka IFS):</b> <br>
-	The current OpenAFS client on Windows is not a 
-	true Windows file system.&nbsp; Instead it operates as a SMB translator service.&nbsp; 
-	The Windows OpenAFS client creates a SMB fileserver on the client machine, and 
-	Windows accesses this SMB server as a normal Windows shared volume.&nbsp; For 
-	each I/O operation made to this virtual SMB server, the OpenAFS client translates 
-	the SMB request into a comparable operation on the OpenAFS fileserver.&nbsp; 
-	This impacts the Windows OpenAFS client in a number of negative ways:</p>
-<ul>
-	<li>The semantics of the CIFS file system are different than the semantics provided 
-	by OpenAFS.&nbsp; Because Windows sees the OpenAFS file system as an CIFS share, 
-	it has no way of acquiring the true capabilities or semantics of OpenAFS.&nbsp; 
-	This causes some applications to perform poorly when they expect the semantics 
-	of CIFS, which OpenAFS does not necessarily provide.</li>
-	<li>The use of the translator service requires data to be received by the OpenAFS 
-	client via RX, translated into SMB packets, and then sent over the virtual loopback 
-	interface to the actual SMB server on the same machine.&nbsp; This results in 
-	a number of extra data copies, which greatly reduces OpenAFS performance.&nbsp; 
-	Making OpenAFS a native Windows file system will reduce the number of data copies 
-	and protocol translations, which will increase performance.</li>
-	<li>The CIFS/SMB protocol does not provide any mechanism for the server to inform 
-	a client that an operation is actively being processed even if it is taking 
-	a long time to complete.&nbsp; The CIFS clients in Windows 2000 and above implement 
-	a dynamic timeout algorithm that estimates how long a request should take based 
-	upon the prior response time of the server and the amount of data being transferred.&nbsp; 
-	As the OpenAFS SMB server and cache manager are local to the machine, it is 
-	frequently the case that the response time in on the order of hundreds of microseconds.&nbsp; 
-	When a request to read or write large amounts of data from/to a file server 
-	occurs or if the needed volume is temporarily busy, the CIFS client will frequently 
-	timeout the request and tear down the SMB virtual circuit.&nbsp; This has a 
-	negative impact on applications as it results in all file handles being invalidated 
-	and all locks being dropped which must then be re-established.&nbsp; </li>
-	<li>In order for the UNC server name &quot;AFS&quot; to be visible on all clients, the 
-	Microsoft Loopback Adapter (MLA) must be installed in order to provide a private 
-	network adapter to which the &quot;AFS&quot; Netbios name can be bound.&nbsp; The installation 
-	of the MLA adversely effects several popular software licensing and anti-spyware 
-	products which use the network adapter MAC address as a unique key.</li>
-</ul>
+	The current OpenAFS client on Windows is not a true Windows file system.&nbsp; 
+	Instead it operates as a SMB translator service.&nbsp; The Windows OpenAFS client 
+	creates a SMB fileserver on the client machine, and Windows accesses this SMB 
+	server as a normal Windows shared volume.&nbsp; For each I/O operation made 
+	to this virtual SMB server, the OpenAFS client translates the SMB request into 
+	a comparable operation on the OpenAFS fileserver.&nbsp; This impacts the Windows 
+	OpenAFS client in a number of negative ways:</p>
+	<ul>
+		<li>The semantics of the CIFS file system are different than the semantics 
+		provided by OpenAFS.&nbsp; Because Windows sees the OpenAFS file system 
+		as an CIFS share, it has no way of acquiring the true capabilities or semantics 
+		of OpenAFS.&nbsp; This causes some applications to perform poorly when they 
+		expect the semantics of CIFS, which OpenAFS does not necessarily provide.</li>
+		<li>The use of the translator service requires data to be received by the 
+		OpenAFS client via RX, translated into SMB packets, and then sent over the 
+		virtual loopback interface to the actual SMB server on the same machine.&nbsp; 
+		This results in a number of extra data copies, which greatly reduces OpenAFS 
+		performance.&nbsp; Making OpenAFS a native Windows file system will reduce 
+		the number of data copies and protocol translations, which will increase 
+		performance.</li>
+		<li>The CIFS/SMB protocol does not provide any mechanism for the server 
+		to inform a client that an operation is actively being processed even if 
+		it is taking a long time to complete.&nbsp; The CIFS clients in Windows 
+		2000 and above implement a dynamic timeout algorithm that estimates how 
+		long a request should take based upon the prior response time of the server 
+		and the amount of data being transferred.&nbsp; As the OpenAFS SMB server 
+		and cache manager are local to the machine, it is frequently the case that 
+		the response time in on the order of hundreds of microseconds.&nbsp; When 
+		a request to read or write large amounts of data from/to a file server occurs 
+		or if the needed volume is temporarily busy, the CIFS client will frequently 
+		timeout the request and tear down the SMB virtual circuit.&nbsp; This has 
+		a negative impact on applications as it results in all file handles being 
+		invalidated and all locks being dropped which must then be re-established.&nbsp;
+		</li>
+		<li>In order for the UNC server name &quot;AFS&quot; to be visible on all clients, 
+		the Microsoft Loopback Adapter (MLA) must be installed in order to provide 
+		a private network adapter to which the &quot;AFS&quot; Netbios name can be bound.&nbsp; 
+		The installation of the MLA adversely effects several popular software licensing 
+		and anti-spyware products which use the network adapter MAC address as a 
+		unique key.</li>
+	</ul>
 	<p>The existing OpenAFS Client relies on an SMB server implementation (similar 
 	to Samba) to export the AFS name space to Windows Applications.&nbsp; This has 
 	a number of negative side effects that would be avoided if the OpenAFS for Windows 
 	client were to be implemented via a combination of File System Redirector, File 
 	System Filter driver, and a Network Provider.&nbsp; </p>
-	<p>The solution is to replace the SMB server with a native File System 
-	Redirector, a File 
-	System Filter driver, and a Network Provider that can be supported on Windows XP SP2, Windows 
-	2003 SP1, Windows XP 64, Windows 2003 R2, Windows Vista, and Windows Server 
-	2008.&nbsp; This project requires Unicode Object Name Support as a 
-	prerequisite.<br>
-	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#file system redirector">For more details ...</a><br>Estimate: 10 to 11 months</p>
+	<p>The solution is to replace the SMB server with a native File System Redirector, 
+	a File System Filter driver, and a Network Provider that can be supported on 
+	Windows XP SP2, Windows 2003 SP1, Windows XP 64, Windows 2003 R2, Windows Vista, 
+	and Windows Server 2008.&nbsp; This project requires Unicode Object Name Support 
+	as a prerequisite.<br>
+	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#file system redirector">
+	For more details ...</a><br>
+	Estimate: 10 to 11 months</p>
 	</li>
 	<li>
 	<p wrap><b>Rx Connection Pools:</b><br>
@@ -185,8 +196,7 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	<li><b>demand prefetch:</b> <br>
 	In order to reduce wait time while streaming files, it is desirable to allow 
 	for a sliding prefetch window when a file is opened and being read. <br>
-	(testing 
-	needed)</li>
+	(testing needed)</li>
 	<li><b>read/write disconnected AFS:</b> <br>
 	UMichigan&#39;s CITI developed read/write disconnected mode in 1993 as a research 
 	project.&nbsp; This code has never been integrated into the mainstream AFS distribution.&nbsp;
@@ -407,6 +417,14 @@ and Microsoft Windows it must gain the following functionality: </p>
 	both inside and outside that NAT. The vlserver should provide interfaces to 
 	allow returning only some addresses to queries when responding to volume location 
 	requests. </li>
+	<li><b>vlserver read-only replication optimizations:</b><br>
+	A volume release current requires that the entire file be copied from the
+	server maintaining the release clone to the replication site instead of only 
+	copying modified chunks.  This is a significant performance issue especially
+	as 64-bit file sizes and append only files become more common.  Modifying
+	the volume replication process would provide significant clock time and 
+	network traffic savings. </li>
+	
 	<li><b>ubik enhancements for true server multi-homing:<br>
 	</b>server CellServDB changes are required to allow for alternate ubik ordering</li>
 	<li><b>partition UUIDs:</b><br>
@@ -665,9 +683,9 @@ Estimate: 4 to 6 weeks</p>
 	Hörnquist Åstrand, Magnus Ahltorp, Jeffrey Hutzelman, Derrick Brashear and Jeffrey 
 	Altman met at KTH the week of 22 Jan 2007 to begin implementation of <b>rxgk</b> 
 	and modify as many of the AFS services as possible.&nbsp; Love presented
-	<a href="http://workshop.openafs.org/afsbpw07/talks/lha.pdf">a status report</a> at the 
-	2007 AFS &amp; Kerberos Best Practice Workshop and did more work with Derrick the 
-	following week.</p>
+	<a href="http://workshop.openafs.org/afsbpw07/talks/lha.pdf">a status report</a> 
+	at the 2007 AFS &amp; Kerberos Best Practice Workshop and did more work with Derrick 
+	the following week.</p>
 	</li>
 	<li><b>rxk5:</b><br>
 	<b>rxk5</b> is a Kerberos v5 based replacement for the existing security class,
@@ -758,17 +776,15 @@ Estimate: 4 to 6 weeks</p>
 	<li>End User Guides</li>
 </ul>
 <h1 align="center">Implementation Schedule</h1>
-<p align="left">The implementation schedule for these projects is entirely dependent 
-upon resource availability.&nbsp; </p>
-<p>Please send inquiries, comments, and offers of support to
+<p align="left">The implementation schedule for these projects is entirely 
+dependent upon resource availability.&nbsp; Please send inquiries, comments, and offers of support to
 <a href="mailto:openafs-gatekeepers@openafs.org?subject=OpenAFS Roadmap Feedback">
-openafs-gatekeepers@openafs.org</a></p>
-&nbsp;<div id="footer">
+openafs-gatekeepers@openafs.org</a></p>&nbsp;<div id="footer">
 	<hr>
 	<address>
 		&lt;webmaster@openafs.org&gt;</address>
 	<address>
-		Last modified: 2007/07/31 10:41:14 EDT</address>
+		Last modified: 2007/09/07 23:41:14 EDT</address>
 </div>
 
 </body>
