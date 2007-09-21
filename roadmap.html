@@ -452,12 +452,41 @@ and Microsoft Windows it must gain the following functionality: </p>
 	Current file servers must be built to support one type of file partition, either
 	<i>inode</i> or <i>namei</i>.&nbsp; This makes it impossible to mix partition 
 	types on the same machine for the purpose of performance comparison or conversion. 
-	This project will make the storage backend modular, and allow for additional 
-	backends to be provided.<br>
+	This project will make the storage back end modular, and allow for additional back ends to be provided.<br>
 	Estimate: 1 month</li>
 	<li><b>Demand Attach File Server:</b><br>
+	The Demand Attach File Server is a compile time option that produces a file 
+	server that supports several new and important features:<br>
 	<br>
-	Estimated: 2 weeks</li>
+&nbsp; * an enhanced volume management library that supports:<br>
+&nbsp;&nbsp;&nbsp; . lock-less I/O<br>
+&nbsp;&nbsp;&nbsp; . on-demand attachment of volumes<br>
+&nbsp;&nbsp;&nbsp; . parallel shutdown of the file server<br>
+&nbsp;&nbsp;&nbsp; . on-line salvaging of volumes<br>
+&nbsp;&nbsp;&nbsp; . automatic detachment of inactive volumes<br>
+	<br>
+&nbsp;* a new salvageserver daemon which can salvage volumes on-demand<br>
+	<br>
+&nbsp;* a modified bos and bosserver<br>
+&nbsp;&nbsp;&nbsp; . fileserver state saving and restoration<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - host state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - callback state<br>
+	<br>
+	With the DAFS, shutdown and startup of the file server is significantly 
+	faster.&nbsp; Instead of salvaging a partition at a time, individual volumes 
+	are salvaged in the background while volumes that do not need salvaging are 
+	served by the fileserver to clients.&nbsp; Volumes are attached on-demand 
+	and detached when no longer required.&nbsp; This reduces the number of 
+	volumes that may require salvaging upon a restart.<br>
+	<br>Estimated: 2 weeks</li>
+	<li><b>Multi-Protocol File Server:</b><br>
+	The current AFS file server can only communicate using the AFS3 protocol.&nbsp; 
+	Once all of the functionality in section 3, AFS Protocol Feature 
+	Enhancements, is implemented, the file server will support all of the 
+	capabilities necessary to alternative protocol front ends including CIFS and 
+	WebDAV.<br>
+	<br>
+	Estimated: To be determined.</li>
 </ul>
 <h3 wrap>Microsoft Windows</h3>
 <p wrap>Once AFS is capable of being used as a first class file system for Microsoft 
