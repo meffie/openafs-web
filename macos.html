@@ -16,68 +16,68 @@ of members.<br>
 <br>
 <h3>Contents</h3>
 <ul>
-<li><a href="#tiger">Maintenance Release: OpenAFS 1.4.4 for MacOS 10.4 (Tiger)</a>
-<li><a href="#tiger_rc">Maintenance Release Candidate: OpenAFS 1.4.3rc2 for MacOS 10.4 (Tiger)</a>
+<li><a href="#leopard">Maintenance Release: OpenAFS 1.4.5 for MacOS 10.5 (Leopard)</a>
+<li><a href="#tiger">Maintenance Release: OpenAFS 1.4.5 for MacOS 10.4 (Tiger)</a>
 <li><a href="#panther">Maintenance Release: OpenAFS 1.4.1 for MacOS 10.3 (Panther)</a>
 <li><a href="#devel">Features Release: OpenAFS 1.5.25 for MacOS 10.4 (Tiger)</a>
 <li><a href="#tools">Third Party Tools for MacOS X</a></li>
 </ul>
 
 
-<h2><a name="tiger">Maintenance Release: OpenAFS 1.4.4 for MacOS 10.4 (Tiger)</a> 
+<h2><a name="leopard">Maintenance Release: OpenAFS 1.4.5 for MacOS 10.5 (Leopard)</a> 
 <font color="#FF0000">**Recommended**</font></h2>
-(released 20 March 2007)<br>
-<h3>Features since 1.4.2:</h3>
+(released 26 October 2007)<br>
+<h3>Features since 1.4.4:</h3>
 <ul>
-  <li>Setuid disabled by default</li>
+  <li>New release</li>
+</ul>
+<h3>Documentation:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/1.4.5/RELNOTES-1.4.5">1.4.5 Release Notes</A><br>
+  </li>
+</ul>
+<h3>Downloads:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.4.5/macos-10.5/OpenAFS-1.4.5-Leopard.dmg">MacOS 10.5 (Leopard) Universal package</A><br>
+  </li>
+</ul>
+<h3>Known Issues:</h3>
+<ul>
+  <li>AFS icon does not appear on user desktop. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=75382">Bug 75382</A>)</li>
+  <li>Some resources are leaked when AFS is unloaded. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=74479">Bug 74479</A>)</li>
+  <li>Finder cannot move items by dragging across AFS volumes. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=34255">Bug 34255</A>)</li>
+  <li>64 bit userspace binaries cannot currently be run in AFS; Nor can 64 bit userspace binaries mmap files in AFS. (Experimental patch available)</li>
+</ul>
+</p>
+<br><br>
+<h2><a name="tiger">Maintenance Release: OpenAFS 1.4.5 for MacOS 10.4 (Tiger)</a> 
+<font color="#FF0000">**Recommended**</font></h2>
+(released 26 October 2007)<br>
+<h3>Features since 1.4.4:</h3>
+<ul>
   <li>Bugfixes</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/1.4.4/RELNOTES-1.4.4">1.4.4 Release Notes</A><br>
+  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/1.4.5/RELNOTES-1.4.5">1.4.5 Release Notes</A><br>
   </li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/1.4.4/macos-10.4/OpenAFS-1.4.4-Tiger.dmg">MacOS 10.4 (Tiger) Universal package</A><br>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.4.5/macos-10.4/OpenAFS-1.4.5-Tiger.dmg">MacOS 10.4 (Tiger) Universal package</A><br>
   </li>
-</ul>
-<p>Note: If you receive the message <b>"You cannot continue. There is 
-nothing to install."</B> you need to remove the OpenAFS package receipt
-from "/Library/Receipts".  <a href="http://www.osxgnu.org/software/pkgdetail.html?project_id=244&cat_id=212">OSXPM</a> is a tool that can be used to 
-perform package management on MacOS X, or you can simply use the bundled uninstaller in the OpenAFS disk image.
-</p>
-
-
-<h2><a name="tiger_rc">Maintenance Release Candidate: OpenAFS 1.4.3rc2 for MacOS 10.4 (Tiger)</a></h2>
-(released 14 February 2007)<br>
-<h3>Features since 1.4.2:</h3>
-<ul>
-  <li>increases the amount of reported free disk space</li>
-  <li>AFSDB record lookup improvements</li>
-  <li>pts chown and pts rename crash fixes</li>
-  <li>avoid issues with tokens being discarded erroneously</li>
 </ul>
 <h3>Known Issues:</h3>
 <ul>
-<li>When authentication state changes, Finder may cache stale data (files appear unaccessible or do not appear)</li>
-</ul>
-<h3>Documentation:</h3>
-<ul>
-  <li>1.4.3 Release Notes (not yet available)<br>
-  </li>
-</ul>
-<h3>Downloads:</h3>
-<ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/candidate/1.4.3rc2/macos-10.4/OpenAFS-1.4.3rc2-Tiger.dmg">MacOS 10.4 (Tiger) Universal package</A><br>
-  </li>
+  <li>Some resources are leaked when AFS is unloaded. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=74479">Bug 74479</A>)</li>
+  <li>Finder cannot move items by dragging across AFS volumes. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=34255">Bug 34255</A>)</li>
+  <li>64 bit userspace binaries cannot currently be run in AFS; Nor can 64 bit userspace binaries mmap files in AFS. (Experimental patch available)</li>
 </ul>
 <p>Note: If you receive the message <b>"You cannot continue. There is 
 nothing to install."</B> you need to remove the OpenAFS package receipt
 from "/Library/Receipts".  <a href="http://www.osxgnu.org/software/pkgdetail.html?project_id=244&cat_id=212">OSXPM</a> is a tool that can be used to 
 perform package management on MacOS X, or you can simply use the bundled uninstaller in the OpenAFS disk image.
 </p>
-
 <br>
 
 <br>
@@ -115,8 +115,8 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 </p>
 
 <br>
-<h2><a name="devel">Features Release: OpenAFS 1.5.25 for MacOS 10.4</a></h2>
-(updated 20 September 2007)<br>
+<h2><a name="devel">Features Release: OpenAFS 1.5.26 for MacOS 10.4</a></h2>
+(updated 24 October 2007)<br>
 <h3>Known Issues:</h3>
 <ul>
 <li>When authentication state changes, Finder may cache stale data (files appear unaccessible or do not appear)</li>
@@ -127,11 +127,11 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li>1.5.25 Release Notes (not yet)</li>
+  <li>1.5.26 Release Notes (not yet)</li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.25/macos-10.4/OpenAFS-1.5.25-Tiger.dmg">MacOS 10.4 package (Universal)</A><br>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.26/macos-10.4/OpenAFS-1.5.26-Tiger.dmg">MacOS 10.4 package (Universal)</A><br>
 </ul>
 <br>
 
