@@ -858,6 +858,13 @@ Estimate: 4 to 6 weeks</p>
 	high latency connections or excessively long delays on high speed networks.&nbsp; 
 	See RFC 2988 (TCP RTO) and RFC 2960 Section 6.3 (SCTP RTO) for suggested 
 	algorithms.<br>&nbsp;</li>
+	<li><strong>Increase RX/UDP Maximum Number of Calls:</strong><br>
+	RX/UDP has a maximum of four simultaneous calls per connection.&nbsp; The 
+	initial number of calls for each connection cannot be increased due to the 
+	lack of an appropriate negotiation mechanism at the RX layer.&nbsp; However, 
+	an application layer negotiation could be used to permit the application to 
+	hint to the rx connection how many calls should be permitted.<br>
+	&nbsp;</li>
 	<li><strong>rxgk:<br>
 	rxgk</strong> is a security class based upon the Generic Security Service Application 
 	Programming Interface (GSS-API) that attempts to address a much broader range 
