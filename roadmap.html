@@ -207,18 +207,17 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	(4Q2007)</li>
 	<li><strong>prevent repeated queries of the same volume location data:</strong><br>
 	The UNIX client does not prevent multiple threads from repeatedly querying 
-	the same volume location data.</li>
+	the same volume location data.<br>&nbsp;</li>
+	<li><strong>O_DIRECT and O_SYNC:</strong><br>
+	These fopen flags should be supported.&nbsp; O_SYNC should force each write 
+	to block until the data is sent to the file server.&nbsp; O_DIRECT should 
+	perform a direct write to the file server bypassing the cache (and until 
+	cache bypass is implemented, it should behave like O_SYNC.)</li>
 </ul>
 <h3 wrap>MacOS X:</h3>
 <ul>
 	<li>
 	<p wrap>Provide for token acquisition as part of the logon process</p>
-	</li>
-	<li>
-	<p wrap>Enhance Finder with an OpenAFS Context menu</p>
-	</li>
-	<li>
-	<p wrap>Add the AFS Commander control panel</p>
 	</li>
 	<li>
 	<p wrap>Support cross-volume Finder &quot;drag&quot; moves</p>
@@ -350,6 +349,14 @@ does for the Explorer Shell.&nbsp; However, the Finder can be customized with an
 AFS virtual folder and AFS context menus. Likewise, certain other graphical interfaces 
 which will become available in Leopard provide opportunities for customization to 
 ease use of AFS.</p>
+<ul>
+	<li>
+	<p wrap>Enhance Finder with an OpenAFS Context menu</p>
+	</li>
+	<li>
+	<p wrap>Add the AFS Commander control panel</p>
+	</li>
+</ul>
 <h2 wrap><a name="protocol"></a>3. AFS3 Protocol Feature Enhancements </h2>
 <p wrap>In order for AFS to be treated as a first class file system for MacOS X 
 and Microsoft Windows it must gain the following functionality: </p>
@@ -456,6 +463,10 @@ and Microsoft Windows it must gain the following functionality: </p>
 	Status data and callback registration expiration is currently determined 
 	based upon the number of clients that are accessing the data instead of the 
 	likelihood that the data is going to change. </p>
+	</li>
+	<li>
+	<p><strong>OPEN/CLOSE File Server RPCs:</strong><br>
+	New file server RPCs would provide new</p>
 	</li>
 	
 </ul>
@@ -840,6 +851,13 @@ Estimate: 4 to 6 weeks</p>
 	<br>
 	Estimated: 6 weeks for Asynchronous Rx and 3 weeks for file server modifications.</p>
 	</li>
+	<li><strong>Implement Dynamic Retransmission Timeout (RTO) Algorithms for 
+	RX/UDP:</strong><br>
+	RX/UDP uses a fixed retransmission timeout value.  This results either in too many 
+	retransmissions on 
+	high latency connections or excessively long delays on high speed networks.&nbsp; 
+	See RFC 2988 (TCP RTO) and RFC 2960 Section 6.3 (SCTP RTO) for suggested 
+	algorithms.<br>&nbsp;</li>
 	<li><strong>rxgk:<br>
 	rxgk</strong> is a security class based upon the Generic Security Service Application 
 	Programming Interface (GSS-API) that attempts to address a much broader range 
@@ -974,7 +992,7 @@ openafs-gatekeepers@openafs.org</a></p>&nbsp;<div id="footer">
 	<address>
 		&lt;webmaster@openafs.org&gt;</address>
 	<address>
-		Last modified: 2007/11/06 14:30:14 EST</address>
+		Last modified: 2007/11/07 23:15:14 EST</address>
 </div>
 
 </body>
