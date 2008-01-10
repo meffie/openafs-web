@@ -25,6 +25,31 @@ with PGP.
 
 <hr>
 
+<a name="OPENAFS-SA-2007-003"></a>
+<h2>OPENAFS-SA-2007-003 - denial of service in OpenAFS fileserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>20-Dec-2007</td></tr>
+<tr><th align="left">Last Update:</th><td>21-Dec-2007</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.3.50-1.4.5, OpenAFS 1.5.0-1.5.27</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2007-003.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2007-003.txt</a>
+</td></tr>
+</table>
+
+<p>The AFS fileserver tracks client callbacks on files via a series of 
+linked lists internally. When a client acquires a new callback or gives up
+an old one, these lists must be updated. Beginning in 1.3.50, a bulk disposal
+mechanism was added. Due to a failure to hold a lock, unsafe access to data
+could result in a crash. No data compromise is known.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+
 <a name="OPENAFS-SA-2007-002"></a>
 <h2>OPENAFS-SA-2007-002 - OpenAFS for Windows clients denial of service vulnerability</h2>
 <table border=0>
