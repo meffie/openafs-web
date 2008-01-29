@@ -1,7 +1,6 @@
 BODY                 { background: #ffffff; color: #000000 }
 :link                { background: #ffffff; color: #000fff }
 :visited             { background: #ffffff; color: #0000ff }
-:active              { background: #ffffff; color: #0000ff }
 
 BODY.top             { background: #ffffff; color: #000000 }
 TABLE.top            { background: #ffffff; color: #000000 }
@@ -13,8 +12,6 @@ TABLE.navbar         { background: #99ccff; color: #000000 }
 TD.navbar            { background: #99ccff; color: #000000 }
 TD.navbar :link      { background: #99ccff; color: #000fff }
 TD.navbar :visited   { background: #99ccff; color: #0000ff }
-TD.navbar :active    { background: #99ccff; color: #0000ff }
 TH.navbar            { background: #99ccff; color: #000000 }
 TH.navbar :link      { background: #99ccff; color: #000fff }
 TH.navbar :visited   { background: #99ccff; color: #0000ff }
-TH.navbar :active    { background: #99ccff; color: #0000ff }
