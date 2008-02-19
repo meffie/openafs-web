@@ -24,7 +24,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a>
 <li><a href="#signatures">Digital Signatures</a>
 <li><a href="#reports">Status Reports</a>
-<li><a href="#release">OpenAFS for Windows 1.5.31</a>
+<li><a href="#release">OpenAFS for Windows 1.5.32</a>
 <!--
 <li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.4</a>
 -->
@@ -71,12 +71,12 @@ process and send e-mail to
 <a name="reports">Status Reports</a></h3>
 <p>
 <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">Secure Endpoints Inc.</a> periodically publishes a report on the current status of OpenAFS for Windows development.  The 
-<a title="OpenAFS for Windows Status Report - January 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jan-2008-Status-Report.pdf">most recent report</a> 
+<a title="OpenAFS for Windows Status Report - February 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Feb-2008-Status-Report.pdf">most recent report</a> 
 was published in January 2008.  
-<a title="OpenAFS for Windows Status Report - January 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jan-2008-Status-Report.pdf">Read it today!</a>
+<a title="OpenAFS for Windows Status Report - February 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Feb-2008-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="release">OpenAFS for Windows 1.5.31 (1.5.3100.0)</a></h2>
-(updated 11 February 2008)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+<h2><a name="release">OpenAFS for Windows 1.5.32 (1.5.3200.0)</a></h2>
+(updated 19 February 2008)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
 <h3>Features:</h3>
 <ul>
   <li>Compatible with all OpenAFS and IBM/Transarc AFS Servers</li>
@@ -129,15 +129,19 @@ was published in January 2008.
 	read and write performance.</li>
 	<li>The 1.5.31 release fixes a bug that would prevent failover when a volume 
 	cannot be attached by a single file server instance.</li>
+	<li>The 1.5.32 more than doubles the throughput of both reads and writes 
+	when compared to previous releases.&nbsp; One 1Gbit/second networks peak 
+	transfer rates of up to 32MB/second have been recorded between the cache 
+	manager and the file server.</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
   <li>
-	<a title="OpenAFS for Windows 1.5.31 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.31/winxp/relnotes-frames.htm">
-	1.5.31 Release Notes</a><br>
+	<a title="OpenAFS for Windows 1.5.32 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.5.32/winxp/relnotes-frames.htm">
+	1.5.32 Release Notes</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.5.31 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.31/winxp/afs-changes-since-1.2.txt">
-	1.5.31 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.5.32 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.32/winxp/afs-changes-since-1.2.txt">
+	1.5.32 ChangeLog</a></li>
 </ul>
 <h3>Supported Platforms::</h3>
 <ul>
@@ -155,10 +159,10 @@ was published in January 2008.
 <h3>Known Issues:</h3>
 <ul>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must 
-be uninstalled before OpenAFS 1.5.31 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
+be uninstalled before OpenAFS 1.5.32 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
 <li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 
-1.5.31 requires MIT Kerberos for Windows 3.1 or above.</li>
+1.5.32 requires MIT Kerberos for Windows 3.1 or above.</li>
 <li>Directory and File Change Notifications are ignored when accessing AFS via 
 UNC paths</li>
 <li>Windows Vista Specific Issues<ul>
@@ -175,17 +179,17 @@ be &quot;Run as Administrator&quot;.</li>
 <h3>Downloads for 32-bit Windows operating systems: Vista/R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.31/winxp/OpenAFSforWindows-1-5-31.exe">32-bit EXE installer for individual installations</a> 
+	<a href="http://dl.openafs.org/dl/openafs/1.5.32/winxp/OpenAFSforWindows-1-5-32.exe">32-bit EXE installer for individual installations</a> 
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.31/winxp/openafs-en_US-1-5-31.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.32/winxp/openafs-en_US-1-5-32.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
 <h3>Downloads for 64-bit Windows operating systems: Vista/R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.31/winxp/openafs-en_US-64bit-1-5-31.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.32/winxp/openafs-en_US-64bit-1-5-32.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
@@ -195,7 +199,7 @@ be &quot;Run as Administrator&quot;.</li>
 	Windows.</p>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.5.31/winxp/openafs-32bit-tools-en_US-1-5-31.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.32/winxp/openafs-32bit-tools-en_US-1-5-32.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
@@ -296,7 +300,7 @@ OpenAFS for Windows depends on
 <a target="_self" href="http://web.mit.edu/kerberos/dist/index.html">MIT 
 Kerberos for Windows (KFW)</a>&nbsp; to provide Kerberos 5 functionality.&nbsp; 
 The recommended version of KFW for <a href="#release">
-OpenAFS for Windows 1.5.31</a> is version 3.2.2.  
+OpenAFS for Windows 1.5.32</a> is version 3.2.2.  
 64-bit releases of KFW are available from
 <a href="http://www.secure-endpoints.com/index.html#kfw">Secure Endpoints Inc.</a>  
 </body>
