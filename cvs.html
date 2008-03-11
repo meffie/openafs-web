@@ -10,22 +10,26 @@
 <h1>OpenAFS CVS information</h1>
 
 <p>OpenAFS source code is managed in a CVS repository.  Anonymous access to 
-the CVS service is available.  Your CVSROOT should be set
-to :pserver:anonymous@cvs.openafs.org:/cvs&nbsp;; The password for this 
-user is "anonymous"; OpenAFS can be found in the "openafs" module. 
-The latest 1.4 series sources can be obtained using the tag 
-"openafs-stable-1_4_x".  The latest 1.5 series sources can be obtained 
-using the tag "openafs-devel-1_5_x".  Replace the "x" in the tag name 
-with a number to obtain the sources to a specific release.</p> 
-
-<p>After checking out or updating sources from the CVS repository
-the command, "sh ./regen.sh", must be executed.  Only then will 
-"./configure" work properly.</p>
+the CVS service is available.  </p>
+<ul>
+	<li>The CVSROOT should be set
+to <a href="mailto::pserver:anonymous@cvs.openafs.org:/cvs">:pserver:anonymous@cvs.openafs.org:/cvs</a></li>
+	<li>The password for this 
+user is "anonymous"</li>
+	<li>OpenAFS can be found in the "openafs" module. 
+	</li>
+</ul>
+<p>The latest 1.4 series sources can be obtained using the tag 
+"<i>openafs-stable-1_4_x</i>".  The latest 1.5 series sources can be obtained 
+using the tag "<i>openafs-devel-1_5_x</i>".  Replace the "<i>x</i>" in the tag name 
+with a number to obtain the sources to a specific release. After checking out or updating sources from the CVS repository
+the command, "<i>sh ./regen.sh</i>", must be executed.  Only then will 
+"<i>./configure</i>" work properly.</p>
 
 <p>For those unfamiliar with cvs:</p>
 <ol>
 <li>cvs -d:pserver:anonymous@cvs.openafs.org:/cvs login</li>
-<li>cvs -d:pserver:anonymous@cvs.openafs.org:/cvs checkout -r <tag> openafs</li>
+<li>cvs -d:pserver:anonymous@cvs.openafs.org:/cvs checkout -r &lt;tag&gt; openafs</li>
 <li>sh ./regen.sh</li>
 <li>sh ./configure</li>
 </ol>
