@@ -118,6 +118,40 @@ data structures and algorithms, preferably in C.
 </p>
 <p>Estimated difficulty: <i>moderate</i></p>
 <p>Contact person/mentor: <i>Matt Benjamin</i> matt at linuxbox.com</p>
+<h2>Project Idea 5: OpenAFS Disconnected Operation Improvements</h2>
+<p>
+Disconnected operation for AFS was originally implemented by the
+University of Michigan, against an old code base. That
+implementation, and the thinking behind it is detailed at http://
+www.citi.umich.edu/techreports/reports/citi-tr-93-3.ps.gz. This code
+has now significantly bit-rotted, but an ongoing effort is being made
+to bring it up the standard of the current code base, and integrate
+it back into the core. Disconnected operation is a key feature for
+many users, and the ability to operate upon files in the local AFS
+cache, whilst away from a normal network connection, is likely to
+open up many new applications.
+</p><p>
+This project would implement a number of significant improvements to
+the current disconnected code. Offline authentication tokens are
+required to allow local users to access files within AFS whilst
+disconnected from the network, without giving them access to
+everything within the cache. A journal optimiser would significantly
+reduce the amount of effort required to replay operations which
+occurred whilst disconnected. In addition, there are many usability
+issues to be explored, and resolved, before the code is ready for end
+user usage.
+</p><p>
+The implementation language is C, with the majority of the code
+executing within the operating system kernel. The AFS kernel module
+runs on Mac OS X, Solaris and Linux, amongst other systems - whilst
+the student need only work on one of these systems, the completed
+code should be capable of running on them all. No initial knowledge
+of OpenAFS is required, a successful student will develop a detailed
+knowledge of kernel VFS layers, and the issues involved in supporting
+disconnected operation.
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<p>Contact person/mentor: <i>Simon Wilkinson</i> sxw at sxw.org.uk</p>
 </body>
 
 </html>
