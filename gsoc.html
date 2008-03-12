@@ -81,7 +81,43 @@ extensions will need to be completed.
 <p>The programming language for this project is C.&nbsp; This is in portable code which can be run on any POSIX-compliant OS; While MacOS, Linux or Solaris are suggested as development platforms due to availability of debugging tools, any supported OpenAFS platform could be used to do this work.</p>
 <p>Estimated difficulty: <i>moderate</i></p>
 <p>Contact person/mentor: <i>Derrick Brashear</i> shadow at openafs.org</p>
-
+<h2>Project Idea 4: OpenAFS per-file access control list (ACL) extensions</h2>
+<p>
+AFS supports advanced file permissions, using Access Control Lists
+(ACLs) on directories.  The traditional AFS permission model is,
+however, showing signs of age.  The AFS model is inflexible for
+administrators, who must store objects with disjoint permissions in
+separate directories.  The AFS model is also inconsistent with POSIX
+ACLs (POSIX 1003.1e/1003.2c), DCE DFS, CIFS, and NFSv4
+(http://www.ietf.org/rfc/rfc3530.txt), all of which allow ACLs (of
+varying types) on a per-file basis.  Implementation of this feature
+will improve the usability of OpenAFS for administrators, and improve
+its interface with modern platforms.
+</p><p>
+The objective of this SOC project is to more fully specify and then
+implement a per-file ACL mechanism for OpenAFS.  Engaging with the
+mentor and the community, the student will work out details of
+per-file ACEs, relationship of per-file and existing per-directory
+ACLs, select an on-disk representation for this design in the OpenAFS
+namei file server, and, minimally, expose the new representation to
+clients via the AFS file server protocol (its FetchACL RPC and
+supporting code, eg, RXFetch_AccessList).  The project will close with a
+validation testing phase.
+</p><p>
+This project will provide an interested student with an opportunity to
+engage with the OpenAFS codebase and development community in a
+significant way, in both design and detailed implementation.  The
+student will gain exposure to the complete operation (and end-to-end
+enhancement) of a major file-system features--from on-disk
+representation to remote procedure invocation, to manifestation on the
+client.
+</p><p>
+The student should have existing skills in C program implementation in
+a Unix environment, and have minimally completed University courses in
+data structures and algorithms, preferably in C.
+</p>
+<p>Estimated difficulty: <i>moderate</i></p>
+<p>Contact person/mentor: <i>Matt Benjamin</i> matt at linuxbox.com</p>
 </body>
 
 </html>
