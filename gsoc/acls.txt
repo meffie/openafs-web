@@ -1,0 +1,81 @@
+Some additional notes on how to attack per-file ACLs task:
+
+1. remote procedure calls -- AFS (and NFS, etc) have a generic mechanism
+for specifying remote procedure calls, and this is used to define the APIs
+presented in the system.  The RPC mechanism in AFS is called
+"rx"--files like "fs.xg" contain something very similar to C function
+prototypes and some constant definitions.  The rxgen program generates C
+program code including client and server stubs for the calls.  The file
+afsfileprocs.c is part of the implementation of the fs RPCs.  The file 
+server has an API that has (IIRC) only one call related to ACLs, the 
+FetchACL in fs.xg.  The AFS cache managers or other clients use the call 
+to get ACL information--the file sever also uses ACL information to check 
+when ACLs a file operation (other RPCs) would violate the ACL.
+
+2. on-disk format.  The portable file server in OpenAFS is called namei,
+and it defines a kind of binary file format in for storing information
+on file server machines, corresponding to files and directories,
+including file meta-data, such as ACLs.  The file server (and
+backup/dump mechanism) know how to read and write files and file
+metadata directly--clients just use the RPC apis to work with files, and
+occasionally list or change the ACLs on a file object.
+
+I'd say the theory you are interested in is pretty basic C programming
+and data structures, for most of the work.  You just have to get used to
+the idea that there is a superstructure of RPCs and services on top--but
+the low-level code is rather simple, most people find.  On the "back
+end" you will be extending (or maybe changing) the on-disk format for
+storing ACLs, and updating programs that parse the data--mostly just the
+file server, and some programs that do backups/dump data.  The dump
+mechanism is used to do data backups of AFS volumes, and also to send
+data to replicas.  There is probability a question of whether ACLs
+should be implemented in a new, ordinary Unix file, or perhaps using
+extended attributes.  The former would be more conservative.
+
+You want to be able to talk about how you would go about creating a new
+extended format for storing per-file ACLs.  You need to talk a bit about
+backward-compatibility.  Older clients need to use their old RPCs, but
+new clients could use new RPC functions (with new prototypes) which you
+would implement, which would publish the per-file ACLs.  On the server
+side, you would discuss what supported behavior will be for new programs
+reading old file data and dumps, and conversely, old programs seeing
+style data.
+
+In the list of docmentation that follows, it would probably be most
+helpful to read the fscm-ispec.pdf--it's 130 pages, but you might kind 
+of skim to get a feel for what's covered.
+
+Some notes on getting spun up quickly on AFS code:
+
+Documentation
+
+The following offical docs are fairly short, and give overviews of how
+subsystems are developed--all of these are found in the OpenAFS source
+distribution, under /doc/:
+
+AFS Programmers Manual
+archov-doc.pdf
+
+File-Server/Cache Manager Interface
+fscm-ispec.pdf
+
+Volume Location Server Interface
+vvl-spec.pdf
+
+Rx Spec (Rx Programmers Manual with example code)
+rx-spec.pdf
+
+Tools
+
+It can be really helpful to have some tools (besides recursive grep in
+the source) to trace structures and calls through the AFS source code.
+
+You might find one of the following helpful:
+
+* source navigator (what I mostly use)
+~  http://sourcenav.berlios.de/
+* cscope
+* emacs/etags
+
+-- Matt Benjamin
+
