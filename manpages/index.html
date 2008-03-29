@@ -1,0 +1,603 @@
+<html>
+<head>
+  <title>OpenAFS Reference Manual</title>
+  <link rel="stylesheet" title="style" type="text/css" href="style.css" media="all">
+</head>
+<body class='contentspage'>
+<h1>OpenAFS Reference Manual</h1>
+<table>
+<tr><td>&nbsp;</td></tr>
+<tr class="heading"><th colspan="2">User Commands</th></tr>
+<tr><td><a href="1/afs.html">afs</a></td><td>Introduction to AFS commands
+</td></tr>
+<tr><td><a href="1/afsmonitor.html">afsmonitor</a></td><td>Monitors File Servers and Cache Managers
+</td></tr>
+<tr><td><a href="1/aklog.html">aklog</a></td><td>Obtain tokens for authentication to AFS
+</td></tr>
+<tr><td><a href="1/cmdebug.html">cmdebug</a></td><td>Reports the status of a host Cache Manager
+</td></tr>
+<tr><td><a href="1/dlog.html">dlog</a></td><td>Authenticates to the DCE Security Service
+</td></tr>
+<tr><td><a href="1/dpass.html">dpass</a></td><td>Returns the DCE password for a new DCE account
+</td></tr>
+<tr><td><a href="1/fs.html">fs</a></td><td>Introduction to the fs command suite
+</td></tr>
+<tr><td><a href="1/fs_apropos.html">fs_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="1/fs_checkservers.html">fs_checkservers</a></td><td>Displays the status of server machines
+</td></tr>
+<tr><td><a href="1/fs_checkvolumes.html">fs_checkvolumes</a></td><td>Forces the Cache Manager to update volume information
+</td></tr>
+<tr><td><a href="1/fs_cleanacl.html">fs_cleanacl</a></td><td>Remove obsolete entries from an ACL
+</td></tr>
+<tr><td><a href="1/fs_copyacl.html">fs_copyacl</a></td><td>Copies an ACL from a directory to one or more other directories
+</td></tr>
+<tr><td><a href="1/fs_diskfree.html">fs_diskfree</a></td><td>Shows data about the partition housing a directory or file
+</td></tr>
+<tr><td><a href="1/fs_examine.html">fs_examine</a></td><td>Shows data about the volume containing a directory or file
+</td></tr>
+<tr><td><a href="1/fs_exportafs.html">fs_exportafs</a></td><td>Configures export of AFS to clients of other file systems
+</td></tr>
+<tr><td><a href="1/fs_flush.html">fs_flush</a></td><td>Forces the Cache Manager to discard a cached file or directory
+</td></tr>
+<tr><td><a href="1/fs_flushall.html">fs_flushall</a></td><td>Force the AFS Cache Manager to discard all data
+</td></tr>
+<tr><td><a href="1/fs_flushmount.html">fs_flushmount</a></td><td>Forces the Cache Manager to discard a mount point
+</td></tr>
+<tr><td><a href="1/fs_flushvolume.html">fs_flushvolume</a></td><td>Forces the Cache Manager to discard cached data from a volume
+</td></tr>
+<tr><td><a href="1/fs_getcacheparms.html">fs_getcacheparms</a></td><td>Displays the current size and usage of the cache
+</td></tr>
+<tr><td><a href="1/fs_getcalleraccess.html">fs_getcalleraccess</a></td><td>Show the current user's access to a file or directory
+</td></tr>
+<tr><td><a href="1/fs_getcellstatus.html">fs_getcellstatus</a></td><td>Reports whether setuid programs are honored in a cell
+</td></tr>
+<tr><td><a href="1/fs_getclientaddrs.html">fs_getclientaddrs</a></td><td>Displays the client interfaces to register
+</td></tr>
+<tr><td><a href="1/fs_getcrypt.html">fs_getcrypt</a></td><td>Displays the state of encryption for AFS file transfers
+</td></tr>
+<tr><td><a href="1/fs_getserverprefs.html">fs_getserverprefs</a></td><td>Displays preference ranks for file servers or VL servers
+</td></tr>
+<tr><td><a href="1/fs_help.html">fs_help</a></td><td>Displays help for fs commands
+</td></tr>
+<tr><td><a href="1/fs_listacl.html">fs_listacl</a></td><td>Displays ACLs
+</td></tr>
+<tr><td><a href="1/fs_listaliases.html">fs_listaliases</a></td><td>Displays the current list of aliases for AFS cells
+</td></tr>
+<tr><td><a href="1/fs_listcells.html">fs_listcells</a></td><td>Displays the database server machines known to the Cache Manager
+</td></tr>
+<tr><td><a href="1/fs_listquota.html">fs_listquota</a></td><td>Displays quota information for a volume
+</td></tr>
+<tr><td><a href="1/fs_lsmount.html">fs_lsmount</a></td><td>Reports the volume for which a directory is the mount point.
+</td></tr>
+<tr><td><a href="1/fs_messages.html">fs_messages</a></td><td>Sets whether the Cache Manager writes log messages
+</td></tr>
+<tr><td><a href="1/fs_minidump.html">fs_minidump</a></td><td>Generate a minidump from the current afsd service
+</td></tr>
+<tr><td><a href="1/fs_mkmount.html">fs_mkmount</a></td><td>Creates a mount point for a volume
+</td></tr>
+<tr><td><a href="1/fs_newalias.html">fs_newalias</a></td><td>Creates a new alias for a cell
+</td></tr>
+<tr><td><a href="1/fs_newcell.html">fs_newcell</a></td><td>Changes the kernel-resident list of a cell's database servers
+</td></tr>
+<tr><td><a href="1/fs_quota.html">fs_quota</a></td><td>Displays the quota used in the volume containing a directory or file
+</td></tr>
+<tr><td><a href="1/fs_rmmount.html">fs_rmmount</a></td><td>Removes a mount point
+</td></tr>
+<tr><td><a href="1/fs_rxstatpeer.html">fs_rxstatpeer</a></td><td>Enables Rx packet logging in the OpenAFS kernel module
+</td></tr>
+<tr><td><a href="1/fs_setacl.html">fs_setacl</a></td><td>Sets the ACL for a directory
+</td></tr>
+<tr><td><a href="1/fs_setcachesize.html">fs_setcachesize</a></td><td>Sets the size of the disk cache
+</td></tr>
+<tr><td><a href="1/fs_setcell.html">fs_setcell</a></td><td>Configures permissions for setuid programs from specified cells
+</td></tr>
+<tr><td><a href="1/fs_setclientaddrs.html">fs_setclientaddrs</a></td><td>Sets the client interfaces to register with the File Server
+</td></tr>
+<tr><td><a href="1/fs_setcrypt.html">fs_setcrypt</a></td><td>Enables of disables the encryption of AFS file transfers
+</td></tr>
+<tr><td><a href="1/fs_setquota.html">fs_setquota</a></td><td>Sets the quota for the volume containing a file or directory
+</td></tr>
+<tr><td><a href="1/fs_setserverprefs.html">fs_setserverprefs</a></td><td>Sets the preference ranks for file servers or VL servers
+</td></tr>
+<tr><td><a href="1/fs_setvol.html">fs_setvol</a></td><td>Set quota and messages for a volume containing a file or directory
+</td></tr>
+<tr><td><a href="1/fs_storebehind.html">fs_storebehind</a></td><td>Enables asynchronous writes to the file server
+</td></tr>
+<tr><td><a href="1/fs_sysname.html">fs_sysname</a></td><td>Reports or sets the CPU/operating system type
+</td></tr>
+<tr><td><a href="1/fs_uuid.html">fs_uuid</a></td><td>Prints the uuid of the client or generates a new one
+</td></tr>
+<tr><td><a href="1/fs_whereis.html">fs_whereis</a></td><td>Reports each file server housing a file or directory
+</td></tr>
+<tr><td><a href="1/fs_whichcell.html">fs_whichcell</a></td><td>Returns the cell to which a file or directory belongs
+</td></tr>
+<tr><td><a href="1/fs_wscell.html">fs_wscell</a></td><td>Returns the name of the cell to which a machine belongs
+</td></tr>
+<tr><td><a href="1/klog.html">klog</a></td><td>Authenticates with the Authentication Server
+</td></tr>
+<tr><td><a href="1/knfs.html">knfs</a></td><td>Establishes authenticated access via the NFS/AFS Translator
+</td></tr>
+<tr><td><a href="1/kpasswd.html">kpasswd</a></td><td>Changes the issuer's password in the Authentication Database
+</td></tr>
+<tr><td><a href="1/livesys.html">livesys</a></td><td>Reports the configured CPU/operating system type
+</td></tr>
+<tr><td><a href="1/package_test.html">package_test</a></td><td>Tests the validity of a package configuration file
+</td></tr>
+<tr><td><a href="1/pagsh.html">pagsh</a></td><td>Creates a new PAG
+</td></tr>
+<tr><td><a href="1/pts.html">pts</a></td><td>Introduction to the pts command suite
+</td></tr>
+<tr><td><a href="1/pts_adduser.html">pts_adduser</a></td><td>Adds a user or machine to a Protection Database group
+</td></tr>
+<tr><td><a href="1/pts_apropos.html">pts_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="1/pts_chown.html">pts_chown</a></td><td>Changes the owner of a Protection Database entry
+</td></tr>
+<tr><td><a href="1/pts_creategroup.html">pts_creategroup</a></td><td>Creates an (empty) Protection Database group entry
+</td></tr>
+<tr><td><a href="1/pts_createuser.html">pts_createuser</a></td><td>Creates a user or machine entry in the Protection Database
+</td></tr>
+<tr><td><a href="1/pts_delete.html">pts_delete</a></td><td>Deletes a Protection Database entry
+</td></tr>
+<tr><td><a href="1/pts_examine.html">pts_examine</a></td><td>Displays a Protection Database entry
+</td></tr>
+<tr><td><a href="1/pts_help.html">pts_help</a></td><td>Displays help for pts commands
+</td></tr>
+<tr><td><a href="1/pts_interactive.html">pts_interactive</a></td><td>Enters interactive mode
+</td></tr>
+<tr><td><a href="1/pts_listentries.html">pts_listentries</a></td><td>Displays all users or groups in the Protection Database
+</td></tr>
+<tr><td><a href="1/pts_listmax.html">pts_listmax</a></td><td>Displays the max user id and max group id counters
+</td></tr>
+<tr><td><a href="1/pts_listowned.html">pts_listowned</a></td><td>Show the Protection Database groups owned by a user or group
+</td></tr>
+<tr><td><a href="1/pts_membership.html">pts_membership</a></td><td>Displays the membership list for a user or group
+</td></tr>
+<tr><td><a href="1/pts_quit.html">pts_quit</a></td><td>Exit from pts interactive mode
+</td></tr>
+<tr><td><a href="1/pts_removeuser.html">pts_removeuser</a></td><td>Removes a user from a Protection Database group
+</td></tr>
+<tr><td><a href="1/pts_rename.html">pts_rename</a></td><td>Changes the name of a Protection Database entry
+</td></tr>
+<tr><td><a href="1/pts_setfields.html">pts_setfields</a></td><td>Sets privacy flags or quota for a Protection Database entry
+</td></tr>
+<tr><td><a href="1/pts_setmax.html">pts_setmax</a></td><td>Sets the value of the max group id or max user id counter
+</td></tr>
+<tr><td><a href="1/pts_sleep.html">pts_sleep</a></td><td>Pauses for a few seconds
+</td></tr>
+<tr><td><a href="1/pts_source.html">pts_source</a></td><td>Read pts commands from a file
+</td></tr>
+<tr><td><a href="1/rxdebug.html">rxdebug</a></td><td>Provides debugging trace of Rx activity
+</td></tr>
+<tr><td><a href="1/rxgen.html">rxgen</a></td><td>Stub generator for the Rx remote procedure call package
+</td></tr>
+<tr><td><a href="1/scout.html">scout</a></td><td>Monitors the File Server process
+</td></tr>
+<tr><td><a href="1/symlink.html">symlink</a></td><td>Introduction to the symlink command suite
+</td></tr>
+<tr><td><a href="1/symlink_list.html">symlink_list</a></td><td>Show the file to which a symlink points
+</td></tr>
+<tr><td><a href="1/symlink_make.html">symlink_make</a></td><td>Create a symbolic link
+</td></tr>
+<tr><td><a href="1/symlink_remove.html">symlink_remove</a></td><td>Remove a symbolic link.
+</td></tr>
+<tr><td><a href="1/sys.html">sys</a></td><td>Reports the compile-time CPU/operating system type
+</td></tr>
+<tr><td><a href="1/tokens.html">tokens</a></td><td>Displays the issuer's tokens
+</td></tr>
+<tr><td><a href="1/translate_et.html">translate_et</a></td><td>Translates numbered error codes into text messages
+</td></tr>
+<tr><td><a href="1/udebug.html">udebug</a></td><td>Reports Ubik process status for a database server process
+</td></tr>
+<tr><td><a href="1/unlog.html">unlog</a></td><td>Discards all of the issuer's tokens
+</td></tr>
+<tr><td><a href="1/up.html">up</a></td><td>Recursively copy directories, preserving AFS metadata
+</td></tr>
+<tr><td><a href="1/vos.html">vos</a></td><td>Introduction to the vos command suite
+</td></tr>
+<tr><td><a href="1/vos_addsite.html">vos_addsite</a></td><td>Adds a read-only site definition to a volume's VLDB entry
+</td></tr>
+<tr><td><a href="1/vos_apropos.html">vos_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="1/vos_backup.html">vos_backup</a></td><td>Creates a backup volume for a single read/write volume
+</td></tr>
+<tr><td><a href="1/vos_backupsys.html">vos_backupsys</a></td><td>Creates a backup volume for several read/write volumes
+</td></tr>
+<tr><td><a href="1/vos_changeaddr.html">vos_changeaddr</a></td><td>Changes or removes a file server machine's entry in the VLDB
+</td></tr>
+<tr><td><a href="1/vos_changeloc.html">vos_changeloc</a></td><td>Change a volume's entry in the VLDB
+</td></tr>
+<tr><td><a href="1/vos_convertROtoRW.html">vos_convertROtoRW</a></td><td>Converts a Read-Only volume into a Read/Write volume
+</td></tr>
+<tr><td><a href="1/vos_copy.html">vos_copy</a></td><td>Make a copy of a volume
+</td></tr>
+<tr><td><a href="1/vos_create.html">vos_create</a></td><td>Creates a read/write volume and associated VLDB entry
+</td></tr>
+<tr><td><a href="1/vos_delentry.html">vos_delentry</a></td><td>Removes a volume entry from the VLDB.
+</td></tr>
+<tr><td><a href="1/vos_dump.html">vos_dump</a></td><td>Converts a volume into ASCII format and writes it to a file
+</td></tr>
+<tr><td><a href="1/vos_examine.html">vos_examine</a></td><td>Shows volume header and VLDB entry information for a volume
+</td></tr>
+<tr><td><a href="1/vos_help.html">vos_help</a></td><td>Displays help for vos commands
+</td></tr>
+<tr><td><a href="1/vos_listaddrs.html">vos_listaddrs</a></td><td>Displays all VLDB server entries
+</td></tr>
+<tr><td><a href="1/vos_listpart.html">vos_listpart</a></td><td>Displays all AFS partitions on a file server machine
+</td></tr>
+<tr><td><a href="1/vos_listvldb.html">vos_listvldb</a></td><td>Displays a volume's VLDB entry
+</td></tr>
+<tr><td><a href="1/vos_listvol.html">vos_listvol</a></td><td>Displays information from a volume header
+</td></tr>
+<tr><td><a href="1/vos_lock.html">vos_lock</a></td><td>Locks a VLDB volume entry
+</td></tr>
+<tr><td><a href="1/vos_move.html">vos_move</a></td><td>Moves a read/write volume to another site
+</td></tr>
+<tr><td><a href="1/vos_offline.html">vos_offline</a></td><td>Takes a volume offline
+</td></tr>
+<tr><td><a href="1/vos_online.html">vos_online</a></td><td>Brings a volume online
+</td></tr>
+<tr><td><a href="1/vos_partinfo.html">vos_partinfo</a></td><td>Reports the available and total space on a partition
+</td></tr>
+<tr><td><a href="1/vos_release.html">vos_release</a></td><td>Updates read-only volumes to match the read/write source volume
+</td></tr>
+<tr><td><a href="1/vos_remove.html">vos_remove</a></td><td>Removes a volume from a site
+</td></tr>
+<tr><td><a href="1/vos_remsite.html">vos_remsite</a></td><td>Removes a read-only site definition from a VLDB entry
+</td></tr>
+<tr><td><a href="1/vos_rename.html">vos_rename</a></td><td>Renames a volume
+</td></tr>
+<tr><td><a href="1/vos_restore.html">vos_restore</a></td><td>Converts an ASCII dump file into an AFS volume
+</td></tr>
+<tr><td><a href="1/vos_size.html">vos_size</a></td><td>Computes the size of a volume dump
+</td></tr>
+<tr><td><a href="1/vos_status.html">vos_status</a></td><td>Reports a Volume Server's status
+</td></tr>
+<tr><td><a href="1/vos_syncserv.html">vos_syncserv</a></td><td>Verifies VLDB entries that mention a specified site
+</td></tr>
+<tr><td><a href="1/vos_syncvldb.html">vos_syncvldb</a></td><td>Verifies VLDB entries for volumes residing at specified site
+</td></tr>
+<tr><td><a href="1/vos_unlock.html">vos_unlock</a></td><td>Unlocks a single VLDB entry
+</td></tr>
+<tr><td><a href="1/vos_unlockvldb.html">vos_unlockvldb</a></td><td>Unlocks several locked VLDB entries
+</td></tr>
+<tr><td><a href="1/vos_zap.html">vos_zap</a></td><td>Removes a volume from its site without writing to the VLDB
+</td></tr>
+<tr><td><a href="1/xstat_cm_test.html">xstat_cm_test</a></td><td>Displays data collections from the Cache Manager
+</td></tr>
+<tr><td><a href="1/xstat_fs_test.html">xstat_fs_test</a></td><td>Displays data collections from the File Server process
+</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="heading"><th colspan="2">Configuration and Data Files</th></tr>
+<tr><td><a href="5/AuthLog.dir.html">AuthLog.dir, AuthLog.pag</a></td><td>Log of Authentication Server privileged operations
+</td></tr>
+<tr><td><a href="5/AuthLog.html">AuthLog</a></td><td>Traces Authentication Server operations
+</td></tr>
+<tr><td><a href="5/BackupLog.html">BackupLog</a></td><td>Traces Backup Server operations
+</td></tr>
+<tr><td><a href="5/BosConfig.html">BosConfig</a></td><td>Defines server processes for the BOS Server to monitor
+</td></tr>
+<tr><td><a href="5/BosLog.html">BosLog</a></td><td>Traces BOS Server operations
+</td></tr>
+<tr><td><a href="5/CellAlias.html">CellAlias</a></td><td>Maps cell names to aliases in /afs
+</td></tr>
+<tr><td><a href="5/CellServDB.html">CellServDB</a></td><td>Lists the database server machines in AFS cells
+</td></tr>
+<tr><td><a href="5/FORCESALVAGE.html">FORCESALVAGE</a></td><td>Forces salvage of entire partition
+</td></tr>
+<tr><td><a href="5/FileLog.html">FileLog</a></td><td>Traces File Server operations
+</td></tr>
+<tr><td><a href="5/KeyFile.html">KeyFile</a></td><td>Defines AFS server encryption keys
+</td></tr>
+<tr><td><a href="5/NetInfo.html">NetInfo</a></td><td>Defines machine interfaces to register with AFS servers
+</td></tr>
+<tr><td><a href="5/NetRestrict.html">NetRestrict</a></td><td>Defines interfaces not to register with AFS servers
+</td></tr>
+<tr><td><a href="5/NoAuth.html">NoAuth</a></td><td>Disables authorization checking
+</td></tr>
+<tr><td><a href="5/SALVAGE.fs.html">SALVAGE.fs</a></td><td>Triggers salvaging of AFS server partitions
+</td></tr>
+<tr><td><a href="5/SalvageLog.html">SalvageLog</a></td><td>Traces Salvager operations
+</td></tr>
+<tr><td><a href="5/ThisCell.html">ThisCell</a></td><td>Defines the local cell name
+</td></tr>
+<tr><td><a href="5/UserList.html">UserList</a></td><td>Defines privileged administrators
+</td></tr>
+<tr><td><a href="5/VLLog.html">VLLog</a></td><td>Traces Volume Location Server operations
+</td></tr>
+<tr><td><a href="5/VolserLog.html">VolserLog</a></td><td>Traces Volume Server operations
+</td></tr>
+<tr><td><a href="5/afs.html">afs</a></td><td>Introduction to AFS files
+</td></tr>
+<tr><td><a href="5/afs_cache.html">afs_cache</a></td><td>Format of data stored in an AFS client disk cache
+</td></tr>
+<tr><td><a href="5/afs_volume_header.html">afs_volume_header</a></td><td>Represents an AFS volume
+</td></tr>
+<tr><td><a href="5/afsmonitor.html">afsmonitor</a></td><td>Provides instructions for the afsmonitor command
+</td></tr>
+<tr><td><a href="5/afszcm.cat.html">afszcm.cat</a></td><td>Error message catalog for debugging the Cache Manager
+</td></tr>
+<tr><td><a href="5/bdb.DB0.html">bdb.DB0, bdb.DBSYS1</a></td><td>Contain the Backup Database and associated log
+</td></tr>
+<tr><td><a href="5/butc.html">butc</a></td><td>Defines Tape Coordinator instructions for automated tape devices
+</td></tr>
+<tr><td><a href="5/butc_logs.html">butc_logs</a></td><td>Message logs from the Tape Coordinator process
+</td></tr>
+<tr><td><a href="5/cacheinfo.html">cacheinfo</a></td><td>Defines configuration parameters for the Cache Manager
+</td></tr>
+<tr><td><a href="5/fms.log.html">fms.log</a></td><td>Records output from the fms command
+</td></tr>
+<tr><td><a href="5/kaserver.DB0.html">kaserver.DB0, kaserver.DBSYS1</a></td><td>The Authentication Database and associated log
+</td></tr>
+<tr><td><a href="5/kaserverauxdb.html">kaserverauxdb</a></td><td>Records failed authentication attempts
+</td></tr>
+<tr><td><a href="5/package.html">package</a></td><td>Provides instructions for the package command
+</td></tr>
+<tr><td><a href="5/prdb.DB0.html">prdb.DB0, prdb.DBSYS1</a></td><td>Contain the Protection Database and associated log
+</td></tr>
+<tr><td><a href="5/salvage.lock.html">salvage.lock</a></td><td>Prevents multiple simultaneous salvage operations on a partition
+</td></tr>
+<tr><td><a href="5/sysid.html">sysid</a></td><td>Lists file server machine interface addresses registered in VLDB
+</td></tr>
+<tr><td><a href="5/tapeconfig.html">tapeconfig</a></td><td>Defines parameters for tape devices and backup data files
+</td></tr>
+<tr><td><a href="5/uss.html">uss</a></td><td>Provides instructions for the uss add command
+</td></tr>
+<tr><td><a href="5/uss_bulk.html">uss_bulk</a></td><td>Provides instructions for the uss bulk command
+</td></tr>
+<tr><td><a href="5/vldb.DB0.html">vldb.DB0, vldb.DBSYS1</a></td><td>Contain the Volume Location Database and associated log
+</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr class="heading"><th colspan="2">Administrator Commands</th></tr>
+<tr><td><a href="8/afsd.html">afsd</a></td><td>Initializes the Cache Manager and starts related daemons
+</td></tr>
+<tr><td><a href="8/asetkey.html">asetkey</a></td><td>Add a key from a keytab to an AFS KeyFile
+</td></tr>
+<tr><td><a href="8/backup.html">backup</a></td><td>Introduction to the backup command suite
+</td></tr>
+<tr><td><a href="8/backup_adddump.html">backup_adddump</a></td><td>Defines a dump level in the dump hierarchy
+</td></tr>
+<tr><td><a href="8/backup_addhost.html">backup_addhost</a></td><td>Adds a Tape Coordinator entry to the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_addvolentry.html">backup_addvolentry</a></td><td>Defines a volume entry in a volume set
+</td></tr>
+<tr><td><a href="8/backup_addvolset.html">backup_addvolset</a></td><td>Creates a new (empty) volume set
+</td></tr>
+<tr><td><a href="8/backup_apropos.html">backup_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="8/backup_dbverify.html">backup_dbverify</a></td><td>Checks the integrity of the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_deldump.html">backup_deldump</a></td><td>Deletes a dump level from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_deletedump.html">backup_deletedump</a></td><td>Deletes one or more dump records from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_delhost.html">backup_delhost</a></td><td>Deletes a Tape Coordinator entry from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_delvolentry.html">backup_delvolentry</a></td><td>Deletes a volume entry from a volume set
+</td></tr>
+<tr><td><a href="8/backup_delvolset.html">backup_delvolset</a></td><td>Deletes one or more volume sets from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_diskrestore.html">backup_diskrestore</a></td><td>Restores the entire contents of a partition
+</td></tr>
+<tr><td><a href="8/backup_dump.html">backup_dump</a></td><td>Creates a dump (dumps a volume set at a particular dump level)
+</td></tr>
+<tr><td><a href="8/backup_dumpinfo.html">backup_dumpinfo</a></td><td>Displays a dump record from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_help.html">backup_help</a></td><td>Displays help for backup commands
+</td></tr>
+<tr><td><a href="8/backup_interactive.html">backup_interactive</a></td><td>Enters interactive mode
+</td></tr>
+<tr><td><a href="8/backup_jobs.html">backup_jobs</a></td><td>Lists pending and running operations in interactive mode
+</td></tr>
+<tr><td><a href="8/backup_kill.html">backup_kill</a></td><td>Terminates a pending or running operation
+</td></tr>
+<tr><td><a href="8/backup_labeltape.html">backup_labeltape</a></td><td>Creates the magnetic label on a tape
+</td></tr>
+<tr><td><a href="8/backup_listdumps.html">backup_listdumps</a></td><td>Displays the dump hierarchy from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_listhosts.html">backup_listhosts</a></td><td>Lists Tape Coordinators registered in the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_listvolsets.html">backup_listvolsets</a></td><td>Lists volume set entries from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_quit.html">backup_quit</a></td><td>Leaves interactive mode
+</td></tr>
+<tr><td><a href="8/backup_readlabel.html">backup_readlabel</a></td><td>Reads and displays a tape's label
+</td></tr>
+<tr><td><a href="8/backup_restoredb.html">backup_restoredb</a></td><td>Restores a saved copy of the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_savedb.html">backup_savedb</a></td><td>Creates a saved copy of the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_scantape.html">backup_scantape</a></td><td>Extracts dump information from a tape
+</td></tr>
+<tr><td><a href="8/backup_setexp.html">backup_setexp</a></td><td>Sets the expiration date for existing dump levels.
+</td></tr>
+<tr><td><a href="8/backup_status.html">backup_status</a></td><td>Reports a Tape Coordinator's status
+</td></tr>
+<tr><td><a href="8/backup_volinfo.html">backup_volinfo</a></td><td>Displays a volume's dump history from the Backup Database
+</td></tr>
+<tr><td><a href="8/backup_volrestore.html">backup_volrestore</a></td><td>Restores one or more volumes
+</td></tr>
+<tr><td><a href="8/backup_volsetrestore.html">backup_volsetrestore</a></td><td>Restores all volumes in a volume set
+</td></tr>
+<tr><td><a href="8/bos.html">bos</a></td><td>Introduction to the bos command suite
+</td></tr>
+<tr><td><a href="8/bos_addhost.html">bos_addhost</a></td><td>Adds a database server machine to the CellServDB file
+</td></tr>
+<tr><td><a href="8/bos_addkey.html">bos_addkey</a></td><td>Adds a new server encryption key to the KeyFile file
+</td></tr>
+<tr><td><a href="8/bos_adduser.html">bos_adduser</a></td><td>Adds a privileged user to the UserList file
+</td></tr>
+<tr><td><a href="8/bos_apropos.html">bos_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="8/bos_create.html">bos_create</a></td><td>Defines a new process in the BosConfig file and starts it
+</td></tr>
+<tr><td><a href="8/bos_delete.html">bos_delete</a></td><td>Deletes a server process from the BosConfig file
+</td></tr>
+<tr><td><a href="8/bos_exec.html">bos_exec</a></td><td>Executes a command on a remote server machine
+</td></tr>
+<tr><td><a href="8/bos_getdate.html">bos_getdate</a></td><td>Displays the time stamps on an AFS binary file
+</td></tr>
+<tr><td><a href="8/bos_getlog.html">bos_getlog</a></td><td>Prints a server process's log file
+</td></tr>
+<tr><td><a href="8/bos_getrestart.html">bos_getrestart</a></td><td>Displays the automatic restart times for server processes
+</td></tr>
+<tr><td><a href="8/bos_help.html">bos_help</a></td><td>Displays help for bos commands
+</td></tr>
+<tr><td><a href="8/bos_install.html">bos_install</a></td><td>Installs a new version of a binary file
+</td></tr>
+<tr><td><a href="8/bos_listhosts.html">bos_listhosts</a></td><td>Displays the contents of the CellServDB file
+</td></tr>
+<tr><td><a href="8/bos_listkeys.html">bos_listkeys</a></td><td>Displays the server encryption keys from the KeyFile file
+</td></tr>
+<tr><td><a href="8/bos_listusers.html">bos_listusers</a></td><td>Lists the privileged users from the UserList file
+</td></tr>
+<tr><td><a href="8/bos_prune.html">bos_prune</a></td><td>Removes obsolete files from /usr/afs/bin and /usr/afs/logs
+</td></tr>
+<tr><td><a href="8/bos_removehost.html">bos_removehost</a></td><td>Removes a database server machine from the CellServDB file
+</td></tr>
+<tr><td><a href="8/bos_removekey.html">bos_removekey</a></td><td>Removes a server encryption key from the KeyFile file
+</td></tr>
+<tr><td><a href="8/bos_removeuser.html">bos_removeuser</a></td><td>Removes a privileged user from the UserList file
+</td></tr>
+<tr><td><a href="8/bos_restart.html">bos_restart</a></td><td>Restarts a server process
+</td></tr>
+<tr><td><a href="8/bos_salvage.html">bos_salvage</a></td><td>Restores internal consistency to a file system or volume
+</td></tr>
+<tr><td><a href="8/bos_setauth.html">bos_setauth</a></td><td>Sets authorization checking requirements for all server processes
+</td></tr>
+<tr><td><a href="8/bos_setcellname.html">bos_setcellname</a></td><td>Sets the cell's name in ThisCell and CellServDB
+</td></tr>
+<tr><td><a href="8/bos_setrestart.html">bos_setrestart</a></td><td>Sets when the BOS Server restarts processes
+</td></tr>
+<tr><td><a href="8/bos_shutdown.html">bos_shutdown</a></td><td>Stops a process without changing its status flag
+</td></tr>
+<tr><td><a href="8/bos_start.html">bos_start</a></td><td>Starts a process after setting its status flag
+</td></tr>
+<tr><td><a href="8/bos_startup.html">bos_startup</a></td><td>Starts a process without changing its status flag
+</td></tr>
+<tr><td><a href="8/bos_status.html">bos_status</a></td><td>Displays the status of server processes
+</td></tr>
+<tr><td><a href="8/bos_stop.html">bos_stop</a></td><td>Stops a process after changing its status flag
+</td></tr>
+<tr><td><a href="8/bos_uninstall.html">bos_uninstall</a></td><td>Reverts to the former version of a process's binary file
+</td></tr>
+<tr><td><a href="8/bos_util.html">bos_util</a></td><td>Manipulate the AFS server Keyfile
+</td></tr>
+<tr><td><a href="8/bosserver.html">bosserver</a></td><td>Initializes the BOS Server
+</td></tr>
+<tr><td><a href="8/buserver.html">buserver</a></td><td>Initializes the Backup Server
+</td></tr>
+<tr><td><a href="8/butc.html">butc</a></td><td>Initializes the Tape Coordinator process
+</td></tr>
+<tr><td><a href="8/fileserver.html">fileserver</a></td><td>Initializes the File Server component of the fs process
+</td></tr>
+<tr><td><a href="8/fms.html">fms</a></td><td>Determine a tape's capacity and a tape device's filemark size
+</td></tr>
+<tr><td><a href="8/fstrace.html">fstrace</a></td><td>Introduction to the fstrace command suite
+</td></tr>
+<tr><td><a href="8/fstrace_apropos.html">fstrace_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="8/fstrace_clear.html">fstrace_clear</a></td><td>Clears the trace log
+</td></tr>
+<tr><td><a href="8/fstrace_dump.html">fstrace_dump</a></td><td>Dumps a trace log
+</td></tr>
+<tr><td><a href="8/fstrace_help.html">fstrace_help</a></td><td>Displays help for fstrace commands
+</td></tr>
+<tr><td><a href="8/fstrace_lslog.html">fstrace_lslog</a></td><td>Displays information about a log
+</td></tr>
+<tr><td><a href="8/fstrace_lsset.html">fstrace_lsset</a></td><td>Reports the status of an event set
+</td></tr>
+<tr><td><a href="8/fstrace_setlog.html">fstrace_setlog</a></td><td>Sets the size of a trace log
+</td></tr>
+<tr><td><a href="8/fstrace_setset.html">fstrace_setset</a></td><td>Sets the status of an event set
+</td></tr>
+<tr><td><a href="8/ka-forwarder.html">ka-forwarder</a></td><td>Forward AFS Authentication Server requests to another server
+</td></tr>
+<tr><td><a href="8/kadb_check.html">kadb_check</a></td><td>Checks the integrity of the Authentication Database
+</td></tr>
+<tr><td><a href="8/kas.html">kas</a></td><td>Introduction to the kas command suite
+</td></tr>
+<tr><td><a href="8/kas_apropos.html">kas_apropos</a></td><td>Displays each help entry containing a keyword string
+</td></tr>
+<tr><td><a href="8/kas_create.html">kas_create</a></td><td>Creates an entry in the Authentication Database
+</td></tr>
+<tr><td><a href="8/kas_delete.html">kas_delete</a></td><td>Deletes an entry from the Authentication Database
+</td></tr>
+<tr><td><a href="8/kas_examine.html">kas_examine</a></td><td>Displays information from an Authentication Database entry
+</td></tr>
+<tr><td><a href="8/kas_forgetticket.html">kas_forgetticket</a></td><td>Discards all tickets for the issuer
+</td></tr>
+<tr><td><a href="8/kas_help.html">kas_help</a></td><td>Displays help for kas commands
+</td></tr>
+<tr><td><a href="8/kas_interactive.html">kas_interactive</a></td><td>Enters interactive mode
+</td></tr>
+<tr><td><a href="8/kas_list.html">kas_list</a></td><td>Displays all entries in the Authentication Database
+</td></tr>
+<tr><td><a href="8/kas_listtickets.html">kas_listtickets</a></td><td>Displays all of the issuer's tickets (tokens)
+</td></tr>
+<tr><td><a href="8/kas_noauthentication.html">kas_noauthentication</a></td><td>Discards an authenticated identity in interactive mode
+</td></tr>
+<tr><td><a href="8/kas_quit.html">kas_quit</a></td><td>Leaves interactive mode
+</td></tr>
+<tr><td><a href="8/kas_setfields.html">kas_setfields</a></td><td>Sets fields in an Authentication Database entry
+</td></tr>
+<tr><td><a href="8/kas_setpassword.html">kas_setpassword</a></td><td>Changes the key field in an Authentication Database entry
+</td></tr>
+<tr><td><a href="8/kas_statistics.html">kas_statistics</a></td><td>Displays statistics from an Authentication Server process
+</td></tr>
+<tr><td><a href="8/kas_stringtokey.html">kas_stringtokey</a></td><td>Converts a character string into an octal key
+</td></tr>
+<tr><td><a href="8/kas_unlock.html">kas_unlock</a></td><td>Unlocks a locked user account
+</td></tr>
+<tr><td><a href="8/kaserver.html">kaserver</a></td><td>Initializes the Authentication Server
+</td></tr>
+<tr><td><a href="8/kdb.html">kdb</a></td><td>Displays log or privileged actions performed by the Authentication Server
+</td></tr>
+<tr><td><a href="8/kpwvalid.html">kpwvalid</a></td><td>Checks quality of new password
+</td></tr>
+<tr><td><a href="8/package.html">package</a></td><td>Configures files and directories on the local disk
+</td></tr>
+<tr><td><a href="8/prdb_check.html">prdb_check</a></td><td>Checks the integrity of the Protection Database
+</td></tr>
+<tr><td><a href="8/pt_util.html">pt_util</a></td><td>Load or dump a Protection Server database
+</td></tr>
+<tr><td><a href="8/ptserver.html">ptserver</a></td><td>Initializes the Protection Server
+</td></tr>
+<tr><td><a href="8/read_tape.html">read_tape</a></td><td>Reads volume dumps from a backup tape to a file
+</td></tr>
+<tr><td><a href="8/salvager.html">salvager</a></td><td>Initializes the Salvager component of the fs process
+</td></tr>
+<tr><td><a href="8/salvageserver.html">salvageserver</a></td><td>Initializes the Salvageserver component of the dafs process
+</td></tr>
+<tr><td><a href="8/upclient.html">upclient</a></td><td>Initializes the client portion of the Update Server
+</td></tr>
+<tr><td><a href="8/upserver.html">upserver</a></td><td>Initializes the server portion of the Update Server
+</td></tr>
+<tr><td><a href="8/uss.html">uss</a></td><td>Introduction to the uss command suite
+</td></tr>
+<tr><td><a href="8/uss_add.html">uss_add</a></td><td>Creates a user account
+</td></tr>
+<tr><td><a href="8/uss_apropos.html">uss_apropos</a></td><td>Displays each help entry containing a keyword string.
+</td></tr>
+<tr><td><a href="8/uss_bulk.html">uss_bulk</a></td><td>Executes multiple uss commands listed in a file
+</td></tr>
+<tr><td><a href="8/uss_delete.html">uss_delete</a></td><td>Deletes a user account
+</td></tr>
+<tr><td><a href="8/uss_help.html">uss_help</a></td><td>Displays help for uss commands
+</td></tr>
+<tr><td><a href="8/vldb_check.html">vldb_check</a></td><td>Checks the integrity of the VLDB
+</td></tr>
+<tr><td><a href="8/vlserver.html">vlserver</a></td><td>Initializes the Volume Location Server
+</td></tr>
+<tr><td><a href="8/voldump.html">voldump</a></td><td>Dump an AFS volume without using the Volume Server
+</td></tr>
+<tr><td><a href="8/volinfo.html">volinfo</a></td><td>Produces detailed statistics about AFS volume headers
+</td></tr>
+<tr><td><a href="8/volserver.html">volserver</a></td><td>Initializes the Volume Server component of the fs process
+</td></tr>
+<tr><td><a href="8/xfs_size_check.html">xfs_size_check</a></td><td>Verifies proper IRIX inode configuration
+</td></tr>
+</table>
+</body>
+</html>
