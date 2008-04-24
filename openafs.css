@@ -15,3 +15,21 @@ TD.navbar :visited   { background: #99ccff; color: #0000ff }
 TH.navbar            { background: #99ccff; color: #000000 }
 TH.navbar :link      { background: #99ccff; color: #000fff }
 TH.navbar :visited   { background: #99ccff; color: #0000ff }
+
+BODY.navbar-win          { background: #99ccff; color: #000000 }
+TABLE.navbar-win         { background: #99ccff; color: #000000 }
+TD.navbar-win            { background: #99ccff; color: #000000; background-image: url(/images/ico-win.png); }
+TD.navbar-win :link      { background: #99ccff; color: #000000; background-image: url(/images/ico-win.png); }
+TD.navbar-win :visited   { background: #99ccff; color: #000000; background-image: url(/images/ico-win.png); }
+TH.navbar-win            { background: #99ccff; color: #000000 }
+TH.navbar-win :link      { background: #99ccff; color: #000fff }
+TH.navbar-win :visited   { background: #99ccff; color: #0000ff }
+
+BODY.navbar-mac          { background: #99ccff; color: #000000 }
+TABLE.navbar-mac         { background: #99ccff; color: #000000 }
+TD.navbar-mac            { background: #99ccff; color: #000000; background-image: url(/images/ico-mac-uni.png); }
+TD.navbar-mac :link      { background: #99ccff; color: #000000; background-image: url(/images/ico-mac-uni.png); }
+TD.navbar-mac :visited   { background: #99ccff; color: #000000; background-image: url(/images/ico-mac-uni.png); }
+TH.navbar-mac            { background: #99ccff; color: #000000 }
+TH.navbar-mac :link      { background: #99ccff; color: #000fff }
+TH.navbar-mac :visited   { background: #99ccff; color: #0000ff }
