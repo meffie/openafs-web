@@ -2,6 +2,10 @@
 <title>Gatekeeper Responsibilities</title>
 </header>
 <body>
+<h1>A gatekeeper plan for OpenAFS</h1>
+From the beginnging of the OpenAFS project, most of the resources used to perform release engineering and management have been provided on an ad-hoc basis. Now, as OpenAFS moves to formally organize, we outline this plan for formalizing the gatekeeper process.
+<h2>Background</h2>
+For the purpose of this document, we assume gatekeepers are a group of people who have access to commit changes to some or all of the OpenAFS project source tree, and contributors are persons who provide or are interested in providing such changes. A gatekeeper may be a contributor. 
 <h2>Implementation</h2>
 This plan presupposes resources which do not exist today. Implementation should be considered phased, which is to say, as resources to put the plan into action become available the clauses here should be put into effect. Conditions which are known to require additional resources are marked with *.
 <h2>Responsibilities</h2>
@@ -10,31 +14,33 @@ This plan presupposes resources which do not exist today. Implementation should 
 <li><i>Contributors</i>
 <p>
 <ol>
-<li>shall provide patches in context or unified format.</li>
+<li>must provide patches in context or unified format.</li>
 <li>should provide against the current head of whichever tree the patch is for.</li>
 <li>should provide a patch for both development and production trees where applicable.</li>
 <li>should provide a unit test for any contribution.(*)</li>
-<li>shall provide necessary assertions that the contribution can be legally contributed by them and are provided under an acceptable license.</li>
-<li>shall provide documentation for submissions which add commands or functionality or change user-visible behavior, meeting current documentation standards.(*)
+<li>must provide necessary assertions that the contribution can be legally contributed by them and are provided under an acceptable license.</li>
+<li>must provide documentation for submissions which add commands or functionality or change user-visible behavior, meeting current documentation standards.(*)
 </ol>
 </li>
 <li><i>Gatekeepers</i>
 <p>
 <ol>
 <li>may convene committees to delegate review and feedback to, but are ultimately responsible for enforcing project contribution standards.</li>
-<li>shall provide review of any architecture proposals submitted.</li>
-<li>shall insure an issue in the issue tracker is opened for all submissions.(*)</li>
-<li>shall copy all correspondence to the issue tracker.</li>
-<li>shall review all patches for compliance with OpenAFS code standards and provide feedback when standards are not met.</li>
-<li>shall review all patches for compliance with published protocol standards and provide feedback when standards are not met.</li>
+<li>should create and publish a checklist of required and desired steps for each variety of submission which is possible.</li>
+<li>must create and publish standards for code and documentation contributions.(*)</li>
+<li>must provide review of any architecture proposals submitted.</li>
+<li>must insure an issue in the issue tracker is opened for all submissions.(*)</li>
+<li>must copy all correspondence to the issue tracker.</li>
+<li>must review all patches for compliance with OpenAFS code standards and provide feedback when standards are not met.</li>
+<li>must review all patches for compliance with published protocol standards and provide feedback when standards are not met.</li>
 <li>may arrange for orphaned contributions deemed of value to the community to be adopted or stewarded until they meet needed standards.</li>
-<li>shall for major architectural changes engage the community for guidance and the Advisory Board for a final decision on acceptance. A review of the proposed changes shall be provided to the community and Advisory Board by the Gatekeepers.</li>
-<li>shall test submissions by compiling on all supported platforms before committing(*).</li>
-<li>shall apply all applicable unit tests before committing.(*)</li>
-<li>shall require current documentation standards to be applied.(*)</li>
-<li>shall note information about the committed change to the issue tracker.</li>
-<li>shall note which release(s) the change is targeted for to the issue tracker.</li>
-<li>shall keep an updated list of which changes have been accepted but not released and when they are expected in releases.(*)</li>
+<li>must for major architectural changes engage the community for guidance and the Advisory Board for a final decision on acceptance. A review of the proposed changes must be provided to the community and Advisory Board by the Gatekeepers. (Standards-based changes must go through the protocol standards process rather than an internal process)</li>
+<li>must test submissions by compiling on all supported platforms before committing(*).</li>
+<li>must apply all applicable unit tests before committing.(*)</li>
+<li>must require current documentation standards to be applied.(*)</li>
+<li>must note information about the committed change to the issue tracker.</li>
+<li>must note which release(s) the change is targeted for to the issue tracker.</li>
+<li>must keep an updated list of which changes have been accepted but not released and when they are expected in releases.(*)</li>
 <li>may keep a list of who has signed contributor agreements (possibly with issue tracker accounts for submitters) to simplify tracking of licensing of submissions.</li>
 </ol>
 </li>
