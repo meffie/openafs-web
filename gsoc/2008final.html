@@ -20,6 +20,7 @@ Of the eight projects undertaken, four were not completed, and four attained a s
 <li><A HREF="#mmc">Microsoft Management Console Snap-ins, Client and Server</A></li>
 <li><A HREF="#kafs">Implementing OpenAFS features into RedHat's kafs kernel module</A></li>
 <li><A HREF="#rwrep">Read/Write replication for OpenAFS</A></li>
+<li><A HREF="#perfile">Per-file ACLs for OpenAFS</A></li>
 </ul>
 <p>
 <a name="mmc"><h2>Project: Microsoft Management Console Snap-ins, Client and Server</h2></a>
@@ -134,7 +135,6 @@ To summarise, my student didn't manage to achieve many of the goals originally
 set.  He was way out of his depth with regard to the programming environment
 and programming techniques, and it took a big chunk of the allotted time just
 to get him up to speed.
-patches.
 <p>
 What he did achieve, though, is a partial documentation of the pioctl functions
 available through AFS, a pioctl syscall and VFS entry point for the Linux
@@ -166,6 +166,70 @@ Aside from issues with communication, not solely mine or his, this project turne
 <p>
 A number of lessons about managing future projects, especially with regard to communicating well at sticking points and ideally sharing a matched development environment between mentor and student, if not the same environment, came out of this, and hopefully can be used in the future to achieve further and greater success.
 <p>
+<a name="perfile"><h2>Project: Per-file ACLs for OpenAFS</h2></a>
+<h3>Mentor: Matt Benjamin</h3>
+<h3>Student: Andreas Matsikaris</h3>
+Andreas Matsikaris was shy, and in his first-year of studies.  He showed
+great interest and energy in the application process, but less interest
+and energy during the spin up and coding phases.  I took Andreas' great
+interest and energy as a sign that he could overcome whatever obstacles
+and succeed.  In practice, it didn't work out that way--Andreas and I
+share some of the responsibility for that, in my estimation.
+<p>
+My errors mentoring Andreas are in 3 areas.  First, the initial
+application showed engagement and effort, but reveals a bit about how
+much Andreas would have had to learn to complete the project.  Still,
+giving students the opportunity to overcome obstacles and gain skills is
+part of the function of education and of GSOC, so I conclude the
+decision to fund Andreas was reasonable.  But in execution,  issues came
+up that took Andreas' project off track.  Initially, spin up went fairly
+well.  I provided scripts and assistance, and Andreas was able to set up
+a working development environment and test AFS cell built from that
+environment.  Some issues appeared subsequently.
+<p>
+Andreas had an previously undisclosed plan to take some vacations and
+absences early on, which I objected to, but not strongly enough.  More
+importantly, Andreas was comfortable communicating with me, but not with
+the general community on the AFS IRC channel.  The example Jeff Altman
+set for our project was to strongly encourage participation in public
+IRC, and although I followed this lead, Andreas pushed back hard.  He
+wanted to work on his own schedule and send periodic reports.  After a
+3-way email conversation with Andreas and Derrick, Andreas agreed to
+more or less our preferred way of working.  In practice, Andreas tended
+to contact me via private IRC and I felt caught in a position of
+chastizing him or "outing" him to public IRC, and mostly didn't.  In
+hindsight, public participation in IRC should have been a mandate, and
+would have had a big impact on Andreas' ability to complete the project.
+<p>
+But there were also the disappearances.  Andreas was unreachable for
+well over a week during part 1, but delivered some experimental code
+that as I wrote in midpoint eval, looked like it might be hypothetically
+completing most of one of the 4-5 development objectives for the project
+(ie, modifying server RPC permission checking to observe per-file ACLs
+if present).  Rather than accelerating progress from this point,
+however, Andreas hit some development roadblocks (needing to come to
+grips with Linux kernel module development processes), and became
+frustrated.  He also disappeared again for another week or two.  On
+returning, he was still having trouble with building and loading a
+kernel module--something which he had appeared to have done successfully
+during the spin-up period.  I had encouraged Andreas to focus on a
+subset of the full tasks, building on what he had already done, but
+necessarily involved kernel module work.
+<p>
+In the end, Andreas approached me/us 2.5
+weeks from pencils-down with his intention to quit.  We requested he not
+quit, and keep at it, but he was by this point demoralized.
+In hindsight, I think part of my own mistakes mentoring him were the
+strategic and tactical mistakes enumerated above (IRC, etc), but another
+was perhaps a failure of coaching.  I had signed-up prepared to guide a
+student in a project, but from time constraints, not to execute it
+myself.  Andreas' preference to work autonomously obviously was not
+bearing fruit, but I could have (at several more points than I in fact
+did) stepped in to push him back onto the the path.  The effort involved
+in co-programming the project (which would have been lighter had Andreas
+used the resources of the community, as Dragos and Jakob did) was
+nevertheless something I couldn't take on, and possibly that is what the
+situation required.
 </body>
 
 </html>
