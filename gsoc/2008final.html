@@ -1,0 +1,172 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Google Summer of Code 2008 Project Summaries</title>
+</head>
+
+<body>
+
+
+<h1>OpenAFS and Google Summer of Code 2008</h1>
+<p>OpenAFS applied for the second time to be part of the Google Summer of Code, and this year was accepted. Ultimately Google opted to fund 6 projects for OpenAFS; Two more were funded with the same rules using other money including that granted by Google to a sponsoring organization per student.
+<p>
+As this was the first year for OpenAFS as an organization as well as all students and mentors, a lot of learning took place which will no doubt be valuable for all concerned who might be involved in the future.
+<p>
+Of the eight projects undertaken, four were not completed, and four attained a substantial amount of their initial or rescoped goals. Here are the details, in the words of the mentors.
+<p>
+<ul>
+<li><A HREF="#mmc">Microsoft Management Console Snap-ins, Client and Server</A></li>
+<li><A HREF="#kafs">Implementing OpenAFS features into RedHat's kafs kernel module</A></li>
+<li><A HREF="#rwrep">Read/Write replication for OpenAFS</A></li>
+</ul>
+<p>
+<a name="mmc"><h2>Project: Microsoft Management Console Snap-ins, Client and Server</h2></a>
+<h3>Mentor: Asanka Herath</h3>
+<h3>Students: Kiran Kumar (server) and Joseph Yeung (client)</h3>
+Kiran was a
+GSoC student while we recruited Joseph independently of the GSoC
+program.  However, both students were given the same deadlines and
+evaluations and were treated as if both of them were GSoC students.
+<p>
+Kiran was working on the AFS Server Manager MMC snap-in and Joseph was
+working on the AFS Client MMC snap-in.  Since both of these were MMC
+snap-ins and would use the same set of technologies, we had the two
+students work together during the start of the coding phase.  The
+first goal that we gave them was to develop a sample MMC snap-in that
+would incorporate features from both the client and server snap-ins.
+The objective was to allow them to work together and learn the basics
+of developing an MMC snap-in and hopefully come up with a code base
+upon which they can base their respective snap-ins.
+<p>
+Both students, mostly with the help of Jeffrey Altman, set up their
+development environments and also OpenAFS Clients and test cells.
+Soon afterwards, we started running into trouble.  One problem that we
+had was that both students were new to almost every technology that
+they were going to use during the project.  They had trouble finding
+information, good tutorials and sample code.  They did find some, but
+there were issues regarding difficulty comprehending or the relevance
+of the materials. Most of the mentoring time at this phase was spent 
+finding or creating resources for them and explaining material for them.
+<p>
+Jeffrey and I called for weekly status meetings where Kiran, Joseph
+and Vamshi Velagapuri were to report on their progress for the week
+that passed.  While informative at first, the weekly meetings proved
+to be less than effective as time went on.  This was because the
+students were not making substantial progress worth reporting on and
+they were almost constantly in touch with either Jeffrey or me.
+<p>
+By the time the midterm evaluation period rolled around, the sample
+MMC plug-in was still in the intermediate stages.  After looking at
+the code that they were producing, I asked them to make several
+substantial changes to fix architectural mistakes that they had made.
+Even with the changes, the code was lacking in organization and would
+not have served as a coherent base for their respective plug-ins.
+Nevertheless, considering the progress they made in the weeks prior to
+the midterm evaluation, we decided to give them a passing grade with
+the hope that they will produce useful code by the end of GSoC.
+<p>
+The students' lack of experience and the difficulty that they
+encountered in understanding all the new material was a continuous
+source of delays in the weeks that followed.  Both Jeffrey and I
+tried to help them as much as we could.  Later on I realized that the
+GSoC coding period was not long enough for them to gain enough
+experience with all the technologies that they were learning to
+produce quality code.
+<p>
+At "keyboards down", Kiran and Joseph together turned in partially
+completed code for the sample snap-in.  The students, at this point,
+had finished working on the sample and had started working on their
+respective snap-ins.  Even though they had put in a lot of work, the
+sample snap-in was not fully functional and the code was disorganized.
+ With not even the first goal met, we had little choice but to
+disqualify the students at the final evaluation.
+<p>
+We believe that this was a good learning experience for the students
+and that they acquired working experience of a number of technologies
+that they would otherwise not be familiar with.  However, in
+retrospect, the coding phase of the GSoC is not a suitable time for
+the students to acquire all the knowledge necessary for their
+projects.  During the selection phase, we should have tested the
+applicants and factored in the learning curve for each applicant
+before making a selection.  In addition, having a study plan would
+have helped.
+<p>
+During the course of GSoC, there were several occasions where we asked
+to see an implementation plan for the code that the students were
+working on.  We never received these plans and the requests often went
+unanswered.  In the absence of these plans and regular commits, we
+often didn't see substantial mistakes until it was very late and
+expensive to fix.  A regular commit and review cycle would have
+prevented this.
+<p>
+In the end, although the projects themselves were unsuccessful, this
+was a valuable learning experience for both the students and the
+mentors involved.
+<a name="kafs"><h2>Project: Implementing OpenAFS features into RedHat's kafs kernel module</h2></a>
+<h3>Mentor: David Howells</h3>
+<h3>Students: Jacob Thebault-Spieker</h3>
+I enjoyed the mentoring experience, though it was frustrating at times.  The
+student selected for me was keen and learnt pretty
+quickly, but he was somewhat unprepared for what he was getting into.
+<p>
+I'm not saying that the unpreparedness was his fault specifically: his
+university course had only taught him Java and a bit of C++ to that point.  I
+had to teach him a dollop of C as I went along, and also educate him in some of
+the kernel-level concepts (such as the separation of userspace and kernel
+spaces) that he hadn't come across at that point.
+<p>
+It makes me realise just how much Java holds your hand, and how low-level C
+really is, and how much the Linux kernel differs from ordinary user-level
+programming.
+<p>
+Another problem I had, is that my student didn't appear to be used to properly
+sequencing his code.  I guess this is a failing of someone who hasn't
+programmed very much, and hasn't build big functions with multiple conditional
+sections.  I've programmed many different languages and can think procedurally
+in all of them, even Prolog.
+<p>
+I had to break him of several bad habits - such as not compiling his code
+before sending me the patches, and not fixing warnings - but he cottoned on
+pretty quickly.
+<p>
+To summarise, my student didn't manage to achieve many of the goals originally
+set.  He was way out of his depth with regard to the programming environment
+and programming techniques, and it took a big chunk of the allotted time just
+to get him up to speed so that I didn't have to spend so long going over his
+patches.
+<p>
+What he did achieve, though, is a partial documentation of the pioctl functions
+available through AFS, a pioctl syscall and VFS entry point for the Linux
+kernel and some implemented pioctls for the kAFS call.
+<p>
+He did learn quickly, though, once he got his head around it and had got some
+practice under his belt.  Hopefully I've helped him become much more effective.
+<p>
+With respect to the mentoring tools available, IRC was invaluable - especially
+as it's a public IRC channel, and so whilst I was guiding him through the flaws
+in his code, other people could drop comments in to help clarify what I was
+saying.  Furthermore, he displayed quite a lot of initiative, and would seek
+help from other people if I wasn't around.  This should be encouraged in
+others.
+<a name="rwrep"><h2>Project: Read/Write replication for OpenAFS</h2></a>
+<h3>Mentor: Derrick Brashear</h3>
+<h3>Students: Vishal Powar</h3>
+Vishal chose to tackle a project which has had my interest for years, namely,
+the lack of full read-write replication in AFS. His prior background suited 
+him well to undertake this work.
+<p>
+Initially Vishal was able to join us on IRC, which greatly helped get things rolling: he got a bootstrap development environment up with help from other members of the community, although the process here pointed to the need to provide one or some canned development environments to students in the future. 
+<p>
+As the first half of the program continued, Vishal's schedule and routine did not allow him to be online for interactive communication to the extent he had initially been. Combined with time zone differences, our communication suffered, and one problem he ran into ended up consuming a lot of time. Later, when he had taken a break and implemented other pieces of the code we were able to revisit the issue he had been grappling with and I found the key element I had failed to either notice or warn him of earlier, and provided a sample function to help overcome the issue. It would take a couple more passes before we got all the details straightened out, as the particular low-level feature he needed for the code he was creating had simply not previously existed in OpenAFS.
+<p>
+Having passed the major obstacle, Vishal was able to make a substantial leap toward a complete implementation at the end of the program. Technically some of the work did take place beyond the suggested "keyboards-down" date. However, what he was able to contribute at the end is an implementation which needs only work on a recovery mechanism to use following an outage or when adding a slave, and selection and tracking of the master copy for a given replicated volume. 
+<p>
+Aside from issues with communication, not solely mine or his, this project turned out very well and hopefully Vishal gained as much from the experience as we did working with him.
+<p>
+A number of lessons about managing future projects, especially with regard to communicating well at sticking points and ideally sharing a matched development environment between mentor and student, if not the same environment, came out of this, and hopefully can be used in the future to achieve further and greater success.
+<p>
+</body>
+
+</html>
