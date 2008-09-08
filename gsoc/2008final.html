@@ -21,6 +21,7 @@ Of the eight projects undertaken, four were not completed, and four attained a s
 <li><A HREF="#kafs">Implementing OpenAFS features into RedHat's kafs kernel module</A></li>
 <li><A HREF="#rwrep">Read/Write replication for OpenAFS</A></li>
 <li><A HREF="#perfile">Per-file ACLs for OpenAFS</A></li>
+<li><A HREF="#discon">Read/Write Disconnected AFS</A></li>
 </ul>
 <p>
 <a name="mmc"><h2>Project: Microsoft Management Console Snap-ins, Client and Server</h2></a>
@@ -230,6 +231,16 @@ in co-programming the project (which would have been lighter had Andreas
 used the resources of the community, as Dragos and Jakob did) was
 nevertheless something I couldn't take on, and possibly that is what the
 situation required.
+<p>
+<a name="discon"><h2>Read/Write Disconnected AFS</h2></a>
+<h3>Mentor: Simon Wilkinson</h3>
+<h3>Student: Dragos Tatulea</h3>
+Originally, the disconnected operations project was based around integrating, and improving, the original University of Michigan disconnected operations code. However, during the two weeks of project discussion on IRC that preceeded student selection, it became obvious that simply integrating the Michigan code wasn't going to produce an acceptable outcome. Instead, the project shifted to creating a new implementation of read/write disconnected operation, building upon work that had already been done to produce a read-only system.
+<p>
+Dragos had no prior experience with the OpenAFS project, but took an active interest in these initial IRC discussions. Before student selection he set up his own development environment, and has maintained a high level of involvement since then - in addition to the code that was the outcome of his project, he also contributed source documentation patches as he attempted to learn the OpenAFS codebase, and we continued to have frequent conversations on IRC through-out the project.
+<p>
+The complexity of the OpenAFS source code is one of the key barriers to students participating in GSoC, in my opinion. I spent a large amount of time guiding Dragos through the tangled maze of source code, as well as the intricacies of disconnected operation. Mentoring took considerably more of my time than I originally envisaged. I think this requirement for close mentor involvement is something we should consider for the future - having a student who was prepared to ask questions whenever they became stuck, and a mentor who was available to answer them, was one of the key elements in the success of this project. Better source documentation would undoubtedly help with this, but I think students have to be encouraged to ask questions.
+<p>
+Overall, the project was a success, producing a pretty complete implementation of disconnection for all of the common file operations. The entire project plan was not completed, however, leaving items such as file sets and pinning for later work. Work slowed significantly after the midterm, as the complexities of directory operations started to bite. Better documentation of the cache manager internals would certainly have helped here, as would more mentor time to have addressed these issues as they started to appear. However, there is an important balance to be struck between assistance and hand holding. In addition to mentor advice being available, students have to be encouraged to develop the skills to learn from the source code itself.
 </body>
-
 </html>
