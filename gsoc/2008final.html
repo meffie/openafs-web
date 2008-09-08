@@ -1,20 +1,15 @@
-<html>
-
 <head>
 <meta http-equiv="Content-Language" content="en-us">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-<title>Google Summer of Code 2008 Project Summaries</title>
+<title>Google Summer of Code Project Ideas</title>
 </head>
 
 <body>
 
 
-<h1>OpenAFS and Google Summer of Code 2008</h1>
+<h1>OpenAFS Projects from Google Summer of Code 2008</h1>
+<h2>Outcome</h2>
 <p>OpenAFS applied for the second time to be part of the Google Summer of Code, and this year was accepted. Ultimately Google opted to fund 6 projects for OpenAFS; Two more were funded with the same rules using other money including that granted by Google to a sponsoring organization per student.
-<p>
-As this was the first year for OpenAFS as an organization as well as all students and mentors, a lot of learning took place which will no doubt be valuable for all concerned who might be involved in the future.
-<p>
-Of the eight projects undertaken, four were not completed, and four attained a substantial amount of their initial or rescoped goals. Here are the details, in the words of the mentors.
 <p>
 <ul>
 <li><A HREF="#mmc">Microsoft Management Console Snap-ins, Client and Server</A></li>
@@ -23,224 +18,236 @@ Of the eight projects undertaken, four were not completed, and four attained a s
 <li><A HREF="#perfile">Per-file ACLs for OpenAFS</A></li>
 <li><A HREF="#discon">Read/Write Disconnected AFS</A></li>
 </ul>
-<p>
 <a name="mmc"><h2>Project: Microsoft Management Console Snap-ins, Client and Server</h2></a>
 <h3>Mentor: Asanka Herath</h3>
-<h3>Students: Kiran Kumar (server) and Joseph Yeung (client)</h3>
-Kiran was a
-GSoC student while we recruited Joseph independently of the GSoC
-program.  However, both students were given the same deadlines and
-evaluations and were treated as if both of them were GSoC students.
-<p>
-Kiran was working on the AFS Server Manager MMC snap-in and Joseph was
-working on the AFS Client MMC snap-in.  Since both of these were MMC
-snap-ins and would use the same set of technologies, we had the two
-students work together during the start of the coding phase.  The
-first goal that we gave them was to develop a sample MMC snap-in that
-would incorporate features from both the client and server snap-ins.
-The objective was to allow them to work together and learn the basics
-of developing an MMC snap-in and hopefully come up with a code base
-upon which they can base their respective snap-ins.
-<p>
-Both students, mostly with the help of Jeffrey Altman, set up their
-development environments and also OpenAFS Clients and test cells.
-Soon afterwards, we started running into trouble.  One problem that we
-had was that both students were new to almost every technology that
-they were going to use during the project.  They had trouble finding
-information, good tutorials and sample code.  They did find some, but
-there were issues regarding difficulty comprehending or the relevance
-of the materials. Most of the mentoring time at this phase was spent 
-finding or creating resources for them and explaining material for them.
-<p>
-Jeffrey and I called for weekly status meetings where Kiran, Joseph
-and Vamshi Velagapuri were to report on their progress for the week
-that passed.  While informative at first, the weekly meetings proved
-to be less than effective as time went on.  This was because the
-students were not making substantial progress worth reporting on and
-they were almost constantly in touch with either Jeffrey or me.
-<p>
-By the time the midterm evaluation period rolled around, the sample
-MMC plug-in was still in the intermediate stages.  After looking at
-the code that they were producing, I asked them to make several
-substantial changes to fix architectural mistakes that they had made.
-Even with the changes, the code was lacking in organization and would
-not have served as a coherent base for their respective plug-ins.
-Nevertheless, considering the progress they made in the weeks prior to
-the midterm evaluation, we decided to give them a passing grade with
-the hope that they will produce useful code by the end of GSoC.
-<p>
-The students' lack of experience and the difficulty that they
-encountered in understanding all the new material was a continuous
-source of delays in the weeks that followed.  Both Jeffrey and I
-tried to help them as much as we could.  Later on I realized that the
-GSoC coding period was not long enough for them to gain enough
-experience with all the technologies that they were learning to
-produce quality code.
-<p>
-At "keyboards down", Kiran and Joseph together turned in partially
-completed code for the sample snap-in.  The students, at this point,
-had finished working on the sample and had started working on their
-respective snap-ins.  Even though they had put in a lot of work, the
-sample snap-in was not fully functional and the code was disorganized.
- With not even the first goal met, we had little choice but to
-disqualify the students at the final evaluation.
-<p>
-We believe that this was a good learning experience for the students
-and that they acquired working experience of a number of technologies
-that they would otherwise not be familiar with.  However, in
-retrospect, the coding phase of the GSoC is not a suitable time for
-the students to acquire all the knowledge necessary for their
-projects.  During the selection phase, we should have tested the
-applicants and factored in the learning curve for each applicant
-before making a selection.  In addition, having a study plan would
-have helped.
-<p>
-During the course of GSoC, there were several occasions where we asked
-to see an implementation plan for the code that the students were
-working on.  We never received these plans and the requests often went
-unanswered.  In the absence of these plans and regular commits, we
-often didn't see substantial mistakes until it was very late and
-expensive to fix.  A regular commit and review cycle would have
-prevented this.
-<p>
-In the end, although the projects themselves were unsuccessful, this
-was a valuable learning experience for both the students and the
-mentors involved.
-<a name="kafs"><h2>Project: Implementing OpenAFS features into RedHat's kafs kernel module</h2></a>
-<h3>Mentor: David Howells</h3>
-<h3>Students: Jacob Thebault-Spieker</h3>
-I enjoyed the mentoring experience, though it was frustrating at times.  The
-student selected for me was keen and learnt pretty
-quickly, but he was somewhat unprepared for what he was getting into.
-<p>
-I'm not saying that the unpreparedness was his fault specifically: his
-university course had only taught him Java and a bit of C++ to that point.  I
-had to teach him a dollop of C as I went along, and also educate him in some of
-the kernel-level concepts (such as the separation of userspace and kernel
-spaces) that he hadn't come across at that point.
-<p>
-It makes me realise just how much Java holds your hand, and how low-level C
-really is, and how much the Linux kernel differs from ordinary user-level
-programming.
-<p>
-My student also had problems properly sequencing his code at first,
-particularly largish functions with multiple consecutive conditional
-blocks.  I would guess that this is due to a lack of experience, and is
-just something that he's overcoming with practice.
-<p>
-I also had to persuade him to compile his code and fix warnings before
-sending me the patches, but he did get into the habit of doing so
-without prompting.
-<p>
-To summarise, my student didn't manage to achieve many of the goals originally
-set.  He was way out of his depth with regard to the programming environment
-and programming techniques, and it took a big chunk of the allotted time just
-to get him up to speed.
-<p>
-What he did achieve, though, is a partial documentation of the pioctl functions
-available through AFS, a pioctl syscall and VFS entry point for the Linux
-kernel and some implemented pioctls for the kAFS call.
-<p>
-He did learn quickly, though, once he got his head around it and had got some
-practice under his belt.  Hopefully I've helped him become much more effective.
-<p>
-With respect to the mentoring tools available, IRC was invaluable - especially
-as it's a public IRC channel, and so whilst I was guiding him through the flaws
-in his code, other people could drop comments in to help clarify what I was
-saying.  Furthermore, he displayed quite a lot of initiative, and would seek
-help from other people if I wasn't around.  This should be encouraged in
-others.
-<a name="rwrep"><h2>Project: Read/Write replication for OpenAFS</h2></a>
-<h3>Mentor: Derrick Brashear</h3>
-<h3>Students: Vishal Powar</h3>
-Vishal chose to tackle a project which has had my interest for years, namely,
-the lack of full read-write replication in AFS. His prior background suited 
-him well to undertake this work.
-<p>
-Initially Vishal was able to join us on IRC, which greatly helped get things rolling: he got a bootstrap development environment up with help from other members of the community, although the process here pointed to the need to provide one or some canned development environments to students in the future. 
-<p>
-As the first half of the program continued, Vishal's schedule and routine did not allow him to be online for interactive communication to the extent he had initially been. Combined with time zone differences, our communication suffered, and one problem he ran into ended up consuming a lot of time. Later, when he had taken a break and implemented other pieces of the code we were able to revisit the issue he had been grappling with and I found the key element I had failed to either notice or warn him of earlier, and provided a sample function to help overcome the issue. It would take a couple more passes before we got all the details straightened out, as the particular low-level feature he needed for the code he was creating had simply not previously existed in OpenAFS.
-<p>
-Having passed the major obstacle, Vishal was able to make a substantial leap toward a complete implementation at the end of the program. Technically some of the work did take place beyond the suggested "keyboards-down" date. However, what he was able to contribute at the end is an implementation which needs only work on a recovery mechanism to use following an outage or when adding a slave, and selection and tracking of the master copy for a given replicated volume. 
-<p>
-Aside from issues with communication, not solely mine or his, this project turned out very well and hopefully Vishal gained as much from the experience as we did working with him.
-<p>
-A number of lessons about managing future projects, especially with regard to communicating well at sticking points and ideally sharing a matched development environment between mentor and student, if not the same environment, came out of this, and hopefully can be used in the future to achieve further and greater success.
+<h3>Status: Incomplete</h3>
+A sample MMC snap-in with both client and server functionality was partially completed.
 <p>
 <a name="perfile"><h2>Project: Per-file ACLs for OpenAFS</h2></a>
 <h3>Mentor: Matt Benjamin</h3>
-<h3>Student: Andreas Matsikaris</h3>
-Andreas Matsikaris was shy, and in his first-year of studies.  He showed
-great interest and energy in the application process, but less interest
-and energy during the spin up and coding phases.  I took Andreas' great
-interest and energy as a sign that he could overcome whatever obstacles
-and succeed.  In practice, it didn't work out that way--Andreas and I
-share some of the responsibility for that, in my estimation.
+<h3>Status: Incomplete</h3>
+Code implementing per-file ACL permission checks on RPCs received at the server was substantially completed.
 <p>
-My errors mentoring Andreas are in 3 areas.  First, the initial
-application showed engagement and effort, but reveals a bit about how
-much Andreas would have had to learn to complete the project.  Still,
-giving students the opportunity to overcome obstacles and gain skills is
-part of the function of education and of GSOC, so I conclude the
-decision to fund Andreas was reasonable.  But in execution,  issues came
-up that took Andreas' project off track.  Initially, spin up went fairly
-well.  I provided scripts and assistance, and Andreas was able to set up
-a working development environment and test AFS cell built from that
-environment.  Some issues appeared subsequently.
+<a name="kafs"><h2>Project: Implementing OpenAFS features into RedHat's kafs kernel module</h2></a>
+<h3>Mentor: David Howells</h3>
+<h3>Status: Partially Complete</h3>
+Partial documentation of the pioctl functions
+available through AFS, a pioctl syscall and VFS entry point for the Linux
+kernel and some implemented pioctls for the kAFS call are available.
 <p>
-Andreas had an previously undisclosed plan to take some vacations and
-absences early on, which I objected to, but not strongly enough.  More
-importantly, Andreas was comfortable communicating with me, but not with
-the general community on the AFS IRC channel.  The example Jeff Altman
-set for our project was to strongly encourage participation in public
-IRC, and although I followed this lead, Andreas pushed back hard.  He
-wanted to work on his own schedule and send periodic reports.  After a
-3-way email conversation with Andreas and Derrick, Andreas agreed to
-more or less our preferred way of working.  In practice, Andreas tended
-to contact me via private IRC and I felt caught in a position of
-chastizing him or "outing" him to public IRC, and mostly didn't.  In
-hindsight, public participation in IRC should have been a mandate, and
-would have had a big impact on Andreas' ability to complete the project.
-<p>
-But there were also the disappearances.  Andreas was unreachable for
-well over a week during part 1, but delivered some experimental code
-that as I wrote in midpoint eval, looked like it might be hypothetically
-completing most of one of the 4-5 development objectives for the project
-(ie, modifying server RPC permission checking to observe per-file ACLs
-if present).  Rather than accelerating progress from this point,
-however, Andreas hit some development roadblocks (needing to come to
-grips with Linux kernel module development processes), and became
-frustrated.  He also disappeared again for another week or two.  On
-returning, he was still having trouble with building and loading a
-kernel module--something which he had appeared to have done successfully
-during the spin-up period.  I had encouraged Andreas to focus on a
-subset of the full tasks, building on what he had already done, but
-necessarily involved kernel module work.
-<p>
-In the end, Andreas approached me/us 2.5
-weeks from pencils-down with his intention to quit.  We requested he not
-quit, and keep at it, but he was by this point demoralized.
-In hindsight, I think part of my own mistakes mentoring him were the
-strategic and tactical mistakes enumerated above (IRC, etc), but another
-was perhaps a failure of coaching.  I had signed-up prepared to guide a
-student in a project, but from time constraints, not to execute it
-myself.  Andreas' preference to work autonomously obviously was not
-bearing fruit, but I could have (at several more points than I in fact
-did) stepped in to push him back onto the the path.  The effort involved
-in co-programming the project (which would have been lighter had Andreas
-used the resources of the community, as Dragos and Jakob did) was
-nevertheless something I couldn't take on, and possibly that is what the
-situation required.
+<a name="rwrep"><h2>Project: Read/Write replication for OpenAFS</h2></a>
+<h3>Mentor: Derrick Brashear</h3>
+<h3>Status: Partially Complete</h3>
+An implementation which needs a working recovery mechanism to use following an outage or when adding a slave, and selection and tracking of the master copy for a given replicated volume is available in OpenAFS RT.
 <p>
 <a name="discon"><h2>Read/Write Disconnected AFS</h2></a>
 <h3>Mentor: Simon Wilkinson</h3>
-<h3>Student: Dragos Tatulea</h3>
-Originally, the disconnected operations project was based around integrating, and improving, the original University of Michigan disconnected operations code. However, during the two weeks of project discussion on IRC that preceeded student selection, it became obvious that simply integrating the Michigan code wasn't going to produce an acceptable outcome. Instead, the project shifted to creating a new implementation of read/write disconnected operation, building upon work that had already been done to produce a read-only system.
+<h3>Status: Substiantially Complete<html>
+Common file operations are implemented. File sets and pinning files in the cache for offline use remain to be implemented. Contributions are available in OpenAFS RT.
 <p>
-Dragos had no prior experience with the OpenAFS project, but took an active interest in these initial IRC discussions. Before student selection he set up his own development environment, and has maintained a high level of involvement since then - in addition to the code that was the outcome of his project, he also contributed source documentation patches as he attempted to learn the OpenAFS codebase, and we continued to have frequent conversations on IRC through-out the project.
+<h2>Background</h2>
+<p>OpenAFS is a 100% open source globally distributed file system derived from 
+IBM AFS commercial offering as of 1 November 2000.&nbsp; Since IBM released the 
+source code OpenAFS has thrived adding support for new platforms while enhancing 
+its overall performance, scalability and usability.&nbsp; </p>
+<p>OpenAFS is a very large and highly complex software project consisting of 
+close to one million lines of source code that is severely under documented.&nbsp; 
+As a result it takes a long time for any developers to become proficient 
+contributors to the core systems.&nbsp; Given the time frames associated with 
+Google Summer of Code the proposed ideas are primarily projects which exist on 
+the periphery of the code base but are nevertheless crucial to an improved end 
+user experience.</p>
+<h2>Project Idea 1: Microsoft Windows Explorer Shell User Interface Extensions</h2>
+<p>In order for end users to be comfortable using AFS, the Explorer Shell must 
+provide the same level of functionality that exists for CIFS and local file 
+systems.&nbsp; Selecting an object should display a summary of the object's meta 
+data; the table view should provide options for displaying ACLs, UNIX mode bits, 
+the owner, group information, symlink and mount point targets; the properties 
+dialog should permit interactive modification to meta data values when the user 
+has the appropriate permissions.&nbsp; All in all, the user should not notice 
+that AFS is not a native part of the operating system and the user interface.</p>
+<p>Mockups of proposals for the Explorer Shell extension can be found at
+<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions">
+http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions</a>.&nbsp; 
+This project consists of multiple components that can be successfully 
+implemented one at a time.&nbsp; The successful completion of this project does 
+not require that all of the proposed extensions be implemented.&nbsp; </p>
+<p>This project does not require any prior knowledge of AFS nor any knowledge of 
+OpenAFS internals. By completing this project the developer will become an 
+expert in the Microsoft Windows Explorer Shell interfaces and the Microsoft 
+Component Object Model (COM).&nbsp; This experience can be reapplied to numerous 
+other applications and will prove to be an excellent item on a resume. </p>
+<p>The programming language for this project is C/C++.&nbsp; The operating 
+system is Microsoft Windows.&nbsp; The project will aim to support Microsoft 
+Windows versions from XP SP2 to Vista/Server 2008.</p>
+<p>Estimated difficulty: <i>moderate</i></p>
+<p>For more information contact: <i>openafs at secure-endpoints.com</i></p>
+<h2>Project Idea 2: Microsoft Management Console for OpenAFS Cache Manager 
+Configuration</h2>
+<p>OpenAFS on Windows has a very out of date Control Panel application that is 
+used to configure the AFS Cache Manager service.&nbsp; In addition to being out 
+of date, the Control Panel is not the appropriate user interface model for 
+configuring a system service.&nbsp; On Microsoft Windows, system wide services 
+should be configured using the Microsoft Management Console (MMC).&nbsp; This 
+project is to implement a MMC Add-on for the OpenAFS Cache Manager. </p>
+<p>Mockups of a proposed MMC user interface can be found at
+<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#client service mmc">
+http://www.secure-endpoints.com/openafs-windows-roadmap.html#client service mmc</a>.&nbsp; 
+This project consists of multiple components that can be successfully 
+implemented one at a time.&nbsp; The successful completion of this project does 
+not require that all of the proposed MMC pages be implemented.</p>
+<p>This project does not require any prior knowlege of AFS nor any knowledge of 
+OpenAFS internals.&nbsp; By completing this project the developer will become an 
+expert in the Microsoft Management Console interfaces and the Microsoft 
+Component Object Model (COM).&nbsp; This experience can be reapplied to numerous 
+other applications and will prove to be an excellent item on a resume.</p>
+<p>The programming language for this project is C/C++.&nbsp; The operating 
+system is Microsoft Windows.&nbsp; The project will aim to support Microsoft 
+Windows versions from XP SP2 to Vista/Server 2008.</p>
+<p>Estimated difficulty: <i>moderate</i></p>
+<p>For more information contact: <i>openafs at secure-endpoints.com</i></p>
+<h2>Project Idea 3: OpenAFS ptserver extensions for additional authentication types</h2>
+<p>In order that authentication systems other than Kerberos 4 be able to be first class authentication systems in the OpenAFS space, extensions to the OpenAFS protections service need to be added. 
+</p><p>
+More detail on this project can be found <A HREF="gsoc/pts.txt">here</A>.
+</p><p>
+For successful completion of this project, both the RPC additions and database
+extensions will need to be completed. 
+<p>This project does not require any prior knowledge of AFS nor any knowledge of OpenAFS internals.&nbsp; By completing this project the developer will become an expert in the OpenAFS ubik database structure as well as in the OpenAFS Rx RPC system.&nbsp; This experience would prove valuable in dealing with other flat database formats, as well as other RPC systems used in distributed applications.</p>
+<p>The programming language for this project is C.&nbsp; This is in portable code which can be run on any POSIX-compliant OS; While MacOS, Linux or Solaris are suggested as development platforms due to availability of debugging tools, any supported OpenAFS platform could be used to do this work.</p>
+<p>Estimated difficulty: <i>moderate</i></p>
+<p>Contact person/mentor: <i>Derrick Brashear</i> shadow at openafs.org</p>
+<h2>Project Idea 4: OpenAFS per-file access control list (ACL) extensions</h2>
 <p>
-The complexity of the OpenAFS source code is one of the key barriers to students participating in GSoC, in my opinion. I spent a large amount of time guiding Dragos through the tangled maze of source code, as well as the intricacies of disconnected operation. Mentoring took considerably more of my time than I originally envisaged. I think this requirement for close mentor involvement is something we should consider for the future - having a student who was prepared to ask questions whenever they became stuck, and a mentor who was available to answer them, was one of the key elements in the success of this project. Better source documentation would undoubtedly help with this, but I think students have to be encouraged to ask questions.
+AFS supports advanced file permissions, using Access Control Lists
+(ACLs) on directories.  The traditional AFS permission model is,
+however, showing signs of age.  The AFS model is inflexible for
+administrators, who must store objects with disjoint permissions in
+separate directories.  The AFS model is also inconsistent with POSIX
+ACLs (POSIX 1003.1e/1003.2c), DCE DFS, CIFS, and NFSv4
+(http://www.ietf.org/rfc/rfc3530.txt), all of which allow ACLs (of
+varying types) on a per-file basis.  Implementation of this feature
+will improve the usability of OpenAFS for administrators, and improve
+its interface with modern platforms.
+</p><p>
+The objective of this SOC project is to more fully specify and then
+implement a per-file ACL mechanism for OpenAFS.  Engaging with the
+mentor and the community, the student will work out details of
+per-file ACEs, relationship of per-file and existing per-directory
+ACLs, select an on-disk representation for this design in the OpenAFS
+namei file server, and, minimally, expose the new representation to
+clients via the AFS file server protocol (its FetchACL RPC and
+supporting code, eg, RXFetch_AccessList).  The project will close with a
+validation testing phase.
+</p><p>
+This project will provide an interested student with an opportunity to
+engage with the OpenAFS codebase and development community in a
+significant way, in both design and detailed implementation.  The
+student will gain exposure to the complete operation (and end-to-end
+enhancement) of a major file-system features--from on-disk
+representation to remote procedure invocation, to manifestation on the
+client.
+</p><p>
+The student should have existing skills in C program implementation in
+a Unix environment, and have minimally completed University courses in
+data structures and algorithms, preferably in C.
+</p>
+<p>More detail on this project can be found <a href="gsoc/acls.txt">here</a>.</p>
+<p>Estimated difficulty: <i>moderate</i></p>
+<p>Contact person/mentor: <i>Matt Benjamin</i> matt at linuxbox.com</p>
+<h2>Project Idea 5: OpenAFS Disconnected Operation Improvements</h2>
 <p>
-Overall, the project was a success, producing a pretty complete implementation of disconnection for all of the common file operations. The entire project plan was not completed, however, leaving items such as file sets and pinning for later work. Work slowed significantly after the midterm, as the complexities of directory operations started to bite. Better documentation of the cache manager internals would certainly have helped here, as would more mentor time to have addressed these issues as they started to appear. However, there is an important balance to be struck between assistance and hand holding. In addition to mentor advice being available, students have to be encouraged to develop the skills to learn from the source code itself.
+Disconnected operation for AFS was originally implemented by the
+University of Michigan, against an old code base. That
+implementation, and the thinking behind it is detailed at http://
+www.citi.umich.edu/techreports/reports/citi-tr-93-3.ps.gz. This code
+has now significantly bit-rotted, but an ongoing effort is being made
+to bring it up the standard of the current code base, and integrate
+it back into the core. Disconnected operation is a key feature for
+many users, and the ability to operate upon files in the local AFS
+cache, whilst away from a normal network connection, is likely to
+open up many new applications.
+</p><p>
+This project would implement a number of significant improvements to
+the current disconnected code. Offline authentication tokens are
+required to allow local users to access files within AFS whilst
+disconnected from the network, without giving them access to
+everything within the cache. A journal optimiser would significantly
+reduce the amount of effort required to replay operations which
+occurred whilst disconnected. In addition, there are many usability
+issues to be explored, and resolved, before the code is ready for end
+user usage.
+</p><p>
+The implementation language is C, with the majority of the code
+executing within the operating system kernel. The AFS kernel module
+runs on Mac OS X, Solaris and Linux, amongst other systems - whilst
+the student need only work on one of these systems, the completed
+code should be capable of running on them all. No initial knowledge
+of OpenAFS is required, a successful student will develop a detailed
+knowledge of kernel VFS layers, and the issues involved in supporting
+disconnected operation.
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<p>Contact person/mentor: <i>Simon Wilkinson</i> sxw at sxw.org.uk</p>
+<h2>Project Idea 6: OpenAFS website redesign and update</h2>
+<p>
+OpenAFS' website is designed around the experience of developers. End users and administrators may find the web site to be difficult or frustrating to use.
+</p><p>
+The goal of this project is to provide a web site which offers an experience to users tailored to their needs, or, for administrators who wish to or have deployed OpenAFS, provides ready access to the information required. At the same time, the web site should be sustainable given the skillset of people maintaining the site and the data therein.
+</p><p>
+Any technology which can be adapted to handle the content of the web site and the needs of the project is acceptable. 
+</p>
+<p>
+The student will be responsible for determining the needs of the openafs
+community that the web site will satisfy.  This will be done by working
+with the OpenAFS gatekeepers and surveying the community participants.
+</p>
+<p>
+A student choosing this project will be able to list on a resume and apply the skills necessary in web site design for any number of projects with virtually any web site.
+</p>
+<p>Estimated difficulty: <i>easy to moderate</i></p>
+<p>Contact person/mentor: <i>Russ Allbery, Jeffrey Altman, Derrick Brashear</i> openafs-gatekeepers at openafs.org</p>
+<p>Primary mentor: <i>Derrick Brashear</i> shadow at gmail.com</p>
+<h2>Project Idea 7: Port OpenAFS to new architectures</h2>
+<p>
+OpenAFS is a cross-platform distributed filesystem. Obviously we'd like it to run on *every* platform. We currently have no coverage of the *BSD OSes. We'd like to fix that.
+</p><p>
+The goal of this project is port OpenAFS to a new OS of the student's choice. Experience with kernel programming is a must, however, experience with OpenAFS is not necessary. 
+</p><p>
+A student choosing this project will be able to list on a resume and apply the skills necessary for kernel development, especially with regard to filesystems. Skills applicable to other kernel data access, manipulation and locking will also be learned.
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<p>Primary mentor: <i>Derrick Brashear</i> shadow at gmail.com</p>
+<h2>Project Idea 8: Read/Write replication for OpenAFS</h2>
+<p>
+OpenAFS currently provides readonly replication of data. Many sites would like to use replication on all their data. A proposal exists to address this, however, no work has yet been done on implementation. 
+</p><p>
+The goal of this project is create readwrite replication for OpenAFS. The proposal can be read <A HREF="http://www.student.nada.kth.se/~noora/exjobb/filer.html">here</A> and we are available to answer questions about anyt further. Experience with systems and network programming is highly desirable, however, experience with OpenAFS is not necessary. 
+</p><p>
+A student choosing this project will be able to list on a resume and apply the skills necessary for developing network-distributed systems, especially with regard to filesystems. 
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<p>Primary mentor: <i>Derrick Brashear</i> shadow at gmail.com</p>
+<h2>Project Idea 9: Linux kAFS enhancements</h2>
+<p>
+The goal of this project would be to bring the Linux kernel kAFS client as close to feature-parity with the existing OpenAFS port as possible. Examples include:
+<ul>
+<li>DNS AFSDB being able to obtain cell server location without using configuration files.</li>
+<li>A common pioctl implementation between kafs and OpenAFS to allow sharing of userspace binaries.</li>
+<li>Making a standard keyring implementation that would allow the client to obtain authentication tokens that would work for both kafs and OpenAFS.</li>
+<li>Implement some of the OpenAFS file system commands that have not yet been integrated into kafs.</li>
+<li>A way for OpenAFS and kafs to be running on the same machine using different port numbers.</li>
+<li>Complete the kafs callback interface.</li>
+</ul>
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<p>Primary mentor: <i>David Howells</i> dhowells at redhat.com</p>
+<h2>Project Idea 10: Updates AFS servers for Windows</h2>
+<p>
+Current releases do not offer an up-to-date, supported set of OpenAFS servers on Windows. The goal of this project would be to make the necessary changes to allow OpenAFS servers to be run on Windows.
+</p>
+<p>Estimated difficulty: <i>easy to moderate</i></p>
+<p>Primary mentor: <i>Jeffrey Altman</i> jaltman at secure-endpoints.com</p>
 </body>
+
 </html>
