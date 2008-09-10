@@ -18,34 +18,12 @@
 <li><A HREF="#rwrep">Read/Write replication for OpenAFS</A></li>
 <li><A HREF="#perfile">Per-file ACLs for OpenAFS</A></li>
 <li><A HREF="#discon">Read/Write Disconnected AFS</A></li>
+<li><A HREF="#ports">Porting OpenAFS to new platforms</A></li>
+<li><A HREF="#shellex">Windows Explorer Shell UI extension updates</A></li>
+<li><A HREF="#website">Redesigning the OpenAFS project website</A></li>
+<li><A HREF="#ptsext">Extensions for multiple authentication types to the OpenAFS ptserver</A></li>
+<li><A HREF="#winserv">OpenAFS servers for Windows</A></li>
 </ul>
-<a name="mmc"><h3>Project: Microsoft Management Console Snap-ins, Client and Server</h3></a>
-<h4>Mentor: Asanka Herath</h4>
-<h4>Status: Incomplete</h4>
-A sample MMC snap-in with both client and server functionality was partially completed.
-<p>
-<a name="perfile"><h3>Project: Per-file ACLs for OpenAFS</h3></a>
-<h4>Mentor: Matt Benjamin</h4>
-<h4>Status: Incomplete</h4>
-Code implementing per-file ACL permission checks on RPCs received at the server was substantially completed.
-<p>
-<a name="kafs"><h3>Project: Implementing OpenAFS features into RedHat's kafs kernel module</h3></a>
-<h4>Mentor: David Howells</h4>
-<h4>Status: Partially Complete</h4>
-Partial documentation of the pioctl functions
-available through AFS, a pioctl syscall and VFS entry point for the Linux
-kernel and some implemented pioctls for the kAFS call are available.
-<p>
-<a name="rwrep"><h3>Project: Read/Write replication for OpenAFS</h3></a>
-<h4>Mentor: Derrick Brashear</h4>
-<h4>Status: Partially Complete</h4>
-An implementation which needs a working recovery mechanism to use following an outage or when adding a slave, and selection and tracking of the master copy for a given replicated volume is available in OpenAFS RT.
-<p>
-<a name="discon"><h3>Read/Write Disconnected AFS</h3></a>
-<h4>Mentor: Simon Wilkinson</h4>
-<h4>Status: Substiantially Complete</h4>
-Common file operations are implemented. File sets and pinning files in the cache for offline use remain to be implemented. Contributions are available in OpenAFS RT.
-<p>
 <h2>Background</h2>
 <p>OpenAFS is a 100% open source globally distributed file system derived from 
 IBM AFS commercial offering as of 1 November 2000.&nbsp; Since IBM released the 
@@ -58,33 +36,10 @@ contributors to the core systems.&nbsp; Given the time frames associated with
 Google Summer of Code the proposed ideas are primarily projects which exist on 
 the periphery of the code base but are nevertheless crucial to an improved end 
 user experience.</p>
-<h2>Project Idea 1: Microsoft Windows Explorer Shell User Interface Extensions</h2>
-<p>In order for end users to be comfortable using AFS, the Explorer Shell must 
-provide the same level of functionality that exists for CIFS and local file 
-systems.&nbsp; Selecting an object should display a summary of the object's meta 
-data; the table view should provide options for displaying ACLs, UNIX mode bits, 
-the owner, group information, symlink and mount point targets; the properties 
-dialog should permit interactive modification to meta data values when the user 
-has the appropriate permissions.&nbsp; All in all, the user should not notice 
-that AFS is not a native part of the operating system and the user interface.</p>
-<p>Mockups of proposals for the Explorer Shell extension can be found at
-<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions">
-http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions</a>.&nbsp; 
-This project consists of multiple components that can be successfully 
-implemented one at a time.&nbsp; The successful completion of this project does 
-not require that all of the proposed extensions be implemented.&nbsp; </p>
-<p>This project does not require any prior knowledge of AFS nor any knowledge of 
-OpenAFS internals. By completing this project the developer will become an 
-expert in the Microsoft Windows Explorer Shell interfaces and the Microsoft 
-Component Object Model (COM).&nbsp; This experience can be reapplied to numerous 
-other applications and will prove to be an excellent item on a resume. </p>
-<p>The programming language for this project is C/C++.&nbsp; The operating 
-system is Microsoft Windows.&nbsp; The project will aim to support Microsoft 
-Windows versions from XP SP2 to Vista/Server 2008.</p>
-<p>Estimated difficulty: <i>moderate</i></p>
-<p>For more information contact: <i>openafs at secure-endpoints.com</i></p>
-<h2>Project Idea 2: Microsoft Management Console for OpenAFS Cache Manager 
-Configuration</h2>
+<a name="mmc"><h3>Project: Microsoft Management Console Snap-ins, Client and Server</h3></a>
+<h4>Mentor: Asanka Herath</h4>
+<h4>Status: Incomplete</h4>
+A sample MMC snap-in with both client and server functionality was partially completed.
 <p>OpenAFS on Windows has a very out of date Control Panel application that is 
 used to configure the AFS Cache Manager service.&nbsp; In addition to being out 
 of date, the Control Panel is not the appropriate user interface model for 
@@ -106,19 +61,10 @@ other applications and will prove to be an excellent item on a resume.</p>
 system is Microsoft Windows.&nbsp; The project will aim to support Microsoft 
 Windows versions from XP SP2 to Vista/Server 2008.</p>
 <p>Estimated difficulty: <i>moderate</i></p>
-<p>For more information contact: <i>openafs at secure-endpoints.com</i></p>
-<h2>Project Idea 3: OpenAFS ptserver extensions for additional authentication types</h2>
-<p>In order that authentication systems other than Kerberos 4 be able to be first class authentication systems in the OpenAFS space, extensions to the OpenAFS protections service need to be added. 
-</p><p>
-More detail on this project can be found <A HREF="gsoc/pts.txt">here</A>.
-</p><p>
-For successful completion of this project, both the RPC additions and database
-extensions will need to be completed. 
-<p>This project does not require any prior knowledge of AFS nor any knowledge of OpenAFS internals.&nbsp; By completing this project the developer will become an expert in the OpenAFS ubik database structure as well as in the OpenAFS Rx RPC system.&nbsp; This experience would prove valuable in dealing with other flat database formats, as well as other RPC systems used in distributed applications.</p>
-<p>The programming language for this project is C.&nbsp; This is in portable code which can be run on any POSIX-compliant OS; While MacOS, Linux or Solaris are suggested as development platforms due to availability of debugging tools, any supported OpenAFS platform could be used to do this work.</p>
-<p>Estimated difficulty: <i>moderate</i></p>
-<p>Contact person/mentor: <i>Derrick Brashear</i> shadow at openafs.org</p>
-<h2>Project Idea 4: OpenAFS per-file access control list (ACL) extensions</h2>
+<a name="perfile"><h3>Project: Per-file ACLs for OpenAFS</h3></a>
+<h4>Mentor: Matt Benjamin</h4>
+<h4>Status: Incomplete</h4>
+Code implementing per-file ACL permission checks on RPCs received at the server was substantially completed.
 <p>
 AFS supports advanced file permissions, using Access Control Lists
 (ACLs) on directories.  The traditional AFS permission model is,
@@ -155,8 +101,10 @@ data structures and algorithms, preferably in C.
 </p>
 <p>More detail on this project can be found <a href="gsoc/acls.txt">here</a>.</p>
 <p>Estimated difficulty: <i>moderate</i></p>
-<p>Contact person/mentor: <i>Matt Benjamin</i> matt at linuxbox.com</p>
-<h2>Project Idea 5: OpenAFS Disconnected Operation Improvements</h2>
+<a name="discon"><h3>Read/Write Disconnected AFS</h3></a>
+<h4>Mentor: Simon Wilkinson</h4>
+<h4>Status: Substiantially Complete</h4>
+Common file operations are implemented. File sets and pinning files in the cache for offline use remain to be implemented. Contributions are available in OpenAFS RT.
 <p>
 Disconnected operation for AFS was originally implemented by the
 University of Michigan, against an old code base. That
@@ -189,8 +137,81 @@ knowledge of kernel VFS layers, and the issues involved in supporting
 disconnected operation.
 </p>
 <p>Estimated difficulty: <i>moderate to hard</i></p>
-<p>Contact person/mentor: <i>Simon Wilkinson</i> sxw at sxw.org.uk</p>
-<h2>Project Idea 6: OpenAFS website redesign and update</h2>
+<a name="rwrep"><h3>Project: Read/Write replication for OpenAFS</h3></a>
+<h4>Mentor: Derrick Brashear</h4>
+<h4>Status: Partially Complete</h4>
+An implementation which needs a working recovery mechanism to use following an outage or when adding a slave, and selection and tracking of the master copy for a given replicated volume is available in OpenAFS RT.
+<p>
+OpenAFS currently provides readonly replication of data. Many sites would like to use replication on all their data. A proposal exists to address this, however, no work has yet been done on implementation. 
+</p><p>
+The goal of this project is create readwrite replication for OpenAFS. The proposal can be read <A HREF="http://www.student.nada.kth.se/~noora/exjobb/filer.html">here</A> and we are available to answer questions about anyt further. Experience with systems and network programming is highly desirable, however, experience with OpenAFS is not necessary. 
+</p><p>
+A student choosing this project will be able to list on a resume and apply the skills necessary for developing network-distributed systems, especially with regard to filesystems. 
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<a name="kafs"><h3>Project: Implementing OpenAFS features into RedHat's kafs kernel module</h3></a>
+<h4>Mentor: David Howells</h4>
+<h4>Status: Partially Complete</h4>
+Partial documentation of the pioctl functions
+available through AFS, a pioctl syscall and VFS entry point for the Linux
+kernel and some implemented pioctls for the kAFS call are available.
+<p>
+The goal of this project would be to bring the Linux kernel kAFS client as close to feature-parity with the existing OpenAFS port as possible. Examples include:
+<ul>
+<li>DNS AFSDB being able to obtain cell server location without using configuration files.</li>
+<li>A common pioctl implementation between kafs and OpenAFS to allow sharing of userspace binaries.</li>
+<li>Making a standard keyring implementation that would allow the client to obtain authentication tokens that would work for both kafs and OpenAFS.</li>
+<li>Implement some of the OpenAFS file system commands that have not yet been integrated into kafs.</li>
+<li>A way for OpenAFS and kafs to be running on the same machine using different port numbers.</li>
+<li>Complete the kafs callback interface.</li>
+</ul>
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<A NAME="winserv"><h3>Project: Updates AFS servers for Windows</h3></A>
+<h4>Mentor: Jeffrey Altman</h4>
+<h4>Status: Incomplete</h4>
+<p>
+Current releases do not offer an up-to-date, supported set of OpenAFS servers on Windows. The goal of this project would be to make the necessary changes to allow OpenAFS servers to be run on Windows.
+</p>
+<p>Estimated difficulty: <i>easy to moderate</i></p>
+<A NAME="shellex"><h3>Project: Microsoft Windows Explorer Shell User Interface Extensions</h3></A>
+<h4>Mentor: Jeffrey Altman</h4>
+<h4>Status: Incomplete</h4>
+<p>In order for end users to be comfortable using AFS, the Explorer Shell must 
+provide the same level of functionality that exists for CIFS and local file 
+systems.&nbsp; Selecting an object should display a summary of the object's meta 
+data; the table view should provide options for displaying ACLs, UNIX mode bits, 
+the owner, group information, symlink and mount point targets; the properties 
+dialog should permit interactive modification to meta data values when the user 
+has the appropriate permissions.&nbsp; All in all, the user should not notice 
+that AFS is not a native part of the operating system and the user interface.</p>
+<p>Mockups of proposals for the Explorer Shell extension can be found at
+<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions">
+http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions</a>.&nbsp; 
+This project consists of multiple components that can be successfully 
+implemented one at a time.&nbsp; The successful completion of this project does 
+not require that all of the proposed extensions be implemented.&nbsp; </p>
+<p>This project does not require any prior knowledge of AFS nor any knowledge of 
+OpenAFS internals. By completing this project the developer will become an 
+expert in the Microsoft Windows Explorer Shell interfaces and the Microsoft 
+Component Object Model (COM).&nbsp; This experience can be reapplied to numerous 
+other applications and will prove to be an excellent item on a resume. </p>
+<p>The programming language for this project is C/C++.&nbsp; The operating 
+system is Microsoft Windows.&nbsp; The project will aim to support Microsoft 
+Windows versions from XP SP2 to Vista/Server 2008.</p>
+<p>Estimated difficulty: <i>moderate</i></p>
+<A NAME="ports"><h3>Project: Port OpenAFS to new architectures</h3></A>
+<h4>Status: Unclaimed</h4>
+<p>
+OpenAFS is a cross-platform distributed filesystem. Obviously we'd like it to run on *every* platform. We currently have no coverage of the *BSD OSes. We'd like to fix that.
+</p><p>
+The goal of this project is port OpenAFS to a new OS of the student's choice. Experience with kernel programming is a must, however, experience with OpenAFS is not necessary. 
+</p><p>
+A student choosing this project will be able to list on a resume and apply the skills necessary for kernel development, especially with regard to filesystems. Skills applicable to other kernel data access, manipulation and locking will also be learned.
+</p>
+<p>Estimated difficulty: <i>moderate to hard</i></p>
+<A NAME="website"><h3>Project: OpenAFS website redesign and update</h3></A>
+<h4>Status: Unclaimed</h4>
 <p>
 OpenAFS' website is designed around the experience of developers. End users and administrators may find the web site to be difficult or frustrating to use.
 </p><p>
@@ -207,48 +228,17 @@ with the OpenAFS gatekeepers and surveying the community participants.
 A student choosing this project will be able to list on a resume and apply the skills necessary in web site design for any number of projects with virtually any web site.
 </p>
 <p>Estimated difficulty: <i>easy to moderate</i></p>
-<p>Contact person/mentor: <i>Russ Allbery, Jeffrey Altman, Derrick Brashear</i> openafs-gatekeepers at openafs.org</p>
-<p>Primary mentor: <i>Derrick Brashear</i> shadow at gmail.com</p>
-<h2>Project Idea 7: Port OpenAFS to new architectures</h2>
-<p>
-OpenAFS is a cross-platform distributed filesystem. Obviously we'd like it to run on *every* platform. We currently have no coverage of the *BSD OSes. We'd like to fix that.
+<A NAME="ptsext"><h3>Project: OpenAFS ptserver extensions for additional authentication types</h3></A>
+<h4>Status: Unclaimed</h4>
+<p>In order that authentication systems other than Kerberos 4 be able to be first class authentication systems in the OpenAFS space, extensions to the OpenAFS protections service need to be added. 
 </p><p>
-The goal of this project is port OpenAFS to a new OS of the student's choice. Experience with kernel programming is a must, however, experience with OpenAFS is not necessary. 
+More detail on this project can be found <A HREF="gsoc/pts.txt">here</A>.
 </p><p>
-A student choosing this project will be able to list on a resume and apply the skills necessary for kernel development, especially with regard to filesystems. Skills applicable to other kernel data access, manipulation and locking will also be learned.
-</p>
-<p>Estimated difficulty: <i>moderate to hard</i></p>
-<p>Primary mentor: <i>Derrick Brashear</i> shadow at gmail.com</p>
-<h2>Project Idea 8: Read/Write replication for OpenAFS</h2>
-<p>
-OpenAFS currently provides readonly replication of data. Many sites would like to use replication on all their data. A proposal exists to address this, however, no work has yet been done on implementation. 
-</p><p>
-The goal of this project is create readwrite replication for OpenAFS. The proposal can be read <A HREF="http://www.student.nada.kth.se/~noora/exjobb/filer.html">here</A> and we are available to answer questions about anyt further. Experience with systems and network programming is highly desirable, however, experience with OpenAFS is not necessary. 
-</p><p>
-A student choosing this project will be able to list on a resume and apply the skills necessary for developing network-distributed systems, especially with regard to filesystems. 
-</p>
-<p>Estimated difficulty: <i>moderate to hard</i></p>
-<p>Primary mentor: <i>Derrick Brashear</i> shadow at gmail.com</p>
-<h2>Project Idea 9: Linux kAFS enhancements</h2>
-<p>
-The goal of this project would be to bring the Linux kernel kAFS client as close to feature-parity with the existing OpenAFS port as possible. Examples include:
-<ul>
-<li>DNS AFSDB being able to obtain cell server location without using configuration files.</li>
-<li>A common pioctl implementation between kafs and OpenAFS to allow sharing of userspace binaries.</li>
-<li>Making a standard keyring implementation that would allow the client to obtain authentication tokens that would work for both kafs and OpenAFS.</li>
-<li>Implement some of the OpenAFS file system commands that have not yet been integrated into kafs.</li>
-<li>A way for OpenAFS and kafs to be running on the same machine using different port numbers.</li>
-<li>Complete the kafs callback interface.</li>
-</ul>
-</p>
-<p>Estimated difficulty: <i>moderate to hard</i></p>
-<p>Primary mentor: <i>David Howells</i> dhowells at redhat.com</p>
-<h2>Project Idea 10: Updates AFS servers for Windows</h2>
-<p>
-Current releases do not offer an up-to-date, supported set of OpenAFS servers on Windows. The goal of this project would be to make the necessary changes to allow OpenAFS servers to be run on Windows.
-</p>
-<p>Estimated difficulty: <i>easy to moderate</i></p>
-<p>Primary mentor: <i>Jeffrey Altman</i> jaltman at secure-endpoints.com</p>
+For successful completion of this project, both the RPC additions and database
+extensions will need to be completed. 
+<p>This project does not require any prior knowledge of AFS nor any knowledge of OpenAFS internals.&nbsp; By completing this project the developer will become an expert in the OpenAFS ubik database structure as well as in the OpenAFS Rx RPC system.&nbsp; This experience would prove valuable in dealing with other flat database formats, as well as other RPC systems used in distributed applications.</p>
+<p>The programming language for this project is C.&nbsp; This is in portable code which can be run on any POSIX-compliant OS; While MacOS, Linux or Solaris are suggested as development platforms due to availability of debugging tools, any supported OpenAFS platform could be used to do this work.</p>
+<p>Estimated difficulty: <i>moderate</i></p>
 </body>
 
 </html>
