@@ -12,6 +12,14 @@ if (window.name == "openafs_main") {
 <META name="verify-v1" content="THAFicQcPIBMrawRwzaJg3JK8FArpvoecAy5Zx7v9DM=" /><!-- cg2v    -->
 <META name="verify-v1" content="VMsthPusbXnedJuKjM0/lhH0uzVj79aQ/lPfk2FLXsA=" /><!-- jaltman -->
 <META name="verify-v1" content="fijqhqC5PvhJOATNi4e6h2uSK0v1deFiKXL+yItw/5w=" /><!-- jhutz   -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5995928-1");
+pageTracker._trackPageview();
+</script>
 <title>OpenAFS</title>
 <link href="/openafs.css" rel="stylesheet" type="text/css">
 </head>
