@@ -15,9 +15,8 @@ IBM AFS commercial offering as of 1 November 2000.&nbsp; Since IBM released the
 source code OpenAFS has thrived adding support for new platforms while enhancing 
 its overall performance, scalability and usability.&nbsp; </p>
 <p>
-For the first time, OpenAFS participated in the Google Summer of Code in 2008.
-<p>
-<A HREF="gsoc/2008final.html">Here are the suggested projects and what transpired.</A>
+In 2008 OpenAFS participated in Google's Summer of Code.&nbsp;
+<A HREF="gsoc/2008final.html">Here are the projects that were suggested and what transpired.</A>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -26,6 +25,142 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 var pageTracker = _gat._getTracker("UA-5995928-1");
 pageTracker._trackPageview();
 </script>
+<h2>
+GSoC 2009</h2>
+<p>
+It is now 2009, the world economy is collapsing, the U.S. dollar has regained 
+much of its value against other currencies and we suspect that many of you are 
+thinking about how nice it would be to have US$4500.00 in your bank account (or 
+perhaps under your mattress) at the end of the Summer.&nbsp; If you are 
+considering applying to OpenAFS for a Summer of Code project and have not 
+already read the <a href="http://code.google.com/opensource/gsoc/2009/faqs.html">
+GSoC 2009 FAQ</a> we suggest that you do so.<p>
+As we indicated last year &quot;OpenAFS is a very large and highly complex software 
+project consisting of close to one million lines of source code that is severely 
+under-documented.&nbsp; As a result it takes a long time for any developers to become 
+proficient contributors to the core systems.&quot;&nbsp; One of the things that we 
+discovered during 2008 GSoC is that the time it takes for new developers to come 
+up to speed is even longer than we expected, especially when the 
+developers have little real world experience working on large system projects.&nbsp; 
+We are not trying to scare you off, but OpenAFS is possibly among the worst of all possible 
+development environments for inexperienced developers.&nbsp; Here are some of 
+the things that make OpenAFS development particularly challenging:<ol>
+	<li>multi-operating system support.&nbsp; Many operating system APIs are not 
+	portable between operating system.&nbsp; OpenAFS includes support for a wide 
+	range of platforms.&nbsp; As a result the source code can be quite 
+	confusing.</li>
+	<li>multi-threaded programming.&nbsp; OpenAFS makes extensive use of 
+	multi-threading.&nbsp; Developing thread-safe code is a challenge for the 
+	most experienced developers.&nbsp; It will take a while before you get the 
+	hang of it.</li>
+	<li>Kernel programming. Developing complex applications that sit on top of 
+	an operating system is hard enough.&nbsp; When developing a kernel 
+	module (or device driver) it gets even worse.&nbsp; One false move and you 
+	will crash your machine.&nbsp; Virtual machines are your friend (but not all operating systems OpenAFS supports can be virtualized).</li>
+	<li>Distributed systems.&nbsp; OpenAFS is a highly distributed system with 
+	clients and services running on multiple machines communicating over an 
+	esoteric remote procedure call system called Rx. This means there's added complexity due to the potential for your work to result in mismatches among disparate pieces.</li>
+	<li>Lack of User Experience.&nbsp; Unlike a web browser or a game, you 
+	aren't likely to simply download OpenAFS and configure a working OpenAFS cell in under 
+	30 minutes so you can experiment with it.&nbsp; Understanding an application 
+	and how it works is crucial to being able to develop additional features and 
+	functionality that can be added to the system.&nbsp; For a highly managed 
+	system such as an AFS cell it is necessary to not only understand something 
+	about being a user but you must also have some familiarity with being a 
+	system administrator.&nbsp; </li>
+	<li>Infrastructure dependencies.&nbsp; To deploy a working AFS cell you must 
+	also have a working DNS and Kerberos deployment.&nbsp; It is very tricky to 
+	setup a complete set of OpenAFS client and services on a single laptop for 
+	the purpose of development.</li>
+	<li>Programming Languages: OpenAFS is written almost entirely in C (and the 
+	user interface on Windows is C++) with all of the issues surrounding memory 
+	allocation and deallocation, pointer manipulation, stack management, memory 
+	leaks, buffer overruns, etc.&nbsp; Most student developers these days are 
+	only used to programming in managed languages such as Java.&nbsp; </li>
+	<li>The mix of Version Control Systems, Debuggers, Build Systems, and other development 
+	tools will likely be unfamiliar to you.&nbsp; </li>
+</ol>
+<p>Since you are still reading you must either really like challenges or are 
+simply insane.&nbsp; Either way, it can be a very rewarding experience; OpenAFS' functionality offers a chance to learn many features, concepts and tools, nearly any of which singly could help you develop a career later, let alone all of them together, if you so chose. If you are seriously interested in working on OpenAFS this 
+Summer (and perhaps for the rest of your life) here are some things that we 
+recommend you do:</p>
+<ol>
+	<li>If you are unfamiliar with programming in C, see if your University has 
+	an resources available for assisting their students learn C.&nbsp; If that 
+	is not possible, get yourself a good book (sorry, no recommendations at this 
+	time) and try your hand at it.</li>
+	<li>If you have no idea what multi-threading is or what mutexes, read/write 
+	locks, or critical sections are, go to the library and find yourself a book.&nbsp; 
+	Not one specializing in Java, Win32 or Posix threads, but a good general 
+	multi-threading text book.&nbsp; (Search Amazon and read reviews)</li>
+	<li>Read the IBM AFS documentation.&nbsp; We are very sorry that it has not 
+	been re-written to fully describe OpenAFS.&nbsp; If writing documentation were a 
+	permitted GSoC project we would put it on the list but unfortunately its 
+	not.</li>
+	<li>Try your hand at building your own DNS, Kerberos and AFS infrastructure.&nbsp;
+	<a href="http://tinyurl.com/cexwea">&quot;Distributed Services with OpenAFS&quot;</a> 
+	is an excellent cookbook that walks though all of the steps necessary to get 
+	all of the pieces up and running.</li>
+</ol>
+<p>If you are considering applying to OpenAFS please be aware of the following:</p>
+<ol>
+	<li>You may not have a second job when working on OpenAFS GSoC.&nbsp; We 
+	expect a minimum of 30 hours a week of dedicated work on your project.&nbsp; 
+	It is likely that you will need to spend significantly more time than that 
+	when you include all of the time spent communicating with your mentor(s) and 
+	the community and learning all of the things you do not realize you do not 
+	know yet.</li>
+	<li>You must have excellent network connectivity on a regular basis.&nbsp; 
+	It is going to be extremely hard to develop for a distributed network file 
+	system without access to the Internet.&nbsp; In particular, you are going to 
+	need to be able to access source code repositories, Kerberos KDCs for 
+	authentication, and OpenAFS services.&nbsp; This will require that a broad 
+	range of udp ports be open for access to the external world.&nbsp; If you 
+	are dependent upon your University's network and they firewall access to the 
+	outside world, it may be very difficult or simply not be possible for you to work on OpenAFS.&nbsp; 
+	Access to Jabber conference rooms and IRC for communication with your 
+	mentor(s) and the community are critical.</li>
+	<li>You must know how to compile a C program and use a debugger at a 
+	rudimentary level.&nbsp; For Linux, gcc and gdb.&nbsp; For Windows, Visual 
+	Studio 2005.</li>
+	<li>The time that our mentors spend working with you on a GSoC project is 
+	extremely valuable.&nbsp; Mentors have significant work of their own that 
+	must be completed.&nbsp; As such, you should attempt to avoid wasting their time.&nbsp; If you are having a 
+	problem, communicate it early so that it can be addressed.&nbsp; If you 
+	promise to deliver something, do so or warn your mentor as soon as you know 
+	that you will miss the promised delivery date.&nbsp; We will do everything 
+	we can to make GSoC a success for you, if you put in the effort at the work and the communication, but we will fail you if you're not putting that effort in.</li>
+</ol>
+<h2>Communicating with the OpenAFS Community regarding GSoC</h2>
+<p>You can speak to members of the OpenAFS Community using two forums:</p>
+<ol>
+	<li>Jabber Conference Room: openafs@conference.openafs.org</li>
+	<li>Internet Relay Chat: freenode.net #openafs channel</li>
+</ol>
+<p>You may also engage the community via our mailing lists.
+<h2>Project Ideas</h2>
+<ol>
+	<li>Prototype a user interface for managing disconnected operations. Read more <A HREF="http://workshop.openafs.org/afsbpw08/fri_1_3.html">here</A> about disconnected AFS.</li>
+	<li>Implement support for storing Microsoft Windows Extended Attributes or 
+	Posix Attributes in Apple Doublefiles from within either the Windows AFS 
+	Cache Manager or the Unix AFS Cache Manager</li>
+	<li>
+	AFS as a Data Driven Filesystem.&nbsp; Prototype a database driven 
+	metadata search engine for use with AFS.
+	</li>
+	<li>
+	Microsoft Management Console for Windows Client Configuration</li>
+	<li>
+	Read/write volume replication. Last year's project offers code and information which should help you understand what's already done and what pieces remain for you to implement to complete this functionality.</li>
+	<li>
+	Protection Service Aliasing. OpenAFS provides a service to map human-readable names to internal identifiers, but the names have semantics based on Kerberos version 4. Human readable names for any authentication system should also be able to be used.</li>
+	<li>
+	anything else that you want to submit.&nbsp; several students from GSoC 2008 
+	or current Capstone projects have discussed their own idea and we are 
+	looking forward to their submissions.</li>
+</ol>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 </body>
 
 </html>
