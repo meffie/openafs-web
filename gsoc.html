@@ -154,6 +154,8 @@ recommend you do:</p>
 	<li>
 	Protection Service Aliasing. OpenAFS provides a service to map human-readable names to internal identifiers, but the names have semantics based on Kerberos version 4. Human readable names for any authentication system should also be able to be used.</li>
 	<li>
+	Implement per-file Access Control Lists. OpenAFS uses a per-directory Access Control mechanism, which has caused confusion among users in some cases. This project would add access control on a per-file basis. Changes to the storage backend, additional RPCs, and changes to honor and display the new access control lists in the client would be designed, and a prototype implementation completed.
+	<li>
 	anything else that you want to submit.&nbsp; several students from GSoC 2008 
 	or current Capstone projects have discussed their own idea and we are 
 	looking forward to their submissions.</li>
