@@ -39,7 +39,7 @@ As we indicated last year &quot;OpenAFS is a very large and highly complex softw
 project consisting of close to one million lines of source code that is severely 
 under-documented.&nbsp; As a result it takes a long time for any developers to become 
 proficient contributors to the core systems.&quot;&nbsp; We 
-discovered during 2008 GSoC is that the time it takes for new developers to come 
+discovered during 2008 GSoC that the time it takes for new developers to come 
 up to speed is even longer than we expected, especially when the developers have 
 little real world experience working on large system projects.&nbsp; Here are some of 
 the things that make OpenAFS development particularly challenging:<ol>
@@ -51,10 +51,10 @@ the things that make OpenAFS development particularly challenging:<ol>
 	multi-threading.&nbsp; Developing thread-safe code is a challenge for the 
 	most experienced developers.&nbsp; It will take a while before you get the 
 	hang of it.</li>
-	<li>Kernel programming. Developing complex applications that sit on top of 
-	an operating system is hard enough.&nbsp; When developing a kernel 
-	module (or device driver) it gets even worse.&nbsp; One false move and you 
-	will crash your machine.&nbsp; Virtual machines are your friend (but not all operating systems OpenAFS supports can be virtualized).</li>
+	<li>Kernel programming. Portions of OpenAFS are implemented as kernel 
+	modules. Developing these can be particularly challenging, as code errors 
+	can crash the entire machine. Working effectively on kernel code will 
+	require access to a second machine, or to virtualization software.</li>
 	<li>Distributed systems.&nbsp; OpenAFS is a highly distributed system with 
 	clients and services running on multiple machines communicating over an 
 	esoteric remote procedure call system called Rx. This means there's added complexity due to the potential for your work to result in mismatches among disparate pieces.</li>
@@ -62,10 +62,9 @@ the things that make OpenAFS development particularly challenging:<ol>
 	aren't likely to simply download OpenAFS and configure a working OpenAFS cell in under 
 	30 minutes so you can experiment with it.&nbsp; Understanding an application 
 	and how it works is crucial to being able to develop additional features and 
-	functionality that can be added to the system.&nbsp; For a highly managed 
-	system such as an AFS cell it is necessary to not only understand something 
-	about being a user but you must also have some familiarity with being a 
-	system administrator.&nbsp; </li>
+	functionality that can be added to the system. In order to successfully 
+	develop for OpenAFS you will need to be able to get the components you are 
+	developing running yourself.&nbsp; </li>
 	<li>Infrastructure dependencies.&nbsp; To deploy a working AFS cell you must 
 	also have a working DNS and Kerberos deployment.&nbsp; It is very tricky to 
 	setup a complete set of OpenAFS client and services on a single laptop for 
@@ -73,11 +72,16 @@ the things that make OpenAFS development particularly challenging:<ol>
 	<li>Programming Languages: OpenAFS is written almost entirely in C (and the 
 	user interface on Windows is C++) with all of the issues surrounding memory 
 	allocation and deallocation, pointer manipulation, stack management, memory 
-	leaks, buffer overruns, etc.&nbsp; Most student developers these days are 
-	only used to programming in managed languages such as Java.&nbsp; </li>
+	leaks, buffer overruns, etc.&nbsp; </li>
 	<li>The mix of Version Control Systems, Debuggers, Build Systems, and other development 
 	tools will likely be unfamiliar to you.&nbsp; </li>
 </ol>
+<p>Not all of these challenges will apply to all GSoC projects.&nbsp; In fact, 
+we have selected project proposals that we believe are manageable by many 
+students. If you are unsure about any of the above challenges, OpenAFS has an 
+active and friendly community that will be happy to provide you with help and 
+guidance. Please join us on #openafs on freenode, or 
+openafs@conference.openafs.org on Jabber</p>
 <p>Even though OpenAFS is challenging to get familiar with it can be a very rewarding experience; OpenAFS's functionality offers a chance to learn many features, concepts and tools, nearly any of which singly could help you develop 
 your career.&nbsp; If you are interested in working on OpenAFS this 
 Summer (and perhaps for the rest of your life) here are some things that we 
@@ -220,13 +224,12 @@ of date, the Control Panel is not the appropriate user interface model for
 configuring a system service.&nbsp; On Microsoft Windows, system wide services 
 should be configured using the Microsoft Management Console (MMC).&nbsp; This 
 project is to implement a MMC Add-on for the OpenAFS Cache Manager. </p>
-<p>Mockups of a proposed MMC user interface can be found at
-<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#client%20service%20mmc">
+<p>Mockups of a proposed MMC user interface can be found at <a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#client%20service%20mmc">
 http://www.secure-endpoints.com/openafs-windows-roadmap.html#client service mmc</a>.&nbsp; 
 This project consists of multiple components that can be successfully 
 implemented one at a time.&nbsp; The successful completion of this project does 
 not require that all of the proposed MMC pages be implemented.</p>
-<p>This project does not require any prior knowledge of AFS nor any knowledge of 
+<p>TThis project does not require any prior knowledge of AFS nor any knowledge of 
 OpenAFS internals.&nbsp; By completing this project the developer will become an 
 expert in the Microsoft Management Console interfaces and the Microsoft 
 Component Object Model (COM).&nbsp; This experience can be reapplied to numerous 
@@ -319,7 +322,18 @@ include: </p>
 <p>Last year's GSoC project produced partial documentation of the pioctl 
 functions available through AFS, a pioctl syscall and VFS entry point for the 
 Linux kernel and some implemented pioctls for the kAFS call are available. </p>
-<h3>9. Surprise Us</h3>
+<h3>9. Simple Volume and Namespace Management System</h3>
+<p>Develop a simple Volume and Namespace management system on
+top of OpenAFS.  OpenAFS can be leveraged to create complex namespaces, and
+it is an effective wide-area file system.  However, determining exactly how
+to configure OpenAFS to scale well across a wide area can be complex.  This
+project will take a few specific scenarios and develop parameterized
+configurations for them that can then be used by OpenAFS users as
+blueprints.  Specific example: create a single namespace split across two
+locations, with tools to manage synchronization and replication according to
+some basic policies on who can invoke replication and how to control the
+bandwidth utilization.</p>
+<h3>&nbsp;10. Surprise Us</h3>
 <p>Anything else that you want to submit.&nbsp; Speak with members of the 
 OpenAFS Community and brainstorm.&nbsp; Several students from GSoC 2008 
 	or current Capstone projects have discussed their own idea and we are 
