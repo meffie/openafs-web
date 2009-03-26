@@ -333,7 +333,11 @@ blueprints.  Specific example: create a single namespace split across two
 locations, with tools to manage synchronization and replication according to
 some basic policies on who can invoke replication and how to control the
 bandwidth utilization.</p>
-<h3>&nbsp;10. Surprise Us</h3>
+<h3>10. Path MTU discovery</h3>
+<p>OpenAFS uses a UDP based RPC transport called Rx. uses the endpoint maximum transfer units (MTUs) to determine how large of a packet may be transmitted without requiring the packet to be broken into fragments on its journey. The prevalence of IP tunnelling, typically with reduced MTUs, on modern internet tpographies, means this is often not an accurate way to determine true maximum packet size. This project would develop and integrate into Rx a mechanism to discover the MTU of the path rather than merely the endpoints, resultingly tuning packet sizes accordingly.</p>
+<h3>11. UPnP support</h3>
+<p>Network Address Translation, or NAT, is now very common on IPv4 networks due to inavailability of IP space. Port mappings to edge clients, especially for UDP, often do not persist, and there are no well-known mappings to clients behind the NAT device. This sometimes causes problems with the AFS protocol's use of reverse RPCs to communicate conherency information. One technology for registering edge usage of ports is Universal Plug and Play, or UPnP. While not all appliances support it, integrating use of it into OpenAFS clients would offer great potential to improve the client experience for users. A project in this space would develop a new UPnP implementation or utilize a license-compatible implement along with additional work to integrate its use into the existing OpenAFS client codebase.</p>
+<h3>&nbsp;12. Surprise Us</h3>
 <p>Anything else that you want to submit.&nbsp; Speak with members of the 
 OpenAFS Community and brainstorm.&nbsp; Several students from GSoC 2008 
 	or current Capstone projects have discussed their own idea and we are 
