@@ -25,6 +25,60 @@ with PGP.
 
 <hr>
 
+<a name="OPENAFS-SA-2009-002"></a>
+<h2>OPENAFS-SA-2009-002 - Denial of service attack against Linux cache manager</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Last Update:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.4.8, OpenAFS 1.5.0-1.5.58</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2009-002.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2009-002.txt</a>
+</td></tr>
+</table>
+
+<p>AFS may pass an error code obtained from the fileserver directly to the
+Linux kernel, using a Linux mechanism that merges error codes and pointers 
+into a single value. However, this mechanism is unable to distinguish certain
+error codes from pointers. When AFS returns a code of this type to the kernel,
+the kernel treats it as a pointer and attempts to dereference it. This causes a
+kernel panic, and results in a denial of service attack.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+<a name="OPENAFS-SA-2009-001"></a>
+<h2>OPENAFS-SA-2009-001 - Network based buffer overflow attack against Unix cache manager</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Last Update:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.4.8, OpenAFS 1.5.0-1.5.58</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2009-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2009-001.txt</a>
+</td></tr>
+</table>
+
+<p>AFS's XDR data marshalling language permits the construction of arrays with a
+size constrained by the interface definition. The XDR decoding language will
+accept data from the server up to this maximum size, which in some cases is
+stored into a buffer allocated by the client. 
+
+In several locations, the AFS client assumes that the server will never
+return more data than requested, and so allocates a buffer smaller than this
+maximum size. Whilst this causes no problems when communicating with valid
+servers, an attacker can return more data than expected, and overflow the
+client's buffer.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
 <a name="OPENAFS-SA-2007-003"></a>
 <h2>OPENAFS-SA-2007-003 - denial of service in OpenAFS fileserver</h2>
 <table border=0>
