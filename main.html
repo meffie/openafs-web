@@ -24,13 +24,48 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <dl>
-<dt>30-Mar-2009 - OpenAFS 1.5.58 released</dt>
-<dd>OpenAFS 1.5.58 provides the best user experience for Microsoft Windows users. 1.4.8 is the recommended release for all other users. The Unicode character set support for Windows clients permits users to create and access file system objects using characters not represented in the local 8-bit OEM character set.
-<p>
-1.5.58 is also the most recent in the series of releases intended to provide new experimental features including the Demand Attach File Service and Disconnected AFS, on other platforms including MacOS X, Linux variants, and UNIX, and includes several bugfixes since 1.5.57.
+<dt>6-Apr-2009 - OpenAFS Security Advisory 2009-002</dt>
+<dd>
+OpenAFS clients versions 1.0-1.4.8, 1.5.0-1.5.58 for all Linux 2.4-2.6 platforms.&nbsp;&nbsp; 
+An attacker with control of a fileserver, or the ability to forge RX packets,
+can crash the cache manager, and hence the kernel, of affected Linux AFS
+clients.
 <ul>
-<li><a href="/release/openafs-1.5.58.html" target="_top">Go to the release page</a>
-<li><A HREF="/pipermail/openafs-announce/2009/000281.html">Go to the release announcement</A>
+<li><a href="/security/OPENAFS-SA-2009-002.txt" target="_top">Go to the advisory</a>
+</ul>
+<p>
+</dd>
+<dt>6-Apr-2009 - OpenAFS Security Advisory 2009-001</dt>
+<dd>
+OpenAFS clients versions 1.0-1.4.8, 1.5.0-1.5.58 for all Unix platforms except MacOS 10.4, 10.5.&nbsp;&nbsp; 
+An attacker with control of a fileserver, or the ability to forge RX packets,
+can crash the cache manager, and hence the kernel, of any Unix AFS client. It
+may be possible for an attacker to cause the kernel to execute arbitrary code.
+<ul>
+<li><a href="/security/OPENAFS-SA-2009-001.txt" target="_top">Go to the advisory</a>
+</ul>
+<p>
+</dd>
+
+<dt>6-Apr-2009 - OpenAFS 1.4.10 released</dt>
+<dd>OpenAFS 1.4.10 is the eleventh in a series of releases focusing on bugfixes for Unix platforms.
+It contains a number of fixes to both clients and servers, including security fixes to Unix clients as detailed in the advisories from 6 April 2009. An upgrade to 1.4.9 (which contains only the security fix since 1.4.8) or 1.4.10 (which includes additional fixes for other bugs) is recommended immediately for clients on all Unix platforms except MacOS 10.4 and 10.5 (which are not volunerable).
+
+<ul>
+<li><a href="/dl/openafs/1.4.10/RELNOTES-1.4.10" target="_top">Read the 1.4.10 release notes</a></li>
+<li><a href="/release/openafs-1.4.10.html" target="_top">Go to the release page</a>
+<li><A HREF="/pipermail/openafs-announce/2009/000285.html">Go to the release announcement</A>
+</ul>
+<p>
+</dd>
+
+<dt>6-Apr-2009 - OpenAFS 1.5.59 released</dt>
+<dd>OpenAFS 1.5.59 provides the best user experience for Microsoft Windows users. 1.4.8 is the recommended release for all other users. The Unicode character set support for Windows clients permits users to create and access file system objects using characters not represented in the local 8-bit OEM character set.
+<p>
+1.5.59 is also the most recent in the series of releases intended to provide new experimental features including the Demand Attach File Service and Disconnected AFS, on other platforms including MacOS X, Linux variants, and UNIX, and includes several bugfixes since 1.5.58, including a fix for the security issues disclosed on 6 April 2009.
+<ul>
+<li><a href="/release/openafs-1.5.59.html" target="_top">Go to the release page</a>
+<li><A HREF="/pipermail/openafs-announce/2009/000286.html">Go to the release announcement</A>
 </ul>
 <p>
 </dd>
@@ -42,18 +77,6 @@ encouraged to participate.  Student proposals are due <a href="http://socghop.ap
 Students and mentors interested
 in participating in an OpenAFS project should read the 
 <a href="gsoc.html">OpenAFS Summer of Code page</a>.
-</dd>
-
-<dt>11-Nov-2008 - OpenAFS 1.4.8 released</dt>
-<dd>OpenAFS 1.4.8 is the ninth in a series of releases focusing on bugfixes for Unix platforms.
-It contains a number of fixes to both clients and servers, including major bugfixes to the network stack.
-
-<ul>
-<li><a href="/dl/openafs/1.4.8/RELNOTES-1.4.8" target="_top">Read the 1.4.8 release notes</a></li>
-<li><a href="/release/openafs-1.4.8.html" target="_top">Go to the release page</a>
-<li><A HREF="/pipermail/openafs-announce/2008/000270.html">Go to the release announcement</A>
-</ul>
-<p>
 </dd>
 
 <dt>17-Sep-2008 - European AFS conference</dt>
