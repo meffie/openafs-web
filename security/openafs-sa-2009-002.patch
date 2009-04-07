@@ -10,7 +10,7 @@ diff -u -r1.81.2.77 osi_vnodeops.c
      if (code == ENOENT)
  	return ERR_PTR(0);
 -    else
-+    else if ((code > 0) && (code <= MAX_ERRNO))
++    else if ((code >= 0) && (code <= MAX_ERRNO))
  	return ERR_PTR(-code);
 +    else 
 +	return ERR_PTR(-EIO);
