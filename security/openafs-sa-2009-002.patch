@@ -5,6 +5,17 @@ retrieving revision 1.81.2.77
 diff -u -r1.81.2.77 osi_vnodeops.c
 --- src/afs/LINUX/osi_vnodeops.c	19 Mar 2009 04:54:50 -0000	1.81.2.77
 +++ src/afs/LINUX/osi_vnodeops.c	1 Apr 2009 19:12:50 -0000
+@@ -45,6 +45,10 @@
+ #define pageoff(pp) pp->offset
+ #endif
+ 
++#ifndef MAX_ERRNO
++#define MAX_ERRNO 1000L
++#endif
++
+ #if defined(AFS_LINUX26_ENV)
+ #define UnlockPage(pp) unlock_page(pp)
+ extern struct backing_dev_info afs_backing_dev_info;
 @@ -1087,8 +1087,10 @@
  #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,2,10)
      if (code == ENOENT)
