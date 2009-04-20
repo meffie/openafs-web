@@ -15,8 +15,37 @@ IBM AFS commercial offering as of 1 November 2000.&nbsp; Since IBM released the
 source code OpenAFS has thrived adding support for new platforms while enhancing 
 its overall performance, scalability and usability.&nbsp; </p>
 <p>
-For 2009, OpenAFS has been granted 4 slots. The projects which we accepted for 2009 are:
 <h2>GSoC 2009</h2>
+For 2009, OpenAFS has been granted 4 slots. The projects which we accepted for 2009 are:
+<ol><li>
+Project #1: Microsoft Management Console: The project is to build a Microsoft Management Console to manage OpenAFS settings. This is already part of the OpenAFS roadmap on Windows and something I am interested in regardless of Summer of Code. Right now, settings for OpenAFS can be controlled through the OpenAFS control panel or through direct registry modification for some settings. Using the control panel does not work well for managed environments, and direct registry modification is prone to user errors.
+<p>
+The solution is to leverage the MMC API to build a console for configuring OpenAFS. Issues to be address are whether to use the MMC 2.0 API or the MMC 3.0 API. The difference is that MMC 3.0 is managed and provides better error handling. The management console is essentially a user interface for the appropriate settings, so it is not tightly coupled to the existing OpenAFS source code.
+<p>
+From there, the user interface needs to be constructed. There are already sample screenshots in the OpenAFS for Windows roadmap as a starting point. Once there is a user interface, actually reading and writing the settings while leveraging elevation in Windows Vista as necessary is the next step.
+</li>
+<li>Project #2: OpenAFS as a data-driven filesystem. The goal of this project is to enable tagging and searching metadata of items in the AFS filesystem.
+<p>Assumptions: single filesystem (server) support, assume interfacing with existing search tools. An indexer, a search service, and documentation and testing with by byproducts of this service. Index data should be mobile with the volume data and stored in a manner which allows ready access from new services. Lucene is being investigated for use in this project.
+</li><li>
+Project #3: OpenAFS server preference based on network conditions: The OpenAFS cache manager keeps two lists of which servers, the list of VLDB servers and the list of file servers. The VLDB server prioritization list is derived from the CellServDB or AFSDB DNS. The list of file servers is provided by the VLDB, and contains the list of servers hosting a requested volume. The order of these lists is currently decided based on the outdated assumption that the networks will be classful in nature. Unfortunately this type of prioritization is no longer useful with current networks, as the Internet is no longer classful. This leads to an all but random prioritization list.
+<p>
+This project seeks to change the way the servers in the list are ordered based on network conditions between the client and the possible servers. Rx peer statistics can help provide information about these network conditions. Parts of these statistics can be used to indicate which servers are closest, proximity-wise, to the client as well as create an estimated throughput capacity for the server. These factors can be analyzed to represent performance between the cache manager client and the servers. This will allow for server prioritization based on the best performance of the server and the server's network connection, which subsequently can increase access times. This project will implement this prioritization on both Windows and Unix platforms, taking into account the statistics mechanisms. The Unix implementation will port relatively simply to other Unix implementations (AIX, HP-UX, etc.). 
+</li><li>
+Project #4: Implementing OpenAFS features into the Linux kafs kernel module: kafs is a Linux implementation of the AFS protocols. While kafs has been maturing, many features contained in OpenAFS are still missing from kafs. This project aims to add some of those features.
+<p>
+<ul><li>
+DNS AFSDB support. Sharing the mechanism used by CIFS will be investigated.
+</li><li>
+A common pioctl interface. Sharing a pioctl interface between kafs and OpenAFS to allow sharing of userspace binaries such as fs.
+</li><li>Implement OpenAFS file system commands. Add support for some OpenAFS commands that have not yet been integrated into kafs.
+</li>
+<li>Keyring compatibility. Making a standard keyring implementation that would allow the client to obtain authentication tokens that would work for both kafs and OpenAFS.
+</li>
+</ul>
+</li>
+</ol>
+<p>
+<h3>GSoC 2009 recruiting</h3>
 <p>
 It is now 2009, the world economy is collapsing, the U.S. dollar has regained 
 much of its value against other currencies and we suspect that many of you are 
