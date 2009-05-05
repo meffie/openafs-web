@@ -15,7 +15,7 @@
 <body bgcolor="#ffffff" text="#000000" link="#000fff" vlink="#0000ff" alink="#0000ff">
 
 <h1 align="center">Development Wish List / Road Map for OpenAFS</h1>
-<p>In its seven plus years as an open source project, OpenAFS has established AFS 
+<p>In its eight plus years as an open source project, OpenAFS has established AFS 
 as one of the open source success stories.&nbsp; OpenAFS provides clients for all 
 of the major operating system distributions and servers on all UNIX/Linux variants.&nbsp; 
 Even so, there is still a great deal that could be done to turn AFS into a first 
@@ -44,61 +44,11 @@ interfaces, pioctl interfaces, and credential management.</p>
 <h3 wrap>Microsoft Windows:</h3>
 <p wrap>The Microsoft Windows client has received significant attention over the 
 last four years.&nbsp; It is a fully functional client that works on all Microsoft 
-Windows releases from Windows 2000 SP4 through Windows Vista.&nbsp; For a summary, 
+Windows releases from Windows 2000 SP4 through Windows Vista and Server 2008.&nbsp; For a summary, 
 see the <a href="http://www.secure-endpoints.com/#oafw_status_report">OpenAFS for 
 Windows Status Report</a>.&nbsp; Still, there are a number of deficiencies that 
 adversely impact the ability of end users to use AFS to its full existing potential.</p>
 <ul>
-	<li>
-	<p wrap><strong>Unicode object names support:</strong><br>
-	The existing cache manager and the SMB server interface only support the local 
-	workstation&#39;s OEM code page.&nbsp; For a United States - English or Western 
-	European workstation this will be
-	<a href="http://en.wikipedia.org/wiki/Code_page_850">CP850</a>.&nbsp; Any attempt 
-	to store or access a file/directory that contains characters that are not in 
-	the local code page will result in a ERROR_NO_UNICODE_TRANSLATION error.&nbsp; 
-	If this error occurs during an attempt to store a roaming profile, it will cause 
-	the profile storage operation to fail midway without any opportunity for the 
-	end user to correct it.&nbsp;&nbsp; Failure to support Unicode also adversely 
-	affects the usefulness of AFS on Microsoft Windows in Asia and the Middle East.<br>
-	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#unicode">
-	For more details ...</a><br>
-	Estimate: 3 months</p>
-	</li>
-	<!--  Implemented
-	<li>
-	<p wrap><b>Directory search optimizations:</b><br>
-	Microsoft Windows is a case-insensitive operating system that supports the use 
-	of case-sensitive file systems such as AFS.&nbsp; In a case insensitive environment 
-	it is necessary for the cache manager to protect against performing requested 
-	operations when there are ambiguous name matches.&nbsp; One of the other negative 
-	results is that the Windows client cannot treat the failure of an AFS directory 
-	hash table lookup to mean that the requested object does not exist.&nbsp; Instead, 
-	the cache manager must perform a linear search of the directory contents in 
-	order to determine if there are zero, one or more case-insensitive matches.&nbsp; 
-	This results in significant performance penalties in the form of CPU utilization 
-	and clock time for negative matches.<br>
-	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#directory search">
-	For more details ...</a><br>
-	Estimate: 2 weeks</p>
-	</li>
--->
-	<!-- Implemented	
-	<li>
-	<p wrap><b>Directory change optimizations:</b><br>
-	When a directory change operation is performed against a file server the cache 
-	manager reads the modified directory contents after the operation has been completed.&nbsp; 
-	The clock time required to perform this refresh is dependent upon the network 
-	performance as well as the number of entries in the directory.&nbsp; The more 
-	entries and the slower the network, the longer the operation takes.&nbsp; A 
-	directory with ten thousand entries over a high-end cable modem service has 
-	seen clock time per update of up to 6.5 seconds.&nbsp;&nbsp; This is a significant 
-	cost that can be mitigated by updating the cache manager to locally modify the 
-	directory contents when it is known by the data version change that no other 
-	client has modified the directory in the mean time.<br>
-	Estimate: 2 weeks</p>
-	</li>
--->
 	<li>
 	<p wrap><strong>Read-only or Read-write disconnected mode:</strong><br>
 	Microsoft Windows users are used to the &quot;Windows Offline Folders&quot; functionality 
@@ -180,7 +130,7 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	as a prerequisite.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#file system redirector">
 	For more details ...</a><br>
-	Estimate: 10 to 11 months</p>
+	Estimate: Nearing completion.</p>
 	</li>
 </ul>
 <h3 wrap>All UNIX platforms:</h3>
@@ -194,21 +144,18 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	In order to reduce wait time while streaming files, it is desirable to allow 
 	for a sliding prefetch window when a file is opened and being read. <br>
 	(testing needed)</li>
-	<li><strong>read/write disconnected AFS:</strong> <br>
-	UMichigan&#39;s CITI developed read/write disconnected mode in 1993 as a research 
-	project.&nbsp; This code has never been integrated into the mainstream AFS distribution.&nbsp;
-	<a href="http://www.google.com/search?q=cache:PI5VE0Ty9NQJ:www.citi.umich.edu/techreports/reports/citi-tr-93-3.ps.gz+afs+disconnected+mode&hl=en&ct=clnk&cd=1&gl=us&client=firefox-a">
-	The original paper &quot;Disconnected Operation for AFS&quot; can be found in the Google 
-	Cache.</a> <br>
-	Estimate: (read/only) 2 weeks / (read/write) 6 to 7 weeks<br>
-	(4Q2007)</li>
+	<li><strong>read/write disconnected AFS:</strong> <br>Read-only and partial 
+	read-write operational support is present in the 1.5 release series.&nbsp; 
+	Additional work needs to completed to support hard links, conflict 
+	resolution, and pinning of objects, directory trees or volumes.<br>
+	</li>
 	<li><strong>intermediate fileserver - client as fileserver:</strong><br>
 	Each AFS cache contains up-to-date copies of data when a callback is registered 
 	with a file server.&nbsp; In a cluster of clients that are reading the same 
 	data over a low bandwidth network, it would be more efficient if the AFS cache 
 	manager could obtain data from a nearby up-to-date copy as opposed to reading 
-	it from the file server on the slow link.<br>
-	(4Q2007)</li>
+	it from the file server on the slow link.
+	<br>Estimate: two to three months.</li>
 	<li><strong>prevent repeated queries of the same volume location data:</strong><br>
 	The UNIX client does not prevent multiple threads from repeatedly querying 
 	the same volume location data.<br>&nbsp;</li>
@@ -268,7 +215,7 @@ years to come.</p>
 	permit a greater number of simultaneous RPCs.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#connection pools">
 	For more details ...</a><br>
-	Estimate: TBD </p></li>
+	Estimate:&nbsp; </p></li>
 	<li><p wrap><strong>Client Cache Usage Tracking and Tuning:</strong><br>
 	The current cache managers implementation an explicit Least Recently Used algorithm for
 recycling objects.   This algorithm does not take into account:
@@ -532,7 +479,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	and detached when no longer required.&nbsp; This reduces the number of 
 	volumes that may require salvaging upon a restart.<br>
 	<br>
-	Estimated: 2 weeks<br>
+	Estimated: Requires Testing<br>
 	<br>
 	</li>
 	<li><strong>Multi-Protocol File Server:</strong><br>
