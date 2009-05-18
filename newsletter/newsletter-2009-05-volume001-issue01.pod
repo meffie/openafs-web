@@ -1,0 +1,354 @@
+=head1 OpenAFS Newsletter, Volume 1, Issue 1, May 2009
+
+This is the first issue of what will hopefully be a monthly summary of the
+activity that's happening in the OpenAFS community.
+
+As always volunteers, patches, bug reports, or any other type of help is
+greatly appreciated.
+
+Feedback on this newsletter is welcome. The goal is to summarize the
+various development efforts and new of OpenAFS for the community. Please
+let Jason know what you would like to see out of this newsletter.
+
+=head2 Upcoming Events
+
+The Sixth Annual International AFS & Kerberos Best Practices Workshop will
+be held at Stanford University on June 1-5, 2009.
+
+Ref: http://workshop.openafs.org/afsbpw09/index.html
+
+=head2 Projects
+
+=head3 Disconnected AFS support
+
+Project Contacts:
+
+=over
+
+=item *
+
+Simon Wilkinson <sxw@inf.ed.ac.uk>
+
+=item *
+
+Dragos Tatulea <dragos.tatulea@gmail.com>
+
+=back
+
+Support for disconnection operation on Unix has been integrated into the
+1.5.x branch. There are no currently known data loss bugs, and further
+testing would be greatly appreciated. Currently, files written whilst
+disconnected do not persist across restarts, and there is no user
+interface to specify which files should be pinned in the cache to ensure
+they're available whilst disconnected. Simon Wilkinson and Dragos Tatulea
+(respectively) are working to resolve these.
+
+=head3 Security Releases
+
+Security Officer:
+
+=over
+
+=item *
+
+Simon Wilkinson <sxw@inf.ed.ac.uk>
+
+=back
+
+
+OpenAFS 1.4.9, 1.4.10 and 1.5.59 were a security release to resolve two
+independent issues in the OpenAFS cache manager for Unix, one of which is
+a potential remote root exploit. All Unix platforms, excluding Mac OS X
+10.4 and 10.5 are affected, and upgrading is strongly recommended.
+
+=head3 Fedora 11 and Linux 2.6.29 support
+
+Project Contact:
+
+=over
+
+=item *
+
+Simon Wilkinson <sxw@inf.ed.ac.uk>
+
+=back
+
+OpenAFS 1.4.10 does not build on Fedora 11, and crashes in some situations
+when running on a 2.6.29 kernel. Fixes will be available shortly.
+
+=head3 Newsletter
+
+Project Contact:
+
+=over
+
+=item *
+
+Jason Edgecombe <jason@rampaginggeek.com>
+
+=back
+
+Derrick Brashear, Jason Edgecombe, Jeff Altman, and Simon Wilkinson
+discussed the issue of keeping the community better informed by the web
+and a monthly email newsletter. Jason volunteered to write the
+newsletter. This document is the result.
+
+Ref: http://jabber.openafs.org/openafs@conference.openafs.org/2009-05-04.txt
+
+
+=head3 Google Summer of Code 2009
+
+OpenAFS received 4 slots for the 2009 Google Summer of Code.
+
+Go to http://socghop.appspot.com/org/home/google/gsoc2009/openafs for more
+information about the GSoC projects.
+
+The student projects are:
+
+=head4 OpenAFS server preference based on network conditions
+
+Student Developer: Jake Thebault-Spieker <summatusmentis@gmail.com>
+
+Mentor: Derrick Brashear <shadow@gmail.com>
+
+This is Jake's second year with GSoC for OpenAFS.
+
+Abstract:
+
+The OpenAFS cache manager keeps two lists of which servers host the files
+required. Currently, these lists are ordered based on antiquated network
+architecture assumptions that no longer apply to current network
+architectures. This project seeks to change the way these lists are
+ordered by taking into account network conditions that can be estimated
+based on the Rx peer statistics gathering functionality built into
+OpenAFS.
+
+Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-April/016590.html
+
+=head4 OpenAFS Management Console on Windows
+
+Student Developer: Brant Gurganus <brant@gurganus.name>
+
+Mentor: Jeffrey Altman <jaltman@secure-endpoints.com>
+
+Abstract:
+
+I propose creating a Microsoft Management Console snap-in for
+Windows. This will better integrate OpenAFS with existing Windows
+management technology and fits in an overall strategy of improved Windows
+integration.
+
+Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-April/016591.html
+
+=head4 Implementing OpenAFS features into RedHat's kafs kernel module.
+
+Student Developer: Wang Lei <wang840925@gmail.com>
+
+Mentor: David Howells
+
+Abstract:
+
+My project is to implement some OpenAFS features into the Linux kafs
+kernel module. The first feature is DNS AFSDB Support which may be
+implemented by sharing the mechanism used by CIFS as my mentor's design at
+present. The second is implement more functions of the pioctl system-call
+on the work of the student of GSoC last year. And the other two are to
+implement some OpenAFS fs commonds that were not implemented in kafs and
+Keyring compatibility which can work well with both OpenAFS client and
+kafs. I have began to read the documatations of pioctl/ioctl of the
+OpenAFS, and I will start my work with the implement of this system
+call. There are a lot of pioctls to implement and I think that can help me
+to understand OpenAFS well.
+
+Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-April/016595.html
+
+=head4 Adding Searching and Indexing Searching Features
+
+Student Developer: Reeni Kaushik <kaushik1@illinois.edu>
+
+Mentor: Dave Botsch
+
+Abstract:
+
+My interest lies in the area of File Systems and I am especially
+interested in working on the project "AFS as a Data Driven File System".
+
+Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-April/016596.html
+
+
+=head3 Kerberos v5 and multiple encryption types
+
+Project Contacts:
+
+=over
+
+=item *
+
+Matt Benjamin <matt@linuxbox.com>
+
+=item *
+
+Marcus Watts <mwd@umich.edu>
+
+=back
+
+We are finalizing work to bring the rxk5 change set to parity with
+openafs-devel-1_5_x, at which time we will pull the rxk5-devel and
+probably rxk5 branch tags forward.  (This may take place in the next day
+or so, in fact, thanks to a bunch of merge work by Marcus over the
+weekend.)  Our intention is to have rxk5 ready to merge with 1.5 in the
+near future.  In addition, we are working on a draft description of
+'rxk5ng', a superset of rxk5 addressing authorization of currently
+unsecured call channels (anonymous file accesses, callbacks), cache
+poisoning, and departmental servers. --Matt
+
+(Ed: This was received on May 10)
+
+=head3 *BSD Support
+
+Project Contacts:
+
+=over
+
+=item *
+
+Matt Benjamin <matt@linuxbox.com>
+
+=back
+
+The OpenBSD port has been updated to support OpenBSD 4.4 and 4.5.  I
+have added a userland port (no client) to DragonflyBSD, supporting
+releases 2.2 and 2.3.  Updates for client support of recent versions
+of FreeBSD 8.0 current and NetBSD 4.x and 5.x are in progress. --Matt
+
+
+=head3 Extended Callback Information
+
+Project Contacts:
+
+=over
+
+=item *
+
+Matt Benjamin <matt@linuxbox.com>
+
+=back
+
+I am preparing a public release of the full extended callback
+information draft implementation, including a reduced version of Tom
+Keiser's libosi work.  (The xcb mechanism makes the callback interface
+extensible, and provides atop this new notifications including range
+invalidation on files and metadata change notifications.)  This will
+be ready for review some time before the afsbpw. --Matt
+
+-- unverified stuff below:
+
+=head3 Web Site Redesign
+
+Project Contact:
+
+=over
+
+=item *
+
+Jake Thebault-Spieker <summatusmentis@gmail.com>
+
+=back
+
+Jake is working on this in his spare time.
+
+=head3 git migration
+
+The effort to do a bulk git conversion of the OpenAFS CVS history
+fizzled. no fully automated way was found to do the conversion because CVS
+was used in non-standard ways. None of the available conversion tools
+could do the job. Even writing custom tools failed.
+
+Simon Wilkinson says we'll probably do a naive migration and rebase the
+history at some point. Simon would like to have this done before the
+Google Summer of code gets into full swing. There is a desire to use
+gerrit to allow for better code review.
+
+Ref: http://jabber.openafs.org/openafs@conference.openafs.org/2009-05-04.txt
+
+
+=head3 Merging the 1.4 and 1.5 branches
+
+Jeff, Derrick, and others want to merge the changes from 1.4 into the 1.5
+branch. The plan is to make the 1.5 the new stable branch. The 1.5 branch
+is usable on Linux and other Unix platforms, but it needs more testing
+before it can become the stable branch. Testers are wanted, especially for
+the demand-attached fileserver compile option. Bug reports welcome.
+
+
+=head3 Better Documentation
+
+Project Contacts:
+
+=over
+
+=item * 
+
+Russ Allbery <rra@stanford.edu>
+
+=item *
+
+Jason Edgecombe <jason@rampaginggeek.com>
+
+=back
+
+Marcus Watts updated the pts_interactive.pod, pts_sleep.pod,
+pts_source.pod, and NoAuth.pod man pages in the rxk5 branch on May 3.
+Jason clarified fake address support in netinfo.pod on April 27. Jason has
+started working on the Admin Quickstart guide. The man pages still need
+work, but Jason is tired of seeing new users set up OpenAFS with the
+deprecated kaserver.
+
+
+=head3 Rx OSD integration
+
+Project Contacts:
+
+=over
+
+=item * 
+
+Felix Frank <Felix.Frank@Desy.de>
+
+=back
+
+Felix Frank is working on integrating the Rx OSD changes back into the mainline
+OpenAFS code.
+
+Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html
+
+=head2 CVS statistics
+
+  Month     Lines Added     Lines Removed  Net Lines Changed
+  ====HEAD====
+  2009/01   +    1289 	  -    1128 	      161
+  2009/02   +    2274 	  -    2152 	      122
+  2009/03   +    4276 	  -    4466 	     -190
+  2009/04   +     394 	  -     361 	       33
+
+  ====openafs-devel-1_5_x====
+  2009/01   +    5794 	  -    7476 	    -1682
+  2009/02   +  133623 	  -  128267 	     5356
+  2009/03   +    8252 	  -    7838 	      414
+  2009/04   +    1145 	  -     777 	      368
+
+  ====openafs-stable-1_4_x====
+  2009/01   +     389 	  -     251 	      138
+  2009/02   +     869 	  -     612 	      257
+  2009/03   +    1503 	  -     710 	      793
+  2009/04   +     544 	  -     436 	      108
+
+  ====openafs-windows-kdfs-ifs-branch====
+  2009/01   +     247 	  -     177 	       70
+  2009/02   +    1959 	  -    1135 	      824
+  2009/03   +     316 	  -      74 	      242
+
+
+  ====rxk5-devel-1_5_x====
+  none in 2009 until May 2009
+
