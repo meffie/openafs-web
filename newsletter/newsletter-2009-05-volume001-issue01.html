@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>OpenAFS Newsletter, Volume 1, Issue 1, May 2009</TITLE>
+<TITLE>OpenAFS Newsletter, Issue 1, May 2009</TITLE>
 <LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
 </HEAD>
 
@@ -10,7 +10,7 @@
 
 <UL>
 
-	<LI><A HREF="#OpenAFS_Newsletter_Volume_1_Is">OpenAFS Newsletter, Volume 1, Issue 1, May 2009</A>
+	<LI><A HREF="#OpenAFS_Newsletter_Issue_1_May">OpenAFS Newsletter, Issue 1, May 2009</A>
 	<UL>
 
 		<LI><A HREF="#Upcoming_Events">Upcoming Events</A>
@@ -33,11 +33,8 @@
 			<LI><A HREF="#Kerberos_v5_and_multiple_encrypt">Kerberos v5 and multiple encryption types</A>
 			<LI><A HREF="#_BSD_Support">*BSD Support</A>
 			<LI><A HREF="#Extended_Callback_Information">Extended Callback Information</A>
-			<LI><A HREF="#Web_Site_Redesign">Web Site Redesign</A>
-			<LI><A HREF="#git_migration">git migration</A>
-			<LI><A HREF="#Merging_the_1_4_and_1_5_branches">Merging the 1.4 and 1.5 branches</A>
-			<LI><A HREF="#Better_Documentation">Better Documentation</A>
 			<LI><A HREF="#Rx_OSD_integration">Rx OSD integration</A>
+			<LI><A HREF="#Better_Documentation">Better Documentation</A>
 		</UL>
 
 		<LI><A HREF="#CVS_statistics">CVS statistics</A>
@@ -48,18 +45,18 @@
 
 <HR>
 <P>
-<H1><A NAME="OpenAFS_Newsletter_Volume_1_Is">OpenAFS Newsletter, Volume 1, Issue 1, May 2009</A></H1>
+<H1><A NAME="OpenAFS_Newsletter_Issue_1_May">OpenAFS Newsletter, Issue 1, May 2009</A></H1>
 <P>
 This is the first issue of what will hopefully be a monthly summary of the
 activity that's happening in the OpenAFS community.
 
 <P>
-As always volunteers, patches, bug reports, or any other type of help is
+As always, volunteers, patches, bug reports, or any other type of help is
 greatly appreciated.
 
 <P>
 Feedback on this newsletter is welcome. The goal is to summarize the
-various development efforts and new of OpenAFS for the community. Please
+various development efforts and news of OpenAFS for the community. Please
 let Jason know what you would like to see out of this newsletter.
 
 <P>
@@ -358,53 +355,36 @@ and metadata change notifications.) This will be ready for review some time
 before the afsbpw. --Matt
 
 <P>
--- unverified stuff below:
-
-<P>
 <HR>
-<H3><A NAME="Web_Site_Redesign">Web Site Redesign</A></H3>
+<H3><A NAME="Rx_OSD_integration">Rx OSD integration</A></H3>
 <P>
-Project Contact:
+Project Contacts:
 
 <UL>
 <LI>
 <P>
-Jake Thebault-Spieker &lt;<A
-HREF="mailto:summatusmentis@gmail.com">summatusmentis@gmail.com</A>&gt;
+Hartmut Reuter &lt;<A
+HREF="mailto:reuter@rzg.mpg.de">reuter@rzg.mpg.de</A>&gt;
+
+<LI>
+<P>
+Felix Frank &lt;<A
+HREF="mailto:Felix.Frank@Desy.de">Felix.Frank@Desy.de</A>&gt;
+
+<LI>
+<P>
+Christof Hanke &lt;<A
+HREF="mailto:hanke@rzg.mpg.de">hanke@rzg.mpg.de</A>&gt;
 
 </UL>
 <P>
-Jake is working on this in his spare time.
-
-<P>
-<HR>
-<H3><A NAME="git_migration">git migration</A></H3>
-<P>
-The effort to do a bulk git conversion of the OpenAFS CVS history fizzled.
-no fully automated way was found to do the conversion because CVS was used
-in non-standard ways. None of the available conversion tools could do the
-job. Even writing custom tools failed.
-
-<P>
-Simon Wilkinson says we'll probably do a naive migration and rebase the
-history at some point. Simon would like to have this done before the Google
-Summer of code gets into full swing. There is a desire to use gerrit to
-allow for better code review.
+Felix Frank is working on integrating the Rx OSD changes back into the
+mainline OpenAFS code.
 
 <P>
 Ref: <A
-HREF="http://jabber.openafs.org/openafs@conference.openafs.org/2009-05-04.txt">http://jabber.openafs.org/openafs@conference.openafs.org/2009-05-04.txt</A>
+HREF="https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html">https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html</A>
 
-
-<P>
-<HR>
-<H3><A NAME="Merging_the_1_4_and_1_5_branches">Merging the 1.4 and 1.5 branches</A></H3>
-<P>
-Jeff, Derrick, and others want to merge the changes from 1.4 into the 1.5
-branch. The plan is to make the 1.5 the new stable branch. The 1.5 branch
-is usable on Linux and other Unix platforms, but it needs more testing
-before it can become the stable branch. Testers are wanted, especially for
-the demand-attached fileserver compile option. Bug reports welcome.
 
 <P>
 <HR>
@@ -429,29 +409,9 @@ pts_source.pod, and NoAuth.pod man pages in the rxk5 branch on May 3. Jason
 clarified fake address support in netinfo.pod on April 27. Jason has
 started working on the Admin Quickstart guide. The man pages still need
 work, but Jason is tired of seeing new users set up OpenAFS with the
-deprecated kaserver.
-
-<P>
-<HR>
-<H3><A NAME="Rx_OSD_integration">Rx OSD integration</A></H3>
-<P>
-Project Contacts:
-
-<UL>
-<LI>
-<P>
-Felix Frank &lt;<A
-HREF="mailto:Felix.Frank@Desy.de">Felix.Frank@Desy.de</A>&gt;
-
-</UL>
-<P>
-Felix Frank is working on integrating the Rx OSD changes back into the
-mainline OpenAFS code.
-
-<P>
-Ref: <A
-HREF="https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html">https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html</A>
-
+deprecated kaserver. Appendix A of the Unix Quickstart Guide has been
+rewritten to show the use of configure and make to compile OpenAFS from
+source.
 
 <P>
 <HR>

@@ -1,13 +1,13 @@
-=head1 OpenAFS Newsletter, Volume 1, Issue 1, May 2009
+=head1 OpenAFS Newsletter, Issue 1, May 2009
 
 This is the first issue of what will hopefully be a monthly summary of the
 activity that's happening in the OpenAFS community.
 
-As always volunteers, patches, bug reports, or any other type of help is
+As always, volunteers, patches, bug reports, or any other type of help is
 greatly appreciated.
 
 Feedback on this newsletter is welcome. The goal is to summarize the
-various development efforts and new of OpenAFS for the community. Please
+various development efforts and news of OpenAFS for the community. Please
 let Jason know what you would like to see out of this newsletter.
 
 =head2 Upcoming Events
@@ -241,45 +241,30 @@ extensible, and provides atop this new notifications including range
 invalidation on files and metadata change notifications.)  This will
 be ready for review some time before the afsbpw. --Matt
 
--- unverified stuff below:
+=head3 Rx OSD integration
 
-=head3 Web Site Redesign
-
-Project Contact:
+Project Contacts:
 
 =over
 
-=item *
+=item * 
 
-Jake Thebault-Spieker <summatusmentis@gmail.com>
+Hartmut Reuter <reuter@rzg.mpg.de>
+
+=item * 
+
+Felix Frank <Felix.Frank@Desy.de>
+
+=item * 
+
+Christof Hanke <hanke@rzg.mpg.de>
 
 =back
 
-Jake is working on this in his spare time.
+Felix Frank is working on integrating the Rx OSD changes back into the mainline
+OpenAFS code.
 
-=head3 git migration
-
-The effort to do a bulk git conversion of the OpenAFS CVS history
-fizzled. no fully automated way was found to do the conversion because CVS
-was used in non-standard ways. None of the available conversion tools
-could do the job. Even writing custom tools failed.
-
-Simon Wilkinson says we'll probably do a naive migration and rebase the
-history at some point. Simon would like to have this done before the
-Google Summer of code gets into full swing. There is a desire to use
-gerrit to allow for better code review.
-
-Ref: http://jabber.openafs.org/openafs@conference.openafs.org/2009-05-04.txt
-
-
-=head3 Merging the 1.4 and 1.5 branches
-
-Jeff, Derrick, and others want to merge the changes from 1.4 into the 1.5
-branch. The plan is to make the 1.5 the new stable branch. The 1.5 branch
-is usable on Linux and other Unix platforms, but it needs more testing
-before it can become the stable branch. Testers are wanted, especially for
-the demand-attached fileserver compile option. Bug reports welcome.
-
+Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html
 
 =head3 Better Documentation
 
@@ -302,25 +287,10 @@ pts_source.pod, and NoAuth.pod man pages in the rxk5 branch on May 3.
 Jason clarified fake address support in netinfo.pod on April 27. Jason has
 started working on the Admin Quickstart guide. The man pages still need
 work, but Jason is tired of seeing new users set up OpenAFS with the
-deprecated kaserver.
+deprecated kaserver. Appendix A of the Unix Quickstart Guide has been
+rewritten to show the use of configure and make to compile OpenAFS from
+source.
 
-
-=head3 Rx OSD integration
-
-Project Contacts:
-
-=over
-
-=item * 
-
-Felix Frank <Felix.Frank@Desy.de>
-
-=back
-
-Felix Frank is working on integrating the Rx OSD changes back into the mainline
-OpenAFS code.
-
-Ref: https://lists.openafs.org/pipermail/openafs-devel/2009-May/016625.html
 
 =head2 CVS statistics
 
