@@ -25,6 +25,7 @@ of members.<br>
 <li><a href="#signatures">Digital Signatures</a>
 <li><a href="#reports">Status Reports</a>
 <li><a href="#release">OpenAFS for Windows 1.5.60</a>
+<li><a href="#hotfix">Microsoft Hot Fixes</a></ul>
 <!--
 <li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.4</a>
 -->
@@ -341,6 +342,41 @@ The recommended version of KFW for <a href="#release">
 OpenAFS for Windows 1.5.60</a> is version 3.2.2.  
 64-bit releases of KFW are available from
 <a href="http://www.secure-endpoints.com/index.html#kfw">Secure Endpoints Inc.</a>  
+
+<p>&nbsp;</p>
+<h2><a name="hotfix"></a>Microsoft Hotfixes</h2>
+<p>Just as OpenAFS releases fixes on a continuous basis, so does Microsoft for their Windows products.  
+If they are security related or deemed to be critical to the entire user base these hot fixes are 
+pushed out via Microsoft's Windows Update service.  However, if the fix is considered to be relevant 
+only to a small user community, the hot fix is made available via a posting to 
+<a href="http://support.microsoft.com">Microsoft KnowledgeBase</a>.  When a new service pack is 
+issued all of the outstanding hot fixes are rolled up and regression tested together.</p>
+<p>OpenAFS for Windows is highly dependent on the correct operation of Microsoft's SMB redirector 
+network file system driver and the Netbios communication stack.  Over the years there have been 
+a large number of bugs found and fixed within these two subsystems.  At the present time there 
+a hot fixes that have been issued by Microsoft which have yet to be bundled into a service pack
+for XP 32-bit, XP 64-bit and Server 2003.&nbsp; Hot Fixes that are considered 
+critical for OpenAFS users are marked as such below.</p>
+
+<h3>Microsoft Windows Server 2003 and XP64</h3>
+<p>The current service pack level is 2.</p>
+<ul>
+	<li>CRITICAL! <a href="http://support.microsoft.com/kb/969289">
+	http://support.microsoft.com/kb/969289</a>&nbsp; (XP 64-bit and Server 2003: not included in SP2)</li>
+</ul>
+
+<h3>Microsoft Windows XP</h3>
+<p>The current service pack level is 3.</p>
+<ul>	
+	<li><a href="http://support.microsoft.com/kb/916204">
+	http://support.microsoft.com/kb/916204</a>&nbsp; (XP 32-bit included in SP3 but not SP2)</li>
+	<li><a href="http://support.microsoft.com/kb/955535">
+	http://support.microsoft.com/kb/955535</a>&nbsp; (XP 32-bit not in SP3 or SP2)</li>
+	<li><a href="http://support.microsoft.com/kb/954956">
+	http://support.microsoft.com/kb/954956</a>&nbsp; (XP 32-bit not in SP3 or SP2)</li>
+	<li>CRITICAL! <a href="http://support.microsoft.com/kb/971421">
+	http://support.microsoft.com/kb/971421</a>&nbsp; (XP 32-bit not in SP3 or SP2)</li>
+</ul>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
