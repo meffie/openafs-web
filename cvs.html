@@ -1,50 +1,89 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
                       "http://www.w3c.org/TR/html4/loose.dtd">
-<html><head>
-<title>OpenAFS CVS information</title>
-<link href="/openafs.css" rel="stylesheet" type="text/css">
-</head>
-<body bgcolor="#ffffff" text="#000000"
-      link="#000fff" vlink="#0000ff" alink="#0000ff">
+<html>
+  <head>
+    <title>OpenAFS Git information</title>
+    <link href="/openafs.css" rel="stylesheet" type="text/css">
+  </head>
+  <body bgcolor="#ffffff" text="#000000"
+        link="#000fff" vlink="#0000ff" alink="#0000ff">
 
-<h1>OpenAFS CVS information</h1>
+  <h1>OpenAFS Git information</h1>
 
-<p>OpenAFS source code is managed in a CVS repository.  Anonymous access to 
-the CVS service is available.  </p>
-<ul>
-	<li>The CVSROOT should be set
-to <a href="mailto::pserver:anonymous@cvs.openafs.org:/cvs">:pserver:anonymous@cvs.openafs.org:/cvs</a></li>
-	<li>The password for this 
-user is "anonymous"</li>
-	<li>OpenAFS can be found in the "openafs" module. 
-	</li>
-</ul>
-<p>The latest 1.4 series sources can be obtained using the tag 
-"<i>openafs-stable-1_4_x</i>".  The latest 1.5 series sources can be obtained 
-using the tag "<i>openafs-devel-1_5_x</i>".  Replace the "<i>x</i>" in the tag name 
-with a number to obtain the sources to a specific release. After checking out or updating sources from the CVS repository
-the command, "<i>sh ./regen.sh</i>", must be executed.  Only then will 
-"<i>./configure</i>" work properly.</p>
+  <p>
+    The OpenAFS source code is maintained using the
+    <a href="http://git-scm.com/">Git revision control system</a> in
+    conjunction with <a href="http://code.google.com/p/gerrit/">Gerrit</a>
+    for code review.  The Git repository is publicly accessible, both via
+    the Git protocol and over the web.
+  </p>
 
-<p>For those unfamiliar with cvs:</p>
-<ol>
-<li>cvs -d:pserver:anonymous@cvs.openafs.org:/cvs login</li>
-<li>cvs -d:pserver:anonymous@cvs.openafs.org:/cvs checkout -r &lt;tag&gt; openafs</li>
-<li>sh ./regen.sh</li>
-<li>sh ./configure</li>
-</ol>
+  <p>
+    To browse the source repository via the web, go to:
+    <a href="http://git.openafs.org/">http://git.openafs.org/</a>
+  </p>
+
+  <p>
+    To clone the repository using Git, install a Git client if you have
+    not already (see the <a href="http://git-scm.com/download">Git
+    download page</a> to find one for your platform) and then run:
+  </p>
+
+  <pre>
+    git clone git://git.openafs.org/openafs.git
+  </pre>
+
+  <p>
+    This will download the full repository and leave a checked-out tree in
+    a subdirectory of the current directory named <code>openafs</code>.
+    The repository itself is in the <code>.git</code> subdirectory of that
+    directory.  <bold>WARNING:</bold> The repository is approximately
+    60MiB currently and will only grow, so it may take some time to
+    download the first time over a slow network connection.
+  </p>
+
+  <p>
+    The current development series is in the branch
+    named <code>master</code>.  This is the code that forms the 1.5
+    release series.  The current 1.4 code is in
+    the <code>openafs-stable-1_4_x</code> branch.  If you are developing
+    new code, please start with the <code>master</code> branch.
+  </p>
+
+  <p>
+    If you are working from a checkout of the Git repository, you will
+    need to run <code>./regen.sh</code> in your working tree before you
+    can run <code>./configure</code> and build the code as normal.  This
+    requires Autoconf and Automake be available on your system.  So the
+    summary of commands to get started is:
+  </p>
+
+  <pre>
+    git clone git://git.openafs.org/openafs.git
+    cd openafs
+    sh ./regen.sh
+    sh ./configure
+  </pre>
+
+  <p>
+    For information about submitting patches and the Gerrit code review
+    system used by OpenAFS, see
+    the <a href="http://www.dementia.org/twiki/bin/view/AFSLore/GitDevelopers">documentation
+    in the wiki</a>.
+  </p>
  
- 
-<div id="footer"><hr>
-<address>&lt;webmaster@openafs.org&gt;</address>
-<address>Last modified: $Date$</address>
-</div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("UA-5995928-1");
-pageTracker._trackPageview();
-</script>
-</body></html>
+  <div id="footer"><hr>
+    <address>&lt;webmaster@openafs.org&gt;</address>
+    <address>Last modified: $Date$</address>
+  </div>
+  
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker("UA-5995928-1");
+    pageTracker._trackPageview();
+  </script>
+  </body>
+</html>
