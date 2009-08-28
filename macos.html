@@ -16,10 +16,12 @@ of members.<br>
 <br>
 <h3>Contents</h3>
 <ul>
+<li><a href="#snowleopard">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.6 (Snowleopard)</a>
 <li><a href="#leopard">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.5 (Leopard)</a>
 <li><a href="#tiger">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.4 (Tiger)</a>
 <li><a href="#panther">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.3 (Panther)</a>
-<li><a href="#devel_leopard">Features Release: OpenAFS 1.5.61 for MacOS 10.5 (Leopard)</a>
+<li><a href="#devel_snowleopard">Features Release: OpenAFS 1.5.62 for MacOS 10.6 (Snowleopard)</a>
+<li><a href="#devel_leopard">Features Release: OpenAFS 1.5.62 for MacOS 10.5 (Leopard)</a>
 <li><a href="#devel_tiger">Features Release: OpenAFS 1.5.51 for MacOS 10.4 (Tiger)</a>
 <li><a href="#leopard_candidate">Maintenance Release Candidate: OpenAFS 1.4.11pre3 for MacOS 10.5 (Leopard)</a>
 <li><a href="#tiger_candidate">Maintenance Release Candidate: OpenAFS 1.4.7pre5 for MacOS 10.4 (Tiger)</a>
@@ -27,6 +29,30 @@ of members.<br>
 </ul>
 
 
+<h2><a name="snowleopard">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.6 (Snowleopard)</a> 
+<font color="#FF0000">**Recommended**</font></h2>
+(released 28 Aug 2009)<br>
+<h3>Features since 1.4.10:</h3>
+<ul>
+  <li>New port</li>
+  <li>32 and 64 bit support in one package</li>
+</ul>
+<h3>Documentation:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/1.4.11/RELNOTES-1.4.11">1.4.11 Release Notes</A><br>
+  </li>
+</ul>
+<h3>Downloads:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.4.11/macos-10.6/OpenAFS-1.4.11-Snowleopard.dmg">MacOS 10.6 (Leopard) Universal package</A><br>
+  </li>
+</ul>
+<h3>Known Issues:</h3>
+<ul>
+  <li>Finder does not display the AFS volume on the Desktop unless the user has selected 'Connected servers" in Finder->Preferences->General.(<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=75382">Bug 75382</A>)</li>
+</ul>
+</p>
+<br><br>
 <h2><a name="leopard">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.5 (Leopard)</a> 
 <font color="#FF0000">**Recommended**</font></h2>
 (released 14 Jul 2009)<br>
@@ -119,27 +145,46 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 </p>
 
 <br>
-<h2><a name="devel_leopard">Features Release: OpenAFS 1.5.61 for MacOS 10.5 (Leopard)</a></h2>
-(updated 5 Aug 2009)<br>
+<h2><a name="devel_snowleopard">Features Release: OpenAFS 1.5.62 for MacOS 10.6 (Snowleopard)</a></h2>
+(updated 28 Aug 2009)<br>
+<h3>Known Issues:</h3>
+<ul>
+  <li>Finder does not display the AFS volume on the Desktop unless the user has selected 'Connected servers" in Finder->Preferences->General.</li>
+</ul>
+<h3>Features since 1.4:</h3>
+<ul>
+  <li>"disconnected AFS" support.</li>
+  <li>Split cache (ability to devote a fixed portion of cache to readonly data)</li>
+</ul>
+<h3>Documentation:</h3>
+<ul>
+  <li>1.5.62 Release Notes (not yet)</li>
+</ul>
+<h3>Downloads:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.62/macos-10.6/OpenAFS-1.5.62-Snowleopard.dmg">MacOS 10.6 package (Universal)</A><br>
+</ul>
+<br>
+<h2><a name="devel_leopard">Features Release: OpenAFS 1.5.62 for MacOS 10.5 (Leopard)</a></h2>
+(updated 28 Aug 2009)<br>
 <h3>Known Issues:</h3>
 <ul>
   <li>Finder cannot move items by dragging across AFS volumes. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=34255">Bug 34255</A>)</li>
   <li>Finder does not display the AFS volume on the Desktop unless the user has selected 'Connected servers" in Finder->Preferences->General.</li>
   <li>Finder consumes excess resources while AFS running (PowerPC only, no details yet). (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=87482">Bug 87482</A>)</li>
 </ul>
-<h3>Features since 1.4.2:</h3>
+<h3>Features since 1.4:</h3>
 <ul>
   <li>"disconnected AFS" support.</li>
   <li>Split cache (ability to devote a fixed portion of cache to readonly data)</li>
-  <li>The 1.5.58 security vulnerability does not apply to MacOS 10.5</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li>1.5.61 Release Notes (not yet)</li>
+  <li>1.5.62 Release Notes (not yet)</li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.61/macos-10.5/OpenAFS-1.5.61-Leopard.dmg">MacOS 10.5 package (Universal)</A><br>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.62/macos-10.5/OpenAFS-1.5.62-Leopard.dmg">MacOS 10.5 package (Universal)</A><br>
 </ul>
 <br>
 <h2><a name="devel_tiger">Features Release: OpenAFS 1.5.51 for MacOS 10.4 (Tiger)</a></h2>
