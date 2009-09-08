@@ -229,17 +229,32 @@ OpenAFS received four slots for the 2009 Google Summer of Code.
 Go to L<http://socghop.appspot.com/org/home/google/gsoc2009/openafs> for more
 information about the GSoC projects.
 
-The following projects did not give a status update:
+=head4 OpenAFS Management Console on Windows
+
+Student Developer: Brant Gurganus <brant@gurganus.name>
+
+Mentor: Jeffrey Altman <jaltman@secure-endpoints.com>
+
+Self-intro:
+L<https://lists.openafs.org/pipermail/openafs-devel/2009-April/016591.html>
+
+Progress is rolling with the management console. It can be built with
+nmake now for both 32-bit and 64-bit machines. It installs and runs.
+Current tasks are polishing any install issues and bringing the console up
+to full functionality. After talking with Jeff, there will also be some
+redesigning of the user interface from the prototyped user interface to
+have a less cluttered user interface and to better follow the MMC 3.0
+Guidelines.
+
+=head4 Google Projects without an update
+
+The following Google Summer of Code projects did not give a status update:
 
 =over
 
 =item *
 
 Implementing OpenAFS Features into RedHat's kafs Kernel Module
-
-=item *
-
-OpenAFS Management Console on Windows
 
 =item *
 
