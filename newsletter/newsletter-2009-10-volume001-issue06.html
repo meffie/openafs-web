@@ -1,0 +1,320 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>OpenAFS Newsletter, Issue 6, October 2009</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#openafs_newsletter__issue_6__october_2009">OpenAFS Newsletter, Issue 6, October 2009</a></li>
+	<ul>
+
+		<li><a href="#general_openafs_progress">General OpenAFS Progress</a></li>
+		<li><a href="#events">Events</a></li>
+		<ul>
+
+			<li><a href="#afs_hackathon">AFS Hackathon</a></li>
+			<li><a href="#european_afs_meeting">European AFS Meeting</a></li>
+			<li><a href="#annual_best_practices_workshop">Annual Best Practices Workshop</a></li>
+		</ul>
+
+		<li><a href="#projects">Projects</a></li>
+		<ul>
+
+			<li><a href="#afs_protocol_standardization">AFS Protocol Standardization</a></li>
+			<li><a href="#demand_attach_fileserver__dafs_">Demand-Attach FileServer (DAFS)</a></li>
+			<li><a href="#mac_os_x_openafs_preference_pane">Mac OS X OpenAFS Preference Pane</a></li>
+			<li><a href="#extended_callback_information">Extended Callback Information</a></li>
+			<li><a href="#_bsd_support">*BSD Support</a></li>
+			<li><a href="#kerberos_v5_and_multiple_encryption_types">Kerberos v5 and multiple encryption types</a></li>
+			<li><a href="#google_summer_of_code_2009">Google Summer of Code 2009</a></li>
+			<ul>
+
+				<li><a href="#openafs_server_preference_based_on_network_conditions">OpenAFS Server Preference Based on Network Conditions</a></li>
+			</ul>
+
+			<li><a href="#projects_with_no_progress_or_no_update">Projects with no progress or no update</a></li>
+		</ul>
+
+		<li><a href="#resolved_tickets">Resolved Tickets</a></li>
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="openafs_newsletter__issue_6__october_2009">OpenAFS Newsletter, Issue 6, October 2009</a></h1>
+<p>Welcome to the sixth issue of the OpenAFS newsletter. This newsletter
+summarizes what is happening in the OpenAFS community.</p>
+<p>As always, volunteers, patches, bug reports, or any other type of help is
+greatly appreciated.</p>
+<p>Feedback on this newsletter is welcome. The goal is to summarize the
+various development efforts and news of OpenAFS for the community. Please
+let Jason Edgecombe &lt;<a href="mailto:jason@rampaginggeek.com">jason@rampaginggeek.com</a>&gt; know what you would like to
+see out of this newsletter. Any news about AFS-related projects is welcome
+and may be submitted to Jason for inclusion in the next newsletter.</p>
+<p>The current and past issues of this newsletter are available at
+<a href="http://www.openafs.org/newsletter/">http://www.openafs.org/newsletter/</a></p>
+<p>
+</p>
+<h2><a name="general_openafs_progress">General OpenAFS Progress</a></h2>
+<p>There were three OpenAFS 1.5.x releases since the last newsletter. OpenAFS
+1.5.65 was released on October 6, 2009. Highlights of this release include
+several important bugfixes. All of the existing compile-time warnings have
+been silenced, but they may be re-enabled with a ./configure option. This
+was done to help prevent new warnings from creeping into the code. The
+configure option can be used for those developers trying to clean up the
+older warnings.</p>
+<p>There was some discussion of allowing one or two hyphens to specify
+command-line options. Michael Meffie supplied a patch to allow this and it
+was approved. This feature will be included in a future release.</p>
+<p>The OpenAFS web site is now using git for source control, and the older
+CVS repository for the web site has been disabled.</p>
+<p>Jeff Altman and Derrick Brashear gave a status update on OpenAFS progress
+at the European AFS Meeting. Your File System Inc. has committed to
+working on several improvements to OpenAFS and contributing them back to
+OpenAFS. There is more information in the Jeff &amp; Derrick's slides at
+<a href="http://www.dia.uniroma3.it/~afscon09/docs/part1.pdf">http://www.dia.uniroma3.it/~afscon09/docs/part1.pdf</a> and
+<a href="http://www.dia.uniroma3.it/~afscon09/docs/part3.pdf">http://www.dia.uniroma3.it/~afscon09/docs/part3.pdf</a>. There is an
+updated roadmap at <a href="http://www.openafs.org/roadmap.html">http://www.openafs.org/roadmap.html</a>.</p>
+<p>There is some discussion about getting rid of the AFS lock icon in the
+Windows system tray for future versions of AFS. A few people value the
+clear indication that the lock icon gives for being logged in. Please join
+in the discussion on the openafs-info mailing list.</p>
+<p>
+</p>
+<h2><a name="events">Events</a></h2>
+<p>
+</p>
+<h3><a name="afs_hackathon">AFS Hackathon</a></h3>
+<p>On September 22-24, an AFS Hackathon was held at The School of Informatics
+at the University of Edinburgh. Simon Wilkinson posted a summary on the
+openafs-devel and afs3-standardization mailing lists. The summary is
+available at
+<a href="https://lists.openafs.org/pipermail/openafs-devel/2009-October/017096.html">https://lists.openafs.org/pipermail/openafs-devel/2009-October/017096.html</a></p>
+<p>The jabber chat logs of the Hackathon are available at
+<a href="http://conference.openafs.org/hackathon@conference.openafs.org/">http://conference.openafs.org/hackathon@conference.openafs.org/</a></p>
+<p>
+</p>
+<h3><a name="european_afs_meeting">European AFS Meeting</a></h3>
+<p>The Second Annual European AFS Workshop was held at Roma Tre University,
+Italy, on September 28-30, 2009.</p>
+<p>Ref: <a href="http://www.dia.uniroma3.it/~afscon09/">http://www.dia.uniroma3.it/~afscon09/</a></p>
+<p>The attendance of the event remained stable at about 50 people from 6
+countries, including two colleagues from Pilsen, Czech Republic. There was
+an introductory day, a day dealing with advanced topics, and a final
+half-day dedicated mainly to site reports. Social activities consisted of
+a sponsored bus tour through Rome (Sun Microsystems), a sponsored visit to
+St Paul's Basilica (DIA Roma Tre), the second largest cathedral after
+St. Peter's, and two dinners in typical Roman restaurants, where the
+attendants proudly consumed more wine than water.</p>
+<p>Thanks to INFN, this year Jeffrey Altman and Derrick Brashear were again
+the invited guests, and Hartmut Reuter provided a detailed tutorial on the
+combination of AFS with object storage. The slides of all talks are
+available on the website, and the event was transmitted in real-time
+streaming, provided by ENEA. Recordings can be freely accessed over the
+web.</p>
+<p>This workshop was a joint effort of the Department of Informatics and
+Automation from Roma Tre University, and three research institutions:
+CASPUR, ENEA, INFN. Two industrial sponsors contributed: E4 company and
+Sun Microsystems.</p>
+<p>The next year's conference will be hosted either in Pilsen, Czech
+Republic, or Hamburg, Germany.</p>
+<p>--Wolfgang Alexander Gehrke</p>
+<p>
+</p>
+<h3><a name="annual_best_practices_workshop">Annual Best Practices Workshop</a></h3>
+<p>Plans are already underway for the seventh Workshop, to be held May 24-28,
+2010, at the University of Illinois at Urbana-Champaign.  We hope to see
+you there.</p>
+<p>
+</p>
+<h2><a name="projects">Projects</a></h2>
+<p>
+</p>
+<h3><a name="afs_protocol_standardization">AFS Protocol Standardization</a></h3>
+<p>There is some progress in afs3-standardization.  There are new protocol
+descriptions for rxgk, rxk5, and Rx/OSD that were published in advance of
+the hackathon, I just submitted a proposal for SRV records for AFS, and I
+think there was an extended callback draft published as well.</p>
+<p>--Russ Allbery</p>
+<p>Current active protocol drafts:</p>
+<ul>
+<li>
+<p>AFS Callback Extensions</p>
+<p><a href="http://www.ietf.org/id/draft-benjamin-extendedcallbackinfo-00.txt">http://www.ietf.org/id/draft-benjamin-extendedcallbackinfo-00.txt</a></p>
+</li>
+<li>
+<p>DNS SRV Resource Records for AFS</p>
+<p><a href="http://www.ietf.org/id/draft-allbery-afs-srv-records-01.txt">http://www.ietf.org/id/draft-allbery-afs-srv-records-01.txt</a></p>
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="demand_attach_fileserver__dafs_">Demand-Attach FileServer (DAFS)</a></h3>
+<p>Project Contacts:</p>
+<ul>
+<li>
+<p>Andrew Deason &lt;<a href="mailto:adeason@sinenomine.net">adeason@sinenomine.net</a>&gt;</p>
+</li>
+<li>
+<p>Tom Keiser &lt;<a href="mailto:tkeiser@sinenomine.net">tkeiser@sinenomine.net</a>&gt;</p>
+</li>
+<li>
+<p>Mike Meffie &lt;<a href="mailto:mmeffie@sinenomine.net">mmeffie@sinenomine.net</a>&gt;</p>
+</li>
+</ul>
+<p>A fix for 124484 (volumes not salvaged on first access from volserver) is
+nearing completion, and should see public review soon. 124484 may be the
+last critical DAFS bug; we are currently trying to reproduce earlier-seen
+problems with the newest patches to see if they still exist.</p>
+<p>We are also working on improved developer documentation for DAFS, as it
+has been noted that a lack of a broad overview for the changes DAFS brings
+(specifically in the volume package) has made contributions and review
+prohibitively difficult for newcomers to DAFS code.</p>
+<p>--Andrew</p>
+<p>
+</p>
+<h3><a name="mac_os_x_openafs_preference_pane">Mac OS X OpenAFS Preference Pane</a></h3>
+<p>Project Contact:</p>
+<ul>
+<li>
+<p>Claudio Bisegni &lt;<a href="mailto:Claudio.Bisegni@lnf.infn.it">Claudio.Bisegni@lnf.infn.it</a>&gt;</p>
+</li>
+</ul>
+<p>The MacOSX Preference Pane has been updated to use the launchd start
+mode. StartupItems has been replaced by the launchd technology. The
+behavior of the OpenAFS service at startup can be managed from the
+Preference Pane. Both the launchd daemon and the preference pane use the
+/Library/OpenAFS/Tools/root.client/usr/vice/etc/afs.rc file to start or
+stop OpenAFS.</p>
+<p>
+</p>
+<h3><a name="extended_callback_information">Extended Callback Information</a></h3>
+<p>Project Contacts:</p>
+<ul>
+<li>
+<p>Matt Benjamin &lt;<a href="mailto:matt@linuxbox.com">matt@linuxbox.com</a>&gt;</p>
+</li>
+</ul>
+<p>XCB was discussed at Edinburgh, and at the request of the group, a new I-D
+draft was published, removing mention of asynchronous delivery.  That
+feature will be revisited in future.  The XCB draft is under last call,
+and interested parties are requested to review the draft and send comments
+or indication of &quot;support&quot; or &quot;not support&quot; to the afs3-standardization
+list.</p>
+<p>A draft document of the protocol changes is available at
+<a href="http://www.ietf.org/id/draft-benjamin-extendedcallbackinfo-00.txt">http://www.ietf.org/id/draft-benjamin-extendedcallbackinfo-00.txt</a>.</p>
+<p>
+</p>
+<h3><a name="_bsd_support">*BSD Support</a></h3>
+<p>Project Contacts:</p>
+<ul>
+<li>
+<p>Matt Benjamin &lt;<a href="mailto:matt@linuxbox.com">matt@linuxbox.com</a>&gt;</p>
+</li>
+</ul>
+<p>I am gradually sending changes indirectly related to NetBSD cache manager
+port.  The most recent are related to AFS_PROC and AFS_UCRED.</p>
+<p>
+</p>
+<h3><a name="kerberos_v5_and_multiple_encryption_types">Kerberos v5 and multiple encryption types</a></h3>
+<p>Project Contacts:</p>
+<ul>
+<li>
+<p>Matt Benjamin &lt;<a href="mailto:matt@linuxbox.com">matt@linuxbox.com</a>&gt;</p>
+</li>
+<li>
+<p>Marcus Watts &lt;<a href="mailto:mwd@umich.edu">mwd@umich.edu</a>&gt;</p>
+</li>
+</ul>
+<p>Marcus have a presentation at the European AFS Meeting
+<a href="http://www.dia.uniroma3.it/~afscon09/docs/watts.pdf">http://www.dia.uniroma3.it/~afscon09/docs/watts.pdf</a></p>
+<p>
+</p>
+<h3><a name="google_summer_of_code_2009">Google Summer of Code 2009</a></h3>
+<p>OpenAFS received four slots for the 2009 Google Summer of Code.</p>
+<p>Go to <a href="http://socghop.appspot.com/org/home/google/gsoc2009/openafs">http://socghop.appspot.com/org/home/google/gsoc2009/openafs</a> for more
+information about the GSoC projects.</p>
+<p>The Google Summer of code is over for this year. The code from the three
+active GSoC projects is available at
+<a href="http://code.google.com/p/google-summer-of-code-2009-openafs/downloads/list">http://code.google.com/p/google-summer-of-code-2009-openafs/downloads/list</a></p>
+<p>
+</p>
+<h4><a name="openafs_server_preference_based_on_network_conditions">OpenAFS Server Preference Based on Network Conditions</a></h4>
+<p>Student Developer: Jake Thebault-Spieker &lt;<a href="mailto:summatusmentis@gmail.com">summatusmentis@gmail.com</a>&gt;</p>
+<p>Mentor: Derrick Brashear &lt;<a href="mailto:shadow@gmail.com">shadow@gmail.com</a>&gt;</p>
+<p>Self-intro:
+<a href="https://lists.openafs.org/pipermail/openafs-devel/2009-April/016590.html">https://lists.openafs.org/pipermail/openafs-devel/2009-April/016590.html</a></p>
+<p>The server preferences project has implemented code for the Windows platform
+to rank servers based on packet round-trip time which is currently available
+in gerrit. Using throughput as well will have updated code in gerrit soon
+(although this is still a work in progress).</p>
+<p>Upon getting code that seems reasonable for the Windows platform, the Unix
+port should be a matter of re-implementing the code, but not changing too
+much. I hope to have the unix port completed within a month, time-allowing.</p>
+<p>--Jake</p>
+<p>Even though the Google Summer of code has ended, Jake will continue
+working on the project until completion. He is still working within the
+original specifications of the project.</p>
+<p>A presentation about Jake's work was given at the European AFS Workshop
+<a href="http://www.dia.uniroma3.it/~afscon09/docs/part2.pdf">http://www.dia.uniroma3.it/~afscon09/docs/part2.pdf</a>.</p>
+<p>--Ed.</p>
+<p>
+</p>
+<h3><a name="projects_with_no_progress_or_no_update">Projects with no progress or no update</a></h3>
+<ul>
+<li>
+<p>Disconnected AFS support</p>
+</li>
+<li>
+<p>Pthreaded Ubik</p>
+</li>
+<li>
+<p>Rx OSD integration &amp; Raw Vicep Access in Clients</p>
+</li>
+<li>
+<p>Userspace cache manager</p>
+</li>
+<li>
+<p>Better Documentation</p>
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="resolved_tickets">Resolved Tickets</a></h2>
+<p>Here is a list of tickets that have been resolved since September 1, 2009:</p>
+<pre>
+  ticket # state     created       title
+     1187: resolved  Oct 31, 2002  rxgen features
+   124990: resolved  Jun 25, 2009  addition of doc/arch/dafs-vnode-fsa.dot
+   125099: resolved  Jul 14, 2009  1.4.11 ../configure; make fails
+   125101: resolved  Jul 15, 2009  ubik_VL_GetEntryByIDN not attempted
+   125151: resolved  Jul 23, 2009  make clean issue on OSX
+   125158: resolved  Jul 24, 2009  Re: getcwd() returns invalid working directory in chroot environment
+   125226: resolved  Aug 14, 2009  ktc_curpag deactivated for non Kerberos environment -&gt; breaks pam_afs.so
+   125285: resolved  Aug 26, 2009  afs global lock not held
+   125342: resolved  Sep 01, 2009  Mac OS 1.4 and 1.5 clients fail with huge root [=cache] partition sizes
+   125351: resolved  Sep 02, 2009  Bug Report: windows client flooding fileserver
+   125355: resolved  Sep 03, 2009  missing init causes erratic results using the client's &quot;hard mount&quot; functionality
+   125388: resolved  Sep 09, 2009  OpenAFS 1.5.50 on Windows clients can DoS an openafs cell
+   125389: resolved  Sep 10, 2009  Integrated login failed: Unknown code KTC2 on windows 1.5.6204
+   125391: resolved  Sep 11, 2009  windows 64-bit 1.5.63 msi installer is corrupt</pre>
+
+</body>
+
+</html>
