@@ -14,7 +14,8 @@
 <img src="images/oafw-logo.jpg" width="184" height="127" align="left">OpenAFS for Windows</h1>
 OpenAFS is the world's foremost location independent file system.&nbsp;
 With OpenAFS for Windows, users of Microsoft Windows 2000, XP, 2003, XP64, Vista
-(32-bit and 64-bit editions) and Server 2008 (32-bit and 64-bit editions) can make the most of this proven data sharing
+(32-bit and 64-bit editions, Server 2008 (32-bit and 64-bit editions), Windows 7 
+(all editions), and Server 2008 R2 (all editions) can make the most of this proven data sharing
 solution.&nbsp; The OpenAFS Project provides binary installation packages
 appropriate for both individual users and organizations with thousands
 of members.<br>
@@ -25,7 +26,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#release">OpenAFS for Windows 1.5.65</a></li>
+<li><a href="#release">OpenAFS for Windows 1.5.66</a></li>
 	<ul>
 		<li><a href="#1_5_features">Features</a>
 		<li><a href="#1_5_docs">Documentation</a>
@@ -45,6 +46,14 @@ of members.<br>
 <ul>
 	<li>All versions of OpenAFS for Windows prior to 1.5.62 can experience data loss 
 when storing data to the file server.</li>
+	<li>Windows 7 Upgrading:<ul>
+		<li>&nbsp;Version 1.5.66 is the first release of OpenAFS for Windows 
+		that is supported on Windows 7.</li>
+		<li>OpenAFS for Windows must be re-installed after a Windows 7 Upgrade.&nbsp; 
+		The Windows 7 Upgrade process will uninstall the Microsoft Loopback 
+		Adapter</li>
+	</ul>
+	</li>
 </ul>
 <h2><a name="whichversion">How to Decide Which Version to Install</a></h2>
 <!--
@@ -91,8 +100,8 @@ process and send e-mail to
 was published in July 2008.  
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="release">OpenAFS for Windows 1.5.65 (1.5.6500.0)</a></h2>
-(updated 1 October 2009)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+<h2><a name="release">OpenAFS for Windows 1.5.66 (1.5.6600.0)</a></h2>
+(updated 24 October 2009)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
 <h3><a name="1_5_features"></a>Features:</h3>
 <ul>
   <!--<li>All the features of the <a href="#stable">maintenance release</a></li> -->
@@ -111,18 +120,16 @@ was published in July 2008.
 	to store an object with a name that cannot be represented in the OEM code 
 	page.&nbsp;</span></li>
 	<li>Compatible with all OpenAFS and IBM/Transarc AFS Server versions</li>
+	<li>Support for all editions of Windows 7 and Windows Server 2008 R2</li>
 	<li>Support for all editions of Windows Vista including SP1 and Windows 
 	Server 2008</li>
-	<li>2007 Daylight Savings Time corrected C Runtime Library DLLs</li>
-	<li>AFS credentials module for MIT Kerberos for Windows Network Identity Manager </li>
+	<li>AFS credentials module for Network Identity Manager version 1 and 
+	version 2</li>
 	<li>Support for 64-bit File Sizes on both 32-bit and 64-bit versions of 
 	Microsoft Windows</li>
-  <li>Support for 64-bit Windows XP/2003/R2/Vista/2008</li>
+  <li>Support for all AMD64 64-bit Windows platforms</li>
 	<li>Implements Windows Byte Range Locking backed by AFS File Server Locks</li>
-    <li>Uses GetCapabilities RPCs to probe the server status</li>
-  <li>Logs <i>fs crypt</i> state to the Windows Event Log</li>
-  <li>Supports OutputDebugString debugging of the RX Library</li>
-  <li>New commands:
+    <li>New commands:
   <ul>
 	  <li>fs uuid [-generate]</li>
 	  <li>fs chown -owner &lt;user name or id&gt; [-path &lt;dir/file path&gt;+] [-literal]</li>
@@ -130,8 +137,9 @@ was published in July 2008.
   </ul>
 	</li>
   <li>Improved CIFS protocol compatibility<ul>
-	  <li>Compatible with XP, Server 2003, Vista and Server 2008.</li>
-	  <li>As of 1.5.62, supports the SRVSVC and WKSSRV services providing an 
+	  <li>Compatible with XP, XP64, Server 2003, Vista, Server 2008, Windows 7 
+	  and Server 2008 R2.</li>
+	  <li>Supports the SRVSVC and WKSSRV services providing an 
 	  improved \\AFS browsing experience.</li>
   </ul>
 	</li>
@@ -141,16 +149,7 @@ was published in July 2008.
 		</ul>
 	</li>
 	<li>Improved handling of Windows Standby/Hibernate modes when network access 
-	is not available</li>
-	<li>Significant performance improvements when searching directories 
-	containing hundreds or thousands of files and sub-directories<ul>
-  <li>Implements Inline Bulk Status RPCs which speeds up directory listings</li>
-  <li>Local B+ tree generation</li>
-		<li>Local directory updates do not require fetching changes from the 
-		file server</li>
-    </ul>
-	</li>
-	<li>Reduced time required for file open operations</li>
+	is unavailable</li>
 	<li><i><b>Fixes critical data loss errors:</b></i><ul>
 		<li><i><b>Prior to 1.5.15, write requests queued for background 
 		processing were not retried upon failure.</b></i></li>
@@ -166,51 +165,43 @@ was published in July 2008.
 	<li>Increased cache hit ratio for data written to AFS by the local client</li>
 	<li>Improved behavior when used behind Network Address Translation (NAT) 
 	devices</li>
-	<li>As of 1.5.18, OpenAFS for Windows no longer attempts to push Kerberos v5 tickets into the logon session.  
-	    This functionality is available in <a href="#kfw">MIT Kerberos for Windows 3.1</a> and above.</li>
-	<li><i><b>Fixes a bug that could result in a failure of Microsoft Windows to 
-	boot successfully.&nbsp; See <a href="http://www.openafs.org/security">Security Advisory OPENAFS-SA-2007-002</a></b></i></li>
-	<li>Improved Explorer Shell behavior when listing directories without &quot;read&quot; 
-	permission.</li>
-	<li>Lower CPU utilization and overall performance improvements than 1.5.20 
-	and earlier</li>
-	<li>The AFS Server Manager no longer terminates unexpectedly</li>
-	<li>Infinite recursions in chains of directory objects up to 512 levels deep 
-	are detected and prevented.</li>
-	<li>Data that is known to be valid will continue to be served by the cache 
-	manager when all servers are down.</li>
-	<li>Partial chunks are written to the file server whenever possible 
-	improving write performance.</li>
 	<li>Default chunk size increased to 1MB from 128KB as of 1.5.23 improving 
 	read and write performance.</li>
-	<li>The 1.5.31 release fixes a bug that would prevent failover when a volume 
-	cannot be attached by a single file server instance.</li>
-	<li>The 1.5.32 more than doubles the throughput of both reads and writes 
-	when compared to previous releases.&nbsp; One 1Gbit/second networks peak 
-	transfer rates of up to 32MB/second have been recorded between the cache 
-	manager and the file server.</li>
-	<li>The 1.5.39 release fixes several memory leaks.</li>
-	<li><b>The 1.5.53 release fixeda 
+	<li><b>The 1.5.53 release fixed a 
 	significant memory leak (rx packets) in the rx rpc protocol library.</b></li>
 	<li><b>The 1.5.56 and 1.5.57 releases fixes race conditions in the rx rpc protocol 
 	library that can result in the AFS Client Service terminating prematurely.</b></li>
 	<li>The 1.5.60 release converts all documentation to Windows HTML Help and 
 	adds registry support for CellServDB information.</li>
+	<li>1.5.66<ul>
+		<li>Network Identity Manager OpenAFS Provider now provides its own &quot;AFS 
+		lock&quot; notification icon to report the status of &quot;have tokens, have no 
+		tokens, service not started, service started but inaccessible&quot;. Hovering 
+		over the icon lists the cells for which tokens exist (if any) and the 
+		OpenAFS version<br>number. Double-clicking executes the Network Identity 
+		Manager default action.</li>
+		<li>disables the drive mapping functionality in the AFS Authentication 
+		Tool (afscreds) and AFS Configuration Tool (afs_config)</li>
+		<li>Workaround a file server bug that can be triggered when extending 
+		the length of a file.</li>
+		<li>Adds support for DNS SRV records _afs3-vlserver._udp.&lt;cellname&gt; in 
+		place of DNS AFSDB records.</li>
+	</ul>
+	</li>
 </ul>
 <h3><a name="1_5_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.5.65 Release Notes <a title="OpenAFS for Windows 1.5.65 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.5.65/winxp/ReleaseNotes.chm">
-	(CHM)</a> <a title="OpenAFS for Windows 1.5.65 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.5.65/winxp/ReleaseNotes/html/index.html">
+	1.5.66 Release Notes <a title="OpenAFS for Windows 1.5.66 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.5.66/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.5.66 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.5.66/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.5.65 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.65/winxp/afs-changes-since-1.2.txt">
-	1.5.65 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.5.66 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.5.66/winxp/afs-changes-since-1.2.txt">
+	1.5.66 ChangeLog</a></li>
 </ul>
 <h3><a name="1_5_platforms"></a>Supported Platforms:</h3>
 <ul>
-	<li>Windows 7 and Server 2008 R2 (X86 and AMD64) are not yet officially 
-	supported.</li>
+	<li>Windows 7 and Server 2008 R2 (X86 and AMD64)</li>
 	<li>Windows Server 2008 (X86 and AMD64) including SP1</li>
 	<li>Windows Vista (X86 and AMD64) including SP1 and SP2</li>
 	<li>Windows 2003 64 (AMD64) including SP1 and SP2</li>
@@ -225,10 +216,10 @@ was published in July 2008.
 <h3><a name="1_5_issues"></a>Known Issues:</h3>
 <ul>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must 
-be uninstalled before OpenAFS 1.5.65 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
+be uninstalled before OpenAFS 1.5.66 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of 
 OpenAFS is not installed will be generated.</li>
 <li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS 
-1.5.65 requires MIT Kerberos for Windows 3.1 or above.</li>
+1.5.66 requires MIT Kerberos for Windows 3.1 or above.</li>
 <li>Directory and File Change Notifications are ignored when accessing AFS via 
 UNC paths</li>
 <li>Windows Vista Specific Issues<ul>
@@ -236,10 +227,6 @@ UNC paths</li>
 	<a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=6ebcfad9-d3f5-4365-8070-334cd175d4bb&DisplayLang=en">WinHlp32.exe must be 
 	downloaded separately from Microsoft.</a>&nbsp; Secure Endpoints Inc. is funding the 
 development of compatible HtmlHelp (.CHM) files.</li>
-	<li>The AFS Systray Tool (afscreds.exe) and AFS Control Panel (afs_config.exe) 
-are not User Account Control (UAC) compatible.&nbsp; In order to start/stop the 
-AFS service or to modify the configuration of the AFS client service they must 
-be &quot;Run as Administrator&quot;.</li>
 </ul></li>
 	<li>Windows 7 and Server 2008 R2 Specific Issues<ul>
 		<li>There is a bug in Windows that will prevent access to
@@ -255,17 +242,17 @@ be &quot;Run as Administrator&quot;.</li>
 <h3><a name="1_5_32bit_downloads"></a>Downloads for 32-bit Windows operating systems: Vista/R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.65/winxp/OpenAFSforWindows-1-5-65.exe">32-bit EXE installer for individual installations</a> 
+	<a href="http://dl.openafs.org/dl/openafs/1.5.66/winxp/OpenAFSforWindows-1-5-66.exe">32-bit EXE installer for individual installations</a> 
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.65/winxp/openafs-en_US-1-5-65.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.66/winxp/openafs-en_US-1-5-66.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
 <h3><a name="1_5_64bit_downloads"></a>Downloads for 64-bit Windows operating systems: Vista/R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.5.65/winxp/openafs-en_US-64bit-1-5-65.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.5.66/winxp/openafs-en_US-64bit-1-5-66.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
@@ -275,7 +262,7 @@ be &quot;Run as Administrator&quot;.</li>
 	Windows.</p>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.5.65/winxp/openafs-32bit-tools-en_US-1-5-65.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.5.66/winxp/openafs-32bit-tools-en_US-1-5-66.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
@@ -376,7 +363,7 @@ OpenAFS for Windows depends on
 <a target="_self" href="http://web.mit.edu/kerberos/dist/index.html">MIT 
 Kerberos for Windows (KFW)</a>&nbsp; to provide Kerberos 5 functionality.&nbsp; 
 The recommended version of KFW for <a href="#release">
-OpenAFS for Windows 1.5.65</a> is version 3.2.2.  
+OpenAFS for Windows 1.5.66</a> is version 3.2.2.  
 64-bit releases of KFW are available from
 <a href="http://www.secure-endpoints.com/index.html#kfw">Secure Endpoints Inc.</a>
 <h2><a name="hotfix"></a>Microsoft Hotfixes</h2>
