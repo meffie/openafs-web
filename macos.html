@@ -23,8 +23,9 @@ of members.<br>
 <li><a href="#devel_snowleopard">Features Release: OpenAFS 1.5.68 for MacOS 10.6 (Snowleopard)</a>
 <li><a href="#devel_leopard">Features Release: OpenAFS 1.5.64 for MacOS 10.5 (Leopard)</a>
 <li><a href="#devel_tiger">Features Release: OpenAFS 1.5.51 for MacOS 10.4 (Tiger)</a>
-<li><a href="#leopard_candidate">Maintenance Release Candidate: OpenAFS 1.4.11pre3 for MacOS 10.5 (Leopard)</a>
-<li><a href="#tiger_candidate">Maintenance Release Candidate: OpenAFS 1.4.7pre5 for MacOS 10.4 (Tiger)</a>
+<li><a href="#snowleopard_candidate">Maintenance Release Candidate: OpenAFS 1.4.12pre1 for MacOS 10.6 (Snowleopard)</a>
+<li><a href="#leopard_candidate">Maintenance Release Candidate: OpenAFS 1.4.12pre1 for MacOS 10.5 (Leopard)</a>
+<li><a href="#tiger_candidate">Maintenance Release Candidate: OpenAFS 1.4.11pre5 for MacOS 10.4 (Tiger)</a>
 <li><a href="#tools">Third Party Tools for MacOS X</a></li>
 </ul>
 
@@ -210,21 +211,72 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 </ul>
 <br>
 
-<h2><a name="leopard_candidate">Maintenance Release: OpenAFS 1.4.11pre3 for MacOS 10.5 (Leopard)</a> 
+<h2><a name="leopard_candidate">Maintenance Release: OpenAFS 1.4.12pre1 for MacOS 10.5 (Leopard)</a> 
 <font color="#FF0000">Prerelease</font></h2>
-(released 3 Jul 2009)<br>
-<h3>Features since 1.4.10:</h3>
+(released 12 Jan 2010)<br>
+<h3>Features since 1.4.11:</h3>
 <ul>
-  <li>Userspace PAG information pioctl added</li>
+  <li>File metadata (stat() results) are no longer leaked to unauthorized users.</li>
+  <li>Avoid blindly trusting that data fetches will return only as much data is requested.</li>
+  <li>Improved fileserver host tracking.</li>
+  <li>A PreferencesPane for configuring OpenAFS is now included.</li>
+  <li>launchdaemon is now used to start OpenAFS.</li>
+  <li>Fileserver startup issues (VL registration and retried starts) fixed.</li>
+  <li>Allow caches on large partitions.</li>
+  <li>Return network unreachable errors in Rx immediately in userspace also.</li>
+  <li>Installer.app now prompts for cell name.</li>
+  <li>Fix Rx resource management issues/races.</li>
+  <li>Avoid spurious DNS lookups in dynroot.</li>
+  <li>Correct shutdown-time memory cleanup.</li>
+  <li>Fix fstrace for 64 bit kernels.</li>
+  <li>Ensure vos operations do not clobber existing volume IDs.</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/candidate/1.4.11pre3/RELNOTES-1.4.11pre3">1.4.11pre3 Release Notes</A><br>
+  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/candidate/1.4.12pre1/RELNOTES-1.4.12pre1">1.4.12pre1 Release Notes</A><br>
   </li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/candidate/1.4.11pre3/macos-10.5/OpenAFS-1.4.11pre3-Leopard.dmg">MacOS 10.5 (Leopard) Universal package</A><br>
+  <li><A HREF="http://www.openafs.org/dl/openafs/candidate/1.4.12pre1/macos-10.5/OpenAFS-1.4.12pre1-Leopard.dmg">MacOS 10.5 (Leopard) Universal package</A><br>
+  </li>
+</ul>
+<h3>Known Issues:</h3>
+<ul>
+  <li>AFS icon does not appear on user desktop. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=75382">Bug 75382</A>)</li>
+  <li>Finder cannot move items by dragging across AFS volumes. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=34255">Bug 34255</A>)</li>
+  <li>Finder consumes excess resources while AFS running (PowerPC only, no details yet). (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=87482">Bug 87482</A>)</li>
+</ul>
+</p>
+
+<h2><a name="snowleopard_candidate">Maintenance Release: OpenAFS 1.4.12pre1 for MacOS 10.6 (Snowleopard)</a> 
+<font color="#FF0000">Prerelease</font></h2>
+(released 12 Jan 2010)<br>
+<h3>Features since 1.4.11:</h3>
+<ul>
+  <li>File metadata (stat() results) are no longer leaked to unauthorized users.</li>
+  <li>Avoid blindly trusting that data fetches will return only as much data is requested.</li>
+  <li>Improved fileserver host tracking.</li>
+  <li>A PreferencesPane for configuring OpenAFS is now included.</li>
+  <li>launchdaemon is now used to start OpenAFS.</li>
+  <li>Fileserver startup issues (VL registration and retried starts) fixed.</li>
+  <li>Allow caches on large partitions.</li>
+  <li>Return network unreachable errors in Rx immediately in userspace also.</li>
+  <li>Installer.app now prompts for cell name.</li>
+  <li>Fix Rx resource management issues/races.</li>
+  <li>Avoid spurious DNS lookups in dynroot.</li>
+  <li>Correct shutdown-time memory cleanup.</li>
+  <li>Fix fstrace for 64 bit kernels.</li>
+  <li>Ensure vos operations do not clobber existing volume IDs.</li>
+</ul>
+<h3>Documentation:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/frameset/dl/openafs/candidate/1.4.12pre1/RELNOTES-1.4.12pre1">1.4.12pre1 Release Notes</A><br>
+  </li>
+</ul>
+<h3>Downloads:</h3>
+<ul>
+  <li><A HREF="http://www.openafs.org/dl/openafs/candidate/1.4.12pre1/macos-10.6/OpenAFS-1.4.12pre1-Snowleopard.dmg">MacOS 10.6 (Snowleopard) Universal package</A><br>
   </li>
 </ul>
 <h3>Known Issues:</h3>
