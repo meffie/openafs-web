@@ -20,8 +20,8 @@ of members.<br>
 <li><a href="#leopard">Maintenance Release: OpenAFS 1.4.12 for MacOS 10.5 (Leopard)</a>
 <li><a href="#tiger">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.4 (Tiger)</a>
 <li><a href="#panther">Maintenance Release: OpenAFS 1.4.11 for MacOS 10.3 (Panther)</a>
-<li><a href="#devel_snowleopard">Features Release: OpenAFS 1.5.72 for MacOS 10.6 (Snowleopard)</a>
-<li><a href="#devel_leopard">Features Release: OpenAFS 1.5.72 for MacOS 10.5 (Leopard)</a>
+<li><a href="#devel_snowleopard">Features Release: OpenAFS 1.5.73 for MacOS 10.6 (Snowleopard)</a>
+<li><a href="#devel_leopard">Features Release: OpenAFS 1.5.73 for MacOS 10.5 (Leopard)</a>
 <li><a href="#devel_tiger">Features Release: OpenAFS 1.5.51 for MacOS 10.4 (Tiger)</a>
 <li><a href="#snowleopard_candidate">Maintenance Release Candidate: OpenAFS 1.4.12pre4 for MacOS 10.6 (Snowleopard)</a>
 <li><a href="#leopard_candidate">Maintenance Release Candidate: OpenAFS 1.4.12pre3 for MacOS 10.5 (Leopard)</a>
@@ -145,8 +145,8 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 </p>
 
 <br>
-<h2><a name="devel_snowleopard">Features Release: OpenAFS 1.5.72 for MacOS 10.6 (Snowleopard)</a></h2>
-(updated 11 Feb 2010)<br>
+<h2><a name="devel_snowleopard">Features Release: OpenAFS 1.5.73 for MacOS 10.6 (Snowleopard)</a></h2>
+(updated 24 Mar 2010)<br>
 <h3>Known Issues:</h3>
 <ul>
   <li>Finder does not display the AFS volume on the Desktop unless the user has selected 'Connected servers" in Finder->Preferences->General.</li>
@@ -155,21 +155,24 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 <ul>
   <li>"disconnected AFS" support.</li>
   <li>Split cache (ability to devote a fixed portion of cache to readonly data)</li>
+  <li>Cross-volume drag in Finder now works</li>
+  <li><A HREF="#growl">Growl client event log agent.</A></li>
+  <li>Bulkstat (fast file status information gathering</li>
+  <li>Filesystem event notification for authentication state changes</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li>1.5.72 Release Notes (not yet)</li>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.73/RELNOTES-1.5.73">1.5.73 Release Notes</A></li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.72/macos-10.6/OpenAFS-1.5.72-Snowleopard.dmg">MacOS 10.6 package (Universal)</A><br>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.73/macos-10.6/OpenAFS-1.5.73-Snowleopard.dmg">MacOS 10.6 package (Universal)</A><br>
 </ul>
 <br>
-<h2><a name="devel_leopard">Features Release: OpenAFS 1.5.72 for MacOS 10.5 (Leopard)</a></h2>
-(updated 11 Feb 2010)<br>
+<h2><a name="devel_leopard">Features Release: OpenAFS 1.5.73 for MacOS 10.5 (Leopard)</a></h2>
+(updated 24 Mar 2010)<br>
 <h3>Known Issues:</h3>
 <ul>
-  <li>Finder cannot move items by dragging across AFS volumes. (<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=34255">Bug 34255</A>)</li>
   <li>Finder does not display the AFS volume on the Desktop unless the user has selected 'Connected servers" in Finder->Preferences->General.</li>
   <li>Finder consumes excess resources while AFS running(<A HREF="http://rt.central.org/rt/Ticket/Display.html?id=87482">Bug 87482</A>)</li>
 </ul>
@@ -177,14 +180,18 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 <ul>
   <li>"disconnected AFS" support.</li>
   <li>Split cache (ability to devote a fixed portion of cache to readonly data)</li>
+  <li>Cross-volume drag in Finder now works</li>
+  <li><A HREF="#growl">Growl client event log agent.</A></li>
+  <li>Bulkstat (fast file status information gathering</li>
+  <li>Filesystem event notification for authentication state changes</li>
 </ul>
 <h3>Documentation:</h3>
 <ul>
-  <li>1.5.72 Release Notes (not yet)</li>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.73/RELNOTES-1.5.73">1.5.73 Release Notes</A></li>
 </ul>
 <h3>Downloads:</h3>
 <ul>
-  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.72/macos-10.5/OpenAFS-1.5.72-Leopard.dmg">MacOS 10.5 package (Universal)</A><br>
+  <li><A HREF="http://www.openafs.org/dl/openafs/1.5.73/macos-10.5/OpenAFS-1.5.73-Leopard.dmg">MacOS 10.5 package (Universal)</A><br>
 </ul>
 <br>
 <h2><a name="devel_tiger">Features Release: OpenAFS 1.5.51 for MacOS 10.4 (Tiger)</a></h2>
@@ -317,9 +324,13 @@ perform package management on MacOS X, or you can simply use the bundled uninsta
 </p>
 <br>
 
+<h2><a name="growl">Growl Notifier for MacOS X</a></h2>
+<p>
+As of OpenAFS 1.5.73, a Growl notifier is included. You can find it in /Library/OpenAFS/Tools/tools/growlagent-openafs. It can be run as any user. The <A HREF="http://growl.info">Growl</A> software must be installed and running. Additionally, before any events will be received, you must, once each time AFS is started, run <B>"sudo fs mariner localhost"</B>. Future versions will likely include persistent configuration for this.
+<p>
 <h2><a name="tool">Third Party AFS Tools for MacOS X</a></h2>
 <ul>
-<li><A HREF="http://www.lnf.infn.it/~bisegni/Main/Afs_Commander.html">AFS Commander</A>: an OSX preferences pane to simplify management of the OpenAFS client.</li>
+<li><A HREF="http://www.lnf.infn.it/~bisegni/Main/Afs_Commander.html">AFS Commander</A>: an OSX preferences pane to simplify management of the OpenAFS client. This tool is bundled with recent OpenAFS releases.</li>
 <li>A collection of third party tools for use with AFS on MacOS X is maintained by <b>bil hayes</b>
 at <a href="http://www.ibiblio.org/macsupport/afs/afstools.html">http://www.ibiblio.org/macsupport/afs/afstools.html</a></li>
 <li><b>AFS Tokens</b> is a gui application for Mac and Linux. This application
