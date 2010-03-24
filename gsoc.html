@@ -4,12 +4,22 @@
 <meta http-equiv="Content-Language" content="en-us">
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <title>Google Summer of Code Project Ideas</title>
+<style type="text/css">
+
+span.MsoFootnoteReference
+	{vertical-align:super;
+}
+</style>
 </head>
 
 <body>
 
 
-<h1>OpenAFS and Google Summer of Code</h1>
+<h1>OpenAFS, Network Identity Manager and Google Summer of Code</h1>
+<p>The OpenAFS community participates in Google Summer of Code by sponsoring 
+students working on OpenAFS and related open source projects such as kAFS and 
+Network Identity Manager</p>
+<h2>What is OpenAFS?</h2>
 <p>OpenAFS is a 100% open source globally distributed file system derived from 
 IBM AFS commercial offering as of 1 November 2000.&nbsp; Since IBM released the 
 source code OpenAFS has thrived adding support for new platforms while enhancing 
@@ -21,7 +31,48 @@ to quantum physics. Developing code for OpenAFS gives you the opportunity to
 make a significant difference to a product that is in real-world large scale
 production use, and to learn key development skills. We have a large,
 supportive, community of developers who are keen to see new developers 
-enter our project, and happy to help out as you get up to speed.
+enter our project, and happy to help out as you get up to speed.</p>
+<h2>What is Network Identity Manager?</h2>
+<p>
+Network Identity Manager is a client-side
+tool designed to simplify the acquisition and management of network 
+identities and the credentials used to provide
+secure identification to network services on Microsoft Windows.&nbsp; In 2010, 
+students, faculty, and 
+researchers among others must be able to access services distributed around the world, 
+managed by different organizations, and deploying different network 
+authentication technologies.</p>
+<p>As an example, a scientist at the U.S. Department of 
+Energy’s Fermi National Labs must be able to access systems that require three 
+different forms of network credentials:</p>
+<ul>
+	<li>Kerberos v5 ticket granting and service tickets</li>
+	<li>Andrew File System (AFS)
+tokens</li>
+	<li>Short Lived Credential Services X.509 Public Key Certificates</li>
+</ul>
+
+<p>Traditionally, the acquisition and renewal of each 
+credential type would be performed using distinct tools.  The Kerberos v5 ticket granting ticket would be obtained and managed by a 
+Kerberos v5 Ticket Manager (MIT’s Leash on Windows or Kerberos.app on MacOS X).
+The AFS Tokens would be obtained by a tool provided by OpenAFS (aklog or 
+afscreds).  The short lived X.509 
+certificate would be obtained by a tool designed to work with either a 
+Kerberized Certificate Authority (KCA) or the Globus MyProxy Credential 
+Management Service.  With each new 
+credential source, the complexity for the end user is increased.</p>
+
+<p>Network Identity Manager reduces this complexity by 
+implementing a Single Sign-On (SSO) framework that permits an initial 
+authentication to retrieve not just a single credential but all of the 
+derivative credentials necessary for the user to perform their task.
+There have been many organization specific tools that have been developed 
+over the years to obtain mixed credentials
+Unlike previous tools what makes NetIdMgr special is its modularity.
+Its pluggable framework model does not require all of the technologies to 
+be integrated by the same organization.  
+Nor do all users have to be given access to the same combination of 
+identity and credential provider modules.</p>
 <h2>GSoC 2010</h2>
 
 <p>If you are considering applying to OpenAFS for a Summer of Code project and 
@@ -51,8 +102,7 @@ openafs-devel@openafs.org mailing list.
 <h3>Background reading</h3>
 If you are interested in working on OpenAFS this 
 Summer (and perhaps for the rest of your life) here are some things that we 
-recommend you do:</p>
-<ol>
+recommend you do:<ol>
 	<li>If you are unfamiliar with programming in C, see if your
 	University has any resources available for assisting their students
 	who want to learn C.&nbsp; If that is not possible, get yourself a
@@ -130,12 +180,14 @@ opportunity to meet the community and learn more about how OpenAFS works and how
 it is used.</p>
 -->
 <h2>Project Ideas</h2>
+<h3>OpenAFS</h3>
 <p>The following are a list of project ideas that members of the OpenAFS 
 community believe are not only interesting challenges that can be completed
 over a Summer but that will provide much needed features or functions for
 OpenAFS.</p>
 
-<h3><a name="Userspace_NFS_AFS_translator"></a> Userspace NFS-&gt;AFS translator </h3>
+<h4><a name="Userspace_NFS_AFS_translator"></a> Userspace NFS-&gt;AFS translator 
+</h4>
 <p />
 AFS has, for years, had an NFS to AFS translator which loads into the Solaris
 kernel. This project would build a new translator for all Unix operating
@@ -143,7 +195,7 @@ systems, building on top of the existing userspace AFS cache manager. It offers
 the prospective student the opportunity to learn about the internals of both
 the AFS and NFS distributed filesystem protocols. An existing knowledge of the
 C programming language is required.
-<h3><a name="Encrypted_storage"></a> Encrypted storage </h3>
+<h4><a name="Encrypted_storage"></a> Encrypted storage </h4>
 <p />
 The AFS protocol offers encryption for data transport from client to server.
 However, that data is stored on the server in cleartext, where it can
@@ -157,7 +209,7 @@ users of their choosing, and protect the names of files, in addition to their
 contents. This is a challenging project, during which the student will gain
 an in depth knowledge of kernel programming, distributed systems, and
 cryptography.
-<h3><a name="An_AFS_search_service"></a> An AFS search service </h3>
+<h4><a name="An_AFS_search_service"></a> An AFS search service </h4>
 <p />
 Desktop search clients such as Beagle are now widely available. However, they
 do not work well with network filesystems and the vast amount of data that may
@@ -167,7 +219,8 @@ clients to query that data. Files may be indexed using existing metadata, or
 through agents which index objects of particular types. Students will learn
 how to specify and extend an existing distributed system, and gain exprience
 with information search, indexing and retrieval toolss
-<h3><a name="Internationalization_infrastruct"></a> Internationalization infrastructure </h3>
+<h4><a name="Internationalization_infrastruct"></a> Internationalization infrastructure 
+</h4>
 <p />
 OpenAFS, as a globally-distributed filesystem, has users worldwide, some
 of whom no doubt do not speak English even as a second language. This project
@@ -179,8 +232,8 @@ methods such as MacOS CoreFoundation ("CFBundleCopyLocalizedString"). Students
 will learn how to interface with C libraries, command line tools and build
 systems. If you're interested in OpenAFS but find the idea of threaded and
 kernel programming to be overwhelming, this may be the project for you.
-<p />
-<h3><a name="Persistent_storage_for_disconnec"></a> Persistent storage for disconnected mode </h3>
+<h4><a name="Persistent_storage_for_disconnec"></a> Persistent storage for disconnected mode 
+</h4>
 <p />
 Since GSoC 2008, and based on a concept pioneered in the 1990s by UMich CITI 
 OpenAFS has supported disconnected operations, meaning cached files can remain
@@ -192,8 +245,7 @@ a client shutdown, so reboots can be done while disconnected from the network.
 An especially ambitious student might also provide a graphical selection
 mechanism for retaining files. Skills learned will include kernel and
 threaded programming skills.
-<p />
-<h3><a name="Cooperative_caching"></a> Cooperative caching </h3>
+<h4><a name="Cooperative_caching"></a> Cooperative caching </h4>
 <p />
 Clients now have large local disks available to them, and fast local
 bandwidth. The remaining issue, in particular in scientific applications
@@ -206,10 +258,9 @@ data fetch, and share the results with all of the other clients in the cluster.
 This is a challenging project, developing a design and proof of concept for
 entirely new functionality. Skills learned will include the principals of
 peer-to-peer filesystems, developing cluster filesystems and kernel programming
-<p />
 
-<h3>Unix or Windows Cache Manager support for Apple Doublefiles (Extended / 
-Posix Attributes)</h3>
+<h4>Unix or Windows Cache Manager support for Apple Doublefiles (Extended / 
+Posix Attributes)</h4>
 <p>In order to store arbitrary metadata (aka attributes) with files or 
 directories in file systems that do not have the necessary native support Apple 
 developed the
@@ -223,19 +274,83 @@ Attributes on Microsoft Windows.&nbsp; This will permit arbitrary metadata (for
 example, icons, thumbnail images, author, copyright info, gps tags, etc.) to be 
 stored in AFS and shared across multiple operating systems without requiring 
 changes to the AFS file servers.</p>
-<h3>Read/write volume replication</h3>
+<h4>Read/write volume replication</h4>
 <p>OpenAFS currently provides readonly replication of data, but many sites
 would like to be able to replicate all of the data, both read only and 
 read/write. A proposal of how to implement this within the AFS protocol can
 be read
 <a href="http://www.student.nada.kth.se/~noora/exjobb/filer.html">here</a>.</p>
 <p>This project would be continuing from the work done in this area during the
-2008 Summer of Code.<p>
-<p>A student choosing this project will gain exerience in the skills necessary
+2008 Summer of Code.<p>A student choosing this project will gain exerience in the skills necessary
 for developing network-distributed systems, especially with regard to file systems. </p>
-<h3>Surprise Us</h3>
+<h4>Implementing Microsoft's Safe String (StrSafe.h) Library for UNIX/Linux</h4>
+<p>Microsoft has developed a safe C String manipulation library (StrSafe.h).&nbsp; 
+The advantages of the <font color="#ffffff" style="BACKGROUND-COLOR: #3399ff">
+Strsafe</font> functions include:</p>
+<ul>
+	<li>The size of the destination buffer is always provided to the function to 
+	ensure that the function does not write past the end of the buffer. </li>
+	<li>Buffers are guaranteed to be null-terminated, even if the operation 
+	truncates the intended result. </li>
+	<li>All functions return an HRESULT, with only one possible success code 
+	(S_OK). </li>
+	<li>Each function is available in a corresponding character count (cch) or 
+	byte count (cb) version. </li>
+	<li>Most functions have an extended (&quot;Ex&quot;) version available for advanced 
+	functionality.</li>
+</ul>
+<p>It is the opinion of the OpenAFS Gatekeepers that the StrSafe.h functions are 
+superior to anything currently available in all of the UNIX/Linux and Windows 
+environments supported by OpenAFS.&nbsp; OpenAFS would like to be able to make 
+use of the StrSafe.h functions on UNIX/Linux to improve the code quality of 
+OpenAFS and further enhance the code sharing across Windows and UNIX/Linux.</p>
+<p>This project is to implement from scratch a new implementation of the 
+StrSafe.h functionality for use on non-Windows platforms based entirely upon the 
+documentation provided by Microsoft: 
+http://msdn.microsoft.com/en-us/library/ms647466(VS.85).aspx</p>
+<h4>Surprise Us</h4>
 <p>Anything else that you want to submit.&nbsp; Speak with members of the 
 OpenAFS Community and brainstorm.&nbsp;</p>
+<h3>Network Identity Manager Project Ideas</h3>
+<h4 wrap="">X.509 identity provider / PKINIT integration</h4>
+<p>Network Identity 
+Manager includes a sample X.509 plug-in that does basic certificate 
+management tasks.&nbsp; However it has a long way to go before it can be 
+integrated with other plug-ins.&nbsp; This project would involve the design 
+and implementation of the user interface extensions needed for supporting 
+PKINIT and certificate acquistion workflows.&nbsp; The work will span requirements 
+gathering, mock-ups, prototyping, user testing, and final implementation.&nbsp; 
+Students wil acquire a working understanding of public key cryptography, 
+Kerberos, user interface design, and Windows GUI development.</p><h4>Per process default identities</h4>
+<p>The default Kerberos v5 identity for a 
+process can be controlled via its environment by specifying the default 
+Kerberos v5 credentials cache for the process.&nbsp; However, Network 
+Identity Manager currently<br>does not support managing default identities at 
+the process level.&nbsp; This project will add that functionality by implementing:</p>
+<ul>
+	<li>A method for selecting the default identity for a running GUI 
+process.</li>
+	<li>A possible approach would be to implement a hook DLL that 
+presents an extra user-interface element for a top level window.</li>
+	<li>An option to create a new process with a specific default identity.<br>
+	</li>
+</ul>
+<p>This is a simple per-identity context menu extension.</p>
+<h4>Password quality meter and password generation</h4>
+<p>The change password dialog 
+in Network Identity Manager can be extended to provide feedback on password 
+quality, and optionally generate random passwords on behalf of the user.&nbsp; 
+Password assessment and generation should be extensible so that dictionary 
+checks or other constraints can be added without changing the application 
+code.&nbsp; The student will be expected to consult existing literature on 
+password quality assessment, design the user interface for exposing this functionality, design the API, and complete the initial implementation.<br>
+</p>
+<h4>Keytab for initial authentication / Obtain keytab tool</h4>
+<p>This enhancement 
+is to extend the new credentials dialog to support the use of keytabs, and to 
+provide a user interface for creating and managing keytabs.&nbsp; Similar to 
+the other enhancements here, the student will be responsible for the design 
+of the user interface and the implementation.<br></p>
 
 <h2>Previous Years</h2>
 OpenAFS previously participated in the <a href="gsoc/2008final.html">2008</a>
