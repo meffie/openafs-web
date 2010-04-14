@@ -41,7 +41,7 @@ Git. These instructions are in the README.git file in each release.
 
 The growl agent for Mac OS X is included in 1.5.73, but it's not well
 integrated yet. Initial feedback is positive and testers are
-welcome. Please send any feedback ot the port-darmin@openafs.org mailing
+welcome. Please send any feedback ot the port-darwin@openafs.org mailing
 list.
 
 A new version of the AFS PERL API was released. For more information and
