@@ -75,10 +75,9 @@ Nor do all users have to be given access to the same combination of
 identity and credential provider modules.</p>
 <h2>GSoC 2010</h2>
 
-<p>If you are considering applying to OpenAFS for a Summer of Code project and 
-have not already read the 
+<p>As always, the 
 <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/faqs">
-GSoC 2010 FAQ</a> we suggest that you do so.</p>
+GSoC 2010 FAQ</a> is a worthwhile reading for anyone involved or considering involvement in the Google Summer of Code program.</p>
 
 <p>OpenAFS is a challenging project to develop for. It is a large and complex
 project that has developed over nearly 3 decades. The code must work across a
@@ -173,29 +172,27 @@ recommend you do:<ol>
 <!--
 <h2>AFS &amp; Kerberos Workshop</h2>
 <p>This year's <a href="http://workshop.openafs.org/">AFS &amp; Kerberos Workshop</a> 
-is being held at Stanford University the week of June 1 to 5.&nbsp;&nbsp; A 
+is being held at the University of Illinois at Urbana-Champaign the week of May 24 to 28.&nbsp;&nbsp; A 
 students working with OpenAFS for Summer of Code are given free admission to the 
 tutorials and workshop sessions.&nbsp;&nbsp; The workshop is an excellent 
 opportunity to meet the community and learn more about how OpenAFS works and how 
 it is used.</p>
 -->
-<h2>Project Ideas</h2>
+<h2>Accepted Projects</h2>
 <h3>OpenAFS</h3>
-<p>The following are a list of project ideas that members of the OpenAFS 
-community believe are not only interesting challenges that can be completed
-over a Summer but that will provide much needed features or functions for
+<p>The following are a list of projects accepted for Summer of Code 2010 for
 OpenAFS.</p>
 
-<h4><a name="Userspace_NFS_AFS_translator"></a> Userspace NFS-&gt;AFS translator 
-</h4>
+<h4><a name="kafs"></a>An alternate implementation of a userspace helper interface for Linux kafs</h4>
+<h5>Student: Weylan (Wang) Lei</h5>
 <p />
-AFS has, for years, had an NFS to AFS translator which loads into the Solaris
-kernel. This project would build a new translator for all Unix operating
-systems, building on top of the existing userspace AFS cache manager. It offers
-the prospective student the opportunity to learn about the internals of both
-the AFS and NFS distributed filesystem protocols. An existing knowledge of the
-C programming language is required.
+During last year's Google Summer of Code, an interface for allowing use of OpenAFS userspace programs with kafs was developed. This was found to not be acceptable to the Linux kernel core due to the pioctl ultiplexor system call. An alternate approach using [gs]etxattr(), add_key() and keyctl() and /proc with O_NODE was done; This year's project aims to extend upon that work.
+<h4><a name="NetBSD_port"></a>A port of OpenAFS to NetBSD</h4>
+<h5>Student: Matt Smith</h5>
+<p />
+Around the same time the original Linux port of AFS was done, a port to NetBSD was also available. While NetBSD has evolved, the original AFS port did not keep pace. Since then, a port to NetBSD has been highly desired. This project will port the OpenAFS client to run on NetBSD.
 <h4><a name="Encrypted_storage"></a> Encrypted storage </h4>
+<h5>Student: Sanket Agarwal</h5>
 <p />
 The AFS protocol offers encryption for data transport from client to server.
 However, that data is stored on the server in cleartext, where it can
@@ -209,58 +206,9 @@ users of their choosing, and protect the names of files, in addition to their
 contents. This is a challenging project, during which the student will gain
 an in depth knowledge of kernel programming, distributed systems, and
 cryptography.
-<h4><a name="An_AFS_search_service"></a> An AFS search service </h4>
-<p />
-Desktop search clients such as Beagle are now widely available. However, they
-do not work well with network filesystems and the vast amount of data that may
-be remotely stored upon them. This project would develop an AFS search service
-which indexes all of the data available on an AFS fileserver, and permit
-clients to query that data. Files may be indexed using existing metadata, or
-through agents which index objects of particular types. Students will learn
-how to specify and extend an existing distributed system, and gain exprience
-with information search, indexing and retrieval toolss
-<h4><a name="Internationalization_infrastruct"></a> Internationalization infrastructure 
-</h4>
-<p />
-OpenAFS, as a globally-distributed filesystem, has users worldwide, some
-of whom no doubt do not speak English even as a second language. This project
-would build infrastructure to collect text strings to be internationalized at
-build time, and install any provided translations into the finished builds.
-Tools and libraries which might be used include xgettext (to collect strings)
-and the libintl internationalization suite ("dgettext"), or native platform
-methods such as MacOS CoreFoundation ("CFBundleCopyLocalizedString"). Students
-will learn how to interface with C libraries, command line tools and build
-systems. If you're interested in OpenAFS but find the idea of threaded and
-kernel programming to be overwhelming, this may be the project for you.
-<h4><a name="Persistent_storage_for_disconnec"></a> Persistent storage for disconnected mode 
-</h4>
-<p />
-Since GSoC 2008, and based on a concept pioneered in the 1990s by UMich CITI 
-OpenAFS has supported disconnected operations, meaning cached files can remain
-available and editable in the presense of no network. In order to be truly
-useful, components are needed to allow selections of files to be stored for
-offline use while still online, to cause those files to remain up-to-date
-while the client is connected, and to keep in-memory state of the files across
-a client shutdown, so reboots can be done while disconnected from the network.
-An especially ambitious student might also provide a graphical selection
-mechanism for retaining files. Skills learned will include kernel and
-threaded programming skills.
-<h4><a name="Cooperative_caching"></a> Cooperative caching </h4>
-<p />
-Clients now have large local disks available to them, and fast local
-bandwidth. The remaining issue, in particular in scientific applications
-with large datasets, is in the speed of the transport mechanism between the
-client and the server hosting the data. In a cluster environment, where a
-large number of clients are collaborating on processing the same read-only
-data, it shouldn't be necessary for each client to individually fetch the
-data from the server - instead a single client should be able to perform the
-data fetch, and share the results with all of the other clients in the cluster.
-This is a challenging project, developing a design and proof of concept for
-entirely new functionality. Skills learned will include the principals of
-peer-to-peer filesystems, developing cluster filesystems and kernel programming
-
 <h4>Unix or Windows Cache Manager support for Apple Doublefiles (Extended / 
 Posix Attributes)</h4>
+<h5>Student: Kelli Ireland</h5>
 <p>In order to store arbitrary metadata (aka attributes) with files or 
 directories in file systems that do not have the necessary native support Apple 
 developed the
@@ -274,16 +222,8 @@ Attributes on Microsoft Windows.&nbsp; This will permit arbitrary metadata (for
 example, icons, thumbnail images, author, copyright info, gps tags, etc.) to be 
 stored in AFS and shared across multiple operating systems without requiring 
 changes to the AFS file servers.</p>
-<h4>Read/write volume replication</h4>
-<p>OpenAFS currently provides readonly replication of data, but many sites
-would like to be able to replicate all of the data, both read only and 
-read/write. A proposal of how to implement this within the AFS protocol can
-be read
-<a href="http://www.student.nada.kth.se/~noora/exjobb/filer.html">here</a>.</p>
-<p>This project would be continuing from the work done in this area during the
-2008 Summer of Code.<p>A student choosing this project will gain exerience in the skills necessary
-for developing network-distributed systems, especially with regard to file systems. </p>
 <h4>Implementing Microsoft's Safe String (StrSafe.h) Library for UNIX/Linux</h4>
+<h5>Student: Jonas Sundberg</h5>
 <p>Microsoft has developed a safe C String manipulation library (StrSafe.h).&nbsp; 
 The advantages of the <font color="#ffffff" style="BACKGROUND-COLOR: #3399ff">
 Strsafe</font> functions include:</p>
@@ -308,50 +248,6 @@ OpenAFS and further enhance the code sharing across Windows and UNIX/Linux.</p>
 StrSafe.h functionality for use on non-Windows platforms based entirely upon the 
 documentation provided by Microsoft: 
 http://msdn.microsoft.com/en-us/library/ms647466(VS.85).aspx</p>
-<h4>Surprise Us</h4>
-<p>Anything else that you want to submit.&nbsp; Speak with members of the 
-OpenAFS Community and brainstorm.&nbsp;</p>
-<h3>Network Identity Manager Project Ideas</h3>
-<h4 wrap="">X.509 identity provider / PKINIT integration</h4>
-<p>Network Identity 
-Manager includes a sample X.509 plug-in that does basic certificate 
-management tasks.&nbsp; However it has a long way to go before it can be 
-integrated with other plug-ins.&nbsp; This project would involve the design 
-and implementation of the user interface extensions needed for supporting 
-PKINIT and certificate acquistion workflows.&nbsp; The work will span requirements 
-gathering, mock-ups, prototyping, user testing, and final implementation.&nbsp; 
-Students wil acquire a working understanding of public key cryptography, 
-Kerberos, user interface design, and Windows GUI development.</p><h4>Per process default identities</h4>
-<p>The default Kerberos v5 identity for a 
-process can be controlled via its environment by specifying the default 
-Kerberos v5 credentials cache for the process.&nbsp; However, Network 
-Identity Manager currently<br>does not support managing default identities at 
-the process level.&nbsp; This project will add that functionality by implementing:</p>
-<ul>
-	<li>A method for selecting the default identity for a running GUI 
-process.</li>
-	<li>A possible approach would be to implement a hook DLL that 
-presents an extra user-interface element for a top level window.</li>
-	<li>An option to create a new process with a specific default identity.<br>
-	</li>
-</ul>
-<p>This is a simple per-identity context menu extension.</p>
-<h4>Password quality meter and password generation</h4>
-<p>The change password dialog 
-in Network Identity Manager can be extended to provide feedback on password 
-quality, and optionally generate random passwords on behalf of the user.&nbsp; 
-Password assessment and generation should be extensible so that dictionary 
-checks or other constraints can be added without changing the application 
-code.&nbsp; The student will be expected to consult existing literature on 
-password quality assessment, design the user interface for exposing this functionality, design the API, and complete the initial implementation.<br>
-</p>
-<h4>Keytab for initial authentication / Obtain keytab tool</h4>
-<p>This enhancement 
-is to extend the new credentials dialog to support the use of keytabs, and to 
-provide a user interface for creating and managing keytabs.&nbsp; Similar to 
-the other enhancements here, the student will be responsible for the design 
-of the user interface and the implementation.<br></p>
-
 <h2>Previous Years</h2>
 OpenAFS previously participated in the <a href="gsoc/2008final.html">2008</a>
 and <a href="gsoc/2009final.html">2009</a>Summers of Code. 
