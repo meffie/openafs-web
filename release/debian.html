@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3c.org/TR/html4/loose.dtd">
+<html><head>
+<title>OpenAFS Debian Packages</title>
+<link href="/openafs.css" rel="stylesheet" type="text/css">
+</head>
+<body bgcolor="#ffffff" text="#000000"
+      link="#000fff" vlink="#0000ff" alink="#0000ff">
+
+  <h1>Installing OpenAFS on Debian</h1>
+
+  <p>
+    OpenAFS is included in Debian and new packages are uploaded to Debian
+    unstable regularly.  If you are using Debian unstable or testing, the
+    best way to get the most current OpenAFS packages is to install them
+    directly from Debian.  Clients will generally want the openafs-client,
+    openafs-krb5, and either the openafs-modules-dkms or
+    openafs-modules-source packages.  Servers will want
+    openafs-fileserver, plus openafs-dbserver for database servers.
+  </p>
+
+  <p>
+    For additional Debian-specific instructions, install openafs-client
+    and read <code>/usr/share/doc/openafs-client/README.Debian.gz</code>
+    and <code>/usr/share/doc/openafs-client/README.modules.gz</code>.  The
+    latter explains how to install the required kernel modules.  The
+    simplest way for individual systems is generally to install the
+    openafs-modules-dkms package, which will automatically build and
+    install the OpenAFS module for your current kernel using DKMS.
+  </p>
+
+  <p>
+    OpenAFS is also included in Debian stable, but as with all packages in
+    Debian stable, the version is frozen at the time of release and is
+    only updated for serious bugs.  If that version works for you,
+    excellent; if you run into any problems, the first thing to try is to
+    update to the current version, which is maintained in
+    the <a href="http://backports.org/">backports.org repository</a>.  If
+    you have not used backports.org before, it contains versions of Debian
+    packages backported from the current testing distribution to the
+    current stable distribution.  The backports of the OpenAFS packages
+    are kept up-to-date with the version currently in testing, which will
+    generally be close to the most recent OpenAFS release.
+  </p>
+
+  <p>
+    To install OpenAFS from backports.org, take the following steps (a
+    specific version of
+    the <a href="http://backports.org/dokuwiki/doku.php?id=instructions">general
+    instructions</a>):
+  </p>
+
+  <ol>
+    <li>
+      <p>
+        Add this line:
+      </p>
+
+      <pre>    deb http://www.backports.org/debian lenny-backports main</pre>
+
+      <p>
+        to your <strong>/etc/apt/sources.list</strong> file.
+      </p>
+    </li>
+    <li>
+      <p>
+        Add the following to <strong>/etc/apt/preferences</strong>, which
+        will also ensure that any backports you install are updated
+        via <strong>apt-get upgrade</strong> or the equivalent when newer
+        versions are available:
+      </p>
+
+<pre>
+    Package: *
+    Pin: release a=lenny-backports
+    Pin-Priority: 200
+
+    Package: openafs-client
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+
+    Package: openafs-krb5
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+
+    Package: openafs-modules-dkms
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+
+    Package: openafs-modules-source
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+
+    Package: openafs-fileserver
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+
+    Package: openafs-dbserver
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+
+    Package: openafs-dbg
+    Pin: release a=lenny-backports
+    Pin-Priority: 991
+</pre>
+
+      <p>
+        Unfortunately, wildcards are not supported, so you have to list
+        all the packages of interest independently.  If you need other
+        OpenAFS packages, add them as well.
+      </p>
+    </li>
+    <li>
+      <p>
+        Run <strong>apt-get update</strong> (or <strong> aptitude
+        update</strong> or your other tool of choice) and then install the
+        debian-backports-keyring package so that you have a key to verify
+        packages in the backports.org repository.  You will have to either
+        allow that initial install to be unchecked or use the other
+        instructions
+        on <a href="http://backports.org/dokuwiki/doku.php?id=instructions">backports.org</a>.
+      </p>
+    </li>
+    <li>
+      <p>
+        Using whatever package management tool you prefer, install the
+        OpenAFS packages as normal.  Your system should now prefer the
+        versions in backports.org.
+      </p>
+    </li>
+  </ol>
+
+<div id="footer"><hr>
+<address>&lt;webmaster@openafs.org&gt;</address>
+<address>Last modified: $Date$</address>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5995928-1");
+pageTracker._trackPageview();
+</script>
+</body></html>
