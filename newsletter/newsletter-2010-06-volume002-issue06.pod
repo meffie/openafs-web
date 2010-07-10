@@ -1,4 +1,4 @@
-=head1 OpenAFS Newsletter, Volume 2, Issue 6, May 2010
+=head1 OpenAFS Newsletter, Volume 2, Issue 6, June 2010
 
 Welcome to the June issue of the OpenAFS newsletter. This newsletter
 summarizes what is happening in the OpenAFS community.
