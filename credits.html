@@ -34,15 +34,17 @@ been contributed for inclusion in OpenAFS distributions.
 <li>Computing Center of the Max-Planck-Gesellschaft - AIX 5 port, large file 
 client support
 <li>IBM Almaden - Java AFS bindings, AFS client port for Windows 95/98
+<li>The Linux Box, Inc - *BSD port work, Linux Cache Bypass support
 <li>Massachusetts Institute of Technology - Windows 2000/XP client updates and 
 Stress Test
+<li>National Institute of Nuclear Physics, Italy - OSX AFS Preferences Pane
 <li>Rensselaer Polytechnic Institute - large file server support
 <li><A HREF="http://skyrope.com">Skyrope, LLC</A> - Windows 2000/XP client 
 updates, including Kerberos v5 integration.
 <li>University of Michigan Center for Information Technology Integration - 
 OpenBSD client port
-<li> <a href="http://sinenomine.net">Sine Nomine Associates</a>
-<li><a href="https://www.secure-endpoints.com">Secure Endpoints Inc.</a> - on-going Windows 2000/XP/2003/Vista maintenance and development
+<li> <a href="http://sinenomine.net">Sine Nomine Associates</a> - Demand Attach fileserver
+<li><a href="https://www.secure-endpoints.com">Secure Endpoints Inc.</a> - ongoing Windows 2000/XP/2003/Vista maintenance and development
 <li>Your File System Inc. - Improvements to the OpenAFS Rx RPC library 
 implementation.
 </ul>
@@ -99,6 +101,14 @@ communities.
     <a href="mailto:shadow@dementia.org">&lt;shadow@dementia.org&gt;</a>
 </ul>
 
+<h2>Continuous Integration (Buildbot) host Providers</h2>
+<p>The following organizations and individuals have provided hosts to be
+used with the OpenAFS buildbot continuous integration test service:
+<ul>
+<li><a href="http://sinenomine.net">Sine Nomine Associates</a> - HP-UX 11i 
+</ul>
+
+
 <h2>Port Masters / Binary Release Builders</h2>
 <p>The following individuals are responsible for coordinating ports of OpenAFS 
 to new platforms and/or building binary releases:
@@ -106,10 +116,14 @@ to new platforms and/or building binary releases:
 <ul>
 <li>Russ Allbery - Debian Linux
 <li>Jeffrey Altman - Microsoft Windows 2000/XP/2003/Vista/2008
-<li>Matt Benjamin - FreeBSD, NetBSD, OpenBSD
-<li>Derrick Brashear - AIX 6, MacOS, Irix, Solaris
+<li>Matt Benjamin - NetBSD
+<li>Derrick Brashear - AIX 6, MacOS 10.5-10.6, Solaris 8
+<li>Chaz Chandler - IRIX 6.5
+<li>Andrew Deason - HP-UX 11i
 <li>Doug Engert - Solaris
+<li>Benjamin Kaduk - FreeBSD
 <li>Tom Keiser - AIX 5
+<li>Antoine Verheijen - OpenBSD
 <li>Simon Wilkinson - RedHat/Fedora Linux
 </ul>
 
@@ -135,219 +149,246 @@ for their efforts:
 development effort:
 
 <ul>
-<li>Adam Megacz
-<li>Adam Thornton
-<li>Adam Vollrath
-<li>Alejandro R. Sedeno
-<li>Alessandro Dellavedova
-<li>Alexei Kosut
-<li>Alf Wachsmann
-<li>Alistair Ferguson
-<li>Anders Kaseorg
-<li>Andrei Keis
-<li>Andrej Filipcic
-<li>Andrew Deason
-<li>Arkadi Shishlov
-<li>Arno Schuring
-<li>Asanka Herath
-<li>Ben Creech
-<li>Benjamin Bennett
-<li>Björn Torkelsson
-<li>Brent Graveland
-<li>Carsten Jacobi
-<li>Cesar Garcia
-<li>Charles Clancy
-<li>Chas Williams
-<li>Chaskiel Grundman
-<li>Chaskiel M Grundman
-<li>Christof Hanke
-<li>Christoph Becker-Freyseng
-<li>Christopher Allen Wing
-<li>Dale Ghent
-<li>Dan Hyde
-<li>Daryl Clevenger
-<li>Dave Cottle
-<li>Dave Koziol
-<li>Dave McMurtrie
-<li>Dave Tanner
-<li>David Bailey
-<li>David Botsch
-<li>David Howells
-<li>David Magda
-<li>David Thompson
-<li>Derek Atkins
-<li>Derrick Brashear
-<li>Douglas Engert
-<li>Dr. Dieter Mack
-<li>Dragos Tatulea
-<li>Ed Moy
-<li>Ed Symanzik
-<li>Eduard Bloch
-<li>Eric Lauriault
-<li>Eric Lorenzo
-<li>Eric Melski
-<li>Eric Sturdivant
-<li>Eric Williams
-<li>Erik J. Burckart
+<li>Aaron M. Ucko 
+<li>Adam Megacz 
+<li>Adam Thornton 
+<li>Adam Vollrath 
+<li>Aditya Sarawgi 
+<li>Alejandro R. Sedeño 
+<li>Alessandro Dellavedova 
+<li>Alexander Redinger 
+<li>Alexei Kosut 
+<li>Alf Wachsmann 
+<li>Alistair Ferguson 
+<li>Anders Kaseorg 
+<li>Andrei Keis 
+<li>Andrej Filipcic 
+<li>Andrew Deason 
+<li>Antoine Verheijen 
+<li>Arkadi Shishlov 
+<li>Arno Schuring 
+<li>Asanka C. Herath 
+<li>Asanka Herath 
+<li>Ben Creech 
+<li>Ben Kaduk 
+<li>Benjamin Bennett 
+<li>Björn Torkelsson 
+<li>Booker Bense 
+<li>Brant Gurganus 
+<li>Brent Graveland 
+<li>Carsten Jacobi 
+<li>Cesar Garcia 
+<li>Charles Clancy 
+<li>Charles Hannum 
+<li>Chas Williams 
+<li>Chaskiel M Grundman 
+<li>Chaz Chandler 
+<li>Christof Hanke 
+<li>Christoph Becker-Freyseng 
+<li>Christopher Allen Wing 
+<li>Claudio Bisegni 
+<li>Dale Ghent 
+<li>Dan Hyde 
+<li>Daryl Clevenger 
+<li>Dave Cottle 
+<li>Dave Koziol 
+<li>Dave McMurtrie 
+<li>Dave Tanner 
+<li>David Bailey 
+<li>David Botsch 
+<li>David Howells 
+<li>David Magda 
+<li>David Thompson 
+<li>Davor Ocelic 
+<li>Derek Atkins 
+<li>Derrick Brashear 
+<li>Douglas Engert 
+<li>Dr. Dieter Mack 
+<li>Dragos Tatulea 
+<li>Ed Moy 
+<li>Ed Symanzik 
+<li>Eduard Bloch 
+<li>Eric Lauriault 
+<li>Eric Lorenzo 
+<li>Eric Melski 
+<li>Eric Sturdivant 
+<li>Eric Williams 
+<li>Erik J. Burckart 
 <li>Erland Lewin
-<li>Ervin Fenyak
-<li>Evan Broder
-<li>Felix Frank
-<li>Frank Burkhardt
-<li>Frank Cusack
-<li>Garrett Wollman
-<li>Garry Zacheiss
-<li>Greg Hudson
-<li>Guillaume Rousse
-<li>Hans-Gunther Borrmann
-<li>Hans-Werner Paulsen
-<li>Harald Barth
-<li>Hartmut Reuter
-<li>Horst Birthelmer
-<li>Jacob Thebault-Spieker
-<li>James Flemer
-<li>James Peterson
-<li>Jaroslaw Polok
-<li>Jason Edgecombe
-<li>Jason McCormick
-<li>Jeff Mahoney
-<li>Jeff Riegel
-<li>Jeffrey Altman
-<li>Jeffrey Hutzelman
-<li>Jeremy Katz
-<li>Jeremy Mika
-<li>Jeremy Stribling
-<li>Jim Rees
-<li>Jimmy Engelbrecht
-<li>Joakim Fallsjö
-<li>Joe Buehler
-<li>Johan Danielsson
-<li>John Bucy
-<li>Jonathan Curley
-<li>Jose Nazario
-<li>Joseph V Moss
-<li>Karl E. Kelley
-<li>Karl Ramm
-<li>Ken Aaker
-<li>Ken Hornstein
-<li>Ken Raeburn
-<li>Kevin Coffman
-<li>Kevin Hildebrand
-<li>Kevin McBride
-<li>Klas Lindfors
-<li>Kris Van Hees
-<li>Larry Greenfield
-<li>Lars Wilke
-<li>Laura Stentz
-<li>Love Hörnquist-Åstrand
-<li>Loïc Tortay
-<li>Lukas Hluze
-<li>Lynn Zhang
+<li>Ervin Fenyak 
+<li>Evan Broder 
+<li>Fabrizio Manfredi
+<li>Felix Frank 
+<li>Frank Burkhardt 
+<li>Frank Cusack 
+<li>Garrett Wollman 
+<li>Garry Zacheiss 
+<li>Greg Hudson 
+<li>Guillaume Rousse 
+<li>Hans-Gunther Borrmann 
+<li>Hans-Werner Paulsen 
+<li>Harald Barth 
+<li>Hartmut Reuter 
+<li>Horst Birthelmer 
+<li>Jacob Thebault-Spieker 
+<li>James Flemer 
+<li>James Peterson 
+<li>Jaroslaw Polok 
+<li>Jason Edgecombe 
+<li>Jason McCormick 
+<li>Jason Rogers 
+<li>Jeff Mahoney 
+<li>Jeff Riegel 
+<li>Jeffrey Altman 
+<li>Jeffrey Hutzelman 
+<li>Jeremy Katz 
+<li>Jeremy Mika 
+<li>Jeremy Stribling 
+<li>Jim Rees 
+<li>Jimmy Engelbrecht 
+<li>Joakim Fallsjö 
+<li>Joe Buehler 
+<li>Johan Danielsson 
+<li>John Bucy 
+<li>Jonathan A. Kollasch 
+<li>Jonathan Billings 
+<li>Jonathan Curley 
+<li>Jose Nazario 
+<li>Joseph V Moss 
+<li>Karl E. Kelley 
+<li>Karl Ramm 
+<li>Ken Aaker 
+<li>Ken Dreyer 
+<li>Ken Hornstein 
+<li>Ken Raeburn 
+<li>Kevin Coffman 
+<li>Kevin Hildebrand 
+<li>Kevin McBride 
+<li>Klas Lindfors 
+<li>Kris Van Hees 
+<li>Larry Greenfield 
+<li>Lars Wilke 
+<li>Laura Stentz 
+<li>Love Hörnquist-Åstrand 
+<li>Loïc Tortay 
+<li>Lukas Hluze 
+<li>Lynn Zhang 
 <li>Magnus Ahltorp
-<li>Manuel Pereira
-<li>Marc Dionne
-<li>Marc Horowitz
-<li>Marcus Watts
-<li>Mark Dapoz
-<li>Mark W. Eichin
-<li>Matt Bacchi
-<li>Matt Benjamin
-<li>Matthew A. Bacchi
-<li>Matthew Loar
-<li>Matthew Miller
-<li>Matthew N. Andrews
-<li>Mattias Amnefelt
-<li>Mattias Pantzare
-<li>Max Cohan
-<li>Michael Allman
-<li>Michael Durket
-<li>Michael Nelson
-<li>Michael Niksch
-<li>Michael Pronath
-<li>Michael Stroucken
-<li>Michael Welsh Duggan
-<li>Mickey Lane
-<li>Mike Becher
-<li>Mike Garrison
-<li>Mike Meffie
-<li>Mike Robinson
-<li>Nathan Neulinger
-<li>Neale Ferguson
-<li>Nick Ingolia
-<li>Nickolai Zeldovich
-<li>Niklas Edmundsson
-<li>Olivier Calle
-<li>Omkar Sathe
-<li>Onime Ehimika Ohireime
-<li>Pascal Terjan
-<li>Paul Weber
-<li>Pavel Semerad
-<li>Pedro Perez
-<li>Peter Breitenlohner
-<li>Peter Nelson
+<li>Manuel Pereira 
+<li>Marc Dionne 
+<li>Marc Horowitz 
+<li>Marcus Watts 
+<li>Mark Dapoz 
+<li>Mark W. Eichin 
+<li>Matt Bacchi 
+<li>Matt Benjamin 
+<li>Matt Smith 
+<li>Matthew A. Bacchi 
+<li>Matthew Loar 
+<li>Matthew Miller 
+<li>Matthew N. Andrews 
+<li>Mattias Amnefelt 
+<li>Mattias Pantzare 
+<li>Max Cohan 
+<li>Michael Allman 
+<li>Michael Durket 
+<li>Michael Meffie 
+<li>Michael Nelson 
+<li>Michael Niksch 
+<li>Michael Pronath 
+<li>Michael Stroucken 
+<li>Michael Welsh Duggan 
+<li>Mickey Lane 
+<li>Mike Becher 
+<li>Mike Garrison 
+<li>Mike Meffie 
+<li>Mike Robinson 
+<li>Nathan Neulinger 
+<li>Neale Ferguson 
+<li>Nick Ingolia 
+<li>Nickolai Zeldovich 
+<li>Niklas Edmundsson 
+<li>Olivier Calle 
+<li>Omkar Sathe 
+<li>Onime Ehimika Ohireime 
+<li>Pascal Terjan 
+<li>Paul Weber 
+<li>Pavel Semerad 
+<li>Pedro Perez 
+<li>Peter Breitenlohner 
+<li>Peter Nelson 
 <li>Peter Scott
-<li>Peter Somogyi
-<li>Peter Tripician
-<li>Phil Holland
-<li>Qi Dong
-<li>Quanah Gibson-Mount
-<li>R. Lindsay Todd
-<li>Rainer Schöpf
-<li>Rainer Toebbicke
-<li>Richard Basch
-<li>Robert A Basch
-<li>Robert Banz
-<li>Robert S Murawski IV
-<li>Robert S. Murawski
-<li>Rolandas Naujikas
+<li>Peter Somogyi 
+<li>Peter Tripician 
+<li>Phil Holland 
+<li>Phillip Moore 
+<li>Qi Dong 
+<li>Quanah Gibson-Mount 
+<li>R. Lindsay Todd 
+<li>Rainer Schöpf 
+<li>Rainer Toebbicke 
+<li>Richard Basch 
+<li>Robert A Basch 
+<li>Robert Banz 
+<li>Robert S Murawski IV 
+<li>Rod Widdowson 
+<li>Rolandas Naujikas 
 <li>Rolf Eike Beer
-<li>Rolf Sattler
-<li>Roman Mitz
-<li>Russ Allbery
-<li>Ryan Lantzer
-<li>Sabin Iacob
-<li>Sam Hartman
-<li>Satish Kumar
-<li>Scott D. Williams
-<li>Sean O'Malley
-<li>Shantonu Sen
-<li>Shyh-Wei Luan
-<li>Silvia Gross
-<li>Simon Spero
-<li>Simon Wilkinson
-<li>Srikanth Vishwanathan
-<li>Stefaan De Roeck
-<li>Stephan Wienczny
-<li>Stephan Wiesand
-<li>Steve McIntosh
-<li>Steve Roseman
-<li>Steven Jenkins
-<li>Steven N . Hirsch
-<li>Sven Menke
-<li>Sven Oehme
-<li>Ted Anderson
-<li>Ted McCabe
-<li>Thomas Galliano
-<li>Thomas Mueller
-<li>Tino Schwarze
-<li>Todd DeSantis
-<li>Todd Fries
-<li>Todd M. Lewis
-<li>Tom Keiser
-<li>Tom Kula
-<li>Tom Maher
-<li>Tommie Gannert
-<li>Tony D'Amato
-<li>Tracy Di Marco White
-<li>Travis Broughton
-<li>Troy Benjegerdes
-<li>Ulrich Hahn
-<li>Vitaly Chernookiy
-<li>Volker Holfeld
-<li>Walter Wong
-<li>Yee Jiun
-<li>Yves Schutz
-<li>Zach Schimke
+<li>Rolf Sattler 
+<li>Roman Mitz 
+<li>Russ Allbery 
+<li>Ryan Lantzer 
+<li>Sabin Iacob 
+<li>Sam Hartman 
+<li>Sanket Agrawal
+<li>Satish Kumar 
+<li>Scott D. Williams 
+<li>Sean O'Malley 
+<li>Shantonu Sen 
+<li>Shyh-Wei Luan 
+<li>Silvia Gross 
+<li>Simon Spero 
+<li>Simon Wilkinson 
+<li>Simona Poilinca 
+<li>Srikanth Vishwanathan 
+<li>Stefaan De Roeck 
+<li>Stefan Kueng 
+<li>Stephan Wienczny 
+<li>Stephan Wiesand 
+<li>Steve McIntosh 
+<li>Steve Roseman 
+<li>Steve Simmons 
+<li>Steven Jenkins 
+<li>Steven N . Hirsch 
+<li>Sven Menke 
+<li>Sven Oehme 
+<li>Ted Anderson 
+<li>Ted McCabe 
+<li>Tharidu Fernando 
+<li>Thomas Galliano 
+<li>Thomas Mueller 
+<li>Tino Schwarze 
+<li>Toby Blake 
+<li>Toby Burress 
+<li>Todd DeSantis 
+<li>Todd Fries 
+<li>Todd M. Lewis 
+<li>Tom Keiser 
+<li>Tom Kula 
+<li>Tom Maher 
+<li>Tommie Gannert 
+<li>Tony D'Amato 
+<li>Tracy Di Marco White 
+<li>Travis Broughton 
+<li>Troy Benjegerdes 
+<li>Ulrich Hahn 
+<li>Vincent Archer 
+<li>Vitaly Chernookiy 
+<li>Volker Holfeld 
+<li>Walter Wong 
+<li>Yee Jiun 
+<li>Yves Schutz 
+<li>Zach Schimke 
 </ul>
 
 <h2>Resources</h2>
