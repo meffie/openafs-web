@@ -10,12 +10,11 @@
 <body bgcolor="#ffffff" text="#000000" link="#000fff" vlink="#0000ff" alink="#0000ff">
 
 <h1 align="center">Development Wish List / Road Map for OpenAFS</h1>
-<p>In its nine plus years as an open source project, OpenAFS has established AFS 
-as one of the open source success stories.&nbsp; OpenAFS provides clients for all 
-of the major operating system distributions and servers on all UNIX/Linux variants.&nbsp; 
-Even so, there is still a great deal that could be done to turn AFS into a first 
-class file system, especially for MacOS X and Microsoft Windows end users and 
-future platform support.</p>
+<p>In its ten plus years as an open source project, OpenAFS has established AFS 
+as an open source success stories.&nbsp; OpenAFS provides clients for all of the 
+major operating system distributions and servers on all UNIX/Linux variants.&nbsp; 
+Even so, there is still a great deal that must be finished in order for AFS to 
+acheive first class status on MacOS X and Microsoft Windows.</p>
 <p>The work to be accomplished on OpenAFS falls into six broad categories:</p>
 <ul>
 	<li><a href="#core">Core Client Functionality</a></li>
@@ -59,19 +58,7 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	conflict resolution process must be initiated.&nbsp; Conflict resolution is 
 	hard but AFS users would gain a great deal even if the contents of the AFS cache 
 	were available when disconnected from the file servers in a read-only manner.<br>
-	Estimate: 1 month</p>
-	</li>
-	<!-- Implemented	
-	<li>
-	<p wrap><b>Executable pre-fetching:</b><br>
-	The Windows client is often used to run applications out of the AFS name space.&nbsp;&nbsp; 
-	When a file server becomes unreachable while an application is running it will 
-	crash if it attempts to load a page that is not currently in the AFS cache.&nbsp; 
-	This problem can be mitigated by modifying the AFS client to pre-fetch the entire 
-	file if the file is likely to be an executable.&nbsp;<br>
-	Estimate: 2 days </p>
-	</li>
--->
+	Estimate: 3 months<br>Status: no resource commitments</p>
 	<li>
 	<p wrap><strong>Native file system driver interface (aka IFS):</strong> <br>
 	The current OpenAFS client on Windows is not a true Windows file system.&nbsp; 
@@ -127,7 +114,9 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	R2.<br>
 	<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#file system redirector">
 	For more details ...</a><br>
-	Estimate: December 2009</p>
+	Estimate: to be included in the 1.7 development series one month after the 
+	release of 1.6.0.&nbsp; Our goal is to have a stable 1.8 release series with 
+	this functionality by June 2011.</p>
 	</li>
 </ul>
 <h3 wrap>All UNIX platforms:</h3>
@@ -136,26 +125,27 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	Some usage scenarios make it desirable to ensure that a certain amount of the 
 	available cache space is reserved for read-only data in order to reduce the 
 	likelihood that the cached data will be swapped out.<br>
-	(testing needed)<br></li>
+	(testing needed)<br><br></li>
 	<li><strong>demand prefetch:</strong> <br>
 	In order to reduce wait time while streaming files, it is desirable to allow 
 	for a sliding prefetch window when a file is opened and being read. <br>
-	(testing needed)<br></li>
+	(testing needed)<br><br></li>
 	<li><strong>read/write disconnected AFS:</strong> <br>Read-only and partial 
 	read-write operational support is present in the 1.5 release series.&nbsp; 
 	Additional work needs to completed to support hard links, conflict 
 	resolution, and pinning of objects, directory trees or volumes.<br>
-	(substantially complete)<br></li>
+	Status: core functionality substantially complete on Unix platforms except 
+	for pinning and user interface issues.<br><br></li>
 	<li><strong>intermediate fileserver - client as fileserver:</strong><br>
 	Each AFS cache contains up-to-date copies of data when a callback is registered 
 	with a file server.&nbsp; In a cluster of clients that are reading the same 
 	data over a low bandwidth network, it would be more efficient if the AFS cache 
 	manager could obtain data from a nearby up-to-date copy as opposed to reading 
 	it from the file server on the slow link.
-	<br>Estimate: two to three months.<br></li>
+	<br>Estimate: two to three months.&nbsp; Requires protocol standardization<br><br></li>
 	<li><strong>prevent repeated queries of the same volume location data:</strong><br>
 	The UNIX client does not prevent multiple threads from repeatedly querying 
-	the same volume location data.<br>&nbsp;</li>
+	the same volume location data.<br><br></li>
 	<li><strong>O_DIRECT and O_SYNC:</strong><br>
 	These fopen flags should be supported.&nbsp; O_SYNC should force each write 
 	to block until the data is sent to the file server.&nbsp; O_DIRECT should 
@@ -169,14 +159,6 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	</li>
 	<li>
 	<p wrap>PAG support</p>
-	</li>
-	<li>
-	<p wrap>Re-implement Bulk Fetch Status calls in a manner compatible with the 
-	MacOS X requirement that directory nodes be created as either &quot;directory&quot; or 
-	&quot;file&quot; at allocation time.</p>
-	</li>
-	<li>
-	<p wrap>Support cross-volume Finder &quot;drag&quot; moves</p>
 	</li>
 </ul>
 <h3 wrap>Linux:</h3>
@@ -203,9 +185,9 @@ adversely impact the ability of end users to use AFS to its full existing potent
 </ul>
 <h3>New Client Platforms:</h3>
 <p>There is a growing demand for pervasive access to data from handset devices.&nbsp; 
-Clients for Symbian S60, Windows Mobile, Apple&#39;s iPhone/iTouch,
+Clients for Symbian S60, Windows Mobile, Apple&#39;s iOS,
 <a title="OpenHandsetAlliance" href="http://www.openhandsetalliance.com/">
-OpenHandsetAlliance</a> (aka Android), and Nokia Maemo devices will be critical in the 
+OpenHandsetAlliance</a> (aka Android), and Nokia/Intel Maemo/Meego devices will be critical in the 
 years to come.</p>
 <h3>All Platforms:</h3>
 <ul>
@@ -359,7 +341,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	<p>For old clients, new implementations of the old RPCs would deliver directory 
 	data translated to the old linear format up to the maximum number of directory 
 	entries.&nbsp; It is possible that old clients will not be able to see all the 
-	files in a given directory.<br><br>Implementation promised by Your File System, 2011.
+	files in a given directory.<br><br>Status: Implementation promised by Your File System, 2011.
 	&nbsp; <br>
 	</p>
 	</li>
@@ -375,7 +357,9 @@ and Microsoft Windows it must gain the following functionality: </p>
 	full EA support within AFS volumes.<br>
 	<a href="http://en.wikipedia.org/wiki/Extended_file_attributes">For more details 
 	...</a></p>
+	Status:
 	Implementation promised by Your File System, 2011.
+	<br>
 	<br>
 	</li>
 	<li>
@@ -385,7 +369,9 @@ and Microsoft Windows it must gain the following functionality: </p>
 	requires that they be stored in separate directories. The AFS protocol provides 
 	partial support for this from the AFS/DFS translator, and this is supported 
 	in clients going back to IBM AFS. </p>
+	Status:
 	Implementation promised by Your File System, 2011.
+	<br>
 	<br></li>
 	<li>
 	<p wrap><strong>Mandatory Locking and Byte range locks:<br></strong>Platforms such as Microsoft Windows and MacOS X require that their first 
@@ -402,18 +388,19 @@ and Microsoft Windows it must gain the following functionality: </p>
 	a byte range to be locked, the cache manager ensures that it has an appropriate 
 	full lock on the object.&nbsp; The cache manager than accepts the responsibility 
 	of tracking each of the locks and doling out a range at a time.<br>Estimate: 2 months. 
-	<br><br>Implementation promised by Your File System, 2010</p>
+	<br><br>Status: Implementation promised by Your File System, 2011.&nbsp; 
+	Requires Standardization.</p>
 	</li>
 	<li>
 	<p><strong>Status Data (Callback Registration) Expiration Algorithm 
 	Improvements:</strong><br>Status data and callback registration expiration is currently determined 
 	based upon the number of clients that are accessing the data instead of the 
-	likelihood that the data is going to change. <br><br>Implementation in 
+	likelihood that the data is going to change. <br><br>Status: Implementation in 
 	progress.&nbsp;&nbsp; Awaiting Standardization.</p>
 	</li>
 	<li>
 	<p><strong>OPEN/CLOSE File Server RPCs:</strong><br>New file server RPCs would provide new audit data<br>
-	<br>Implementation promised by Your File System, 2010</p>
+	<br>Status: Implementation promised by Your File System, 2011</p>
 	</li>
 	
 </ul>
@@ -448,7 +435,8 @@ and Microsoft Windows it must gain the following functionality: </p>
 	portability of the <em>namei</em> backend with the performance of the <em>
 	inode</em> backend.&nbsp;&nbsp; A <em>PosixEA</em> backend would not require 
 	a special fsck which would permit the use of journal logs.<br>
-	<br>Implementation promised by Your File System, 2011
+	<br>Status: Implementation promised by Your File System, 2011
+	<br>
 	<br>
 	</li>
 	<li><strong>Demand Attach File Server:</strong><br>
@@ -476,8 +464,8 @@ and Microsoft Windows it must gain the following functionality: </p>
 	and detached when no longer required.&nbsp; This reduces the number of 
 	volumes that may require salvaging upon a restart.<br>
 	<br>
-	Implemented in 1.5 release series.&nbsp;&nbsp; Requires Testing<br>Target: 
-	1.6<br>
+	Status: Present in 
+	1.6 pre-releases.&nbsp; Requires additional testing.<br>
 	<br>
 	</li>
 	<li><strong>Multi-Protocol File Server:</strong><br>
@@ -497,7 +485,8 @@ and Microsoft Windows it must gain the following functionality: </p>
 	A proposed implementation was sketched out at the AFSig Hackathon
 	in Stockholm in 2004 (<A HREF="http://web.archive.org/web/20060211111127/http://www.afsig.se/snipsnap/space/prdb+extensions">details</A>)
 	<br>
-	<p>Estimate: 2.5 to 3.5 months. Implementation promised by Your File System, 2010</p>
+	<p>Status: Standardization complete.&nbsp; Implementation promised by Your 
+	File System, 2011</p>
 	</li>
 	<li><strong>Volume Server enhancements for large volume names:</strong><br>
 	Volume names within the existing RPCs and database are too short given the number 
@@ -562,7 +551,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	Add the concept of machine accounts to the protection server database 
 	permitting authenticated machine access that does not result in the client 
 	being treated as a member of system:authuser.<br>
-	  Implementation promised by Your File System, 2010<br><br>
+	  Implementation promised by Your File System, 2011<br><br>
 	<li><strong>UBIK improvements or replacements:</strong><br>
 	UBIK is the database replication protocol used by AFS server for the 
 	synchronizing the volume and protection databases among servers.&nbsp; It is 
@@ -796,7 +785,8 @@ Estimate: 4 to 6 weeks</p>
 	that.&nbsp; One of our out year tasks is to investigate work being done at CERN 
 	in using “off-line storage”, where an OpenAFS client bypasses the OpenAFS fileserver 
 	completely and retrieves files via direct communication with disk hardware.<br>
-	<br>Estimated: 20 to 25 months. <br>Implementation promised by Your File System, 2011</p>
+	<br>Estimated: 20 to 25 months. <br>Implementation promised by Your File 
+	System, 2012</p>
 	</li>
 	<li>
 	<p wrap><strong>Asynchronous RX RPCs:</strong><br>
@@ -810,23 +800,16 @@ Estimate: 4 to 6 weeks</p>
 	<em>waiting for threads</em>.<br>
 	<br>
 	Estimated: 6 weeks for Asynchronous Rx and 3 weeks for file server modifications. 
-	<br>Implementation promised by Your File System, 2011</p>
+	<br>Implementation promised by Your File System, 2012</p>
 	</li>
-	<li><strong>Implement Dynamic Retransmission Timeout (RTO) Algorithms for 
-	RX/UDP:</strong><br>
-	RX/UDP uses a fixed retransmission timeout value.  This results either in too many 
-	retransmissions on 
-	high latency connections or excessively long delays on high speed networks.&nbsp; 
-	See RFC 2988 (TCP RTO) and RFC 2960 Section 6.3 (SCTP RTO) for suggested 
-	algorithms.<br><br>Implementation promised by Your File System, 2010</li>
-	<li></li>
 	<li><strong>Increase RX/UDP Maximum Number of Calls:</strong><br>
 	RX/UDP has a maximum of four simultaneous calls per connection.&nbsp; The 
 	initial number of calls for each connection cannot be increased due to the 
 	lack of an appropriate negotiation mechanism at the RX layer.&nbsp; However, 
 	an application layer negotiation could be used to permit the application to 
 	hint to the rx connection how many calls should be permitted.<br>
-	<br>Implementation promised by Your File System, 2010<br></li>
+	<br>Implementation promised by Your File System, 2011.&nbsp; Requires 
+	Standardization<br><br></li>
 	<li><strong>rxgk:<br>rxgk</strong> is a security class based upon the Generic Security Service Application 
 	Programming Interface (GSS-API) that attempts to address a much broader range 
 	of security weaknesses in AFS; not simply the use of single DES encryption ciphers.&nbsp; 
@@ -851,7 +834,8 @@ Estimate: 4 to 6 weeks</p>
 	<a href="http://workshop.openafs.org/afsbpw07/talks/lha.pdf">a status report</a> 
 	at the 2007 AFS &amp; Kerberos Best Practice Workshop and did more work with Derrick 
 	the following week.</p>
-	Implementation promised by Your File System, 2010<br>Target: 2.0<br>
+	Status: Standardization in progress.&nbsp; Implementation substantially 
+	complete.&nbsp; promised by Your File System, 2011<br>Target: 2.0<br><br>
 	</li>
 	<li><strong>rxk5:</strong><br><strong>rxk5</strong> is a Kerberos v5 based replacement for the existing security class,
 	<strong>rxkad</strong>, developed by Marcus Watts (UMich) and Matt Benjamin (LinuxBox).&nbsp; 
@@ -877,7 +861,7 @@ Estimate: 4 to 6 weeks</p>
 	<p><strong>rxk5</strong> is significantly stronger than <strong>rxkad</strong> when it comes to 
 	security and requires relatively minor changes to the OpenAFS architecture.</p>
 	Estimate: 1-2 months for protocol review and revision
-	<br>Target: 1.8</li>
+	<br>Target: 1.10</li>
 </ul>
 <h2><a name="misc"></a>6. Miscellaneous</h2>
 <ul>
@@ -936,7 +920,7 @@ Estimate: 4 to 6 weeks</p>
 	somewhat comparable to the vldb-server which gives the location of a volume.&nbsp;
 	<a href="http://pfanne.rzg.mpg.de/trac/openAFS-OSD/wiki/Specs">
 	http://pfanne.rzg.mpg.de/trac/openAFS-OSD/wiki/Specs</a><br><br>Status: 
-	Integration is in progress.<br>Target: 1.8<br>Follow up work promised by 
+	Integration is in progress.<br>Target: 1.10<br>Follow up work promised by 
 	Your File System, 2011.<br>&nbsp;</li>
 	<li><strong>Automatic Load Balancing:</strong><br>
 	CMU has a load balancing tool that could be polished and supported.<br>&nbsp;
@@ -962,21 +946,15 @@ Estimate: 4 to 6 weeks</p>
 dependent upon resource availability.&nbsp; Please send inquiries, comments, and offers of support to
 <a href="mailto:openafs-gatekeepers@openafs.org?subject=OpenAFS Roadmap Feedback">
 openafs-gatekeepers@openafs.org</a>. Where external contributors have promised contributions, they are included, as are timelines when those are provided.&nbsp;&nbsp; The following release schedule is subject to change.</p>
-<h2 align="left">1.4.12</h2>
-<p>The next release in the stable series for UNIX is expected before the end of 
-2009.&nbsp; This release will correct implementation defects and support for 
+<h2 align="left">1.4.15</h2>
+<p>The next release in the stable series for UNIX is expected before June 2011.&nbsp; This release will correct implementation defects and support for 
 newer kernel revisions on supported operating systems.</p>
-<h2>1.5.xx</h2>
-<p>The 1.5 release series is used for production releases for the Microsoft 
-Windows platform and provides a test release series for UNIX platforms.&nbsp; 
-1.5.xx releases are issued approximately on a monthly basis.</p>
 <h2>1.6</h2>
 <p>The 1.6 series will replace the 1.4 series as the current stable series for 
 UNIX and the 1.5 series as the last stable series for Microsoft Windows without 
 a native IFS implementation.&nbsp; The 1.6 series will include significant 
 improvements to source code quality and one major feature change: the demand 
-attach file server.&nbsp; Pre-release testing for 1.6 is expected to begin in 
-July 2010.</p>
+attach file server.&nbsp; Pre-release testing for 1.6 is currently under way.</p>
 <h2>1.7</h2>
 <p>The 1.7 series will replace the 1.5 series as the experimental release 
 series.&nbsp; 1.7 releases will begin shortly after the 1.6 series enters 
@@ -984,40 +962,42 @@ pre-release testing.&nbsp; The Windows IFS implementation will be integrated
 into 1.7 releases in preparation for the 1.8 stable release.&nbsp; The 1.7 
 release series will track the 1.6 series.&nbsp; Other than the Window IFS 
 changes no commits will be made to this branch that are not also committed to 
-the 1.6 release series.&nbsp; July 2010.</p>
+the 1.6 release series.&nbsp; May 2011.</p>
 <h2>1.8</h2>
 <p>The 1.8 series will become the first stable release of OpenAFS to include the 
 Windows IFS implementation.&nbsp; No other new features will be added to 1.8.&nbsp; 
-September 2010.</p>
+June 2011.</p>
 <h2>1.9</h2>
 <p>The 1.9 series will replace the 1.5 series as the experimental release 
 series.&nbsp; 1.9 releases will begin shortly after the 1.7 series has the 
-Windows IFS implementation committed.&nbsp; Major new features will be integrated into 1.9 
-releases in preparation for the 1.10 stable release.&nbsp; July 2010.</p>
+Windows IFS implementation committed.&nbsp; Major new features will be 
+integrated into 1.9 releases in preparation for the 1.10 stable release.&nbsp; 
+October 2011.</p>
 <h2>1.10</h2>
 <p>The 1.10 series will replace the 1.8 series as the stable release series for 
 UNIX and Microsoft Windows.&nbsp; The 1.10 series are scheduled to include the 
-rxk5 security class, object storage, RxUDP performance improvements, PTS authentication name extensions, and extended 
-callbacks.&nbsp; Pre-release testing for 1.10 is expected to begin in December 
-2010.</p>
+rxk5 security class, object storage, RxUDP performance improvements, PTS 
+authentication name extensions, and extended callbacks.&nbsp; Pre-release 
+testing for 1.10 is expected to begin in February 
+2012.</p>
 <h2>1.11</h2>
 <p>The 1.11 series will replace the 1.9 series as the experimental release 
 series.&nbsp; 1.11 releases will begin shortly after the 1.10 series enters 
 pre-release testing.&nbsp; Major new features will be integrated into 1.11 
-releases in preparation for the 2.0 stable release.&nbsp; January 2011.</p>
+releases in preparation for the 2.0 stable release.&nbsp; March 2012.</p>
 <h2>2.0</h2>
 <p>The 2.0 series will replace the 1.10 series as the current stable series for 
 UNIX and Microsoft Windows.&nbsp; The 2.0 series will include the rxgk security 
 class including Kerberos v5, X.509 and SCRAM authentication, protection of 
 anonymous connections, protection of the server to client callback connection, 
 and server coordinated byte range locking, .&nbsp; Pre-release testing for 2.0 
-is expected to begin in June 2011.</p>
+is expected to begin in June 2012.</p>
 &nbsp;<div id="footer"> 
 	<hr>
 	<address>
 		&lt;webmaster@openafs.org&gt;</address>
 	<address>
-		Last modified: 2010/05/28 02:49:14 EDT</address>
+		Last modified: 2011/03/18 01:12:14 EDT</address>
 </div>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
