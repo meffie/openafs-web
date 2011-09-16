@@ -25,21 +25,43 @@ div#news p {
 
 <h2>What is AFS?</h2>
 <p>AFS is a distributed filesystem product, pioneered at
-Carnegie Mellon University and supported and developed as a product by 
-Transarc Corporation (now IBM Pittsburgh Labs). It offers a client-server 
+Carnegie Mellon University and supported and developed as a product by
+Transarc Corporation (now IBM Pittsburgh Labs). It offers a client-server
 architecture for federated file sharing and replicated read-only content
 distribution, providing location independence, scalability,
-security, and transparent migration capabilities.  AFS is available 
-for a broad range of heterogeneous systems including UNIX, Linux, 
+security, and transparent migration capabilities.  AFS is available
+for a broad range of heterogeneous systems including UNIX, Linux,
 <a href="macos.html">MacOS X</a>, and <a href="windows.html">Microsoft Windows</a></p>
 <p>IBM branched the source of the AFS product, and made a copy of the source
-available for community development and maintenance. They called the release 
+available for community development and maintenance. They called the release
 OpenAFS.</p>
 
 <div style="text-align:center"><script type="text/javascript" src="//www.ohloh.net/p/4467/widgets/project_basic_stats.js"></script></div>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+
+<h4>15-Sep-2011 - OpenAFS 1.7.1 - native File System client for Microsoft Windows available</h4>
+<p>OpenAFS 1.7.1 is the first in a new series of OpenAFS clients for the Microsoft Windows platform that is implemented as a native file system.</p>
+<blockquote><ul>
+	<li>Significantly faster than previous releases (up to 800MB/second
+	read throughput from Solid State Disk backed cache)</li>
+	<li>Does not require the installation of the Microsoft Windows Loopback
+	Adapter</li>
+	<li>Provides support for kernel enforced Process and Thread Authentication
+	Groups</li>
+	<li>New Explorer Shell integration including AFS specific property sheets</li>
+	<li>Immediate access to \\AFS namespace after
+	system resume</li>
+	<li>AFS Mount Points and Symlinks are File System Reparse Points</li>
+</ul>
+</blockquote>
+<p>The 1.7 series is targeted at Microsoft Windows only.
+	<ul>
+		<li><a href="/pipermail/openafs-announce/2011/000375.html">Read the release announcement</a>
+		<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
+		<li><a href="/release/openafs-1.7.1.html" target="_top">Go to the distribution page</a>
+	</ul>
 
 <h4>1-Sep-2011 - OpenAFS 1.6.0 available</h4>
 <p>OpenAFS 1.6.0 is the first in a new series of OpenAFS stable releases.
@@ -50,7 +72,7 @@ OpenAFS.</p>
 		<li><a href="/release/openafs-1.6.0.html" target="_top">Go to the distribution page</a>
 		<li><a href="/pipermail/openafs-announce/2011/000372.html">Go to the release announcement</a>
 	</ul>
-	
+
 <h4>27-Jul-2011 - OpenAFS Newsletter</h4>
 <p>The latest issue of the monthly OpenAFS newsletter is available at
   <a href="/newsletter/newsletter-2011-07-volume003-issue07.html">http://www.openafs.org/newsletter/newsletter-2011-07-volume003-issue07.html</a>.
@@ -66,7 +88,7 @@ OpenAFS.</p>
 
 <h4>14-Jul-2011 - OpenAFS available for MacOS 10.7 (Lion)</h4>
 <p>Concurrent with the expected release of MacOS Lion, an initial version of
-  OpenAFS is now available. More details are available on the 
+  OpenAFS is now available. More details are available on the
   <a href="macos.html">MacOS page</a>.
 
 
@@ -80,22 +102,22 @@ is limited to a denial of service attack by a user with the ability to
 affect a lock of AFS though the client on a host.
 
 <h4>23-Feb-2011 - OpenAFS Security Advisory 2011-001</h4>
-<p>OpenAFS servers versions 1.2.8 - 1.4.12.1, 1.5.0-1.5.74 for all platforms.&nbsp;&nbsp; 
+<p>OpenAFS servers versions 1.2.8 - 1.4.12.1, 1.5.0-1.5.74 for all platforms.&nbsp;&nbsp;
 An attacker with control of a client, or the ability to forge RX packets,
 can crash a server of affected hosts.
-This vulnerability is being tracked as CVE-2011-0430. 
+This vulnerability is being tracked as CVE-2011-0430.
 
 Currently the advisory erroneously states 1.4.14 is vulnerable.
 	<ul>
 		<li><a href="/security/OPENAFS-SA-2011-001.txt" target="_top">Go to the advisory</a>
 	</ul>
-	
+
 
 <h4>4-Nov-2010 - OpenAFS 1.5.78 released</h4>
-<p>OpenAFS 1.5.78 is the twelfth release of OpenAFS for Windows 7 and Server 
-2008 R2 and provides the best user experience for users on all supported 
-Microsoft Windows platforms. 1.4.12 is the suggested production release for all other 
-users. Due to data loss issues present in all versions of OpenAFS prior to 
+<p>OpenAFS 1.5.78 is the twelfth release of OpenAFS for Windows 7 and Server
+2008 R2 and provides the best user experience for users on all supported
+Microsoft Windows platforms. 1.4.12 is the suggested production release for all other
+users. Due to data loss issues present in all versions of OpenAFS prior to
 1.5.62 and believed to be in IBM AFS, all Windows users are urged to upgrade.
 
 <p>1.5.78 is also the most recent in the series of releases intended to provide new experimental features including the Demand Attach File Service and Disconnected AFS, on other platforms including MacOS X, Linux variants, and UNIX, and includes numerous new features since 1.5.72, especially for users of MacOS X. OSX users may find that 1.5.78 provides a dramatically better usage experience than the current suggested production version.
@@ -103,7 +125,7 @@ users. Due to data loss issues present in all versions of OpenAFS prior to
 		<li><a href="/release/openafs-1.5.78.html" target="_top">Go to the release page</a>
 		<li><a href="/pipermail/openafs-announce/2010/000345.html">Go to the release announcement</a>
 	</ul>
-	
+
 
 
 	<h4>13-Mar-2010 - OpenAFS 1.4.12 released</h4>
@@ -115,26 +137,26 @@ It contains a number of fixes to both clients and servers.
 		<li><a href="/release/openafs-1.4.12.html" target="_top">Go to the release page</a>
 		<li><A HREF="/pipermail/openafs-announce/2010/000326.html">Go to the release announcement</A>
 	</ul>
-	
+
 
 <h4>24-Oct-2009 - Microsoft Windows 7 and Server 2008 R2 now supported</h4>
 	<p>The OpenAFS Elders are pleased to announce that with the release of
-<a href="http://www.openafs.org/windows.html">OpenAFS for Windows</a> version 
-	1.5.66 that 
+<a href="http://www.openafs.org/windows.html">OpenAFS for Windows</a> version
+	1.5.66 that
 <a href="http://www.microsoft.com/windows7/">Microsoft Windows 7</a>
 	becomes an officially supported platform. All versions of Windows 7
 including "Home Basic", "Home Premium", "Business", and "Ultimate" are
-supported on both X86 and X86_64 CPU architectures.&nbsp; Users that are 
+supported on both X86 and X86_64 CPU architectures.&nbsp; Users that are
 	upgrading to Windows 7 from Vista must reinstall OpenAFS after the upgrade.
 	<h4>28-Aug-2009 - MacOS 10.6 Snow Leopard support announced</h4>
 	<p>Concurrent with the release of MacOS 10.6, OpenAFS has released
-OpenAFS 1.5.62 with 32 and 64 bit kernel and userspace support for 
+OpenAFS 1.5.62 with 32 and 64 bit kernel and userspace support for
 Snow Leopard. Additionally, a backport of the necessary support is available
 and is being distributed with OpenAFS 1.4.11 effective immediately.
 	<ul>
 		<li><A HREF="/pipermail/openafs-announce/2009/000304.html">Go to the support announcement</A>
 	</ul>
-	
+
 	<h4>28-Aug-2009 - Data Loss in Pre-1.5.62 OpenAFS for Windows Releases</h4>
 	<p>
 	Releases of OpenAFS for Windows prior 1.5.62 may fail to store data
@@ -147,45 +169,45 @@ to file servers.  There are two issues that are addressed in the
 	<ul>
 		<li><A HREF="/pipermail/openafs-announce/2009/000305.html">Read the announcement</A>
 	</ul>
-	
+
 	<h4>9-Jul-2009 - OpenAFS Changes Source Code Version Control System to Git</h4>
 	<p>After more than eighteen months of attempts to migrate source code management
-away from cvs OpenAFS has finally converted to Git.  This change will not have 
-any visible impact on end users.  For developers there are major changes in 
+away from cvs OpenAFS has finally converted to Git.  This change will not have
+any visible impact on end users.  For developers there are major changes in
 the tools required to work with the OpenAFS source repository and the workflow
-used to submit contributions to OpenAFS.  Along with the conversion to Git, 
+used to submit contributions to OpenAFS.  Along with the conversion to Git,
 OpenAFS is now using the Gerrit source code review application which makes it
-significantly easier for developers to review and comment on each other's 
-contributions. 
+significantly easier for developers to review and comment on each other's
+contributions.
 	<ul>
 		<li><A HREF="/pipermail/openafs-announce/2009/000299.html">Go to the announcement</A>
 	</ul>
-	
+
 	<h4>6-Apr-2009 - OpenAFS Security Advisory 2009-002</h4>
-	<p>OpenAFS clients versions 1.0-1.4.8, 1.5.0-1.5.58 for all Linux 2.4-2.6 platforms.&nbsp;&nbsp; 
+	<p>OpenAFS clients versions 1.0-1.4.8, 1.5.0-1.5.58 for all Linux 2.4-2.6 platforms.&nbsp;&nbsp;
 An attacker with control of a fileserver, or the ability to forge RX packets,
 can crash the cache manager, and hence the kernel, of affected Linux AFS
 clients. This vulnerability is being tracked as CVE-2009-1250.
 	<ul>
 		<li><a href="/security/OPENAFS-SA-2009-002.txt" target="_top">Go to the advisory</a>
 	</ul>
-	
+
 	<h4>6-Apr-2009 - OpenAFS Security Advisory 2009-001</h4>
-	<p>OpenAFS clients versions 1.0-1.4.8, 1.5.0-1.5.58 for all Unix platforms except MacOS 10.4, 10.5.&nbsp;&nbsp; 
+	<p>OpenAFS clients versions 1.0-1.4.8, 1.5.0-1.5.58 for all Unix platforms except MacOS 10.4, 10.5.&nbsp;&nbsp;
 An attacker with control of a fileserver, or the ability to forge RX packets,
 can crash the cache manager, and hence the kernel, of any Unix AFS client. It
 may be possible for an attacker to cause the kernel to execute arbitrary code. This vulnerability is being tracked as CVE-2009-1251.
 	<ul>
 		<li><a href="/security/OPENAFS-SA-2009-001.txt" target="_top">Go to the advisory</a>
 	</ul>
-	
+
 	<h4>18-Mar-2009 - OpenAFS Accepted into Google Summer of Code(TM) 2009</h4>
 	<p>Following last year's successful participation in GSoC 2008, OpenAFS has
-been accepted for a second straight year.  Students and OpenAFS experts are 
-encouraged to participate.  Student proposals are due 
-	<a href="http://socghop.appspot.com/document/show/program/google/gsoc2009/timeline">April 3</a>.  
+been accepted for a second straight year.  Students and OpenAFS experts are
+encouraged to participate.  Student proposals are due
+	<a href="http://socghop.appspot.com/document/show/program/google/gsoc2009/timeline">April 3</a>.
 Students and mentors interested
-in participating in an OpenAFS project should read the 
+in participating in an OpenAFS project should read the
 <a href="gsoc.html">OpenAFS Summer of Code page</a>.
 
 	<h4>17-Sep-2008 - European AFS conference</h4>
@@ -196,11 +218,11 @@ talks about usage cases, development and a social event.
 	<p>For more information, please visit http://www.openafs.at
 
 	<h4>17-Mar-2008 - OpenAFS participating in Google Summer of Code</h4>
-	<p>Once again, Google will be doing their Summer of Code. For the first year, OpenAFS will be participating as a mentoring organization. Students interested are encouraged to discuss potential projects on the openafs development list. We have a list of 
+	<p>Once again, Google will be doing their Summer of Code. For the first year, OpenAFS will be participating as a mentoring organization. Students interested are encouraged to discuss potential projects on the openafs development list. We have a list of
 	<A HREF="gsoc.html">suggested projects</A> online, but we would be happy to discuss any relevant project with you.
-	
+
 	<h4>20-Dec-2007 - OpenAFS Security Advisory 2007-003</h4>
-	<p>OpenAFS fileserver versions 1.3.50 - 1.4.5, 1.5.0 - 1.5.27.&nbsp;&nbsp; 
+	<p>OpenAFS fileserver versions 1.3.50 - 1.4.5, 1.5.0 - 1.5.27.&nbsp;&nbsp;
 Fileservers of affected versions can be crashed by a client-triggered race condition. Fixes are available in 1.4.6 and 1.5.28.
 	<ul>
 		<li><a href="/security/OPENAFS-SA-2007-003.txt" target="_top">Go to the advisory</a>
@@ -208,9 +230,9 @@ Fileservers of affected versions can be crashed by a client-triggered race condi
 
 
 	<h4>OpenAFS Elders Newsletter for November online</h4>
-	<p>The OpenAFS Elders newsletter for November 
+	<p>The OpenAFS Elders newsletter for November
 	<a href="http://www.openafs.org/elders/minutes-20071113.html" target="_top">is available now.</a>
-	
+
 
 <h4>OpenAFS Elders Newsletter for August online</h4>
 <p>The OpenAFS Elders newsletter for August <a href="http://www.openafs.org/elders/minutes-20070800.html" target="_top">is available now.</a>
@@ -218,10 +240,10 @@ Fileservers of affected versions can be crashed by a client-triggered race condi
 
 <h4>19-Apr-2007 - OpenAFS Security Advisory 2007-002</h4>
 <p>
-OpenAFS for Windows clients versions 1.3.64 - 1.3.99, 1.4.0 - 1.4.4, 1.5.0 - 1.5.18.&nbsp;&nbsp; 
+OpenAFS for Windows clients versions 1.3.64 - 1.3.99, 1.4.0 - 1.4.4, 1.5.0 - 1.5.18.&nbsp;&nbsp;
 When MIT Kerberos for Windows (any version) is installed
 a user with the ability to alter the contents of the Kerberos v5 configuration
-profile can prevent Microsoft Windows from successfully booting.&nbsp; This 
+profile can prevent Microsoft Windows from successfully booting.&nbsp; This
 issue has been corrected in OpenAFS 1.5.19.
 <ul>
 <li><a href="/security/OPENAFS-SA-2007-002.txt" target="_top">Go to the advisory</a>
@@ -229,7 +251,7 @@ issue has been corrected in OpenAFS 1.5.19.
 
 
 <h4>20-Mar-2007 - OpenAFS Security Advisory 2007-001</h4>
-<p>Unix clients in OpenAFS versions before 1.5.17 and 1.4.4 
+<p>Unix clients in OpenAFS versions before 1.5.17 and 1.4.4
 allow a potential privilege escalation via setuid functionality which
 can be enabled by the client administration but is enabled by default
 for the client's local cell. To avoid this issue, 1.5.17 and 1.4.4 have been
@@ -241,13 +263,13 @@ issued with setuid disabled by default in all cases.
 
 <h4>28-Dec-2006 - OpenAFS Elders announce "No More DES" roadmap</h4>
 <p>
-AFSv3 was designed and implemented during the late 80s and early 90s when the 
-state of the art in distributed computer authentication and data confidentiality 
+AFSv3 was designed and implemented during the late 80s and early 90s when the
+state of the art in distributed computer authentication and data confidentiality
 was to use Kerberos 4 and the United States' Data Encryption Standard (DES).
-Over the last two years the U.S. National Institutes of Standards and Technology 
+Over the last two years the U.S. National Institutes of Standards and Technology
 (NIST) has withdrawn the DES standard and MIT has announced the end of life of
 Kerberos 4.  In response, the OpenAFS Elders have approved a roadmap to transition
-from DES to stronger ciphers which includes the deprecation of the OpenAFS kaserver.  
+from DES to stronger ciphers which includes the deprecation of the OpenAFS kaserver.
 
 <ul>
 <li><a href="no-more-des.html">Go to the announcement</a></li>
@@ -256,11 +278,11 @@ from DES to stronger ciphers which includes the deprecation of the OpenAFS kaser
 
 <h4>6-Dec-2006 - pam-afs-session 1.0 released</h4>
 <p>
-pam-afs-session is a PAM module intended for use with a Kerberos v5 PAM module to 
-obtain an AFS PAG and AFS tokens on login. It puts every new session in a PAG 
-regardless of whether it was authenticated with Kerberos and runs a configurable 
-external program to obtain tokens. It supports using Heimdal's libkafs for the AFS 
-interface and falls back to an internal Linux-only implementation if libkafs isn't 
+pam-afs-session is a PAM module intended for use with a Kerberos v5 PAM module to
+obtain an AFS PAG and AFS tokens on login. It puts every new session in a PAG
+regardless of whether it was authenticated with Kerberos and runs a configurable
+external program to obtain tokens. It supports using Heimdal's libkafs for the AFS
+interface and falls back to an internal Linux-only implementation if libkafs isn't
 available.
 <ul>
 <li><A HREF="/pipermail/openafs-announce/2006/000175.html">Go to the announcement</A>
@@ -270,8 +292,8 @@ available.
 <h4>1-Dec-2006 - Announcing OpenAFS "Works with Windows Vista"</h4>
 <p>
 The OpenAFS Elders are pleased to announce that with the release of
-<a href="http://www.openafs.org/windows.html">OpenAFS for Windows</a> 
-version 1.5.12 that 
+<a href="http://www.openafs.org/windows.html">OpenAFS for Windows</a>
+version 1.5.12 that
 <a href="http://www.microsoft.com/windowsvista/">Microsoft Windows Vista</a>
 becomes an officially supported platform.  All versions of Vista
 including "Home Basic", "Home Premium", "Business", and "Ultimate" are

@@ -26,7 +26,17 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#release">OpenAFS for Windows 1.6.0002 (aka 1.6.0b)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.0100 (aka 1.7.1)</a></li>
+	<ul>
+		<li><a href="#1_7_features">Features</a>
+		<li><a href="#1_7_docs">Documentation</a>
+		<li><a href="#1_7_platforms">Supported Platforms</a>
+		<li><a href="#1_7_issues">Known Issues</a>
+		<li><a href="#1_7_64bit_downloads">64-bit Downloads</a>
+		<li><a href="#1_7_32bit_downloads">32-bit Downloads</a>
+
+	</ul>
+<li><a href="#maintenance-release">OpenAFS for Windows 1.6.0002 (aka 1.6.0b)</a></li>
 	<ul>
 		<li><a href="#1_6_features">Features</a>
 		<li><a href="#1_6_docs">Documentation</a>
@@ -36,9 +46,6 @@ of members.<br>
 		<li><a href="#1_6_64bit_downloads">64-bit Downloads</a>
 	</ul>
 
-<!--
-<li><a href="#stable">Maintenance Release: OpenAFS for Windows 1.4.4</a></li>
--->
 <li><a href="#kfw">MIT Kerberos for Windows</a></li>
 <li><a href="#hotfix">Microsoft Hot Fixes</a></li>
 </ul>
@@ -56,46 +63,49 @@ of members.<br>
 		<li>OpenAFS for Windows must be re-installed after a Windows 7 Upgrade.&nbsp;
 		The Windows 7 Upgrade process will uninstall the Microsoft Loopback
 		Adapter</li>
-                <li>Version 1.5.99b (aka 1.6.0pre2) was the first release that will not
-                    lose connectivity with \\AFS when the network configuration changes.</li>
+        <li>Version 1.5.99b (aka 1.6.0pre2) was the first release that will not
+            lose connectivity with \\AFS when the network configuration changes.</li>
 	</ul>
 	</li>
 </ul>
 <h2><a name="whichversion">How to Decide Which Version to Install</a></h2>
-<!--
-<p>OpenAFS for Windows releases are labeled <b><i>Maintenance</i></b> or <b><i>
-Features</i></b>.&nbsp; These labels are not related to the quality of the
-release but to the source code repository branch from which the release is
-generated.&nbsp; The <b><i>Maintenance</i></b> branch is a version of the source code
-which is undergoing a slower rate of change.&nbsp; Where the <b><i>Features</i></b>
-branch may be used to release one or more versions per month, the <b><i>
-Maintenance</i></b>
-branch is likely to have one release every six or more months.&nbsp; The <b><i>
-Maintenance</i></b> branch is not used to deliver new functionality nor it is used to
-support new platforms.&nbsp; Bugs will always be fixed in the <b><i>Features</i></b>
-branch but may not always be fixed in the <b><i>Maintenance</i></b> branch.&nbsp;
-Carefully review the feature list of the <b><i>Features</i></b> branch before
-deciding against its use.&nbsp; Many of the features such as file locking, large
-file support, and inline bulk status calls are crucial to obtaining good
-performance with AFS and Microsoft Office applications among others.</p>
--->
 
-<p>The following guidelines should be used for choosing an installer type.  If you are upgrading
-from a previous installation, select the same type of installer, EXE or MSI, as was
-previously installed on the system.  If you are installing for the first time, choose the
-EXE if you are installing manually and the MSI if you either need to customize the
-installation package (via a transform) or wish to deploy via Active Directory Group Policy.
-</p>
 <p>
-Each installer is provided in debug and non-debug versions.  The debug versions should
-be installed only when you are experiencing a problem and you need to assist
-the OpenAFS developers in debugging the problem.  The non-debug version is optimized for
-performance, does not generate logging information by default, and does not install
-symbol files.<h3><a name="signatures">Digital Signatures</a></h3>
+OpenAFS.org maintains two active release series for the Microsoft Windows
+platform, 1.6.x and 1.7.x.&nbsp; If life were simple, the 1.6 release series
+would be the most recent production quality revision and the 1.7.x would be the
+next generation release series that includes potentially experimental features
+that have not received broad testing.&nbsp; Unfortunately when it comes to
+OpenAFS on the Microsoft Windows platform life is not simple.</p>
 <p>
-All of the installers are produced and signed by <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">
-Secure Endpoints Inc.</a>.  If the signature is missing do not complete the installation
-process and send e-mail to
+Access to the \\AFS name space is acheived via the use of an SMB to AFS gateway
+in the 1.6 series.&nbsp; This approach was developed when there were no
+documented methods of adding networked file system to Microsoft Windows.&nbsp;
+It worked quite well in Windows XP and Server 2003 but is highly unstable on
+Windows 7 and Server 2008 R2.&nbsp; Especially on systems that suspend and
+resume or migrate between networks.</p>
+<p>
+The 1.7 series is a completely new approach.&nbsp; Instead of relying on the
+Microsoft SMB client to interface with the Windows kernel, OpenAFS 1.7.x is a
+native Windows file system that is compatible with all versions of Microsoft
+Windows from XP SP3 to Windows 7 SP1 and Server 2008 R2 SP1.&nbsp; As a native
+file system, 1.7 provides better performance, does not rely on a private
+loopback interface to publish the SMB gateway service name, and most
+importantly, permits the OpenAFS developers to fully control the file system
+source code.&nbsp; No longer will OpenAFS be held hostage to the whims of
+Microsoft when bugs in the SMB client negatively impact access to the
+\\AFS name space.</p>
+<p>
+The choice is yours to make but the recommendation of OpenAFS is to deploy the
+1.7 series client and submit bug reports if application incompatibilities are
+uncovered.&nbsp; The OpenAFS developers have a long track record of promptly
+fixing reported issues.</p>
+
+<h3><a name="signatures">Digital Signatures</a></h3>
+<p>
+Installers are produced and signed by <a href="https://www.secure-endpoints.com" title="Secure Endpoints Inc.">
+Secure Endpoints Inc.</a> or <a href="http://www.your-file-system.com" title="Your File System Inc.">Your File System Inc.</a>.
+If the signature is missing do not complete the installation process and send e-mail to
 <a href="mailto:openafs-security@openafs.org?subject=Missing or Incorrect Digital Signature">openafs-security@openafs.org</a>
 <br>
 <h3>
@@ -106,11 +116,92 @@ process and send e-mail to
 was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 <p>
-<h2><a name="release">OpenAFS for Windows 1.6.0002 aka 1.6.0b</a></h2>
+
+<h2><a name="features-release">OpenAFS for Windows 1.7.0100 aka 1.7.1</a></h2>
+<p>(updated 15 Sep 2011)</p>
+
+<h3><a name="1_7_features"></a>Features:</h3>
+<ul>
+	<li><span style>OpenAFS is a native Microsoft Windows file system.</span></li>
+	<li>Compatible with all OpenAFS and IBM/Transarc AFS Server versions</li>
+	<li>Significantly faster than the OpenAFS 1.6 release (up to 800MB/second
+	read throughput from Solid State Disk backed cache)</li>
+	<li>Does not require the installation of the Microsoft Windows Loopback
+	Adapter</li>
+	<li>Provides support for kernel enforced Process and Thread Authentication
+	Groups</li>
+	<li>New Explorer Shell integration including AFS specific property sheets</li>
+	<li>Immediate access to \\AFS namespace after
+	system resume</li>
+	<li>AFS Mount Points and Symlinks are File System Reparse Points</li>
+</ul>
+
+<h3><a name="1_7_docs"></a>Documentation:</h3>
+<ul>
+  <li>
+	1.7.1 Release Notes <a title="OpenAFS for Windows 1.7.1 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.1/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.7.1 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.1/winxp/ReleaseNotes/html/index.html">
+	(HTML)</a><br>
+  <li>
+	<a title="OpenAFS for Windows 1.7.1 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.1/winxp/afs-changes-since-1.2.txt">
+	1.7.1 ChangeLog</a></li>
+</ul>
+<h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
+<ul>
+	<li>Windows 7 (X86 and AMD64)</li>
+	<li>Windows Server 2008 R2 (AMD64)</li>
+	<li>Windows Server 2008 (X86 and AMD64) including SP1</li>
+	<li>Windows Vista (X86 and AMD64) including SP1 and SP2</li>
+	<li>Windows XP 64 (AMD64) SP2</li>
+	<li>Windows 2003 R2 SP1 (X86 and AMD64)</li>
+	<li>Windows 2003 SP2</li>
+	<li>Windows XP SP3</li>
+</ul>
+
+<small>Windows 2000 is not a supported platform for the 1.7 series.  Use <a href="#maintenance-release">OpenAFS for Windows 1.6.0002 (aka 1.6.0b)</a>.</small>
+
+<h3><a name="1_7_issues"></a>Known Issues:</h3>
+	<ul class="itemizedlist" type="disc">
+		<li class="listitem">
+		<p>On Windows 7 and Windows Server 2008 R2, it is not possible to
+		execute an application out of AFS under the following conditions: </p>
+		<div class="itemizedlist">
+			<ul class="itemizedlist" type="circle">
+				<li class="listitem">
+				<p>The path is a drive letter mapping</p>
+				</li>
+				<li class="listitem">
+				<p>The application requires elevated privileges</p>
+				</li>
+			</ul>
+		</div>
+		<p>Workaround: use SUBST instead of NET USE to assign drive letters to
+		UNC paths. </p>
+		</li>
+	</ul>
+<h3><a name="1_7_64bit_downloads"></a>Downloads for 64-bit Windows operating systems: 2008-R2/Win7/2008/Vista/2003-R2/2003/XP:</h3>
+<p>Both installers must be installed on 64-bit systems.</p>
+<ul>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.1/winxp/openafs-en_US-64bit-1-7-0100.msi">64-bit MSI installer</a><br>
+  </li>
+		<li>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.1/winxp/openafs-32bit-tools-en_US-1-7-0100.msi">32-bit tools MSI installer</a><br>
+		</li>
+</ul>
+<h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems: Win7/2008/Vista/2003-R2/2003/XP:</h3>
+<ul>
+  <li>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.1/winxp/openafs-en_US-1-7-0100.msi">32-bit MSI installer</a><br>
+  </li>
+</ul>
+
+
+
+<h2><a name="maintenance-release">OpenAFS for Windows 1.6.0002 aka 1.6.0b</a></h2>
 (updated 1 Sep 2011)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
 <h3><a name="1_6_features"></a>Features:</h3>
 <ul>
-  <!--<li>All the features of the <a href="#stable">maintenance release</a></li> -->
 	<li><span style>Starting with the 1.5.50 release of OpenAFS for Windows,
 	each of the AFS Client Service, the AFS Explorer Shell Extension, and the
 	command-line tools are Unicode enabled.&nbsp; No longer is OpenAFS restricted to
@@ -197,7 +288,7 @@ was published in July 2008.
 	<li>1.5.75 provides compatibility with Windows Security Update
 	<a href="http://www.microsoft.com/technet/security/bulletin/ms10-020.mspx">MS10-020</a>
 	(<a href="http://support.microsoft.com/kb/980232">KB980232</a>).</li>
-	<li>1.5.77 corrects an AFS RPC Path MTU discovery error that was introduced 
+	<li>1.5.77 corrects an AFS RPC Path MTU discovery error that was introduced
 	in 1.5.76.</li>
         <li>1.5.99b corrects an error that caused Windows to lose connectivity with the \\AFS
             server after a network configuration change.</li>
@@ -286,91 +377,6 @@ when installing applications that the installers be started from a 64-bit
 process.&nbsp; It is strongly recommended that the Add/Remove Programs Control
 Panel be used to initiate installations on 64-bit Microsoft Windows operating
 systems.</p>
-
-<!--
-<h2><a name="stable">Maintenance Release: OpenAFS for Windows 1.4.4
-(1.4.0400)</a></h2>
-(released 19 March 2007)<br>
-<h3>Features:</h3>
-<ul>
-  <li>The OpenAFS Client Service provides access seamless access to the
-AFS file system</li>
-  <ul>
-    <li>Access AFS cells via the <span style="font-weight: bold;">\\AFS\</span><span
- style="font-style: italic; font-weight: bold;">cellname</span> UNC path</li>
-  </ul>
-  <li>Integrates with <a title="MIT Kerberos for Windows" href="#kfw">MIT
-Kerberos for Windows</a> for Kerberos 5 authentication support</li>
-  <li>The AFS Explorer Shell Extension provides the ability to
-manipulate AFS objects and permissions from the Windows Explorer Shell</li>
-  <li>The AFS System Tray tool can be used to obtain and monitor AFS
-authentication credentials (tokens)</li>
-  <li>The Integrated Logon facility allows AFS credentials to be obtained
-during the Windows logon process enabling Windows Profiles and
-Redirected Folders to be stored within AFS</li>
-  <li>Automatic configuration of the Windows Internet Connection
-Firewall</li>
-  <li>Obtains AFS volume database server information via DNS</li>
-  <li>Dynamic Root Volume support</li>
-  <li>Cisco VPN compatible</li>
-  <li>Persistent caches storing up to 1.2GB of data</li>
-  <li>Supports AFS Universal Error Codes</li>
-  <li>Major improvements to AFS SMB Server</li>
-  <li>Improved detection of AFS servers brought back into service</li>
-  <li>Improved maintenance of NAT port mappings</li>
-  <li>Implements Windows Byte Range Locking without use of AFS File Locks</li>
-  <li>Thread priorities are adjusted based upon age of CIFS requst</li>
-  <li>Improved CIFS Server performance due to finer grained locking</li>
-  <li>Improved resource recycling</li>
-  <li>SDK is now installed at \Program Files\OpenAFS\SDK</li>
-  <li>NSIS and WiX installer frameworks updated to the latest versions</li>
-  <li>Improved Kerberos Logon Integration</li>
-  <li>Better handling of dot directory in <b>fs</b> command</li>
-  <li><b>fs setquota</b> and <b>fs mkmount</b> now behave the same as the UNIX versions</li>
-  <li>Improved Loopback Adapter installer</li>
-</ul>
-<h3>Documentation:</h3>
-<ul>
-  <li>
-	<a title="OpenAFS for Windows 1.4.4 Release Notes" target="_top" href="http://www.openafs.org/dl/openafs/1.4.4/winxp/relnotes-frames.htm">
-	1.4.4 Release Notes</a><br>
-  <li>
-	<a href="http://www.openafs.org/dl/openafs/1.4.4/winxp/afs-changes-since-1.2.txt">1.4.4 ChangeLog</a></li>
-  </li>
-</ul>
-<h3>Supported Platforms:</h3>
-<ul>
-	<li>Windows 2000 Workstation and Server</li>
-	<li>Windows XP </li>
-	<li>Windows XP SP2</li>
-	<li>Windows 2003 </li>
-	<li>Windows 2003 SP1</li>
-	<li>Windows 2003 R2</li>
-</ul>
-<h3>Known Issues:</h3>
-<ul>
-<li>Data Corruption on Writes.&nbsp; If the network connectivity to the file
-server is lost while background write operations have been queued, the writes
-will not succeed and that data will not be written to the file server.&nbsp;
-This leaves a hole in the file filled with NULs.&nbsp; This has been fixed in
-releases 1.5.15 and above.</li>
-<li>The AFS Servers (bos, file, ...) do not work<li>Directories with large
-numbers of files or subdirectories will results in very high CPU utilization
-when searched</li>
-<li>Application file lock requests are granted without obtaining a
-lock from the file server.&nbsp; This can lead to data corruption if two
-applications are writing to the same file at the same time.</li>
-</ul>
-<h3>Downloads:</h3>
-<ul>
-  <li>
-	<a href="http://www.openafs.org/dl/openafs/1.4.4/winxp/OpenAFSforWindows-1-4-4.exe">EXE installer for individual installations</a><br>
-  </li>
-  <li>
-	<a href="http://www.openafs.org/dl/openafs/1.4.4/winxp/openafs-en_US-1-4-4.msi">MSI installer for managed installations</a><br>
-  </li>
-</ul>
--->
 
 <h2><a name=kfw>MIT Kerberos for Windows</a></h2>
 OpenAFS for Windows depends on
