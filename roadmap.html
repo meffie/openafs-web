@@ -62,15 +62,6 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	</ul>
 <h3 wrap>All UNIX platforms:</h3>
 <ul>
-	<li><strong>split readonly/readwrite cache usage limits:</strong><br>
-	Some usage scenarios make it desirable to ensure that a certain amount of the
-	available cache space is reserved for read-only data in order to reduce the
-	likelihood that the cached data will be swapped out.<br>
-	(testing needed)<br><br></li>
-	<li><strong>demand prefetch:</strong> <br>
-	In order to reduce wait time while streaming files, it is desirable to allow
-	for a sliding prefetch window when a file is opened and being read. <br>
-	(testing needed)<br><br></li>
 	<li><strong>read/write disconnected AFS:</strong> <br>Read-only and partial
 	read-write operational support is present in the 1.5 release series.&nbsp;
 	Additional work needs to completed to support hard links, conflict
@@ -96,9 +87,6 @@ adversely impact the ability of end users to use AFS to its full existing potent
 <h3 wrap>MacOS X:</h3>
 <ul>
 	<li>
-	<p wrap>Provide for token acquisition as part of the logon process</p>
-	</li>
-	<li>
 	<p wrap>PAG support</p>
 	</li>
 </ul>
@@ -114,10 +102,6 @@ adversely impact the ability of end users to use AFS to its full existing potent
 	<li>
 	<p wrap>update client to use system inodes instead of private inode pool.</p>
 	</li>
-</ul>
-<h3 wrap>AIX:</h3>
-<ul>
-	<li>AIX 5 kcred PAG support</li>
 </ul>
 <h3>BSD:</h3>
 <ul>
@@ -336,8 +320,8 @@ and Microsoft Windows it must gain the following functionality: </p>
 	<p><strong>Status Data (Callback Registration) Expiration Algorithm
 	Improvements:</strong><br>Status data and callback registration expiration is currently determined
 	based upon the number of clients that are accessing the data instead of the
-	likelihood that the data is going to change. <br><br>Status: Implementation in
-	progress.&nbsp;&nbsp; Awaiting Standardization.</p>
+	likelihood that the data is going to change. <br><br>Status: Implementation 
+	in progress.</p>
 	</li>
 	<li>
 	<p><strong>OPEN/CLOSE File Server RPCs:</strong><br>New file server RPCs would provide new audit data<br>
@@ -380,35 +364,6 @@ and Microsoft Windows it must gain the following functionality: </p>
 	<br>
 	<br>
 	</li>
-	<li><strong>Demand Attach File Server:</strong><br>
-	The Demand Attach File Server is a compile time option that produces a file
-	server that supports several new and important features:<br>
-	<br>
-&nbsp; * an enhanced volume management library that supports:<br>
-&nbsp;&nbsp;&nbsp; . lock-less I/O<br>
-&nbsp;&nbsp;&nbsp; . on-demand attachment of volumes<br>
-&nbsp;&nbsp;&nbsp; . parallel shutdown of the file server<br>
-&nbsp;&nbsp;&nbsp; . on-line salvaging of volumes<br>
-&nbsp;&nbsp;&nbsp; . automatic detachment of inactive volumes<br>
-	<br>
-&nbsp;* a new salvageserver daemon which can salvage volumes on-demand<br>
-	<br>
-&nbsp;* a modified bos and bosserver<br>
-&nbsp;&nbsp;&nbsp; . fileserver state saving and restoration<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - host state<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - callback state<br>
-	<br>
-	With the DAFS, shutdown and startup of the file server is significantly
-	faster.&nbsp; Instead of salvaging a partition at a time, individual volumes
-	are salvaged in the background while volumes that do not need salvaging are
-	served by the fileserver to clients.&nbsp; Volumes are attached on-demand
-	and detached when no longer required.&nbsp; This reduces the number of
-	volumes that may require salvaging upon a restart.<br>
-	<br>
-	Status: Present in
-	1.6 pre-releases.&nbsp; Requires additional testing.<br>
-	<br>
-	</li>
 	<li><strong>Multi-Protocol File Server:</strong><br>
 	The current AFS file server can only communicate using the AFS3 protocol.&nbsp;
 	Once all of the functionality in section 3, AFS Protocol Feature
@@ -427,7 +382,8 @@ and Microsoft Windows it must gain the following functionality: </p>
 	in Stockholm in 2004 (<A HREF="http://web.archive.org/web/20060211111127/http://www.afsig.se/snipsnap/space/prdb+extensions">details</A>)
 	<br>
 	<p>Status: Standardization complete.&nbsp; Implementation promised by Your
-	File System, 2011</p>
+	File System, 2011.&nbsp; Blocked on required extensions to the Ubik database 
+	format.</p>
 	</li>
 	<li><strong>Volume Server enhancements for large volume names:</strong><br>
 	Volume names within the existing RPCs and database are too short given the number
@@ -437,7 +393,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	<br>
 	<br>
 	</li>
-	<li><strong>Volume Server enhancements for split horizon addressing:</strong><br>
+	<li><strong>VL Server enhancements for split horizon addressing:</strong><br>
 	Many sites now provide services from hosts which exist behind a NAT to hosts
 	both inside and outside that NAT. The vlserver should provide interfaces to
 	allow returning only some addresses to queries when responding to volume location
@@ -465,8 +421,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	external backup systems</li>
 	</ul>
 	<br>
-	Estimate: 2 to 3 months<br>Implementation promised by Your File System, 2011&nbsp;
-	</li>
+	Estimate: 2 to 3 months<br>Implementation promised by Your File System, 2011</li>
 </ul>
 <ul>
 	<li><strong>Read/write volumes and replication:</strong><br>
@@ -514,9 +469,6 @@ and Microsoft Windows it must gain the following functionality: </p>
 	</ul>
 	</li>
 	<ul>
-		<li><strong>pthreading:</strong><br>
-		The new implementation should support the use of pthreads instead of lwp
-		in order to maximize performance of multiple processor systems.</li>
 		<li><strong>Increase Record Sizes:</strong><br>
 		The existing record size results in significant design restrictions and
 		imposes undesirable overhead.&nbsp; </li>
@@ -524,6 +476,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 		Single master replication is easier to implement than multiple master
 		replication models.&nbsp; However, multiple master replication makes the
 		most efficient use of network resources.</li>
+		<li><strong>Multi-File Databases:<br></strong></li>
 	</ul>
 	</ul>
 <h3 wrap>Microsoft Windows</h3>
