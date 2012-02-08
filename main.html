@@ -47,7 +47,49 @@ OpenAFS.</p>
 <h2>Recent OpenAFS News</h2>
 <div id="news">
 
-<h4>29-Jan-2011 - OpenAFS 1.6.1 prerelease 2 available</h4>
+<h4>8-Feb-2012 - OpenAFS 1.7.6 - Native File System client for Microsoft Windows available</h4>
+<p>OpenAFS 1.7.6 is the next in a new series of OpenAFS clients for the
+Microsoft Windows platform that is implemented as a native file system.&nbsp;
+Significant changes since 1.7.4</p>
+	<ul>
+		<li>Stop the thundering herd of threads in the kernel.<ul>
+			<li>Significantly reduced CPU usage.</li>
+			<li>Improved scalability</li>
+		</ul>
+		</li>
+		<li>Improved handling of callback breaks in the kernel.</li>
+		<li>New data verification mode:&nbsp; 		<a href="http://docs.openafs.org/Reference/1/fs_setverify.html">fs
+		setverify</a> and
+		<a href="http://docs.openafs.org/Reference/1/fs_getverify.html">fs
+		getverify</a></li>
+		<li>Correct failover behavior in response to file server VBUSY error.</li>
+		<li>
+		<a href="http://docs.openafs.org/ReleaseNotesWindows/ch08.html#id512235">
+		NonPersistentCaching</a> now works with AFS redirector interface.</li>
+		<li>Fix a variety of deadlock and BSOD issues in the AFSRedirLib.sys
+		driver.</li>
+		<li>Restrict
+		<a href="http://docs.openafs.org/ReleaseNotesWindows/ch08.html#id513588">
+		MaxCPUs</a> to two by default.</li>
+		<li>New algorithm for handling idle dead timeouts.</li>
+		<li>RRenaming of open files is now permitted.</li>
+		<li>Fix bug in afsrpc.dll event processing that can result in
+		application failures.</li>
+		<li>Improved compatibility with anti-malware services.</li>
+		<li>Improved reparse point processing.</li>
+	</ul>
+<p>All users of previous 1.7 releases should upgrade.</p>
+<p>TThe 1.7 series is for Microsoft Windows only.&nbsp; The 1.7.5 release was not
+announced.</p>
+<ul>
+	<li><a href="/pipermail/openafs-announce/2012/000382.html">Read the release announcement/a>
+	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
+	<li><a href="/release/openafs-1.7.4.html" target="_top">Go to the distribution page</a>
+</ul>
+
+	<h4>&nbsp;</h4>
+
+<h4>29-Jan-2012 - OpenAFS 1.6.1 prerelease 2 available</h4>
 <p>OpenAFS 1.6.1pre2 is the second prerelease for the 1.6.1 release.
 <p>1.6.1pre2 includes two fileserver fixes which will be required for 1.6.0 users to ensure replicated data consistency on the server. Sites not already running 1.6.0 should wait for 1.6.1 to upgrade fileservers. Additionally, updated support for Linux kernel versions as well as fixes to Rx idle connection and client NAT ping support are included.
 	<ul>
