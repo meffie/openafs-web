@@ -26,7 +26,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.6 (aka 1.7.0600)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.8 (aka 1.7.0800)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -117,25 +117,31 @@ was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 <p>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.6 (1.7.0600)</a></h2>
-<p>(updated 8 Feb 2012)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.8 (1.7.0800)</a></h2>
+<p>(updated 15 March 2012)</p>
 
 <h3><a name="1_7_features"></a>Significant Changes:</h3>
 <ul>
-	<li>Improved compatibility with anti-virus and other .anti-malware products.</li>
+	<li>Improved compatibility with anti-virus and other anti-malware products.</li>
 	<li>Significant improvements in processor utilization and parallel
 	processing.</li>
-	<li>Several BSOD issues fixed.</li>
+	<li>BSOD issues fixed.<ul>
+		<li>Avoid race during file control block deallocation.</li>
+		<li>Disable bugcheck in release builds.&nbsp; Too many out of memory
+		conditions were triggering BSODs.</li>
+	</ul>
+	</li>
+	<li>Deadlocks avoided<ul>
+		<li>VolumeCB-&gt;ObjectInfoTree.TreeLock</li>
+		<li>&nbsp;ExtentsResource during CcPurge</li>
+	</ul>
+	</li>
 	<li>Directory and file data synchronization errors fixed.</li>
-	<li>Renaming of open files permitted.</li>
-	<li>More precise error reporting when symlinks and mount points cannot be
-	resolved and when the volume is read only.</li>
-	<li>&quot;NonPersistentCaching&quot; mode can now be used with read/write data.</li>
-	<li>Better failover handling when a file server reports VBUSY errors.</li>
-	<li>&quot;fs flushvolume&quot; works with the afs redirector.</li>
-	<li>&quot;fs setverify&quot; and &quot;fs getverify&quot; added to manage a new data
-	verification mode.</li>
-	<li>NPGetUniversalName path truncation error fixed.</li>
+	<li>Permit rename of a file to itself without error.</li>
+	<li>.Permit Explorer Shell to set UNIX mode bits.</li>
+	<li>Ignore AFS File Server file lock counts when deciding whether fail a
+	lock request.&nbsp; File Servers prior to 1.6.1pre5 do not report accurate
+	values.</li>
 </ul>
 <h3>Features:</h3>
 <ul>
@@ -157,12 +163,12 @@ was published in July 2008.
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.6 Release Notes <a title="OpenAFS for Windows 1.7.6 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.6/winxp/ReleaseNotes.chm">
-	(CHM)</a> <a title="OpenAFS for Windows 1.7.6 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.6/winxp/ReleaseNotes/html/index.html">
+	1.7.8 Release Notes <a title="OpenAFS for Windows 1.7.8 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.8/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.7.8 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.8/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.7.6 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.6/winxp/afs-changes-since-1.2.txt">
-	1.7.6 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.8 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/afs-changes-since-1.2.txt">
+	1.7.8 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -207,21 +213,22 @@ was published in July 2008.
 			error and the flush operation never completes.</li>
 		<li>Adobe Reader X cannot save a PDF to a SUBST drive mapped to an AFS
 		path. Use the UNC path instead.</li>
+		<li>Adobe Acrobat X cannot merge PDFs to an AFS path.</li>
 	</ul>
 <h3><a name="1_7_64bit_downloads"></a>Downloads for 64-bit Windows operating systems: 2008-R2/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.6/winxp/openafs-en_US-64bit-1-7-0600.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/openafs-en_US-64bit-1-7-0800.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.6/winxp/openafs-32bit-tools-en_US-1-7-0600.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/openafs-32bit-tools-en_US-1-7-0800.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems: Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.6/winxp/openafs-en_US-1-7-0600.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/openafs-en_US-1-7-0800.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
@@ -425,7 +432,7 @@ MIT version
 MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
 The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.6</a>
+version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.8</a>
 is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
 section of krb5.conf in %SystemRoot%:\ProgramData\Kerberos.<p>MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.
