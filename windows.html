@@ -26,7 +26,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.8 (aka 1.7.0800)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.9 (aka 1.7.0900)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -36,7 +36,7 @@ of members.<br>
 		<li><a href="#1_7_32bit_downloads">32-bit Downloads</a>
 
 	</ul>
-<li><a href="#maintenance-release">OpenAFS for Windows 1.6.0002 (aka 1.6.0b)</a></li>
+<li><a href="#maintenance-release">OpenAFS for Windows 1.6.1 (aka 1.6.0104)</a></li>
 	<ul>
 		<li><a href="#1_6_features">Features</a>
 		<li><a href="#1_6_docs">Documentation</a>
@@ -115,34 +115,39 @@ If the signature is missing do not complete the installation process and send e-
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">most recent report</a>
 was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
-<p>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.8 (1.7.0800)</a></h2>
-<p>(updated 15 March 2012)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.9 (1.7.0900)</a></h2>
+<p>(updated 9 April 2012)</p>
 
-<h3><a name="1_7_features"></a>Significant Changes:</h3>
+<h3><a name="1_7_features"></a>Significant Changes since 1.7.8:</h3>
+<a name="1_7_features0">
 <ul>
-	<li>Improved compatibility with anti-virus and other anti-malware products.</li>
-	<li>Significant improvements in processor utilization and parallel
-	processing.</li>
+	<li>Improved compatibility with anti-virus and other anti-malware products.<ul>
+		<li>Fixed kernel deadlocks with Trend Micro</li>
+	</ul>
+	</li>
 	<li>BSOD issues fixed.<ul>
-		<li>Avoid race during file control block deallocation.</li>
-		<li>Disable bugcheck in release builds.&nbsp; Too many out of memory
-		conditions were triggering BSODs.</li>
+		<li>Reference count errors corrected.</li>
 	</ul>
 	</li>
-	<li>Deadlocks avoided<ul>
-		<li>VolumeCB-&gt;ObjectInfoTree.TreeLock</li>
-		<li>&nbsp;ExtentsResource during CcPurge</li>
+	<li>More directory and file data synchronization errors fixed.</li>
+	<li>Improved VNOSERVICE error handling.</li>
+	<li>Improved Authentication Group inheritance.</li>
+	<li>Handle backward clock transitions.</li>
+	<li>Optimized RXAFSCB_InitCallBack3 RPC processing.</li>
+	<li>Corrected processing of symlinks containing &quot;..&quot; components.</li>
+	<li>Query file server for up to date free space for each:<ul>
+		<li>FileFsSizeInformation query</li>
+		<li>FileFsFullSizeInformation query</li>
+		<li>SetEndOfFile requests when new value extends the file size.</li>
 	</ul>
 	</li>
-	<li>Directory and file data synchronization errors fixed.</li>
-	<li>Permit rename of a file to itself without error.</li>
-	<li>.Permit Explorer Shell to set UNIX mode bits.</li>
-	<li>Ignore AFS File Server file lock counts when deciding whether fail a
-	lock request.&nbsp; File Servers prior to 1.6.1pre5 do not report accurate
-	values.</li>
+	<li>Return STATUS_ACCESS_DENIED if recursive loops are detected.</li>
+	<li>Cache file server EACCES errors.</li>
+	<li>Return STATUS_DISK_FULL instead of STATUS_QUOTA_EXCEEDED.</li>
 </ul>
+</a>
+
 <h3>Features:</h3>
 <ul>
 	<li><span style>OpenAFS is a native Microsoft Windows file system.</span></li>
@@ -163,12 +168,12 @@ was published in July 2008.
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.8 Release Notes <a title="OpenAFS for Windows 1.7.8 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.8/winxp/ReleaseNotes.chm">
-	(CHM)</a> <a title="OpenAFS for Windows 1.7.8 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.8/winxp/ReleaseNotes/html/index.html">
+	1.7.9 Release Notes <a title="OpenAFS for Windows 1.7.9 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.9/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.7.9 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.9/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.7.8 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/afs-changes-since-1.2.txt">
-	1.7.8 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.9 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/afs-changes-since-1.2.txt">
+	1.7.9 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -182,7 +187,8 @@ was published in July 2008.
 	<li>Windows XP SP3</li>
 </ul>
 
-<small>Windows 2000 is not a supported platform for the 1.7 series.  Use <a href="#maintenance-release">OpenAFS for Windows 1.6.0002 (aka 1.6.0b)</a>.</small>
+<small>Windows 2000 is not a supported platform for the 1.7 series.  Use <a href="#maintenance-release">OpenAFS for Windows
+1,6,1 (1.6.0104)</a>.</small>
 
 <h3><a name="1_7_issues"></a>Known Issues:</h3>
 	<ul class="itemizedlist" type="disc">
@@ -219,24 +225,35 @@ was published in July 2008.
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/openafs-en_US-64bit-1-7-0800.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/openafs-en_US-64bit-1-7-0900.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/openafs-32bit-tools-en_US-1-7-0800.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/openafs-32bit-tools-en_US-1-7-0900.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems: Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.8/winxp/openafs-en_US-1-7-0800.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/openafs-en_US-1-7-0900.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
 
 
-<h2><a name="maintenance-release">OpenAFS for Windows 1.6.0002 aka 1.6.0b</a></h2>
-(updated 1 Sep 2011)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
-<h3><a name="1_6_features"></a>Features:</h3>
+<h2><a name="maintenance-release">OpenAFS for Windows 1.6.1 (1.6.0104)</a></h2>
+(updated 28 March 2012)<p>&nbsp;<img border="0" src="images/wVista-Works.png" width="209" height="93"></p>
+<h3><a name="1_6_features"></a>Significant Changes since 1.6.0b:</h3>
+<ul>
+	<li>&quot;fs setserverprefs -vl&quot; works again</li>
+	<li>Improved handling of volume renames</li>
+	<li>Windows Vista and Windows 7 Advanced Firewall Configuration</li>
+	<li>Idle Dead Timeout improvements</li>
+	<li>Busy RX Call Channel processing</li>
+	<li>NAT Ping Improvements</li>
+	<li>Correct handling of VBUSY errors</li>
+	<li>Correct handling of VNOSERVICE errors</li>
+</ul>
+<h3>Features:</h3>
 <ul>
 	<li><span style>Starting with the 1.5.50 release of OpenAFS for Windows,
 	each of the AFS Client Service, the AFS Explorer Shell Extension, and the
@@ -332,12 +349,12 @@ was published in July 2008.
 <h3><a name="1_6_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.6.0b Release Notes <a title="OpenAFS for Windows 1.6.0b Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.6.0/winxp/ReleaseNotes.chm">
-	(CHM)</a> <a title="OpenAFS for Windows 1.6.0b Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.6.0/winxp/ReleaseNotes/html/index.html">
+	1.6.1 Release Notes <a title="OpenAFS for Windows 1.6.1 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.6.1/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.6.1 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.6.1/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.6.0b ChangeLog" href="http://dl.openafs.org/dl/openafs/1.6.0/winxp/afs-changes-since-1.2.txt">
-	1.6.0b ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.6.1 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.6.1/winxp/afs-changes-since-1.2.txt">
+	1.6.1 ChangeLog</a></li>
 </ul>
 <h3><a name="1_6_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -357,7 +374,7 @@ was published in July 2008.
 <h3><a name="1_6_issues"></a>Known Issues:</h3>
 <ul>
 <li>If a *beta* AFS plug-in for Network Identity Manager is installed, it must
-be uninstalled before OpenAFS 1.6.0b is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of
+be uninstalled before OpenAFS 1.6.1 is installed.  Otherwise, an error indicating that the plug-in cannot be installed because the appropriate version of
 OpenAFS is not installed will be generated.</li>
 <li>The AFS plug-in for Network Identity Manager provided as part of OpenAFS
 1.6.0b requires MIT Kerberos for Windows 3.1 or above.</li>
@@ -383,17 +400,17 @@ development of compatible HtmlHelp (.CHM) files.</li>
 <h3><a name="1_6_32bit_downloads"></a>Downloads for 32-bit Windows operating systems: Win7/2008/Vista/2003-R2/2003/XP/2000:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.6.0/winxp/OpenAFSforWindows-1-6-0002.exe">32-bit EXE installer for individual installations</a>
+	<a href="http://dl.openafs.org/dl/openafs/1.6.1/winxp/OpenAFSforWindows-1-6-0104.exe">32-bit EXE installer for individual installations</a>
   </li>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.6.0/winxp/openafs-en_US-1-6-0002.msi">32-bit MSI installer for managed installations</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.6.1/winxp/openafs-en_US-1-6-0104.msi">32-bit MSI installer for managed installations</a><br>
   </li>
 </ul>
 
 <h3><a name="1_6_64bit_downloads"></a>Downloads for 64-bit Windows operating systems: 2008-R2/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.6.0/winxp/openafs-en_US-64bit-1-6-0002.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.6.1/winxp/openafs-en_US-64bit-1-6-0104.msi">64-bit MSI installer</a><br>
   </li>
 </ul>
 <blockquote>
@@ -403,7 +420,7 @@ development of compatible HtmlHelp (.CHM) files.</li>
 	Windows.</p>
 	<ul>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.6.0/winxp/openafs-32bit-tools-en_US-1-6-0002.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.6.1/winxp/openafs-32bit-tools-en_US-1-6-0104.msi">32-bit tools MSI installer</a><br>
 		</li>
 	</ul>
 </blockquote>
@@ -424,7 +441,7 @@ Kerberos for Windows</a></li>
 	<li><a href="https://www.secure-endpoints.com/heimdal/">Heimdal Kerberos</a>
 </li>
 </ul>
-The recommended version of Kerberos v5 for <a href="#release">OpenAFS for Windows 1.6.0b</a> is 
+The recommended version of Kerberos v5 for <a href="#release">OpenAFS for Windows 1.6.1</a> is
 MIT version 
 3.2.2.
 64-bit releases of KFW are available from
@@ -432,7 +449,7 @@ MIT version
 MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
 The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.8</a>
+version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.9</a>
 is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
 section of krb5.conf in %SystemRoot%:\ProgramData\Kerberos.<p>MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.
