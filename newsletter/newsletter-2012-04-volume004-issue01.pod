@@ -93,7 +93,7 @@ fileserver that way."
 
 But what happens when the server IP failover process itself goes awry? Or when a
 larger problem with the SAN keeps disk inaccessible to one or more servers?
-That's where AFS's built in data replication and redundnacy features, both old
+That's where AFS's built in data replication and redundancy features, both old
 and new, come into play.
 
 "AFS replications provide our third level of redundancy. We have three
