@@ -26,7 +26,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.9 (aka 1.7.0900)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.10 (aka 1.7.1000)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -116,38 +116,28 @@ If the signature is missing do not complete the installation process and send e-
 was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.9 (1.7.0900)</a></h2>
-<p>(updated 9 April 2012)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.10 (1.7.1000)</a></h2>
+<p>(updated 17 April 2012)</p>
 
-<h3><a name="1_7_features"></a>Significant Changes since 1.7.8:</h3>
-<a name="1_7_features0">
+<h3><a name="1_7_features">Significant Changes since 1.7.9:</h3>
 <ul>
 	<li>Improved compatibility with anti-virus and other anti-malware products.<ul>
-		<li>Fixed kernel deadlocks with Trend Micro</li>
+		<li>Fixed kernel deadlocks with Trend Micro when file is truncated to
+		zero bytes.</li>
 	</ul>
 	</li>
-	<li>BSOD issues fixed.<ul>
-		<li>Reference count errors corrected.</li>
-	</ul>
-	</li>
-	<li>More directory and file data synchronization errors fixed.</li>
-	<li>Improved VNOSERVICE error handling.</li>
-	<li>Improved Authentication Group inheritance.</li>
-	<li>Handle backward clock transitions.</li>
-	<li>Optimized RXAFSCB_InitCallBack3 RPC processing.</li>
-	<li>Corrected processing of symlinks containing &quot;..&quot; components.</li>
-	<li>Query file server for up to date free space for each:<ul>
-		<li>FileFsSizeInformation query</li>
-		<li>FileFsFullSizeInformation query</li>
-		<li>SetEndOfFile requests when new value extends the file size.</li>
-	</ul>
-	</li>
-	<li>Return STATUS_ACCESS_DENIED if recursive loops are detected.</li>
-	<li>Cache file server EACCES errors.</li>
-	<li>Return STATUS_DISK_FULL instead of STATUS_QUOTA_EXCEEDED.</li>
+	<li>Another file cache synchronization error fixed.</li>
+	<li>Redesigned AFS PIOCTL processing to workaround broken SMB protocol
+	implementations.</li>
+	<li>Ensure that file data is flushed to the file server before file locks
+	are released.</li>
+	<li>Prevent afsd_service crash if a file is marked <em>delete on close</em>
+	and the file server is unreachable.</li>
+	<li>Avoid File Control Block ERESOURCE contention during file create and
+	open operations.</li>
+	<li>Correct an RX deadlock introduced in 1.7.9.</li>
 </ul>
 </a>
-
 <h3>Features:</h3>
 <ul>
 	<li><span style>OpenAFS is a native Microsoft Windows file system.</span></li>
@@ -168,12 +158,12 @@ was published in July 2008.
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.9 Release Notes <a title="OpenAFS for Windows 1.7.9 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.9/winxp/ReleaseNotes.chm">
-	(CHM)</a> <a title="OpenAFS for Windows 1.7.9 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.9/winxp/ReleaseNotes/html/index.html">
+	1.7.10 Release Notes <a title="OpenAFS for Windows 1.7.10 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.10/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.7.10 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.10/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.7.9 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/afs-changes-since-1.2.txt">
-	1.7.9 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.10 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.10/winxp/afs-changes-since-1.2.txt">
+	1.7.10 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -211,13 +201,7 @@ was published in July 2008.
 			environments.&nbsp; Testing shows that write performance is no 
 		better or worse when using the SMB or AFS redirector interfaces on 
 		Windows 7.</li>
-			<li>There are compatibility issues with Symantec Endpoint
-			Protection and Microsoft Security Essentials on 32-bit XP.&nbsp;
-			File data is flushed to the file server using the credentials of the
-			anti-virus service and not the application that wrote the file.&nbsp;
-			As a result, the store data operation fails with an &quot;access denied&quot;
-			error and the flush operation never completes.</li>
-		<li>Adobe Reader X cannot save a PDF to a SUBST drive mapped to an AFS
+			<li>Adobe Reader X cannot save a PDF to a SUBST drive mapped to an AFS
 		path. Use the UNC path instead.</li>
 		<li>Adobe Acrobat X cannot merge PDFs to an AFS path.</li>
 	</ul>
@@ -225,16 +209,16 @@ was published in July 2008.
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/openafs-en_US-64bit-1-7-0900.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.10/winxp/openafs-en_US-64bit-1-7-1000.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/openafs-32bit-tools-en_US-1-7-0900.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.10/winxp/openafs-32bit-tools-en_US-1-7-1000.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems: Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.9/winxp/openafs-en_US-1-7-0900.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.10/winxp/openafs-en_US-1-7-1000.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
@@ -449,7 +433,7 @@ MIT version
 MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
 The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.9</a>
+version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.10</a>
 is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
 section of krb5.conf in %SystemRoot%:\ProgramData\Kerberos.<p>MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.
