@@ -30,7 +30,7 @@ for ReadWrite data.
 "For some of the 10k+ users of AFS at CERN, the high-availability (HA)
 of their data is of utmost importance" writes Arne Wiebalck of CERN. 
 
-And Ken Dreyer of Argonne National Labs writes that "we use AFS to distribute
+And Ken Dreyer of US Geological Survey writes that "we use AFS to distribute
 website content to web servers in three geographic regions ... it's acceptable
 to have a little bit of downtime, but we need to be able to recover with a
 minimum of hassle if we had an outage ... to meet our team's mission of highly
