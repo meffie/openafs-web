@@ -47,25 +47,35 @@ OpenAFS.</p>
 <h2>Recent OpenAFS News</h2>
 <div id="news">
 
-<h4>23-Apr-2012 - OpenAFS 1.7.11 - Native File System client for Microsoft Windows available</h4>
-<p>OpenAFS 1.7.11 is the next in a new series of OpenAFS clients for the
+<h4>7-May-2012 - OpenAFS 1.7.12 - Native File System client for Microsoft Windows available</h4>
+<p>OpenAFS 1.7.12 is the next in a new series of OpenAFS clients for the
 Microsoft Windows platform that is implemented as a native file system.&nbsp;
-Significant changes since 1.7.10</p>
-	<a name="1_7_features">
+Significant changes since 1.7.11</p>
 	<ul>
-		<li><a name="1_7_features0">Fixed a bug introduced in 1.7.9 that results in afsd_service.exe
-	termination on unlog.exe or equivalent.</a></li>
-</ul>
-	</a>
-	<p>All users of previous 1.7 releases should upgrade.</p>
+		<li>Windows cache coherency issues fixed.</li>
+        <li>Fix BSOD condition when
+          <ul>
+            <li>multiple threads attempt to open the same file system object simultaneously resulting  in memory corruption.</li>
+            <li> the stack is exhausted as a side effect of an out of memory condition.</li>
+          </ul>
+        </li>
+        <li>Prevent a potential AFS FileLock leak during file cleanup.</li>
+        <li>Improved handling of VNOVOL and VOFFLINE errors when produced by the file server during a volume backup, readonly release or salvage operation.</li>
+        <li>Reduced CPU utilization.<br>
+		</li>
+	</ul><p>All users of previous 1.7 releases should upgrade.</p>
 <p>The 1.7 series is for Microsoft Windows only.</p>
 <ul>
-	<li><a href="/pipermail/openafs-announce/2012/000388.html">Read the release announcement</a>
+	<li><a href="/pipermail/openafs-announce/2012/000391.html">Read the release announcement</a>
 	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
-	<li><a href="/release/openafs-1.7.11.html" target="_top">Go to the distribution page</a>
+	<li><a href="/release/openafs-1.7.12.html" target="_top">Go to the distribution page</a>
 </ul>
 
 
+<h4>25-Apr-2012 - 2012 European AFS and Kerberos Conference &amp; Call for Papers</h4>
+<p>Announcing  the 2012 European AFS and Kerberos Conference   taking place at the University of Edinburgh School of Informatics  from Tuesday 16th to Thursday 18th October 2012.</p>
+<p>Full details are available at: <a href="http://openafs2012.inf.ed.ac.uk/">http://openafs2012.inf.ed.ac.uk/</a></p>
+<p>The call for abstracts is open and so please feel free to submit your  presentation proposals. As always the conference will examine the  development outlook for AFS and Kerberos implementations, it will  highlight current projects and will offer space to proposals and new  ideas. Also, sites will be able to present their AFS and Kerberos  activities in site reports. Please submit proposals by email to  <a href="mailto:openafs-conf@inf.ed.ac.uk.">openafs-conf@inf.ed.ac.uk.</a></p>
 <h4>2-Apr-2012 - OpenAFS 1.6.1 available</h4>
 <p>OpenAFS 1.6.1 is the second in a new series of OpenAFS stable releases.
 <p>The 1.6 series is intended to provide new features including the Demand Attach File Service and Disconnected AFS, on other platforms including MacOS X, Linux variants, and UNIX, and includes numerous new features since 1.5.72, especially for users of MacOS X.
@@ -187,15 +197,8 @@ Students and mentors interested
 in participating in an OpenAFS project should read the
 <a href="gsoc.html">OpenAFS Summer of Code page</a>.</p>
 
-	<h4>17-Sep-2008 - European AFS conference</h4>
-	<p>The first European AFS Conference will be held in Graz from 24th to 26th of
-September 2008.
-	<p>Besides information about current OpenAFS topics there will be
-talks about usage cases, development and a social event.
-	<p>For more information, please visit http://www.openafs.at</p>
-
 	<h4>17-Mar-2008 - OpenAFS participating in Google Summer of Code</h4>
-	<p>Once again, Google will be doing their Summer of Code. For the first year, OpenAFS will be participating as a mentoring organization. Students interested are encouraged to discuss potential projects on the openafs development list. We have a list of
+<p>Once again, Google will be doing their Summer of Code. For the first year, OpenAFS will be participating as a mentoring organization. Students interested are encouraged to discuss potential projects on the openafs development list. We have a list of
 	<A HREF="gsoc.html">suggested projects</A> online, but we would be happy to discuss any relevant project with you.</p>
 
 	<h4>20-Dec-2007 - OpenAFS Security Advisory 2007-003</h4>

@@ -26,7 +26,7 @@ of members.<br>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.11 (aka 1.7.1100)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.12 (aka 1.7.1200)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -116,13 +116,21 @@ If the signature is missing do not complete the installation process and send e-
 was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.11 (1.7.1100)</a></h2>
-<p>(updated 23 April 2012)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.12 (1.7.1200)</a></h2>
+<p>(updated 7 May 2012)</p>
 
-<h3><a name="1_7_features">Significant Changes since 1.7.10:</a></h3>
+<h3><a name="1_7_features">Significant Changes since 1.7.11:</a></h3>
 <ul>
-	<li>Fixed a bug introduced in 1.7.9 that results in afsd_service.exe
-	termination on unlog.exe or equivalent.</li>
+	<li>Windows cache coherency issues fixed.</li>
+    <li>Fix BSOD condition when
+      <ul>
+        <li>multiple threads attempt to open the same file system object simultaneously resulting  in memory corruption.</li>
+        <li> the stack is exhausted as a side effect of an out of memory condition.</li>
+      </ul>
+    </li>
+    <li>Prevent a potential AFS FileLock leak during file cleanup.</li>
+    <li>Improved handling of VNOVOL and VOFFLINE errors when produced by the file server during a volume backup, readonly release or salvage operation.</li>
+    <li>Reduced CPU utilization.</li>
 </ul>
 <h3>Features:</h3>
 <ul>
@@ -144,12 +152,12 @@ was published in July 2008.
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.11 Release Notes <a title="OpenAFS for Windows 1.7.11 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.11/winxp/ReleaseNotes.chm">
-	(CHM)</a> <a title="OpenAFS for Windows 1.7.11 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.11/winxp/ReleaseNotes/html/index.html">
+	1.7.12 Release Notes <a title="OpenAFS for Windows 1.7.12 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.12/winxp/ReleaseNotes.chm">
+	(CHM)</a> <a title="OpenAFS for Windows 1.7.12 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.12/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a><br>
   <li>
-	<a title="OpenAFS for Windows 1.7.11 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.11/winxp/afs-changes-since-1.2.txt">
-	1.7.11 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.12 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.12/winxp/afs-changes-since-1.2.txt">
+  1.7.12 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -195,16 +203,16 @@ was published in July 2008.
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.11/winxp/openafs-en_US-64bit-1-7-1100.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.12/winxp/openafs-en_US-64bit-1-7-1200.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.11/winxp/openafs-32bit-tools-en_US-1-7-1100.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.12/winxp/openafs-32bit-tools-en_US-1-7-1200.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems: Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.11/winxp/openafs-en_US-1-7-1100.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.12/winxp/openafs-en_US-1-7-1200.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
