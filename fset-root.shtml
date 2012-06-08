@@ -24,7 +24,7 @@ pageTracker._trackPageview();
 <title>OpenAFS</title>
 <link href="/openafs.css" rel="stylesheet" type="text/css">
 </head>
-<frameset cols="200,*">
+<frameset cols="265,*">
   <frame src="/navbar.html" name="navbar" frameborder=0>
   <frameset rows="170,*">
     <frame src="/top.html" scrolling=no name="top" frameborder=0>
