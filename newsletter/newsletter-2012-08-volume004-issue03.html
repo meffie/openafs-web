@@ -1,0 +1,454 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>OpenAFS Newsletter, Volume 4, Issue 3, August 2012</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#openafs_newsletter__volume_4__issue_3__august_2012">OpenAFS Newsletter, Volume 4, Issue 3, August 2012</a></li>
+	<ul>
+
+		<li><a href="#introduction">Introduction</a></li>
+		<li><a href="#passing_of_rl_bob_morgan">Passing of RL &quot;Bob&quot; Morgan</a></li>
+		<li><a href="#openafs_1_6_1a_for_mountain_lion">OpenAFS 1.6.1a for Mountain Lion</a></li>
+		<li><a href="#openafs_for_windows_8_and_server_2012">OpenAFS for Windows 8 and Server 2012</a></li>
+		<li><a href="#did_you_know____about_dkms">Did You Know... About DKMS?</a></li>
+		<li><a href="#case_study__windows_roaming_profiles__part_2">Case Study: Windows Roaming Profiles, Part 2</a></li>
+		<ul>
+
+			<li><a href="#appendix_a1__cross_realm_authentication_">Appendix A1.	Cross realm authentication:</a></li>
+			<li><a href="#appendix_a2__afs_access_on_login_">Appendix A2.	AFS Access on login:</a></li>
+			<li><a href="#appendix_b1__roaming_profile_">Appendix B1.	Roaming profile:</a></li>
+			<li><a href="#appendix_b2__caching_of_roaming_profiles">Appendix B2. Caching of Roaming Profiles</a></li>
+			<li><a href="#appendix_c__folder_redirection_">Appendix C.	Folder redirection:</a></li>
+			<li><a href="#appendix_d__openafs_client_configuration">Appendix D.	OpenAFS Client Configuration</a></li>
+		</ul>
+
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="openafs_newsletter__volume_4__issue_3__august_2012">OpenAFS Newsletter, Volume 4, Issue 3, August 2012</a></h1>
+<p>
+</p>
+<h2><a name="introduction">Introduction</a></h2>
+<p>Welcome back to the OpenAFS Newsletter.</p>
+<p>This edition features part 2 of our Windows Roaming Profiles Case Study. And, the debut of &quot;Did You Know...&quot; , which will feature lesser known hints,
+tips, and tidbits in addition to more misunderstood pieces of OpenAFS.</p>
+<p>If you have any suggestions for future topics or would like to contribute to the OpenAFS Newsletter, please contact Dave Botsch at newsletter (at)
+openafs.org .</p>
+<p>
+</p>
+<h2><a name="passing_of_rl_bob_morgan">Passing of RL &quot;Bob&quot; Morgan</a></h2>
+<p>OpenAFS recently learned of the passing of RL &quot;Bob&quot; Morgan.</p>
+<p>Bob was most recently known for his considerable work on identity management,
+but before his employment at the University of Washington worked at Stanford
+and was involved in Kerberos and AFS during his time there. Bob was among the
+people who externally pushed the cause of open sourcing AFS, and in a
+conference call where it became clear that would actually happen, posed a
+scenario which became a running joke for years when he suggested the
+possibility of providing support for this open source AFS as &quot;R L Bob's AFS
+Company&quot;.  Bob will be sorely missed.</p>
+<p>More can be read here: <a href="https://spaces.internet2.edu/display/rlbob/Home">https://spaces.internet2.edu/display/rlbob/Home</a></p>
+<p>-Derrick Brashear</p>
+<p>
+</p>
+<h2><a name="openafs_1_6_1a_for_mountain_lion">OpenAFS 1.6.1a for Mountain Lion</a></h2>
+<p>OpenAFS 1.6.1a is a set of patches to 1.6.1 to update the MacOS AFS client, including the preferences pane. Installers for Mac OS X Lion and SnowLeopard are also available.</p>
+<p><a href="http://www.openafs.org/macos.html">http://www.openafs.org/macos.html</a> as always has links to all MacOS installers.</p>
+<p>
+</p>
+<h2><a name="openafs_for_windows_8_and_server_2012">OpenAFS for Windows 8 and Server 2012</a></h2>
+<p>On August 15th Microsoft made available the &quot;Release to Manufacturing&quot;
+builds of Windows 8 and Server 2012 to members of the following programs:</p>
+<p>* MSDN Subscriptions</p>
+<p>* Microsoft Partner Network</p>
+<p>* TechNet Professional Subscriptions</p>
+<p>* Microsoft Volume Licensing/Software Assurance customers</p>
+<p>The general public release for consumers and small businesses will take
+place on October 26.  However, the above programs will permit just about
+every organization that uses OpenAFS to deploy Windows 8 and Server 2012
+in some capacity.  Therefore, it is critical that OpenAFS provide
+support for the Windows 8 and Server 2012 platforms.</p>
+<p>On August 16th OpenAFS.org announced the availability of Windows 8 and
+Server 2012 support in the OpenAFS 1.7.17 release.  This support covers
+the X86 and AMD64/X64 chipsets.</p>
+<p>Windows 8 and Server 2012 are a major platform change for the Windows
+ecosystem,  especially for file system vendors and file system filter
+products such as Anti-malware, Backup, Encryption, and Content/Activity
+monitors.  For the first time since the introduction of NTFS Microsoft
+has introduced a new file system called ReFS which will eventually
+provide functionality equivalent to Solaris' ZFS.  As a result of the
+addition of ReFS, significant changes have taken place within the
+installable file system (IFS) layer.  File Object IDs have grown from
+64-bit to 128-bit values, Short (8.3 compatibility) names have been
+discontinued, and extended attributes and alternate data streams among
+other features have become optional.</p>
+<p>Windows 8 and Server 2012 include significant security improvements as
+well.  There is support for the new Kerberos Flexible Authentication
+Secure Tunneling (FAST) protocol, Compound identities, Kerberos Proxy
+support for obtaining Kerberos credentials when KDCs are not exposed to
+the Internet, and compressed Privilege Attribute Certificate (PAC) data
+in Kerberos tickets substantially reduce the chance of buffer overflow
+failures during authentication with AFS, WebAuth and other systems.</p>
+<p>The OpenAFS 1.7.17 client has undergone substantial testing with
+forthcoming Windows 8 and Server 2012 products from a broad range of
+vendors at two Microsoft sponsored interop events this year.</p>
+<p>The biggest challenge for sites that wish to use OpenAFS on future
+Windows devices is Microsoft's approach to locking down ARM devices.
+At present there is no OpenAFS support for Windows 8 RT that will be
+used in the forthcoming products such as the Microsoft Surface and
+Lenovo Thinkpad Tablet 2 or in Windows Phone 8 devices from Nokia and
+Samsung.  Microsoft will not allow third party file system device
+drivers to be sold via the Windows 8 and Windows Phone 8 Marketplaces.
+The only time an OpenAFS file system driver could appear on such a
+device is if the hardware manufacturer chooses to bundle it.</p>
+<p>While OpenAFS can never be distributed via the Marketplace for X86 and
+AMD64/X64 Windows systems, there are no restrictions on the installation
+of third party file systems on those platforms.</p>
+<p>
+</p>
+<h2><a name="did_you_know____about_dkms">Did You Know... About DKMS?</a></h2>
+<p>DKMS stands for Dynamic Kernel Module Support. Designed by Dell, DKMS allows
+one to auto-build kernel modules. The auto build can take place when the system
+boots a new kernel, when the new kernel version is installed, when the dynamic kernel module package itself is installed, or at any time by typing in a couple of very simple commands. No longer do you need to manually rebuild modules from source by hand. And no longer do you need to install new pre-packaged and pre-built kernel modules for every individual kernel version. After installing the DKMS version of a kernel module, you just reboot to the new kernel, and DKMS does the rest.</p>
+<p>DKMS OpenAFS packages are available for Fedora and RedHat Enterprise Linux.
+You will need to install compilers if not part of your standard install (these
+are usually available as part of the linux distribution). You should install
+the main DKMS RPM, available from various sources such as the EPEL (Extra
+Packages for Enterprise Linux) repository. Then, in place of installing the
+kmod-openafs RPMs matching your installed kernel versions, install the
+dkms-openafs RPM. The install will take a bit longer than an usual RPM install
+since DKMS is building an openafs kernel module for your running kernel.</p>
+<p>And now, with each new kernel install, DKMS will ensure you have a matching OpenAFS kernel module.</p>
+<p>Read more about DKMS in Linux Journal: <a href="http://www.linuxjournal.com/article/6896">http://www.linuxjournal.com/article/6896</a></p>
+<p>
+</p>
+<h2><a name="case_study__windows_roaming_profiles__part_2">Case Study: Windows Roaming Profiles, Part 2</a></h2>
+<pre>
+        Nathan Hatley
+        Mosaic Technical Specialist-Windows Administration
+        William States Lee College of Engineering
+        The University of North Carolina at Charlotte</pre>
+<p>Our legacy and current computing environment is Windows XP. The XP environment consists of about 1100 XP desktops spread across several labs and hundereds of faculty/staff offices.</p>
+<p>Roaming profiles with folder redirection allow all user data to easily and quickly roam to wherever the user is logging in. The user gets a seamless desktop experience. As all of the user's data is stored in AFS, the user's data is easily backed up. And in case of a hardware failure, this setup allows easy replacement of systems.</p>
+<p>We are in process of testing our upgrade path from XP to Windows 7 and from Server 2003 to Server 2008 R2. We have created a brand new AD for our Windows 7 rollout so that any changes made can be guaranteed to not affect the current production environment. This also enables us to use Windows Server 2008 R2 from the start, rather than having to upgrade our production Server 2003 boxes.</p>
+<p>The rest of this discussion targets the new Windows 7 environment. However, some also applies to the old XP environment because some settings have not changed between Windows releases.</p>
+<p>Our environment utilizes three virtual MIT KDCs, three virtual VLDB servers, and seven bare-metal AFS fileservers offering 10TB each (2TB per vice partition).  The partitions reside on 12 1TB disks in a raid 6 array per server.  We have three virtual Windows Server 2008 R2 AD servers.  We have three server rooms in three separate buildings, so each KDC, VLDB, and AD server are split among the three server rooms.  We have two fileservers in two server rooms, and three in the last.</p>
+<p>Currently, we have 35 Windows 7 test systems. Some of these Windows 7 test systems are virtual machines running on our several Hyper-V servers. Our workstations are running the 64-bit version of Windows 7 SP1 Enterprise.  We installed MIT Kerberos 3.2.2 64bit and 32bit, both provided by Secure-Endpoints. We also installed the new Network Identity Manager from Secure-Endpoints.  As of this writing, we are running OpenAFS 1.7.1600 64bit with the 32bit tools package also installed.</p>
+<p>To get Roaming Profiles working, we first had to get AFS access on user login (known in AFS parlance as &quot;integrated login&quot;) so that Windows can download the user's profile. We describe the necessary changes in appendix A1 and A2. Note that if your organization uses Windows AD as the KDC, a cross realm trust between Windows Active Directory and the MIT KDC Kerberos realm, as described in appendix A1, is unnecessary.</p>
+<p>We store the Windows Roaming Profile in a folder under the user's AFS home directory. The Roaming Profile folder does not have to exist prior to the user's first logon as Windows will automatically create it (users have 'rlidwka' permissions for their AFS volume, so with tokens obtained at login Windows can create the folder). See appendix B1 for roaming profile configuration details. You can also choose to delete the workstation local caches of Roaming Profiles. If you do so, you must also save the contents of AppData\Local and AppData\LocalLow in the Roaming Profile. These are not stored with the roaming profile by default.  To store these folders with the roaming profile, see appendix B2.</p>
+<p>Roaming Profiles have some Gotchas which need to be understood. Profile upload and download only occur at user logon / logoff. This means that if a user changes a preference, other machines that user is concurrently logged into will not see the change. Also, Roaming Profiles are subject to what we call &quot;last write wins&quot;. In &quot;last write wins&quot; if a user is logged into multiple machines and logs out of one machine at a time, the Roaming Profile will only keep the configuration uploaded by the last logout. Any changes that were made on the other systems will be overwritten by the last logout and will be lost. Also, a user must have an AFS token before logging out. Otherwise, the profile upload will fail, and the user will lose any changed data. Of course, if you do not delete local Roaming Profile caches, any changed data will still reside in the Roaming Profile cache on the workstation.</p>
+<p>In our organization, we do not limit profile size through Active Directory. Instead, we just use the user's AFS volume quota as the limiting factor.  Users must be mindful of their quotas and ensure enough space to store Roaming Profiles on logout. Otherwise the Roaming Profile upload/synchronization will fail. We have quota checks during our logon scripting that inform the user if running low on space. And if the user is at quota, we do not allow the user to login (via our pre-profile scripting mentioned below). This is to help prevent the issues resulting from not being able to store anything in AFS. Users can login to our web gateway from an unmanaged workstation to free up space in their AFS volumes.</p>
+<p>Folder Redirection into AFS gets a little more complicated. Target folders for the redirection must exist prior to user login, or the redirection will fail.  There are two choices for a resolution to this problem.</p>
+<p>Option one is that an organization could pre-create these folders during user AFS volume creation. The issue with this approach is that the user could accidentally delete those folders and break the profile.</p>
+<p>Option two, our choice, is to run a script prior to user profile download. Unfortunately, Microsoft does not natively provide a means to run a script at the right time. We had to create a logon provider that would execute our script. Our implementation works but currently has a bug. This bug causes the script code to run during workstation unlock as well. Once we resolve this issue we will hopefully be able to release the code for others.</p>
+<p>A second issue, common to both options, is that Folder Redirection configuration choices are relatively limited. This is especially true if all user volumes do not reside under a common folder. So, we chose to redirect all folders to a drive letter. And, we configured each user to map a drive letter on login. See appendix C for configuration details.</p>
+<p>For use with Windows Folder Redirection, we have configured the OpenAFS cache size to 1GB. This larger cache size allows enough room in the  workstation OpenAFS cache for the user's Windows profile data (from Windows folder redirection into AFS) to reside in the cache.  We have also configured the chunk size for 2MB to increase network throughput for faster login / logout times for users.  See appendix D for configuration details.</p>
+<p>Folder Redirection has some more Gotchas. The AppData\Roaming folder stores user configuration information for most all programs a user runs. If the user's AFS token goes away, programs can no longer access this folder, which we redirect into AFS. Programs do not take kindly to their data store suddently disappearing and can start to behave oddly. Because of this potential problem, we have a monitor program, written in java, to warn the user if his or her token is about to expire. Our program then offers an AFS token renewal GUI to the user. Because the Network Identity Manager targets users who understand what AFS and what Kerberos are, we instead use our own simpler GUI. Our targeted user base is made up of university students who may or may not even know what a hard drive is!</p>
+<p>Another gotcha is that while most applications obey Folder Redrection, some applications do
+not. The end result is that a user may now have *two* AppData folders! When a
+folder is redirected, various Microsoft functions/registry keys/environment
+variables will return the path to the redirected folder instead of the default
+path.  Programs that implement these standard routines will properly store
+their data in the redirected folder.  Unfortunately, some programs do not
+follow standard Microsoft practice and will instead store their data in a hard
+coded location (more or less).  For example, the path to the roaming
+application data folder can be accessed via the environment variable
+&quot;%APPDATA%&quot;.  By default, this resolves to
+&quot;C:\Users\&lt;username&gt;\AppData\Roaming&quot;.  But some programs instead take a
+different tack and use &quot;%USERPROFILE%\AppData\Roaming&quot;.  This is done
+erroneously, but we cannot change the behavior of the individual program.
+When the roaming application data folder is redirected, &quot;%APPDATA%&quot; properly
+resolves to the redirected location, but &quot;%USERPROFILE%\AppData\Roaming&quot; still
+resolves to a location in the regular user Roaming Profile. So, we have to
+allow this 'hard coded' data to roam with the profile, even when the data
+should instead be stored in the redirected folder.</p>
+<p>Many applications will also not store files in the location pointed to by the %TEMPT% environment variable. %TEMP% by default resolves to C:\Users\&lt;username&gt;\AppData\Local\Temp, on the local hard disk. Instead, the applications will store temporary files inside one of the two Appdata\Roaming folders. If using the redirected to AFS Appdata\Roaming folder, the application will experience a performance hit talking to AFS. This is an application specific configuration that must be attended to during application deployment.</p>
+<p>And for another gotcha, some applications attempt to perform NTFS specific operations in redirected folders. These operations not only fail in AFS but can result in odd behavior. One example is an application attempting to store data in an alternate stream or attempting to hide a file. This will not work in AFS. So, the user may encounter the normally hidden desktop.ini files throughout the user profile. Another example is pinning a program to the taskbar. When Google Chrome is pinned to the taskbar, Windows attempts to store additional data with the shortcut so that jump lists function. Because this operation fails, Google Chrome creates an additional temporary icon that lasts as long as chrome continues running.</p>
+<p>These issues are not show stoppers for us. And these issues will eventually be resolved. The incredible functionality brought about by combining OpenAFS with Windows Roaming Profiles and Windows Folder Redirection far exceeds any other competing solutions.</p>
+<p>
+</p>
+<h3><a name="appendix_a1__cross_realm_authentication_">Appendix A1.	Cross realm authentication:</a></h3>
+<p>Create a principal on the KDC with a strong password:</p>
+<pre>
+        krbtgt/&lt;AD DOMAIN&gt;@&lt;KERBEROS DOMAIN&gt;</pre>
+<p>NOTE: This principal MUST have RC4-HMAC-MD5 encryption enabled.</p>
+<ol>
+<li><strong><a name="ad_active_directory_domains_and_trusts" class="item">AD: Active Directory Domains and Trusts</a></strong>
+
+</li>
+<li><strong><a name="right_click_on_domain_name_properties" class="item">Right-click on &lt;domain name&gt; properties</a></strong>
+
+</li>
+<li><strong><a name="trusts" class="item">Trusts</a></strong>
+
+</li>
+<li><strong><a name="new_trust" class="item">New Trust</a></strong>
+
+</li>
+<li><strong><a name="next" class="item">next</a></strong>
+
+</li>
+<li><strong><a name="kerberos_domain" class="item">&lt;KERBEROS DOMAIN&gt;</a></strong>
+
+</li>
+<li><strong><a name="realm_trust" class="item">Realm Trust</a></strong>
+
+</li>
+<li><strong>next</strong>
+
+</li>
+<li><strong><a name="nontransitive" class="item">nontransitive</a></strong>
+
+</li>
+<li><strong>next</strong>
+
+</li>
+<li><strong><a name="one_way_outgoing" class="item">One way: outgoing</a></strong>
+
+</li>
+<li><strong>next</strong>
+
+</li>
+<li><strong><a name="enter_strong_password_used_for_principal" class="item">Enter strong password used for principal</a></strong>
+
+</li>
+<li><strong>next</strong>
+
+</li>
+<li><strong>next</strong>
+
+</li>
+<li><strong><a name="finish" class="item">finish.</a></strong>
+
+</li>
+</ol>
+<p>Configure Kerberos name mapping for each user in AD:</p>
+<ol>
+<li><strong><a name="active_directory_users_and_computers" class="item">Active Directory users and computers</a></strong>
+
+</li>
+<li><strong><a name="view" class="item">view</a></strong>
+
+</li>
+<li><strong><a name="advanced_features" class="item">advanced features</a></strong>
+
+</li>
+<li><strong><a name="right_click_on_a_user" class="item">Right-click on a user</a></strong>
+
+</li>
+<li><strong><a name="name_mappings" class="item">Name Mappings</a></strong>
+
+</li>
+<li><strong><a name="kerberos_names" class="item">Kerberos Names</a></strong>
+
+</li>
+<li><strong><a name="add_the_kerberos_principal_e_g_exampleuser_exampledomain_com" class="item">Add the Kerberos principal e.g. <a href="mailto:exampleuser@EXAMPLEDOMAIN.COM">exampleuser@EXAMPLEDOMAIN.COM</a></a></strong>
+
+</li>
+<li><strong><a name="assign_a_default_domain_for_logon_enabled" class="item">Assign a default domain for logon: enabled</a></strong>
+
+</li>
+<li><strong><a name="set_it_to_your_kerberos_domain" class="item">Set it to your Kerberos domain.</a></strong>
+
+</li>
+<li><strong><a name="on_each_workstation_execute" class="item">On each workstation execute:</a></strong>
+
+<pre>
+        ksetup /addkdc &lt;KERBEROS DOMAIN&gt; &lt;Kerberos kdc server&gt;</pre>
+<p>NOTE: execute for each kdc server you wish to add</p>
+</li>
+</ol>
+<p>
+</p>
+<h3><a name="appendix_a2__afs_access_on_login_">Appendix A2.	AFS Access on login:</a></h3>
+<ul>
+<li><strong><a name="network_security" class="item">Network Security:</a></strong>
+
+<pre>
+        Configure encryption types allowed for Kerberos:
+        DES_CBC_CRC, RC4_HMAC_MD5, AES128_HMAC_SHA1, AES256_HMAC_SHA1</pre>
+</li>
+<li><strong><a name="hkey_local_machine_system_currentcontrolset_services_transarcafsdaemon_networkprovider" class="item">[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider]</a></strong>
+
+<pre>
+        &quot;LogonOptions&quot;=dword:00000000</pre>
+</li>
+<li><strong><a name="hkey_local_machine_system_currentcontrolset_services_transarcafsdaemon_networkprovider_domain_uncc_edu" class="item">[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider\Domain\uncc.edu]</a></strong>
+
+<pre>
+        &quot;LogonOptions&quot;=dword:00000001</pre>
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="appendix_b1__roaming_profile_">Appendix B1.	Roaming profile:</a></h3>
+<p>Configure roaming profile for each user in AD: Active Directory users and computers.</p>
+<ol>
+<li><strong><a name="right_click_on_a_user2" class="item">Right-click on a user</a></strong>
+
+</li>
+<li><strong><a name="properties" class="item">Properties</a></strong>
+
+</li>
+<li><strong><a name="profile" class="item">Profile</a></strong>
+
+</li>
+<li><strong><a name="under_profile_path" class="item">Under profile path</a></strong>
+
+<p>Input the path to a subfolder under the user's volume where you wish to store the profile.  This folder will have a .V2 appended to the end of it.</p>
+</li>
+</ol>
+<ul>
+<li><strong><a name="do_not_check_for_user_ownership_of_roaming_profile_folders_enabled" class="item">Do not check for user ownership of Roaming Profile Folders: enabled</a></strong>
+
+</li>
+<li><strong><a name="do_not_detect_slow_network_connections_enabled" class="item">Do not detect slow network connections: enabled</a></strong>
+
+</li>
+<li><strong><a name="wait_for_remote_user_profile_enabled" class="item">Wait for remote user profile: enabled</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="appendix_b2__caching_of_roaming_profiles">Appendix B2. Caching of Roaming Profiles</a></h3>
+<ul>
+<li><strong><a name="delete_cached_copies_of_roaming_profiles_enabled" class="item">Delete cached copies of roaming profiles: enabled</a></strong>
+
+</li>
+</ul>
+<p>Each user must have the following registry key changed:</p>
+<pre>
+        HKCU\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\ExcludeProfileDirs</pre>
+<pre>
+        AppData\Local\Temp; $Recycle.Bin; AppData\Local\Microsoft\Terminal Server Client\Cache; AppData\Local\Microsoft\Windows\Temporary Internet Files;</pre>
+<p>The default for the above key is &quot;AppData\Local;AppData\LocalLow;$RecycleBin&quot; . We change the key to &quot;AppData\Local\Temp;$RecycleBin&quot; so that the folders LocalLow and Local (except temp) will be stored with the profile.</p>
+<p>However, &quot;AppData\Local&quot; is not normally a roaming folder. So, Applications will tend to store cache data in &quot;AppData\Local&quot;. To control profile bloat, we exclude the &quot;Temp&quot; subfolder (&quot;AppData\Local\Temp&quot;) from the Roaming Profile.</p>
+<p>Any additional cache data subfolders created by programs should also be added to this exclude list to keep profile size small.</p>
+<p>
+</p>
+<h3><a name="appendix_c__folder_redirection_">Appendix C.	Folder redirection:</a></h3>
+<p>User Configuration &gt; Policies &gt; Windows Settings &gt; Folder Redirection.</p>
+<p>Configure all folders except Start Menu to redirect to a common drive letter of your choice (we selected H:).</p>
+<p>Under the options tab, ensure the following is configured:</p>
+<ul>
+<li><strong><a name="grant_user_exclusive_rights_to_folder_name_disabled" class="item">Grant user exclusive rights to &lt;folder name&gt;: disabled.</a></strong>
+
+</li>
+<li><strong><a name="move_the_contents_of_folder_name_to_the_new_location_disabled" class="item">Move the contents of &lt;folder name&gt; to the new location: disabled.</a></strong>
+
+</li>
+<li><strong><a name="also_apply_redirection_policy_to_windows_2000_windows_200_server_windows_xp_and_windows_server_2003_operating_systems_disabled" class="item">Also apply redirection policy to Windows 2000, Windows 200 server, Windows XP, and Windows Server 2003 operating systems: disabled.</a></strong>
+
+</li>
+<li><strong><a name="policy_removal_behavior_leave_contents" class="item">Policy removal behavior: leave contents.</a></strong>
+
+</li>
+</ul>
+<p>Configure driver letter mapping for each user in AD:</p>
+<ol>
+<li><strong><a name="active_directory_users_and_computers2" class="item">Active Directory users and computers.</a></strong>
+
+</li>
+<li><strong><a name="right_click_on_a_user3" class="item">Right-click on a user</a></strong>
+
+</li>
+<li><strong><a name="properties2" class="item">Properties</a></strong>
+
+</li>
+<li><strong><a name="profile2" class="item">Profile</a></strong>
+
+</li>
+<li><strong><a name="under_home_folder_choose_connect_drive_letter_to" class="item">Under Home folder, choose connect &lt;drive letter&gt; to:</a></strong>
+
+<p>Input the path to a subfolder under the user's volume where you wish to store the redirected folders.  This folder and all redirected subfolders must exist prior to user login.</p>
+</li>
+</ol>
+<ul>
+<li><strong><a name="paths" class="item">Intranet Sites:  Include all network paths (UNCs): enabled</a></strong>
+
+</li>
+<li><strong><a name="site_to_zone_assignment_list_enabled_afs_uncc_edu" class="item">Site to Zone Assignment List: enabled, afs, *.uncc.edu</a></strong>
+
+</li>
+<li><strong><a name="allow_or_disallow_use_of_the_offline_files_feature_disabled" class="item">Allow or Disallow use of the Offline Files feature: disabled</a></strong>
+
+</li>
+<li><strong><a name="turn_off_windows_libraries_features_that_rely_on_indexed_file_data_enabled" class="item">Turn off Windows Libraries features that rely on indexed file data: enabled</a></strong>
+
+</li>
+<li><strong><a name="exclude_directories_in_roaming_profile_enabled" class="item">Exclude directories in roaming profile: enabled</a></strong>
+
+<p>&lt;input all redirected folders&gt; ex: Desktop; Documents; Pictures; Music; Videos; Favorites; Contacts; Downloads; Links; Searches; Saved Games</p>
+<p>NOTE:  Do NOT include AppData\Roaming in this list, as some programs do not follow the redirected folder and will store important information here (e.g. Outlook.).</p>
+</li>
+<li><strong><a name="do_not_automatically_make_redirected_folders_available_offline_enabled" class="item">Do not automatically make redirected folders available offline: enabled</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="appendix_d__openafs_client_configuration">Appendix D.	OpenAFS Client Configuration</a></h3>
+<p>[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\AFD\Parameters]</p>
+<ul>
+<li><strong><a name="fastsenddatagramthreshold_dword_000005dc" class="item">&quot;FastSendDatagramThreshold&quot;=dword:000005dc</a></strong>
+
+</li>
+<li><strong><a name="fastcopyreceivethreshold_dword_000005dc" class="item">&quot;FastCopyReceiveThreshold&quot;=dword:000005dc</a></strong>
+
+<p>NOTE: The above values modify Microsoft's default UDP behavior.  See this message from the mailing lists for more detail: <a href="http://lists.openafs.org/pipermail/openafs-info/2012-July/038350.html">http://lists.openafs.org/pipermail/openafs-info/2012-July/038350.html</a></p>
+</li>
+</ul>
+<p>[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters]</p>
+<ul>
+<li><strong><a name="securitylevel_dword_00000000" class="item">&quot;SecurityLevel&quot;=dword:00000000</a></strong>
+
+</li>
+<li><strong><a name="freelanceclient_dword_00000001" class="item">&quot;FreelanceClient&quot;=dword:00000001</a></strong>
+
+</li>
+<li><strong><a name="usedns_dword_00000001" class="item">&quot;UseDNS&quot;=dword:00000001</a></strong>
+
+</li>
+<li><strong><a name="rxmaxmtu_dword_00000000" class="item">&quot;RxMaxMTU&quot;=dword:00000000</a></strong>
+
+</li>
+<li><strong><a name="isgateway_dword_00000000" class="item">&quot;IsGateway&quot;=dword:00000000</a></strong>
+
+</li>
+<li><strong><a name="hidedotfiles_dword_00000001" class="item">&quot;HideDotFiles&quot;=dword:00000001</a></strong>
+
+</li>
+<li><strong><a name="nofindlanabyname_dword_00000001" class="item">&quot;NoFindLanaByName&quot;=dword:00000001</a></strong>
+
+</li>
+<li><strong><a name="cachesize_dword_00100000" class="item">&quot;CacheSize&quot;=dword:00100000</a></strong>
+
+</li>
+<li><strong><a name="chunksize_dword_00000015" class="item">&quot;ChunkSize&quot;=dword:00000015</a></strong>
+
+</li>
+</ul>
+
+</body>
+
+</html>
