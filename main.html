@@ -46,9 +46,9 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
-<h4>5-Novemeber-2012 - OpenAFS 1.7.18 - Native File System client for Microsoft
+<h4>12-Novemeber-2012 - OpenAFS 1.7.19 - Native File System client for Microsoft
 Windows 8 and Server 2012</h4>
-<p>OpenAFS 1.7.18 is the next a series of OpenAFS clients for the
+<p>OpenAFS 1.7.19 is the next a series of OpenAFS clients for the
 Microsoft Windows platform that is implemented as a native file system.&nbsp;
 Significant changes since 1.7.17:</p>
 <ul>
@@ -56,13 +56,16 @@ Significant changes since 1.7.17:</p>
 	<li>Prevents race conditions which decreased read and write performance in some environments</li>
 	<li>Symlink file information responses match NTFS Symlink behavior</li>
 	<li>Improved compatibility with Mozilla Firefox and Adobe Acrobat</li>
+	<li>Protection against broken file servers which can report invalid File Status information.  All file servers older than 1.6.1 can transmit invalid File Status information.</li>
+    <li>32-bit builds no longer have a Kerberos v4 dependency.</li>
+    <li>Fix an afsd_service panic condition introduced in 1.7.18 during file cleanup.</li>
 </ul>
 	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
 <p>The 1.7 series is for Microsoft Windows only.</p>
 <ul>
-	<li><a href="/pipermail/openafs-announce/2012/000411.html">Read the release announcement</a>
+	<li><a href="/pipermail/openafs-announce/2012/000412.html">Read the release announcement</a>
 	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
-	<li><a href="/release/openafs-1.7.18.html" target="_top">Go to the distribution page</a>
+	<li><a href="/release/openafs-1.7.19.html" target="_top">Go to the distribution page</a>
 </ul>
 
 
