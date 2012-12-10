@@ -19,7 +19,7 @@ OpenAFS is the world's foremost location independent file system.&nbsp;With Open
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.20 (aka 1.7.2000)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.21 (aka 1.7.2100)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -109,19 +109,21 @@ If the signature is missing do not complete the installation process and send e-
 was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.20 (1.7.2000)</a></h2>
-<p>(updated 12 November 2012)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.21 (1.7.2100)</a></h2>
+<p>(updated 10 December 2012)</p>
 
-<h3><a name="1_7_features">Significant Changes since 1.7.17:</a></h3>
+<h3><a name="1_7_features">Significant Changes since 1.7.20:</a></h3>
 <ul>
-	<li>Fixes critical kernel memory corruption bugs that can lead to BSOD events</li>
-	<li>Prevents race conditions which decreased read and write performance in some environments</li>
-	<li>Symlink file information responses match NTFS Symlink behavior</li>
-	<li>Improved compatibility with Mozilla Firefox and Adobe Acrobat</li>
-	<li>Protection against broken file servers which can report invalid File Status information.  All file servers older than 1.6.1 can transmit invalid File Status information.</li>
-    <li>32-bit builds no longer have a Kerberos v4 dependency.</li>
-    <li>Fix an afsd_service panic condition introduced in 1.7.20 during file cleanup.</li>
-    <li>Fix a critical error in the AFS Authentication Provider which causes XP, XP64, and Server 2003 systems to BSOD during logon if a Kerberos 5 implementation is not installed.  Affected versions of OpenAFS are 1.7.16 to 1.7.19.</li>
+	<li>Fixes critical kernel driver reference counting errors that can result in a BSOD.</li>
+    <li>Fixes several errors in afsd_service.exe which can result in unexpected termination.</li>
+    <li>Prevents access to SACL via file system Security Information Queries. Executables can now be started from network drive mappings.</li>
+    <li>Improved compatibility with Trend Micro Office Scan 10.0.</li>
+    <li>Adds support for creating and deleting hard links.</li>
+    <li>\\afs\cell#volume\ notation now works with the AFS redirector.</li>
+    <li>&quot;fs getcacheparms&quot; once again reports used cache buffers.</li>
+    <li>&quot;fs getcalleraccess&quot; now implemented on Windows.</li>
+    <li>&quot;msdfs:&quot; symlinks can now refer to DOS devices. (e.g., msdfs:c:\temp)</li>
+    <li>RX corrections.</li>
 </ul>
 <h3>Features:</h3>
 <ul>
@@ -143,15 +145,15 @@ was published in July 2008.
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.20 Release Notes
-    <a title="OpenAFS for Windows 1.7.20 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.20/winxp/ReleaseNotes.chm"> (CHM)</a>
-        <a title="OpenAFS for Windows 1.7.20 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.20/winxp/ReleaseNotes.pdf"> (PDF)</a>
-    <a title="OpenAFS for Windows 1.7.20 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.20/winxp/ReleaseNotes.epub"> (EPUB)</a>
-    <a title="OpenAFS for Windows 1.7.20 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.20/winxp/ReleaseNotes/html/index.html">
+	1.7.21 Release Notes
+    <a title="OpenAFS for Windows 1.7.21 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.21/winxp/ReleaseNotes.chm"> (CHM)</a>
+        <a title="OpenAFS for Windows 1.7.21 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.21/winxp/ReleaseNotes.pdf"> (PDF)</a>
+    <a title="OpenAFS for Windows 1.7.21 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.21/winxp/ReleaseNotes.epub"> (EPUB)</a>
+    <a title="OpenAFS for Windows 1.7.21 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.21/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a>
   <li>
-	<a title="OpenAFS for Windows 1.7.20 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.20/winxp/afs-changes-since-1.2.txt">
-  1.7.20 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.21 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.21/winxp/afs-changes-since-1.2.txt">
+  1.7.21 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -177,44 +179,29 @@ was published in July 2008.
 		modified and assigned properties such as Font, Height, Width, etc. will
 		be ignored by conhost.exe.</p>
 		<li class="listitem">
-		<p>On Windows 7 and Windows Server 2008 R2 and beyond, it is not possible to
-		execute an application out of AFS under the following conditions: </p>
-		<div class="itemizedlist">
-			<ul class="itemizedlist" type="circle">
-				<li class="listitem">
-				<p>The path is a drive letter mapping</p>
-				</li>
-				<li class="listitem">
-				<p>The application requires elevated privileges</p>
-				</li>
-			</ul>
-		</div>
-		<p>Workaround: use SUBST instead of NET USE to assign drive letters to
-		UNC paths. </p>
-	    <li>Write performance can be unacceptably slow in some 
+		<p>Write performance can be unacceptably slow in some
 			environments.&nbsp; Testing shows that write performance is no 
 		better or worse when using the SMB or AFS redirector interfaces on 
-		Windows 7.</li>
+		Windows 7.</p>
 	    <li>Stopping and restarting the OpenAFS Service when there are open file handles will leave file locks in an inconsistent state.&nbsp;Windows will believe the files are locked and the AFS cache manager will be unaware of them.</li>
 	    <li>Stopping and restarting the OpenAFS Service will result in all AFS token mappings to authentication groups to be lost.</li>
-	    <li>Command Prompt .LNK files cannot be stored in AFS. The conhost.exe background service does not access the file while impersonating the end user credentials.</li>
 	</ul>
 <h3><a name="1_7_64bit_downloads"></a>Downloads for 64-bit Windows operating systems:
 2012/Win8/2008-R2/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.20/winxp/openafs-en_US-64bit-1-7-2000.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.21/winxp/openafs-en_US-64bit-1-7-2100.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.20/winxp/openafs-32bit-tools-en_US-1-7-2000.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.21/winxp/openafs-32bit-tools-en_US-1-7-2100.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems:
 Win8/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.20/winxp/openafs-en_US-1-7-2000.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.21/winxp/openafs-en_US-1-7-2100.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
@@ -429,7 +416,7 @@ MIT version
 MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
 The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.20</a>
+version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.21</a>
 is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
 section of krb5.conf in %SystemDrive%\ProgramData\Kerberos.<p>MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.
