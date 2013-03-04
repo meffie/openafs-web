@@ -25,29 +25,50 @@ with PGP.
 
 <hr>
 
-<a name="OPENAFS-SA-2011-001"></a>
-<h2>OPENAFS-SA-2011-001 - Denial of service attack against Rx server processes</h2>
+<a name="OPENAFS-SA-2013-002"></a>
+<h2>OPENAFS-SA-2013-002 - Buffer overflow in OpenAFS ptserver</h2>
 <table border=0>
-<tr><th align="left">Issued:</th><td>23-Feb-2011</td></tr>
-<tr><th align="left">Last Update:</th><td>23-Feb-2011</td></tr>
+<tr><th align="left">Issued:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>27-Feb-2013</td></tr>
 <tr><th align="left">Affected:</th><td>
-  OpenAFS servers versions 1.2.8 - 1.4.12.1, 1.5.0-1.5.74 for all platforms</td></tr>
+  OpenAFS servers before version 1.6.2</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2013-002.patch">
+  http://www.openafs.org/security/openafs-sa-2013-002.patch</a>
+  <a href="openafs-sa-2013-002-1_4_14_1.patch">
+  http://www.openafs.org/security/openafs-sa-2013-002-1_4_14_1.patch (for 1.4.14.1)</a>
+</td></tr>
 <tr><th align="left">Full Text:</th><td>
-  <a href="OPENAFS-SA-2011-001.txt">
-  http://www.openafs.org/security/OPENAFS-SA-2011-001.txt</a>
+  <a href="OPENAFS-SA-2013-002.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2013-002.txt</a>
 </td></tr>
 </table>
-<p>An attacker with control of a client, or the ability to forge RX packets,
-can crash a server of affected hosts.
-This vulnerability is being tracked as CVE-2011-0430.</p>
+<p>An attacker can crash an OpenAFS ptserver by sending an IdToName RPC with
+a large payload. This vulnerability is being tracked as CVE-2013-1795.</p>
 
-<p>Currently the advisory erroneously states 1.4.14 is vulnerable.</p>
-
-<p>CVE-2011-0431, while correctly describing 1.4.14 as containing the fix
-for this issue, describes in its summary the release as broken. It is not.
-We recommend sites upgrade to 1.4.14; However, the impact of the issue
-is limited to a denial of service attack by a user with the ability to
-affect a lock of AFS though the client on a host.</p>
+<a name="OPENAFS-SA-2013-001"></a>
+<h2>OPENAFS-SA-2013-001 - Buffer overflows in OpenAFS fileserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+ OpenAFS servers before version 1.6.2</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2013-001.patch">
+  http://www.openafs.org/security/openafs-sa-2013-001.patch</a>
+  <a href="openafs-sa-2013-001-1_4_14_1.patch">
+  http://www.openafs.org/security/openafs-sa-2013-001-1_4_14_1.patch (for 1.4.14.1)</a>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2013-001.txt</a>
+</td></tr>
+</table>
+<p>By carefully crafting an ACL entry an attacker may overflow fixed length 
+buffers within the OpenAFS fileserver, crashing the fileserver, and 
+potentially permitting the execution of arbitrary code. To perform the
+exploit, the attacker must already have permissions to create ACLs on the
+fileserver in question. This vulnerability is being tracked as CVE-2013-1794.</p>
 
 <a name="OPENAFS-SA-2009-002"></a>
 <h2>OPENAFS-SA-2009-002 - Denial of service attack against Linux cache manager</h2>

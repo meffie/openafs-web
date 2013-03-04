@@ -46,6 +46,26 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>4-Mar-2013 - OpenAFS Security Advisory 2013-001</h4>
+<p>OpenAFS servers versions before 1.6.2 for all platforms.&nbsp;&nbsp;
+An attacker with the ability to manipulate AFS directory ACLs may crash the
+fileserver hosting that volume. In addition, once a corrupt ACL is placed
+on a fileserver, its existence may crash client utilities manipulating ACLs
+on that server.
+
+This vulnerability is being tracked as CVE-2013-1794.</p>
+	<ul>
+		<li><a href="/security/OPENAFS-SA-2013-001.txt" target="_top">Go to the advisory</a>
+	</ul>
+<h4>4-Mar-2013 - OpenAFS Security Advisory 2013-002</h4>
+<p>OpenAFS servers versions before 1.6.2 for all platforms.&nbsp;&nbsp;
+An attacker who can send an IdToName RPC can crash a ptserver.
+
+This vulnerability is being tracked as CVE-2013-1795.</p>
+	<ul>
+		<li><a href="/security/OPENAFS-SA-2013-002.txt" target="_top">Go to the advisory</a>
+	</ul>
+
 <h4>4-Mar-2013 - OpenAFS 1.6.2 available</h4>
 <p>OpenAFS 1.6.2 is the third in a new series of OpenAFS stable releases.
 <p>The 1.6 series is intended to provide new features including the Demand Attach File Service and Disconnected AFS, on other platforms including MacOS X, Linux variants, and UNIX, and includes numerous new features since 1.5.72, especially for users of MacOS X.
