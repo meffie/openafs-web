@@ -70,6 +70,30 @@ potentially permitting the execution of arbitrary code. To perform the
 exploit, the attacker must already have permissions to create ACLs on the
 fileserver in question. This vulnerability is being tracked as CVE-2013-1794.</p>
 
+<a name="OPENAFS-SA-2011-001"></a>
+<h2>OPENAFS-SA-2011-001 - Denial of service attack against Rx server processes</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>23-Feb-2011</td></tr>
+<tr><th align="left">Last Update:</th><td>23-Feb-2011</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS servers versions 1.2.8 - 1.4.12.1, 1.5.0-1.5.74 for all platforms</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2011-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2011-001.txt</a>
+</td></tr>
+</table>
+<p>An attacker with control of a client, or the ability to forge RX packets,
+can crash a server of affected hosts.
+This vulnerability is being tracked as CVE-2011-0430.</p>
+
+<p>Currently the advisory erroneously states 1.4.14 is vulnerable.</p>
+
+<p>CVE-2011-0431, while correctly describing 1.4.14 as containing the fix
+for this issue, describes in its summary the release as broken. It is not.
+We recommend sites upgrade to 1.4.14; However, the impact of the issue
+is limited to a denial of service attack by a user with the ability to
+affect a lock of AFS though the client on a host.</p>
+
 <a name="OPENAFS-SA-2009-002"></a>
 <h2>OPENAFS-SA-2009-002 - Denial of service attack against Linux cache manager</h2>
 <table border=0>
