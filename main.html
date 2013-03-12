@@ -46,6 +46,26 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>12-March-2013 - OpenAFS 1.7.22 - Native File System client for Microsoft Windows</h4>
+<p>OpenAFS 1.7.22 is the next a series of OpenAFS clients for the
+Microsoft Windows platform that is implemented as a native file system.&nbsp;
+Significant changes since 1.7.21:</p>
+<ul>
+	<li>Improved garbage collection and reduced kernel memory usage</li>
+	<li>Redesigned I/O processing pathway results in higher throughput across a broad range of use cases as measured by 'iozone'.</li>
+	<li>New Symlink implementation provides improved compatibility with applications aware of NTFS Symlinks. Symlinks can be created and deleted using the Win32 API.</li>
+	<li>More accurate reporting of volume state information via FILE_FS_VOLUME_INFORMATION..</li>
+	<li>Many bugs fixed.</li>
+</ul>
+	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
+<p>The 1.7 series is for Microsoft Windows only.</p>
+<ul>
+	<li><a href="/pipermail/openafs-announce/2013/000425.html">Read the release announcement</a>
+	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
+	<li><a href="/release/openafs-1.7.22.html" target="_top">Go to the distribution page</a>
+</ul>
+
+
 <h4>4-Mar-2013 - OpenAFS Security Advisory 2013-001</h4>
 <p>OpenAFS servers versions before 1.6.2 for all platforms.&nbsp;&nbsp;
 An attacker with the ability to manipulate AFS directory ACLs may crash the
@@ -76,31 +96,6 @@ This vulnerability is being tracked as CVE-2013-1795.</p>
 		<li><a href="/release/openafs-1.6.2.html" target="_top">Go to the distribution page</a>
 		<li><a href="/pipermail/openafs-announce/2013/000424.html">Go to the release announcement</a>
 	</ul>
-
-<h4>10-Decemeber-2012 - OpenAFS 1.7.21 - Native File System client for Microsoft Windows 8 and Server 2012</h4>
-<p>OpenAFS 1.7.21 is the next a series of OpenAFS clients for the
-Microsoft Windows platform that is implemented as a native file system.&nbsp;
-Significant changes since 1.7.20:</p>
-<ul>
-	<li>Fixes critical kernel driver reference counting errors that can result in a BSOD.</li>
-    <li>Fixes several errors in afsd_service.exe which can result in unexpected termination.</li>
-    <li>Prevents access to SACL via file system Security Information Queries. Executables can now be started from network drive mappings.</li>
-    <li>Improved compatibility with Trend Micro Office Scan 10.0.</li>
-    <li>Adds support for creating and deleting hard links.</li>
-    <li>\\afs\cell#volume\ notation now works with the AFS redirector.</li>
-    <li>&quot;fs getcacheparms&quot; once again reports used cache buffers.</li>
-    <li>&quot;fs getcalleraccess&quot; now implemented on Windows.</li>
-    <li>&quot;msdfs:&quot; symlinks can now refer to DOS devices. (e.g., msdfs:c:\temp)</li>
-    <li>RX corrections.</li>
-</ul>
-	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
-<p>The 1.7 series is for Microsoft Windows only.</p>
-<ul>
-	<li><a href="/pipermail/openafs-announce/2012/000416.html">Read the release announcement</a>
-	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
-	<li><a href="/release/openafs-1.7.21.html" target="_top">Go to the distribution page</a>
-</ul>
-
 
 <h4>25-Apr-2012 - 2012 European AFS and Kerberos Conference &amp; Call for Papers</h4>
 <p>Announcing  the 2012 European AFS and Kerberos Conference   taking place at the University of Edinburgh School of Informatics  from Tuesday 16th to Thursday 18th October 2012.Full details are available at: <a href="http://openafs2012.inf.ed.ac.uk/">http://openafs2012.inf.ed.ac.uk/</a></p>
