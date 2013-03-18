@@ -106,7 +106,6 @@
 <p>So there we had it: an upgraded RedHat kernel on our newest servers had increased the ulimit -n from 1024 to 4096 to expose &quot;dangerous applications&quot;, and that broke the fileserver so terribly that it wouldn't run for more than a couple hours without a segfault. The trivial workaround was, of course, to set ulimit -Hn and ulimit -Sn to 1024 in the fileserver init script. And after deploying that workaround, we haven't observed another segfault of this nature.</p>
 <p>(Editor's note... one can also edit /etc/security/limits.conf adding the line</p>
 <pre>
-
         *       hard    nofile  1024</pre>
 <p>to enforce this change to the number of file descriptors).</p>
 <p>In closing, it is important to mention that OpenAFS 1.6.2 [Editor's note, released March 4, 2013] should have enabled the polling code, which will finally resolve the issue described in this article. Assuming that that code works as described, we can all rest knowing that, as the author of the RHEL ulimit patch has wished, the world will then be a safer place.</p>
@@ -414,8 +413,8 @@ yet made it to current stable releases of OpenAFS (as of 1.6.2).</p>
 <p>This option dictates the size of the UDP receive buffer in the underlying OS. If
 the fileserver cannot read packets from the wire quickly enough, the fileserver may drop
 packets. Dropped packets can cause serious problems for read/write throughput performance.</p>
-<p>The performance in this area was recently explored by Jakub Moscicki and Dan van
-der Ster of CERN:</p>
+<p>The performance in this area was recently explored by Jakub Moscicki,  Dan van
+der Ster, and Arne Wiebalck, all of CERN:</p>
 <p><a href="http://conferences.inf.ed.ac.uk/eakc2012/slides/CERN_Site-Report.pdf">http://conferences.inf.ed.ac.uk/eakc2012/slides/CERN_Site-Report.pdf</a></p>
 <p>They found that the current defaults (as of OpenAFS 1.6.1), are generally not
 sufficient for a highly-loaded fileserver, and should be increased to about

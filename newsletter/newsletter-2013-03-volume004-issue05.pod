@@ -418,8 +418,8 @@ This option dictates the size of the UDP receive buffer in the underlying OS. If
 the fileserver cannot read packets from the wire quickly enough, the fileserver may drop
 packets. Dropped packets can cause serious problems for read/write throughput performance.
 
-The performance in this area was recently explored by Jakub Moscicki and Dan van
-der Ster of CERN:
+The performance in this area was recently explored by Jakub Moscicki,  Dan van
+der Ster, and Arne Wiebalck, all of CERN:
 
 http://conferences.inf.ed.ac.uk/eakc2012/slides/CERN_Site-Report.pdf
 
