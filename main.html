@@ -46,24 +46,30 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
-<h4>09-May-2013 - OpenAFS 1.7.24 - Native File System client for Microsoft Windows</h4>
-<p>OpenAFS 1.7.24 is the next a series of OpenAFS clients for the
+<h4>24-May-2013 - OpenAFS 1.7.25 - Native File System client for Microsoft Windows</h4>
+<p>OpenAFS 1.7.25 is the next a series of OpenAFS clients for the
 Microsoft Windows platform that is implemented as a native file system.&nbsp;
-Significant changes since 1.7.23:</p>
+Significant changes since 1.7.24:</p>
 <ul>
-	<li>Prevents data corruption when mixing non-cached and cached writes on the same file as performed by Firefox and Internet Explorer.</li>
-    <li>Corrects various conditions that could lead to BSOD.</li>
-    <li>Improved application compatibility for drive letter mappings.</li>
-    <li>Improved handling of token expiration.</li>
-    <li>New Reparse Point Policy &quot;Symlink to File reported as File&quot; configurable by registry value &quot;ReparsePointPolicy&quot; and file system ioctl.</li>
-    <li>Less cpu intensive garbage collection in the afs redirector.</li>
+	<li> Fix kernel memory leaks using the AFAR and AFNB tags.</li>
+    <li> Avoid AFSFcb SectionObjectResource leak if a race occurs between a non-extendeding non-cached write and a file truncation.</li>
+    <li>Avoid Null pointer reference when a hard link create request
+      fails due to a cross-directory reference.</li>
+    <li> As a result of the demand attach file service rewrite, the
+      file servers can return the error VIO when the VNOVNODE error
+      is appropriate.  VIO errors are treated as transient errors
+      which are always retried.  Install a hard cap of 100 retries
+      on the number of retry attempts.</li>
+    <li> Fix a bug in afsd_service which can result in a Null pointer
+      reference when file reads from the file server are performed
+      in cache bypass mode.</li>
 </ul>
 	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
 <p>The 1.7 series is for Microsoft Windows only.</p>
 <ul>
-	<li><a href="/pipermail/openafs-announce/2013/000431.html">Read the release announcement</a>
+	<li><a href="/pipermail/openafs-announce/2013/000433.html">Read the release announcement</a>
 	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
-	<li><a href="/release/openafs-1.7.24.html" target="_top">Go to the distribution page</a>
+	<li><a href="/release/openafs-1.7.25.html" target="_top">Go to the distribution page</a>
 </ul>
 
 
