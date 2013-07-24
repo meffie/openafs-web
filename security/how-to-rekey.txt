@@ -27,6 +27,17 @@ afs@REALM principal, you may want to transition to an afs/cell@REALM principal
 while performing this procedure (specific instructions on this are provided
 below, in the "afs/cell Transition Procedure").
 
+Note for Heimdal: Certain versions of the Heimdal KDC contain a bug that causes
+the following procedures to completely disable DES on the AFS service
+principal. This effectively implements rxkad-kdf in addition to rxkad-k5, and
+so this means that non-upgraded clients will be unable to access AFS in an
+authenticated manner. Any site running a Heimdal KDC should check whether you
+can still acquire a ticket with a DES session key for a principal with no DES
+key. If you cannot, you probably want to upgrade or patch the KDC to fix this
+behavior. If you cannot do that, you must upgrade all authenticating AFS
+clients before following any of these procedures, as if you were implementing
+rxkad-kdf.
+
 "Basic" Procedure
 =================
 
