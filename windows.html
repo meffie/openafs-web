@@ -110,23 +110,19 @@ was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 
 <h2><a name="features-release">OpenAFS for Windows 1.7.26 (1.7.2600)</a></h2>
-<p>(updated 24 May 2013)</p>
+<p>(updated 24 July 2013)</p>
 
-<h3><a name="1_7_features">Significant Changes since 1.7.24:</a></h3>
+<h3><a name="1_7_features">Significant Changes since 1.7.25:</a></h3>
 <ul>
-	<li> Fix security advisories 2013-003 and 2013-004</li>
-	<li> Fix kernel memory leaks using the AFAR and AFNB tags.</li>
-    <li> Avoid AFSFcb SectionObjectResource leak if a race occurs between a non-extendeding non-cached write and a file truncation.</li>
-    <li>Avoid Null pointer reference when a hard link create request
-      fails due to a cross-directory reference.</li>
-    <li> As a result of the demand attach file service rewrite, the
-      file servers can return the error VIO when the VNOVNODE error
-      is appropriate.  VIO errors are treated as transient errors
-      which are always retried.  Install a hard cap of 100 retries
-      on the number of retry attempts.</li>
-    <li> Fix a bug in afsd_service which can result in a Null pointer
-      reference when file reads from the file server are performed
-      in cache bypass mode.</li>
+	<li>Fixes for <a href="http://www.openafs.org/pages/security/#OPENAFS-SA-2013-003">OpenAFS-SA-2013-0003</a> and <a href="http://www.openafs.org/pages/security/#OPENAFS-SA-2013-004">OpenAFS-SA-2013-0004</a></li>
+    <li>Fix for premature termination of afsd_service due to cm_GetVolServerList() failure.</li>
+    <li>Fix for afsd_service.exe soft deadlock due to cm_SyncOp() permission failure when threads are waiting.</li>
+    <li>Fix for &quot;fs makemount -cell&quot; producing an invalid target string.</li>
+    <li>afsredirlib.sys wraps all Windows Memory Manager and Cache Manager operations in a try..except<br>
+      block to protect against leaking the SectionObjectResource if an exception
+      is thrown.  Failure to release the SectionObjectResource will result in
+      future deadlocks.</li>
+    <li> Additional cache consistency checks are performed on the AFSCache file at service startup.</li>
 </ul>
 <h3>Features:</h3>
 <ul>
@@ -160,6 +156,7 @@ was published in July 2008.
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
+	<li>Windows 8.1 and Server 2012 R2 Preview Editions (X86 and AMD64)</li>
 	<li>Windows 8 (X86 and AMD64)</li>
 	<li>Windows Server 2012 (AMD64)</li>
 	<li>Windows 7 (X86 and AMD64)</li>
