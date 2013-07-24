@@ -25,6 +25,49 @@ with PGP.
 
 <hr>
 
+<a name="OPENAFS-SA-2013-004"></a>
+<h2>OPENAFS-SA-2013-004 - vos -encrypt doesn't encrypt connection data</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.6.1 through 1.6.4</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2013-004.patch">
+  http://www.openafs.org/security/openafs-sa-2013-004.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-004.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2013-004.txt</a>
+</td></tr>
+</table>
+<p>An attacker can read data which an administrator expected to remain private.</p>
+
+<a name="OPENAFS-SA-2013-003"></a>
+<h2>OPENAFS-SA-2013-003 - Brute force DES attack permits compromise of AFS cell</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS servers before versions 1.4.15 and 1.6.5</td></tr>
+<tr><th align="left">Instructions:</th><td>
+  <a href="how-to-rekey.txt">
+  How to rekey your cell</a><br>
+  <a href="install-rxkad-k5-1.6.txt">
+  How to install rxkad k5 support for servers running OpenAFS 1.6</a><br>
+  <a href="install-rxkad-k5-1.4.txt">
+  How to install rxkad k5 support for servers running OpenAFS 1.4</a>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-004.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2013-004.txt</a>
+</td></tr>
+</table>
+<p>The small size of the DES key space permits an attacker to brute
+force a cell's service key and then forge traffic from any user
+within the cell. The key space search can be performed in under 1
+day at a cost of around $100 using publicly available services.</p>
+
 <a name="OPENAFS-SA-2013-002"></a>
 <h2>OPENAFS-SA-2013-002 - Buffer overflow in OpenAFS ptserver</h2>
 <table border=0>
@@ -397,6 +440,16 @@ for this vulnerability.
   <td>2013-002</td><td>27-Feb-2013</td><td>27-Feb-2013</td>
   <td>High</td><td>1.0-1.6.1</td>
   <td><a href="#OPENAFS-SA-2013-002">Buffer overflow in OpenAFS ptserver</a></td>
+</tr>
+<tr>
+  <td>2013-003</td><td>24-Jul-2013</td><td>24-Jul-2013</td>
+  <td>High</td><td>1.0-1.4.14,1.5.0-1.6.4</td>
+  <td><a href="#OPENAFS-SA-2013-003">Brute force DES attack permits compromise of AFS cell</a></td>
+</tr>
+<tr>
+  <td>2013-004</td><td>24-Jul-2013</td><td>24-Jul-2013</td>
+  <td>High</td><td>1.6.1-1.6.4</td>
+  <td><a href="#OPENAFS-SA-2013-004">vos -encrypt doesn't encrypt connection data</a></td>
 </tr>
 </table>
 
