@@ -27,16 +27,51 @@ afs@REALM principal, you may want to transition to an afs/cell@REALM principal
 while performing this procedure (specific instructions on this are provided
 below, in the "afs/cell Transition Procedure").
 
-Note for Heimdal: Certain versions of the Heimdal KDC contain a bug that causes
-the following procedures to completely disable DES on the AFS service
-principal. This effectively implements rxkad-kdf in addition to rxkad-k5, and
-so this means that non-upgraded clients will be unable to access AFS in an
-authenticated manner. Any site running a Heimdal KDC should check whether you
-can still acquire a ticket with a DES session key for a principal with no DES
-key. If you cannot, you probably want to upgrade or patch the KDC to fix this
-behavior. If you cannot do that, you must upgrade all authenticating AFS
-clients before following any of these procedures, as if you were implementing
-rxkad-kdf.
+Note for Heimdal
+================
+
+If you are not using Heimdal, skip this section.
+
+Users of Heimdal may find this rekeying procedure a bit confusing, since there
+are two different bugs in various Heimdal versions that change what the proper
+rekeying procedure is. These are arguably not actually "bugs", but rather
+simply changes in behavior, but this document will treat them as bugs for the
+purposes of discussing them.
+
+One such bug causes the session key enctype and the enctype for encrypting a
+service ticket to always be the same. This prevents old AFS clients from
+obtaining a DES session key with a service ticket encrypted with a non-DES
+enctype, which is critical for backwards compatiblity during rxkad-k5
+deployment. To test whether you are affected by this bug, make a service
+principal of the form afs/testcell@REALM, and try to acquire a DES session key
+with a service ticket encrypted with a non-DES enctype for that principal. If
+you can only acquire tickets where the session key enctype and the service
+ticket enctype is the same, or if the KDC refuses the request entirely, then
+your KDC is affected by this bug. If you do not patch or upgrade your KDC to
+fix this behavior, you must upgrade all authenticating AFS clients before
+following the procedures in this document, or they will not be able to
+authenticate.
+
+Another bug causes old AFS clients to be unable to obtain a DES session key for
+a service ticket if the relevant service principal does not contain a DES
+long-term key. To test whether you are affected by this bug, try to obtain a DES
+session key for a service principal that does not have a DES long-term key. If
+you cannot, then your KDC is affected by this bug. If you do not patch or
+upgrade your KDC to fix this behavior, you must create a DES long-term key for
+the AFS service principal, but you must NOT include that DES long-term key in
+rxkad.keytab. If you do not do that, old clients will not be able to
+authenticate to AFS.
+
+Many, if not all, versions of Heimdal prior to and including 1.5.3 are affected
+by both of these bugs. Regardless of the version number reported, you should
+verify whether your KDC is affected by these bugs before proceeding. There are
+patches available from Heimdal to fix these issues.
+
+For simplicity, the Heimdal procedures in this document assume that your KDC is
+not affected by either of these bugs. If your KDC is affected by either of the
+bugs and you wish to proceed anyway, make sure you take the appropriate measures
+as suggested in this section. If it is unclear as to what the appropriate
+measures are, please ask your support vendor or the community for more details.
 
 "Basic" Procedure
 =================
@@ -89,18 +124,26 @@ Entry for principal afs/cell with kvno 3, encryption type ArcFour with HMAC/md5 
 Heimdal Kerberos:
 
 Run 'kadmin' with administrator credentials, or run 'kadmin -l' as root on the
-KDC. From the kadmin prompt, run:
+KDC. Then run:
 
 kadmin> passwd --random-key afs/cell
 kadmin> ext_keytab -k /tmp/rxkad.keytab afs/cell
 kadmin> exit
+$ ktutil -k /tmp/rxkad.keytab remove -e des-cbc-crc
+$ ktutil -k /tmp/rxkad.keytab remove -e des-cbc-md5
+$ ktutil -k /tmp/rxkad.keytab remove -e des-cbc-md4
 
 That should create new keys for the AFS service principal with the default
 encryption types. The default enctypes are probably fine, but if you want to
 inspect them, they are listed in the output of 'get afs/cell' in kadmin. If
 your version of Heimdal is new enough, you can alter the enctype list using
-the commands del_enctype and add_enctype. Make sure you alter the principal
-enctypes before running ext_keytab, not after.
+the commands del_enctype and add_enctype before running ext_keytab. Note that
+the resulting rxkad.keytab file must NOT contain any single DES keys (even if
+the service principal contains a DES long-term key, which is okay).
+
+The 'ktutil' commands above ensure that the keytab contains no DES keys. Those
+'ktutil' commands may fail with 'Key table entry not found' if they already
+contain no DES keys; if that happens, ignore the error.
 
 Active Directory:
 
@@ -495,4 +538,7 @@ Verifying - Password:
    upgrade documentation.
 
 4. Change the password of the afs/cell principal to the password you just used
-   to generate the given keytab.
+   to generate the given keytab. The KDC must allow DES session keys to be
+   issued for the AFS service principal in order for older clients to work. How
+   to ensure this is out of the scope of this document, and may depend on local
+   site policies and configuration.
