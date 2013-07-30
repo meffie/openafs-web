@@ -29,8 +29,7 @@ FIXES
 =====
 
 The OpenAFS project recommends that administrators upgrade to OpenAFS 1.6.5
-or later.  For those sites unable, or unwilling, to upgrade to the 1.6 series, 
-a final release in the 1.4 series, 1.4.15, is provided.
+or later.
 
 ACKNOWLEDGMENTS
 ===============
