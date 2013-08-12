@@ -277,6 +277,39 @@ keysize 61 afs/cell@REALM ptype 1 (KRB5_NT_PRINCIPAL) vno 5 etype 0x11 (AES128-S
    bits 0x3 from msDS-SupportedEncryptionTypes. But the above instructions
    should take care of that.
 
+4. If you used '/crypto all' above, it is strongly recommended that you remove
+   single DES enctypes from the resultant rxkad.keytab file before distributing
+   rxkad.keytab to any AFS servers. After you transfer the keytab to a Unix
+   machine, you can do this by using the 'ktutil' command. If the Unix machine
+   has MIT Kerberos installed, run something like this to remove DES keys:
+
+$ ktutil
+ktutil: rkt /tmp/rxkad.keytab
+ktutil: list -e
+slot KVNO Principal
+---- ---- ---------------------------------------------------------------------
+   1    5                  afs/cell@REALM (DES cbc mode with CRC-32)
+   2    5                  afs/cell@REALM (AES-256 CTS mode with 96-bit SHA-1 HMAC)
+   3    5                  afs/cell@REALM (AES-128 CTS mode with 96-bit SHA-1 HMAC)
+   5    5                  afs/cell@REALM (ArcFour with HMAC/md5)
+ktutil: delent 1
+ktutil: wkt /tmp/rxkad.nosingledes.keytab
+ktutil: exit
+
+   Use the 'delent' command to remove each slot that contains a single DES key.
+   In the above example, we only needed to remove slot 1, but the relevant slot
+   number may be different. Note that the slot numbers do change when you
+   remove or add entries, so run 'list -e' between each one to make sure what
+   you are deleting.
+
+   If the Unix machine has Heimdal Kerberos installed, run the following to
+   remove DES keys:
+
+$ ktutil -k /tmp/rxkad.keytab remove -e des-cbc-crc
+$ ktutil -k /tmp/rxkad.keytab remove -e des-cbc-md5
+
+   And run 'ktutil -k /tmp/rxkad.keytab list' to verify what is in the keytab.
+
 Active Directory (msktutil):
 
 Alternatively, instead of using ktpass from a Windows machine, you can run a
