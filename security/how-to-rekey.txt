@@ -73,6 +73,66 @@ bugs and you wish to proceed anyway, make sure you take the appropriate measures
 as suggested in this section. If it is unclear as to what the appropriate
 measures are, please ask your support vendor or the community for more details.
 
+Note for older systems
+======================
+
+If you are certain that all of your machines running OpenAFS server processes
+support AES256 encryption in their krb5 library, skip this section. Generally
+all "modern" software will support AES256, but read this section if you are
+unsure.
+
+This section is also only for enctype compatibility with OpenAFS servers; for
+OpenAFS clients, this is usually not an issue. Clients do not need to interpret
+encrypted service tickets at all, and session key enctype selection is usually
+not an issue since the client and KDC can negotiate a session key enctype
+during token acquisition.
+
+The examples in this document assume that you will be using AES256 encryption
+for your new long-term keys. While you may use any encryption you want, AES256
+is currently a common default, and is often a good choice. However, if you use
+an encryption type for the afs/cell service principal that is not supported by
+the krb5 library on one of your cell's OpenAFS fileservers or database servers,
+that server will not function properly. So, for example, if you use the default
+AES256 encryption type, and a fileserver does not support AES256, that
+fileserver will be unable to handle encrypted connections, and suffer other
+problems.
+
+Possibly the most modern system that does not support AES256 by default is
+Solaris 10 Update 3, but of course any sufficiently old system will also not
+support it. If you are not sure, you can try to test if the system supports an
+encryption type before performing the migration procedure in this document. On
+Solaris, or any system with MIT krb5, you can run commands similar to the
+following to test AES256:
+
+$ ktutil
+ktutil:  addent -password -p afs/cell@REALM -k 2 -e aes256-cts
+Password for afs/cell@REALM:
+
+If the system does not support AES256, you should instead see an error like the
+following:
+
+$ ktutil
+ktutil:  addent -password -p afs/cell@REALM -k 2 -e aes256-cts
+addent: Bad encryption type while adding new entry
+
+If a server does not support the encryption type you want to use, you have a
+few options:
+
+ - Use a different encryption type for the afs/cell service principal. For
+   example, don't use AES256.
+ - Upgrade the system krb5 library to support the desired encryption type. On
+   Solaris 10, you need the SUNWcry and SUNWcryr packages installed to support
+   AES256 (these are installed by default in Solaris 10 Update 4 and later).
+ - Compile and install your own krb5 library, which supports the desired
+   encryption type, and build OpenAFS linked against that library.
+ - Decommission the server.
+
+If you use, for example, an AES256 key for the afs/cell service principal, and
+a server does not support AES256, you will see errors such as "security object
+was passed a bad ticket", or code 19270407. Note that there are many situations
+that can result in that error message, though; an enctype mismatch is just one
+possible reason out of many.
+
 "Basic" Procedure
 =================
 
