@@ -19,7 +19,7 @@ OpenAFS is the world's foremost location independent file system.&nbsp;With Open
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
 <li><a href="#reports">Status Reports</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.27 (aka 1.7.2700)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.28 (aka 1.7.2800)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -109,14 +109,30 @@ If the signature is missing do not complete the installation process and send e-
 was published in July 2008.
 <a title="OpenAFS for Windows Status Report - July 2008" target="_top" href="https://www.secure-endpoints.com/talks/OpenAFS-Windows-Jul-2008-Status-Report.pdf">Read it today!</a>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.27 (1.7.2700)</a></h2>
-<p>(updated 28 September 2013)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.28 (1.7.2800)</a></h2>
+<p>(updated 21 November 2013)</p>
 
-<h3><a name="1_7_features">Significant Changes since 1.7.26:</a></h3>
+<h3><a name="1_7_features">Significant Changes since 1.7.27:</a></h3>
 <ul>
-	<li> Alternative fix for Trend Micro deadlocks. The previous fix created the opportunity for an out of order lock acquisition that in turn would cause its own deadlocks.</li>
-	<li>Delay mountpoint target evaluation to reduce clock time during directory enumeration.</li>
-	<li>Cache status information for deleted files to avoid issuing RPCs to the file server which could trigger the file server's abort threshold and resulting client throttling.</li>
+	<li>Fix for data corrupting bug in Windows Server XP/2003 IO Manager. 
+	  The IO Manager will issue multiple outstanding cached writes on
+	  a synchronous file object which is not supposed to occur.  Add
+	  protection for this scenario only on Server 2003 and older.</li>
+    <li> Fix afsd_service panic condition when CM_SCACHEFLAG_INHASH is set
+      on a cm_scache_t object after successful recycling.</li>
+    <li> Prevent the afsd_service from delivering uninitialized target name
+      data to the redirector which can result in a BSOD.</li>
+    <li> Prevent a race condition when unloading AFSRedirLib.sys that can
+      result in a BSOD.</li>
+    <li> Avoid unnecessary delays during system suspend and shutdown by
+      not issuing a GiveUpAllCallBacks RPC if there is no network
+      adapter with a non-loopback IP address.</li>
+    <li> Fix out of range pointer checks during AFSCache validations
+      that prevented re-use of persistent cache data.</li>
+    <li> Supurious &quot;no such volume&quot;	  errors.</li>
+    <li> Force RPC retries for RX_CALL_BUSY, VNOSERVICE and related errors
+      even on threads that have explicitly requested no retries.  This
+      prevents undesirable IO errors.</li>
     </ul>
 <h3>Features:</h3>
 <ul>
@@ -138,15 +154,15 @@ was published in July 2008.
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.27 Release Notes
-    <a title="OpenAFS for Windows 1.7.27 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.27/winxp/ReleaseNotes.chm"> (CHM)</a>
-	<a title="OpenAFS for Windows 1.7.27 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.27/winxp/ReleaseNotes.pdf"> (PDF)</a>
-    <a title="OpenAFS for Windows 1.7.27 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.27/winxp/ReleaseNotes.epub"> (EPUB)</a>
-    <a title="OpenAFS for Windows 1.7.27 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.27/winxp/ReleaseNotes/html/index.html">
+	1.7.28 Release Notes
+    <a title="OpenAFS for Windows 1.7.28 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.28/winxp/ReleaseNotes.chm"> (CHM)</a>
+	<a title="OpenAFS for Windows 1.7.28 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.28/winxp/ReleaseNotes.pdf"> (PDF)</a>
+    <a title="OpenAFS for Windows 1.7.28 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.28/winxp/ReleaseNotes.epub"> (EPUB)</a>
+    <a title="OpenAFS for Windows 1.7.28 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.28/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a>
   <li>
-	<a title="OpenAFS for Windows 1.7.27 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.27/winxp/afs-changes-since-1.2.txt">
-  1.7.27 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.28 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.28/winxp/afs-changes-since-1.2.txt">
+  1.7.28 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -182,17 +198,17 @@ was published in July 2008.
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.27/winxp/openafs-en_US-64bit-1-7-2700.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.28/winxp/openafs-en_US-64bit-1-7-2800.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.27/winxp/openafs-32bit-tools-en_US-1-7-2700.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.28/winxp/openafs-32bit-tools-en_US-1-7-2800.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems:
 Win8/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.27/winxp/openafs-en_US-1-7-2700.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.28/winxp/openafs-en_US-1-7-2800.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
@@ -407,7 +423,7 @@ MIT version
 MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
 The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.27</a>
+version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.28</a>
 is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
 section of krb5.conf in %SystemDrive%\ProgramData\Kerberos.<p>MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.

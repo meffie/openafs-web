@@ -46,6 +46,24 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>21-November-2013 - OpenAFS 1.7.28 - Native File System client for Microsoft Windows</h4>
+<p>OpenAFS 1.7.28 is the next a series of OpenAFS clients for the
+Microsoft Windows platform that is implemented as a native file system.&nbsp;
+Significant changes since 1.7.28:</p>
+<ul>
+	<li> Workaround for XP/Server 2003 IO Manager data corruption error.</li>
+	<li>BSOD fixes.</li>
+	<li>additional stability improvements.</li>
+    </ul>
+	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
+<p>The 1.7 series is for Microsoft Windows only.</p>
+<ul>
+	<li><a href="/pipermail/openafs-announce/2013/000449.html">Read the release announcement</a>
+	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
+	<li><a href="/release/openafs-1.7.28.html" target="_top">Go to the distribution page</a>
+</ul>
+
+
 <h4>11-October-2013 - OpenAFS 1.6.5.1 - Maintenance release for several UNIX/Linux clients</h4>
 <p>OpenAFS 1.6.5.1 is the next in the current series of OpenAFS stable releases for UNIX/Linux systems. Significant changes since 1.6.5:</p>
 <ul>
@@ -58,24 +76,6 @@ OpenAFS.</p>
   <li><a href="/dl/openafs/1.6.5.1/RELNOTES-1.6.5.1" target="_top">Read the 1.6.5.1 release notes</a></li>
   <li><a href="/release/openafs-1.6.5.1.html" target="_top">Go to the distribution page</a>
   <li><a href="/pipermail/openafs-announce/2013/000445.html">Go to the release announcement</a>
-</ul>
-
-
-<h4>30-September-2013 - OpenAFS 1.7.27 - Native File System client for Microsoft Windows</h4>
-<p>OpenAFS 1.7.27 is the next a series of OpenAFS clients for the
-Microsoft Windows platform that is implemented as a native file system.&nbsp;
-Significant changes since 1.7.27:</p>
-<ul>
-	<li> Alternative fix for Trend Micro deadlocks. The previous fix created the opportunity for an out of order lock acquisition that in turn would cause its own deadlocks.</li>
-	<li>Delay mountpoint target evaluation to reduce clock time during directory enumeration.</li>
-	<li>Cache status information for deleted files to avoid issuing RPCs to the file server which could trigger the file server's abort threshold and resulting client throttling.</li>
-    </ul>
-	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
-<p>The 1.7 series is for Microsoft Windows only.</p>
-<ul>
-	<li><a href="/pipermail/openafs-announce/2013/000441.html">Read the release announcement</a>
-	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
-	<li><a href="/release/openafs-1.7.27.html" target="_top">Go to the distribution page</a>
 </ul>
 
 
