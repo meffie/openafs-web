@@ -266,8 +266,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	<p>For old clients, new implementations of the old RPCs would deliver directory
 	data translated to the old linear format up to the maximum number of directory
 	entries.&nbsp; It is possible that old clients will not be able to see all the
-	files in a given directory.<br><br>Status: Implementation promised by Your File System, 2011.
-	&nbsp; <br>
+	files in a given directory.&nbsp; <br>
 	</p>
 	</li>
 	<li>
@@ -282,9 +281,6 @@ and Microsoft Windows it must gain the following functionality: </p>
 	full EA support within AFS volumes.<br>
 	<a href="http://en.wikipedia.org/wiki/Extended_file_attributes">For more details
 	...</a></p>
-	Status:
-	Implementation promised by Your File System, 2011.
-	<br>
 	<br>
 	</li>
 	<li>
@@ -294,9 +290,6 @@ and Microsoft Windows it must gain the following functionality: </p>
 	requires that they be stored in separate directories. The AFS protocol provides
 	partial support for this from the AFS/DFS translator, and this is supported
 	in clients going back to IBM AFS. </p>
-	Status:
-	Implementation promised by Your File System, 2011.
-	<br>
 	<br></li>
 	<li>
 	<p wrap><strong>Mandatory Locking and Byte range locks:<br></strong>Platforms such as Microsoft Windows and MacOS X require that their first
@@ -313,8 +306,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	a byte range to be locked, the cache manager ensures that it has an appropriate
 	full lock on the object.&nbsp; The cache manager than accepts the responsibility
 	of tracking each of the locks and doling out a range at a time.<br>Estimate: 2 months.
-	<br><br>Status: Implementation promised by Your File System, 2011.&nbsp;
-	Requires Standardization.</p>
+	<br></p>
 	</li>
 	<li>
 	<p><strong>Status Data (Callback Registration) Expiration Algorithm
@@ -325,7 +317,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	</li>
 	<li>
 	<p><strong>OPEN/CLOSE File Server RPCs:</strong><br>New file server RPCs would provide new audit data<br>
-	<br>Status: Implementation promised by Your File System, 2011</p>
+	</p>
 	</li>
 
 </ul>
@@ -360,8 +352,6 @@ and Microsoft Windows it must gain the following functionality: </p>
 	portability of the <em>namei</em> backend with the performance of the <em>
 	inode</em> backend.&nbsp;&nbsp; A <em>PosixEA</em> backend would not require
 	a special fsck which would permit the use of journal logs.<br>
-	<br>Status: Implementation promised by Your File System, 2011
-	<br>
 	<br>
 	</li>
 	<li><strong>Multi-Protocol File Server:</strong><br>
@@ -381,25 +371,18 @@ and Microsoft Windows it must gain the following functionality: </p>
 	A proposed implementation was sketched out at the AFSig Hackathon
 	in Stockholm in 2004 (<A HREF="http://web.archive.org/web/20060211111127/http://www.afsig.se/snipsnap/space/prdb+extensions">details</A>)
 	<br>
-	<p>Status: Standardization complete.&nbsp; Implementation promised by Your
-	File System, 2011.&nbsp; Blocked on required extensions to the Ubik database 
-	format.</p>
+	<p>Status: Standardization complete.</p>
 	</li>
 	<li><strong>Volume Server enhancements for large volume names:</strong><br>
 	Volume names within the existing RPCs and database are too short given the number
 	of volumes that are now being deployed in existing cells.<br>
-	<br>Estimate: 1 week<br>
-	Implementation promised by Your File System, 2011
-	<br>
-	<br>
+	<br>Estimate: 1 week<br><br>
 	</li>
 	<li><strong>VL Server enhancements for split horizon addressing:</strong><br>
 	Many sites now provide services from hosts which exist behind a NAT to hosts
 	both inside and outside that NAT. The vlserver should provide interfaces to
 	allow returning only some addresses to queries when responding to volume location
 	requests. <br>
-	  <br>Implementation promised by Your File System, 2011
-	<br>
 	<br>
 	</li>
 	<li><strong>Volume Server read-only replication optimizations:</strong><br>
@@ -421,7 +404,7 @@ and Microsoft Windows it must gain the following functionality: </p>
 	external backup systems</li>
 	</ul>
 	<br>
-	Estimate: 2 to 3 months<br>Implementation promised by Your File System, 2011</li>
+	Estimate: 2 to 3 months<br></li>
 </ul>
 <ul>
 	<li><strong>Read/write volumes and replication:</strong><br>
@@ -431,23 +414,20 @@ and Microsoft Windows it must gain the following functionality: </p>
 	used for reads.</li>
 	<br>
 	<br>
-	Implementation promised by Your File System, 2011
-	<br><br>
 	<li><strong>Partition UUIDs:</strong><br>
 	Assigning UUIDs to each partition instead of the exsting non-unique names
 	will permit drives to be migrated between machines with just a simple update
 	of the volume database before continued use.&nbsp; This will eliminate most
 	of the work associated with synchronizing the database and removing stale
 	entries.<br>
-	Estimate: 1 to 2 weeks<br>Implementation promised by Your File System, 2011
-	<br>
+	Estimate: 1 to 2 weeks<br>
 	<br>
 	</li>
 	<li><strong>Machine Accounts in the Protection Database:</strong><br>
 	Add the concept of machine accounts to the protection server database
 	permitting authenticated machine access that does not result in the client
 	being treated as a member of system:authuser.<br>
-	  Implementation promised by Your File System, 2011<br><br>
+	  <br>
 	<li><strong>UBIK improvements or replacements:</strong><br>
 	UBIK is the database replication protocol used by AFS server for the
 	synchronizing the volume and protection databases among servers.&nbsp; It is
@@ -489,9 +469,6 @@ implementation and there needs to be much better integration with power manageme
 plug-n-play networking, and Windows Event Logging.</p>
 <p>Of course if you want to host services on Windows, you must provide a Microsoft
 Management Console plug-in to manage them.</p>
-<p>The primary reason that we haven&#39;t spent the time and energy to get the AFS servers
-in tip top shape is that without the protocol feature enhancements, users that attempt
-to deploy AFS in an all Windows environment are bound to be disappointed.</p>
 <p wrap>
 <a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#afs servers">
 For more details ...</a><br>
@@ -499,189 +476,6 @@ For more details ...</a><br>
 Estimate: 4 to 6 weeks</p>
 <h2><a name="HPC"></a>5. High Performance Computing Extensions</h2>
 <ul>
-	<li><strong>RX/TCP and IPv6:<br>
-	</strong>The networking protocol used by OpenAFS was developed in the late 1980s.&nbsp;
-	It is a Remote Procedure Call transport called Rx that provides a stream interface
-	that runs over UDP/IP.&nbsp; This protocol was designed to address the traditionally
-	poor performance of TCP implementations at the time, and to be scalable to large
-	numbers of clients.<p>Since that time, a large amount of networking research
-	has been done on TCP performance, and modern TCP implementations are capable
-	of good performance on high-speed networks.&nbsp; Also, other protocols such
-	as Infiniband and SCTP have emerged as alternative transports to TCP.&nbsp;
-	The growth of the World Wide Web has pushed operating system vendors to develop
-	interfaces that allow applications to manage thousands of clients simultaneously
-	in a scalable manner.&nbsp; While incremental improvements have been made to
-	the Rx protocol since it was first developed, it has not been able to take advantage
-	of the performance available in modern networks.</p>
-	<p>Our proposal includes the following work items:</p>
-	<p style="text-indent: -18pt; margin-left: 18pt;">
-	<span style="font-family: Symbol;">·<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Develop an Rx protocol that uses TCP as a transport (RxTCP).&nbsp;
-	As part of an earlier project, Kenneth Hornstein has developed a prototype of
-	RxTCP; our goal is to complete this work and integrate it properly into the
-	OpenAFS distribution.<br>
-	<br>
-	There are many challenges with this approach.&nbsp; Much of the OpenAFS code
-	has an implicit assumption that the transport protocol is the traditional Rx
-	interface.&nbsp; This is further complicated by the lack of any formal API for
-	Rx.&nbsp; As a result of this, many OpenAFS programs use what normally would
-	be considered internal interfaces, and perform internal operations such as directly
-	manipulate queues of packets.&nbsp; The Rx API has no way to indicate such things
-	as connection types, so new API functions will need to be created.&nbsp; The
-	Rx library makes heavy uses of threads, but uses two distinct threading libraries
-	(pthreads and a custom thread library called LWP).&nbsp; Any new transport must
-	not only be thread-safe, but also present the same threading model to applications
-	so that they do not need to be rewritten.&nbsp; To maintain compatibility with
-	existing clients and servers, the original UDP transport must still function
-	simultaneously with the new transport.<br>
-	<br>
-	Despite these obstacles, much work has been completed.&nbsp; The RxTCP transport
-	has been implemented, and tests have shown excellent performance on Gigabit
-	networks.&nbsp; The remaining challenge is to integrate this transport into
-	the actual OpenAFS clients and servers.&nbsp; This new transport protocol addresses
-	a number of deficiencies in the original Rx protocol and implementation:</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>The original Rx protocol was (with one exception) limited in packet
-	size to one Ethernet MTU (1500 bytes).&nbsp; In general, research has shown
-	that larger packet sizes facilitate higher performance due to the overall reduction
-	in per-packet processing time and the need to process fewer packets in order
-	to send the same amount of data.&nbsp; With the current networking APIs available
-	to applications today, programs cannot query the size of the MTU on a networking
-	interface, nor can they determine the MTU of a particular network path (even
-	though the operating system may have determined that already).<br>
-	<br>
-	With the use of TCP, the operating system can make use of knowledge not available
-	to the application, such as accurate estimates of round trip time, network path
-	MTU, and interface MTU, and as a result can take advantage of the capabilities
-	of modern networks, such as Ethernet jumbo frames.&nbsp; The exception to this
-	1500 byte packet limit is that Rx has a concept called a “jumbogram”, which
-	places multiple Rx packets into one UDP datagram.&nbsp; Unfortunately, in practice
-	this results in no net gain in performance, since the Rx per-packet processing
-	is not reduced.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Since Rx utilizes a datagram transport but provides a reliable
-	stream interface, it must implement many of the features that are already provided
-	by TCP, such as a windowing algorithm, packet loss detection and retransmission,
-	and congestion control.&nbsp; While incremental improvements have been made
-	to the Rx implementation since it was first developed, it has not received the
-	attention that TCP performance has had during the same time period.&nbsp; The
-	use of TCP as the basis for Rx allows us to leverage the serious engineering
-	work that has been done on TCP, rather than requiring that same level of effort
-	be placed into Rx.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>The Rx implementation is very large and monolithic.&nbsp; Part
-	of the size of Rx results in having to perform many of the same functions of
-	TCP.&nbsp; This size and complexity makes it extremely difficult to understand
-	and follow the code.&nbsp; In addition, most of the Rx work is done by a relatively
-	small number of extremely complicated functions.&nbsp; In addition to lacking
-	modularity, this makes profiling extremely difficult, as most of the time spent
-	by Rx takes place in few functions, and it becomes difficult to get further
-	granularity by profiling since most profiling tools operate on a function basis.<br>
-	<br>
-	In contrast, RxTCP has a much smaller implementation, and is very modular.&nbsp;
-	Since the overall complexity is reduced, this makes it easier to profile and
-	understand.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>All data transmitted or received by Rx is divided internally into
-	per-packet buffers, which means data that is delivered to an application must
-	undergo two copies to reach its destination (kernel to Rx buffers, Rx buffers
-	to application buffers).<br>
-	<br>
-	RxTCP eliminates this copy completely on writes; data is sent directly from
-	the application buffer to the network stack.&nbsp; On reads data is delivered
-	directly from the network stack to an application when an application buffer
-	is available; if an application buffer is not available, then data is placed
-	into a large contiguous buffer internal to Rx and copied out completely when
-	an application buffer becomes available.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Since Rx is a custom protocol, any tool used to analyze Rx performance
-	must be designed specifically for Rx use, or we must make modifications to an
-	existing tool.&nbsp; With the use of TCP, we can use any one of a number of
-	off-the-shelf tools to analyze TCP performance.</p>
-	<p style="text-indent: -18pt; margin-left: 18pt;">
-	<span style="font-family: Symbol;">·<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Analyze remaining AFS performance deficiencies.&nbsp; Under an
-	SBIR grant, Sine Nomine has already conducted a formal analysis of AFS performance.&nbsp;
-	Poor Rx behavior was identified as the number one item impacting performance.&nbsp;
-	Our strategy for dealing with Rx performance is to utilize RxTCP, as detailed
-	above.<br>
-	<br>
-	Aside from Rx, a number of other bottlenecks were identified in the UNIX OpenAFS
-	client.&nbsp;&nbsp; After the integration of RxTCP, we will perform another
-	series of benchmarks to mimic the ones in the Sine Nomine report to analyze
-	the issues reported by Sine Nomine, and to see if any new issues arise.&nbsp;
-	The issues identified by the Sine Nomine research were as follows:</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Write performance is hurt by UNIX OpenAFS’s sync-on-close semantics.&nbsp;
-	Currently the UNIX OpenAFS client performs data synchronization when a file
-	is closed by an application, or the client cache dirty blocks have exceeded
-	a high-water mark threshold.&nbsp; For large files, this results in large time
-	periods during writes where the network is quiescent, and the application must
-	wait either when the file is closed or during a write for all of the outstanding
-	data to be written to the fileserver.<br>
-	<br>
-	One proposal offered in the Sine Nomine paper was to relax the sync-on-close
-	semantics as offered by the AFS client today.&nbsp; Multi-client data consistency
-	has never been an area where AFS has excelled, but our long-term experience
-	has shown this is not a necessary function of OpenAFS.&nbsp; Especially for
-	larger files, a more intelligent scheme would be to implement a relaxed consistency
-	model where synchronization could occur between the client and server at any
-	arbitrary time.&nbsp; In the case of HPC or video applications, an adaptive
-	write-behind mechanism would be the most desirable option.&nbsp; We recognize
-	that not all users desire the same semantics, so after a write-behind mechanism
-	has been implemented the next step will be to develop the ability to select
-	the data consistency model on a per-volume basis.<br>
-	<br>
-	In addition, write-on-close semantics are incompatible with file locks.&nbsp;
-	There is a strong desire in the AFS community to support mandatory file locking,
-	byte range locks, and optimistic locking algorithms.&nbsp; This desire is primarily
-	the result of wishing AFS to be a first class file system on the Microsoft Windows
-	and MacOS X operating systems which require those semantics.&nbsp; When locks
-	are obtained and released, the buffers affected by the locks must be flushed
-	to the file server prior to the completion of the lock release.<br>
-	<br>
-	The Windows OpenAFS client does not implement write-on-close semantics because
-	of the heavy use of byte range file locks.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>If the client cache fills up during writes, the UNIX OpenAFS client
-	blocks the process performing writes until the cache is completely flushed to
-	the low-water mark.&nbsp; A better strategy would be to dispatch the truncation
-	daemon in advance of the cache reaching a high-water mark threshold, using one
-	of the many I/O prediction algorithms available in the common literature.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>Read performance of both OpenAFS client implementations are hampered
-	by an inability to read more than a single chunk per RPC.&nbsp; When flushing
-	dirty buffers to the file server, the client is able to send multiple contiguous
-	chunks at a time thereby reducing the number of RPCs.&nbsp; On operating systems
-	that provide hints as to the usage patterns of the file, performance can be
-	improved by optimistically reading chunks whose need is anticipated.</p>
-	<p style="text-indent: -18pt; margin-left: 72pt;">
-	<span style="font-family: Courier New;">o<span style="font-family: &quot;Times New Roman&quot;; font-style: normal; font-variant: normal; font-weight: normal; font-size: 7pt; line-height: normal; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	</span></span>
-	<span style="font-style: normal; font-variant: normal; font-weight: normal;">
-	T</span>he restriction that no more than four RPCs may be outstanding on any
-	Rx connection is another observed bottleneck.&nbsp; This is particularly troublesome
-	when AFS is being used primarily to serve a single service such as a web server
-	as only one Rx connection is created for any collection of client, server, and
-	authentication ID.</p>
-	<p>Given the limitations imposed by network processing overhead, available network
-	APIs, and system bus limitations we do not expect to achieve line rate performance
-	at network speeds past 1 Gigabit.&nbsp; We believe that performance faster than
-	1 Gigabit is achievable, but we do not know what the practical limits are beyond
-	that.&nbsp; One of our out year tasks is to investigate work being done at CERN
-	in using “off-line storage”, where an OpenAFS client bypasses the OpenAFS fileserver
-	completely and retrieves files via direct communication with disk hardware.<br>
-	<br>Estimated: 20 to 25 months. <br>Implementation promised by Your File
-	System, 2012</p>
-	</li>
 	<li>
 	<p wrap><strong>Asynchronous RX RPCs:</strong><br>
 	All Rx calls in the existing implementation are synchronous.&nbsp; The
@@ -694,7 +488,7 @@ Estimate: 4 to 6 weeks</p>
 	<em>waiting for threads</em>.<br>
 	<br>
 	Estimated: 6 weeks for Asynchronous Rx and 3 weeks for file server modifications.
-	<br>Implementation promised by Your File System, 2012</p>
+	</p>
 	</li>
 	<li><strong>Increase RX/UDP Maximum Number of Calls:</strong><br>
 	RX/UDP has a maximum of four simultaneous calls per connection.&nbsp; The
@@ -702,7 +496,7 @@ Estimate: 4 to 6 weeks</p>
 	lack of an appropriate negotiation mechanism at the RX layer.&nbsp; However,
 	an application layer negotiation could be used to permit the application to
 	hint to the rx connection how many calls should be permitted.<br>
-	<br>Implementation promised by Your File System, 2011.&nbsp; Requires
+	<br>Requires
 	Standardization<br><br></li>
 	<li><strong>rxgk:<br>rxgk</strong> is a security class based upon the Generic Security Service Application
 	Programming Interface (GSS-API) that attempts to address a much broader range
@@ -729,7 +523,7 @@ Estimate: 4 to 6 weeks</p>
 	at the 2007 AFS &amp; Kerberos Best Practice Workshop and did more work with Derrick
 	the following week.</p>
 	Status: Standardization in progress.&nbsp; Implementation substantially
-	complete.&nbsp; promised by Your File System, 2011<br>Target: 2.0<br><br>
+	complete.&nbsp; promised by MIT.<br>Target: 2.0<br><br>
 	</li>
 </ul>
 <h2><a name="misc"></a>6. Miscellaneous</h2>
@@ -789,8 +583,7 @@ Estimate: 4 to 6 weeks</p>
 	somewhat comparable to the vldb-server which gives the location of a volume.&nbsp;
 	<a href="http://pfanne.rzg.mpg.de/trac/openAFS-OSD/wiki/Specs">
 	http://pfanne.rzg.mpg.de/trac/openAFS-OSD/wiki/Specs</a><br><br>Status:
-	Integration is in progress.<br>Target: 1.10<br>Follow up work promised by
-	Your File System, 2011.<br>&nbsp;</li>
+	Integration is in progress.<br>Target: 1.10<br>&nbsp;</li>
 	<li><strong>Automatic Load Balancing:</strong><br>
 	CMU has a load balancing tool that could be polished and supported.<br>&nbsp;
 	</li>
@@ -819,40 +612,35 @@ openafs-gatekeepers@openafs.org</a>. Where external contributors have promised c
 <p>The next release in the previous stable series for UNIX is expected before
 December 2011.&nbsp; This release will correct implementation defects and will
 most likely be the last release in the 1.4 series.</p>
-<h2>1.6.1</h2>
+<h2>1.6.8</h2>
 <p>The 1.6 series is the current stable series for
 UNIX and the last stable series for Microsoft Windows without a native IFS
-implementation.&nbsp; 1.6.1 is the next release in the series and is expected
-before December 2011.&nbsp; The 1.6.1 release will correct implementation
-defects and add support for new kernel versions as necessary.</p>
+implementation.&nbsp; <br>1.6.8 is the next release in the series and is expected
+April 2014.</p>
 <h2>1.7</h2>
 <p>The 1.7 series is the development branch for the Windows IFS implementation.&nbsp;
 The first release on this branch was announced on 15 Sept 2011.&nbsp; Subsequent
 releases are expected every two to four weeks until the code enters maintenance
 mode after two or three months.</p>
 <h2>1.8</h2>
-<p>The 1.8 series will become the first stable release of OpenAFS to include the
-Windows IFS implementation.&nbsp; No other new features will be added to 1.8.&nbsp;
-December 2011.</p>
+<p>The 1.8 series will become the first stable release of OpenAFS to include the 
+Windows IFS implementation.&nbsp; No other new features will be added to 1.8.</p>
 <h2>1.9</h2>
-<p>The 1.9 series will replace the 1.5 series as the experimental release
-series.&nbsp; 1.9 releases will begin shortly after the 1.7 series has the
-Windows IFS implementation committed.&nbsp; Major new features will be
-integrated into 1.9 releases in preparation for the 1.10 stable release.&nbsp;
-October 2011.</p>
+<p>The 1.9 series will replace the 1.5 series as the experimental release 
+series.&nbsp; 1.9 releases will begin shortly after the 1.7 series has the 
+Windows IFS implementation committed.&nbsp; Major new features will be 
+integrated into 1.9 releases in preparation for the 1.10 stable release.&nbsp; </p>
 <h2>2.0</h2>
 <p>The 2.0 series will replace the 1.6 and 1.8 series as the stable release series for
 UNIX and Microsoft Windows.&nbsp; The 2.0 series are scheduled to include the
 rxgk security class including Kerberos v5, RxUDP performance improvements, PTS
-authentication name extensions, and extended callbacks.&nbsp; Pre-release
-testing for 2.0 is expected to begin in February
-2012.</p>
+authentication name extensions, and extended callbacks.</p>
 &nbsp;<div id="footer">
 	<hr>
 	<address>
 		&lt;webmaster@openafs.org&gt;</address>
 	<address>
-		Last modified: 2011/09/15 01:12:14 EDT</address>
+		Last modified: 2014/03/20 23:12:14 EDT</address>
 </div>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
