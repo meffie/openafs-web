@@ -18,7 +18,7 @@ OpenAFS is the world's foremost location independent file system.&nbsp;With Open
 <li><a href="#urgent_news">Urgent News</a></li>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.29 (aka 1.7.2900)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.30 (aka 1.7.3000)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -101,20 +101,20 @@ If the signature is missing do not complete the installation process and send e-
 <a href="mailto:openafs-security@openafs.org?subject=Missing or Incorrect Digital Signature">openafs-security@openafs.org</a>
 <br>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.29 (1.7.2900)</a></h2>
-<p>(updated 16 January 2014)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.30 (1.7.3000)</a></h2>
+<p>(updated 25 March 2014)</p>
 
-<h3><a name="1_7_features">Significant Changes since 1.7.28:</a></h3>
+<h3><a name="1_7_features">Significant Changes since 1.7.29:</a></h3>
 <ul>
   <li>Performance improvements:
     <ul>
-      <li>Avoid unnecessary mount point resolution.</li>
-      <li>More efficient writing of file data to the file server for length extending writes.</li>
-      <li>Fix buffer hash algorithm bug that resulted in cache misses.</li>
+      <li>Cache file server uuid to address mappings to avoid redundant VLDB RPCs.</li>
     </ul>
   </li>
-  <li>Fix bug that could result in lost synchronous write IRPs in the kernel.</li>
-  <li>The above mentioned buffer hash bug could also result in data corruption.</li>
+  <li>Modify Advanced Firewall Registration module to support cache manager ports other than 7001/udp.</li>
+  <li>Fix afsd_service.exe crash if VL replies service replies RXKADEXPIRED</li>
+  <li>Revert use of secure MUP registration on XP as it prevents access by <em>limited users</em></li>
+  <li>Fix afsd_service.exe race condition that can under rare conditions result in invalid server to cell bindings.</li>
 </ul>
 <h3>Features:</h3>
 <ul>
@@ -136,15 +136,15 @@ If the signature is missing do not complete the installation process and send e-
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.29 Release Notes
-    <a title="OpenAFS for Windows 1.7.29 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.29/winxp/ReleaseNotes.chm"> (CHM)</a>
-	<a title="OpenAFS for Windows 1.7.29 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.29/winxp/ReleaseNotes.pdf"> (PDF)</a>
-    <a title="OpenAFS for Windows 1.7.29 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.29/winxp/ReleaseNotes.epub"> (EPUB)</a>
-    <a title="OpenAFS for Windows 1.7.29 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.29/winxp/ReleaseNotes/html/index.html">
+	1.7.30 Release Notes
+    <a title="OpenAFS for Windows 1.7.30 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes.chm"> (CHM)</a>
+	<a title="OpenAFS for Windows 1.7.30 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes.pdf"> (PDF)</a>
+    <a title="OpenAFS for Windows 1.7.30 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes.epub"> (EPUB)</a>
+    <a title="OpenAFS for Windows 1.7.30 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a>
   <li>
-	<a title="OpenAFS for Windows 1.7.29 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.29/winxp/afs-changes-since-1.2.txt">
-  1.7.29 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.30 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/afs-changes-since-1.2.txt">
+  1.7.30 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
@@ -180,17 +180,17 @@ If the signature is missing do not complete the installation process and send e-
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.29/winxp/openafs-en_US-64bit-1-7-2900.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/openafs-en_US-64bit-1-7-3000.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.29/winxp/openafs-32bit-tools-en_US-1-7-2900.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/openafs-32bit-tools-en_US-1-7-3000.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems:
 Win8/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.29/winxp/openafs-en_US-1-7-2900.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/openafs-en_US-1-7-3000.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
@@ -405,7 +405,7 @@ MIT version
 MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
 The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.29</a>
+version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.30</a>
 is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
 section of krb5.conf in %SystemDrive%\ProgramData\Kerberos.<p>MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.
