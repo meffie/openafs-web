@@ -55,7 +55,10 @@ issue is available directly from:
 
   http://www.openafs.org/security/openafs-sa-2014-001.patch
 
-Note that this patch is against 1.6.6.
+Note that this patch is against 1.6.6. For the 1.4 series, use the following
+patch:
+
+  http://www.openafs.org/security/openafs-sa-2014-001-1.4.patch
 
 The latest stable OpenAFS release is always available from
 http://www.openafs.org/release/latest.html
