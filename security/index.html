@@ -25,6 +25,25 @@ with PGP.
 
 <hr>
 
+<a name="OPENAFS-SA-2014-001"></a>
+<h2>OPENAFS-SA-2014-001 - Denial of service attack against OpenAFS fileserver processes</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>9-Apr-2014</td></tr>
+<tr><th align="left">Last Update:</th><td>9-Apr-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.4.8 through 1.6.6</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2014-001.patch">
+  http://www.openafs.org/security/openafs-sa-2014-001.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2014-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2014-001.txt</a>
+</td></tr>
+</table>
+<p>An attacker with the ability to connect to an OpenAFS fileserver can
+trigger a buffer overflow, crashing the server.</p>
+
 <a name="OPENAFS-SA-2013-004"></a>
 <h2>OPENAFS-SA-2013-004 - vos -encrypt doesn't encrypt connection data</h2>
 <table border=0>
@@ -450,6 +469,11 @@ for this vulnerability.
   <td>2013-004</td><td>24-Jul-2013</td><td>24-Jul-2013</td>
   <td>High</td><td>1.6.1-1.6.4</td>
   <td><a href="#OPENAFS-SA-2013-004">vos -encrypt doesn't encrypt connection data</a></td>
+</tr>
+<tr>
+  <td>2013-004</td><td>9-Apr-2013</td><td>9-Apr-2014</td>
+  <td>High</td><td>1.4.8-1.6.6</td>
+  <td><a href="#OPENAFS-SA-2014-001">vos -encrypt doesn't encrypt connection data</a></td>
 </tr>
 </table>
 
