@@ -46,6 +46,34 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>13-May-2014 - OpenAFS 1.7.31 - Native File System client for Microsoft Windows</h4>
+<p>OpenAFS 1.7.31 is the next a series of OpenAFS clients for the
+Microsoft Windows platform that is implemented as a native file system.&nbsp;
+Significant changes since 1.7.30:</p>
+<ul>
+  <li>Fixes a variety of rare errors that can lead to data corruption.
+    <ul>
+      <li>one specific to synchronous file writes on Server 2012 R2.</li>
+    </ul>
+  </li>
+  <li>File copies from readonly volumes could fail with a Media Protected error due to failure of the afs redirector to permit setting file position on a readonly file handle. </li>
+  <li>Prevent applications from unintentionally clearing the Reparse Point or Directory attribute when setting other attributes on files and directories.</li>
+  <li> If a file has the DOS readonly attribute set, deny
+    all writes, truncations, and overwrites in the
+    redirector and not the afsd_service.  Waiting for the
+    afsd_service to see the store operation is too late.
+  The Windows cache manager has already accepted the data.</li>
+  <li>  Fix a potential BSOD when afs redirector trace is enabled.</li>
+  <li>Improved support for applications that set the Last Modified Timestamp to -1 to indicate that the timestamp should not be modified.</li>
+</ul>
+	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
+<p>The 1.7 series is for Microsoft Windows only.</p>
+<ul>
+	<li><a href="/pipermail/openafs-announce/2014/000464.html">Read the release announcement</a>
+	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
+	<li><a href="/release/openafs-1.7.31.html" target="_top">Go to the distribution page</a>
+</ul>
+
 <h4>9-April-2014 - OpenAFS Security Advisory 2014-001</h4>
 <p>OpenAFS servers versions 1.4.8 through 1.6.6 for all platforms. (The first
 prerelease of 1.6.8, 1.6.8pre1 is also affected. The final release of 1.6.8
@@ -65,29 +93,6 @@ This vulnerability is being tracked as CVE-2014-0159.</p>
   <li><a href="/dl/openafs/1.6.7/RELNOTES-1.6.7" target="_top">Read the 1.6.7 release notes</a></li>
   <li><a href="/release/openafs-1.6.7.html" target="_top">Go to the distribution page</a>
   <li><a href="/pipermail/openafs-announce/2014/000460.html">Read the release announcement</a>
-</ul>
-
-<h4>25-March-2014 - OpenAFS 1.7.30 - Native File System client for Microsoft Windows</h4>
-<p>OpenAFS 1.7.30 is the next a series of OpenAFS clients for the
-Microsoft Windows platform that is implemented as a native file system.&nbsp;
-Significant changes since 1.7.30:</p>
-<ul>
-  <li>Performance improvements:
-    <ul>
-      <li>Cache file server uuid to address mappings to avoid redundant VLDB RPCs.</li>
-    </ul>
-  </li>
-  <li>Modify Advanced Firewall Registration module to support cache manager ports other than 7001/udp.</li>
-  <li>Fix afsd_service.exe crash if VL replies service replies RXKADEXPIRED</li>
-  <li>Revert use of secure MUP registration on XP as it prevents access by <em>limited users</em></li>
-  <li>Fix afsd_service.exe race condition that can under rare conditions result in invalid server to cell bindings.</li>
-    </ul>
-	<p><strong>All users of previous 1.7 releases should upgrade.</strong></p>
-<p>The 1.7 series is for Microsoft Windows only.</p>
-<ul>
-	<li><a href="/pipermail/openafs-announce/2014/000458.html">Read the release announcement</a>
-	<li><a href="/windows.html" target="_top">Go to the Microsoft Windows page</a>
-	<li><a href="/release/openafs-1.7.30.html" target="_top">Go to the distribution page</a>
 </ul>
 
 <h4>24-January-2014 - OpenAFS 1.6.6 - Maintenance release for UNIX/Linux</h4>

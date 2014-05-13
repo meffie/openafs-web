@@ -18,7 +18,7 @@ OpenAFS is the world's foremost location independent file system.&nbsp;With Open
 <li><a href="#urgent_news">Urgent News</a></li>
 <li><a href="#whichversion">How to Decide Which Version to Install</a></li>
 <li><a href="#signatures">Digital Signatures</a></li>
-<li><a href="#features-release">OpenAFS for Windows 1.7.30 (aka 1.7.3000)</a></li>
+<li><a href="#features-release">OpenAFS for Windows 1.7.31 (aka 1.7.3100)</a></li>
 	<ul>
 		<li><a href="#1_7_features">Features</a>
 		<li><a href="#1_7_docs">Documentation</a>
@@ -101,20 +101,25 @@ If the signature is missing do not complete the installation process and send e-
 <a href="mailto:openafs-security@openafs.org?subject=Missing or Incorrect Digital Signature">openafs-security@openafs.org</a>
 <br>
 
-<h2><a name="features-release">OpenAFS for Windows 1.7.30 (1.7.3000)</a></h2>
-<p>(updated 25 March 2014)</p>
+<h2><a name="features-release">OpenAFS for Windows 1.7.31 (1.7.3100)</a></h2>
+<p>(updated 13 May 2014)</p>
 
-<h3><a name="1_7_features">Significant Changes since 1.7.29:</a></h3>
+<h3><a name="1_7_features">Significant Changes since 1.7.30:</a></h3>
 <ul>
-  <li>Performance improvements:
+  <li>Fixes a variety of rare errors that can lead to data corruption.
     <ul>
-      <li>Cache file server uuid to address mappings to avoid redundant VLDB RPCs.</li>
+      <li>one specific to synchronous file writes on Server 2012 R2.</li>
     </ul>
   </li>
-  <li>Modify Advanced Firewall Registration module to support cache manager ports other than 7001/udp.</li>
-  <li>Fix afsd_service.exe crash if VL replies service replies RXKADEXPIRED</li>
-  <li>Revert use of secure MUP registration on XP as it prevents access by <em>limited users</em></li>
-  <li>Fix afsd_service.exe race condition that can under rare conditions result in invalid server to cell bindings.</li>
+  <li>File copies from readonly volumes could fail with a Media Protected error due to failure of the afs redirector to permit setting file position on a readonly file handle. </li>
+  <li>Prevent applications from unintentionally clearing the Reparse Point or Directory attribute when setting other attributes on files and directories.</li>
+  <li> If a file has the DOS readonly attribute set, deny
+    all writes, truncations, and overwrites in the
+    redirector and not the afsd_service.  Waiting for the
+    afsd_service to see the store operation is too late.
+  The Windows cache manager has already accepted the data.</li>
+  <li>  Fix a potential BSOD when afs redirector trace is enabled.</li>
+  <li>Improved support for applications that set the Last Modified Timestamp to -1 to indicate that the timestamp should not be modified.</li>
 </ul>
 <h3>Features:</h3>
 <ul>
@@ -136,19 +141,19 @@ If the signature is missing do not complete the installation process and send e-
 <h3><a name="1_7_docs"></a>Documentation:</h3>
 <ul>
   <li>
-	1.7.30 Release Notes
-    <a title="OpenAFS for Windows 1.7.30 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes.chm"> (CHM)</a>
-	<a title="OpenAFS for Windows 1.7.30 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes.pdf"> (PDF)</a>
-    <a title="OpenAFS for Windows 1.7.30 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes.epub"> (EPUB)</a>
-    <a title="OpenAFS for Windows 1.7.30 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.30/winxp/ReleaseNotes/html/index.html">
+	1.7.31 Release Notes
+    <a title="OpenAFS for Windows 1.7.31 Release Notes (CHM)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.31/winxp/ReleaseNotes.chm"> (CHM)</a>
+	<a title="OpenAFS for Windows 1.7.31 Release Notes (PDF)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.31/winxp/ReleaseNotes.pdf"> (PDF)</a>
+    <a title="OpenAFS for Windows 1.7.31 Release Notes (EPUB)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.31/winxp/ReleaseNotes.epub"> (EPUB)</a>
+    <a title="OpenAFS for Windows 1.7.31 Release Notes (HTML)" target="_top" href="http://www.openafs.org/dl/openafs/1.7.31/winxp/ReleaseNotes/html/index.html">
 	(HTML)</a>
   <li>
-	<a title="OpenAFS for Windows 1.7.30 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/afs-changes-since-1.2.txt">
-  1.7.30 ChangeLog</a></li>
+	<a title="OpenAFS for Windows 1.7.31 ChangeLog" href="http://dl.openafs.org/dl/openafs/1.7.31/winxp/afs-changes-since-1.2.txt">
+  1.7.31 ChangeLog</a></li>
 </ul>
 <h3><a name="1_7_platforms"></a>Supported Platforms:</h3>
 <ul>
-	<li>Windows 8.1 and Server 2012 R2 (X86 and AMD64)</li>
+	<li>Windows 8.1 and Server 2012 R2 including Update 1 (X86 and AMD64)</li>
 	<li>Windows 8 (X86 and AMD64)</li>
 	<li>Windows Server 2012 (AMD64)</li>
 	<li>Windows 7 (X86 and AMD64)</li>
@@ -180,17 +185,17 @@ If the signature is missing do not complete the installation process and send e-
 <p>Both installers must be installed on 64-bit systems.</p>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/openafs-en_US-64bit-1-7-3000.msi">64-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.31/winxp/openafs-en_US-64bit-1.7-3100.msi">64-bit MSI installer</a><br>
   </li>
 		<li>
-		<a href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/openafs-32bit-tools-en_US-1-7-3000.msi">32-bit tools MSI installer</a><br>
+		<a href="http://dl.openafs.org/dl/openafs/1.7.31/winxp/openafs-32bit-tools-en_US-1.7-3100.msi">32-bit tools MSI installer</a><br>
 		</li>
 </ul>
 <h3><a name="1_7_32bit_downloads"></a>Download for 32-bit Windows operating systems:
 Win8/Win7/2008/Vista/2003-R2/2003/XP:</h3>
 <ul>
   <li>
-	<a href="http://dl.openafs.org/dl/openafs/1.7.30/winxp/openafs-en_US-1-7-3000.msi">32-bit MSI installer</a><br>
+	<a href="http://dl.openafs.org/dl/openafs/1.7.31/winxp/openafs-en_US-1.7-3100.msi">32-bit MSI installer</a><br>
   </li>
 </ul>
 
@@ -392,25 +397,24 @@ systems.</p>
 a third party Kerberos 5 implementation for network authentication.&nbsp; There 
 are two supported options:</p>
 <ul>
+<li><a href="https://www.secure-endpoints.com/heimdal/">Heimdal Kerberos</a> </li>
 <li><a target="_self" href="http://web.mit.edu/kerberos/dist/index.html">MIT
-Kerberos for Windows</a></li>
-	<li><a href="https://www.secure-endpoints.com/heimdal/">Heimdal Kerberos</a>
-</li>
+  Kerberos for Windows</a></li>
 </ul>
-The recommended version of Kerberos v5 for <a href="#release">OpenAFS for Windows 1.6.1</a> is
-MIT version 
-3.2.2.
-64-bit releases of KFW are available from
-<a href="http://www.secure-endpoints.com/index.html#kfw">Secure Endpoints Inc.</a>&nbsp;
-MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
+<p>The recommended
+  version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.31</a> is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
+  section of krb5.conf in %SystemDrive%\ProgramData\Kerberos.
+<p> The recommended version of Kerberos v5 for <a href="#release">OpenAFS for Windows 1.6.1</a> is
+  MIT version
+  3.2.2.
+  64-bit releases of KFW are available from
+  <a href="http://www.secure-endpoints.com/index.html#kfw">Secure Endpoints Inc.</a>&nbsp;
+  MIT Kerberos has stability issues on Windows 7 and Server 2008 R2.
 <p>
-The recommended 
-version of Kerberos v5 for <a href="#features-release">OpenAFS for Windows 1.7.30</a>
-is Heimdal.&nbsp; Please add allow_weak_crypto = true to the [libdefaults]
-section of krb5.conf in %SystemDrive%\ProgramData\Kerberos.<p>MIT 3.2.2 ships
+  MIT 3.2.2 ships
 with Network Identity Manager version 1.3.1.
-<a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Network
-Identity Manager version 2.0</a> works with both Heimdal and MIT Kerberos.<br></p>
+    <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Network
+Identity Manager version 2.0</a> works with both Heimdal and MIT Kerberos.<br>
 <h2><a name="hotfix"></a>Microsoft Hotfixes</h2>
 <p>Just as OpenAFS releases fixes on a continuous basis, so does Microsoft for their Windows products.
 If they are security related or deemed to be critical to the entire user base these hot fixes are
