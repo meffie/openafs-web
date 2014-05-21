@@ -46,6 +46,27 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>21-May-2014 - OpenAFS 1.6.8 - Maintenance release for UNIX/Linux</h4>
+<p>OpenAFS 1.6.8 is the next in the current series of OpenAFS stable releases
+for UNIX/Linux systems. Significant changes on top of the security fixes in 1.6.7 include:</p>
+<ul>
+  <li> <strong>The default fileserver sync behavior changes from "delayed" to "onclose".</strong>
+       This means that explicit syncing only happens when a volume is detached. This was the
+       recommended option in recent stable releases, and it's believed to improve data integrity.</li>
+  <li> <strong>When a client is shut down, it will give up its callbacks.</strong>
+       The Windows client has been doing this since 2007. Note that older fileservers
+       (1.3.50 to 1.4.5 and 1.5.0 to 1.5.27) had a bug in the implementation of the
+       relevant RPC that could cause crashes or other undefined behavior when this happens.</li>
+  <li> Improved documentation, diagnostics and error messages</li>
+  <li> Dozens of bug fixes and other improvements</li>
+</ul>
+<p>For more information:</p>
+<ul>
+  <li><a href="/dl/openafs/1.6.8/RELNOTES-1.6.8" target="_top">Read the 1.6.8 release notes</a></li>
+  <li><a href="/release/openafs-1.6.8.html" target="_top">Go to the distribution page</a></li>
+  <li><a href="/pipermail/openafs-announce/2014/000467.html">Read the release announcement</a></li>
+</ul>
+
 <h4>13-May-2014 - OpenAFS 1.7.31 - Native File System client for Microsoft Windows</h4>
 <p>OpenAFS 1.7.31 is the next a series of OpenAFS clients for the
 Microsoft Windows platform that is implemented as a native file system.&nbsp;
@@ -110,37 +131,6 @@ This vulnerability is being tracked as CVE-2014-0159.</p>
   <li><a href="/release/openafs-1.6.6.html" target="_top">Go to the distribution page</a>
   <li><a href="/pipermail/openafs-announce/2014/000455.html">Read the release announcement</a>
 </ul>
-
-<h4>20-December-2013 - OpenAFS 1.6.5.2 - Maintenance release for several UNIX/Linux clients</h4>
-<p>OpenAFS 1.6.5.2 is the next in the current series of OpenAFS stable releases for UNIX/Linux systems. Significant changes since 1.6.5.1:</p>
-<ul>
-  <li> Support for OS X 10.9 "Mavericks" clients
-  <li> Fixed tpmfs cache on Linux clients, which was broken since Linux 3.1
-  <li> A Client fix affecting at least RHEL6.5 with syscall auditing enabled
-</ul>
-<p>Systems not affected by these changes can continue to use the 1.6.5 or 1.6.5.1 releases.</p>
-<p>For more information:</p>
-<ul>
-  <li><a href="/dl/openafs/1.6.5.2/RELNOTES-1.6.5.2" target="_top">Read the 1.6.5.2 release notes</a></li>
-  <li><a href="/release/openafs-1.6.5.2.html" target="_top">Go to the distribution page</a>
-  <li><a href="/pipermail/openafs-announce/2013/000452.html">Read the release announcement</a>
-</ul>
-
-
-<h4>11-October-2013 - OpenAFS 1.6.5.1 - Maintenance release for several UNIX/Linux clients</h4>
-<p>OpenAFS 1.6.5.1 is the next in the current series of OpenAFS stable releases for UNIX/Linux systems. Significant changes since 1.6.5:</p>
-<ul>
-  <li> Support for the latest Linux kernels, 3.11 up to at least 3.12-rc4
-  <li> Client fixes affecting at least AIX, RHEL5.9, RHEL6.4 and SLES 11 SP3
-</ul>
-<p>Systems not affected by these changes can continue to use the 1.6.5 release.</p>
-<p>For more information:</p>
-<ul>
-  <li><a href="/dl/openafs/1.6.5.1/RELNOTES-1.6.5.1" target="_top">Read the 1.6.5.1 release notes</a></li>
-  <li><a href="/release/openafs-1.6.5.1.html" target="_top">Go to the distribution page</a>
-  <li><a href="/pipermail/openafs-announce/2013/000445.html">Go to the release announcement</a>
-</ul>
-
 
 <h4>24-July-2013 - SECURITY RELEASES - OpenAFS 1.4.15, 1.6.5 and 1.7.26 available</h4>
 With the release of OpenAFS security advisories 2013-003 and 2013-004,
