@@ -25,6 +25,33 @@ with PGP.
 
 <hr>
 
+<a name="OPENAFS-SA-2014-002"></a>
+<h2>OPENAFS-SA-2014-002 - Use of uninitialized memory in OpenAFS fileserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>12-Jun-2014</td></tr>
+<tr><th align="left">Last Update:</th><td>12-Jun-2014</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS fileserver version 1.6.8 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2014-002.patch">
+  http://www.openafs.org/security/openafs-sa-2014-002.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2014-002.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2014-002.txt</a>
+</td></tr>
+</table>
+<p>The 1.6.8 release of the OpenAFS fileserver and dafileserver
+processes introduced a security vulnerability in the host package
+due to the use of uninitialized memory allocations from the process
+heap.
+<p>
+An attacker with the ability to connect to an OpenAFS fileserver over
+the network can trigger the use of uninitialized memory and, potentially, 
+execution of arbitrary code with the privileges of the fileserver
+process. 
+
 <a name="OPENAFS-SA-2014-001"></a>
 <h2>OPENAFS-SA-2014-001 - Denial of service attack against OpenAFS fileserver processes</h2>
 <table border=0>
@@ -471,9 +498,14 @@ for this vulnerability.
   <td><a href="#OPENAFS-SA-2013-004">vos -encrypt doesn't encrypt connection data</a></td>
 </tr>
 <tr>
-  <td>2013-004</td><td>9-Apr-2013</td><td>9-Apr-2014</td>
+  <td>2014-001</td><td>9-Apr-2014</td><td>9-Apr-2014</td>
   <td>High</td><td>1.4.8-1.6.6</td>
-  <td><a href="#OPENAFS-SA-2014-001">vos -encrypt doesn't encrypt connection data</a></td>
+  <td><a href="#OPENAFS-SA-2014-001">Buffer overflow in OpenAFS fileserver</a></td>
+</tr>
+<tr>
+  <td>2014-002</td><td>12-Jun-2014</td><td>12-Jun-2014</td>
+  <td>High</td><td>1.6.8</td>
+  <td><a href="#OPENAFS-SA-2014-002">Use of uninitialized memory in OpenAFS fileserver</a></td>
 </tr>
 </table>
 
