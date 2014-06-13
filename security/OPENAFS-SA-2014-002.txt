@@ -1,5 +1,5 @@
 Topic: Use of uninitialized memory in OpenAFS fileserver
-
+       CVE 2014-4044
 
 Issued:         12-June-2014
 Last Update:    12-June-2014
