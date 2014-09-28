@@ -46,9 +46,31 @@ OpenAFS.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>24-October-2014 - OpenAFS 1.6.10 - Maintenance release for UNIX/Linux</h4>
+<p>OpenAFS 1.6.10 is the next in the current series of OpenAFS stable releases
+for UNIX/Linux systems. Significant changes on top of the security fixes in 1.6.9 include:</p>
+<ul>
+  <li> The addition of volscan(8), a swiss army knife utility for gathering
+       information about volume content efficiently on the fileserver hosting it.
+  <li> The client now reports just under 2 TiB free space in /afs. Previously, it reported
+       9 GiB on most platforms, which could cause problems with software checking for
+       sufficient free space before attempting to write files larger than that.
+  <li> Client support for Linux kernels up to 3.16
+  <li> Support for FreeBSD 9.3 and 10.1
+  <li> Improved documentation, diagnostics and error messages</li>
+  <li> Dozens of bug fixes and other improvements</li>
+</ul>
+<p>Note: There is a known issue affecting Linux clients, causing spurious ENOENT errors on fakestat mounts, often showing up as getcwd() failures. This problem had been fixed in the 1.6.8 release, but seems to be back in 1.6.10 due to a change fixing another issue. Please find the details in the later comments in the <a href="http://grand.central.org/rt/Ticket/Display.html?id=131780&user=guest&pass=guest">bug report</a>.</p>
+<p>For more information:</p>
+<ul>
+  <li><a href="/dl/openafs/1.6.10/RELNOTES-1.6.10" target="_top">Read the 1.6.10 release notes</a></li>
+  <li><a href="/release/openafs-1.6.10.html" target="_top">Go to the distribution page</a></li>
+  <li><a href="/pipermail/openafs-announce/2014/000472.html">Read the release announcement</a></li>
+</ul>
+
 <h4>12-June-2014 - OpenAFS Security Advisory 2014-002</h4>
 <p>OpenAFS fileservers version 1.6.8 for all UNIX/Linux platforms. Earlier releases
-are not affected.)
+are not affected.
 An attacker with the ability to connect to an OpenAFS fileserver can
 trigger the use of uninitialized memory, crashing the server.
 
