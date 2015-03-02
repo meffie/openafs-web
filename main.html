@@ -55,6 +55,30 @@ OpenAFS Foundation website</a>.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>2-March-2015 - OpenAFS 1.6.11 - Maintenance release for UNIX/Linux</h4>
+<p>OpenAFS 1.6.11 is the next in the current series of OpenAFS stable releases
+for UNIX/Linux systems. This release is focused on client side fixes platform support:</p>
+<ul>
+  <li> Support for Linux kernels up to 3.19 (but not 4.0)
+  <li> OS X 10.10 "Yosemite" support  (no installer is available yet though)
+  <li> Build support for FreeBSD >= 11.0 and OpenBSD 5.4
+  <li> A fix allowing aklog to succeed creating native K5 tokens even when mapping
+  the K5 principal to a K4 one fails
+  <li> Selected fixes for potential data corruption or client panics under certain conditions
+</ul>
+<p>Known issues:
+<ol>
+  <li> With all released versions of OpenAFS, including this one, there is a risk of database corruption if a database server is shut down and then brought up again quickly with an altered database. Please see <a href="http://grand.central.org/rt/Ticket/Display.html?id=131997&user=guest&pass=guest">this bug report</a> for details. This issue will likely be addressed in the next release. Meanwhile, administrators are advised to make sure that the coordinating server (the "sync site") has noticed that the peer server is down before the latter is started again if its local database is modified in any way. This may take up to 75 seconds.
+  <li> Clients for Linux kernels 3.17 to 3.17.2 require an additional configure switch to avoid a memory leak. The same would be required for a hypothetical distribution kernel with certain backports from 3.17 but lacking the fixes from 3.17.2. Please see the release notes or the README for details.
+  <li> While there are changes addressing the spurious  <a href="http://grand.central.org/rt/Ticket/Display.html?id=131780&user=guest&pass=guest">getcwd() failures on Linux</a>, they seem not to be sufficient at least for later kernels.
+</ol>
+<p>For more information:</p>
+<ul>
+  <li><a href="/dl/openafs/1.6.11/RELNOTES-1.6.11" target="_top">Read the 1.6.11 release notes</a></li>
+  <li><a href="/release/openafs-1.6.11.html" target="_top">Go to the distribution page</a></li>
+  <li><a href="/pipermail/openafs-announce/2015/000478.html">Read the release announcement</a></li>
+</ul>
+
 <h4>24-October-2014 - OpenAFS 1.6.10 - Maintenance release for UNIX/Linux</h4>
 <p>OpenAFS 1.6.10 is the next in the current series of OpenAFS stable releases
 for UNIX/Linux systems. Significant changes on top of the security fixes in 1.6.9 include:</p>
@@ -95,27 +119,6 @@ This vulnerability is being tracked as CVE-2014-4044.</p>
   <li><a href="/dl/openafs/1.6.9/RELNOTES-1.6.9" target="_top">Read the 1.6.9 release notes</a></li>
   <li><a href="/release/openafs-1.6.9.html" target="_top">Go to the distribution page</a>
   <li><a href="/pipermail/openafs-announce/2014/000468.html">Read the release announcement</a>
-</ul>
-
-<h4>21-May-2014 - OpenAFS 1.6.8 - Maintenance release for UNIX/Linux</h4>
-<p>OpenAFS 1.6.8 is the next in the current series of OpenAFS stable releases
-for UNIX/Linux systems. Significant changes on top of the security fixes in 1.6.7 include:</p>
-<ul>
-  <li> <strong>The default fileserver sync behavior changes from "delayed" to "onclose".</strong>
-       This means that explicit syncing only happens when a volume is detached. This was the
-       recommended option in recent stable releases, and it's believed to improve data integrity.</li>
-  <li> <strong>When a client is shut down, it will give up its callbacks.</strong>
-       The Windows client has been doing this since 2007. Note that older fileservers
-       (1.3.50 to 1.4.5 and 1.5.0 to 1.5.27) had a bug in the implementation of the
-       relevant RPC that could cause crashes or other undefined behavior when this happens.</li>
-  <li> Improved documentation, diagnostics and error messages</li>
-  <li> Dozens of bug fixes and other improvements</li>
-</ul>
-<p>For more information:</p>
-<ul>
-  <li><a href="/dl/openafs/1.6.8/RELNOTES-1.6.8" target="_top">Read the 1.6.8 release notes</a></li>
-  <li><a href="/release/openafs-1.6.8.html" target="_top">Go to the distribution page</a></li>
-  <li><a href="/pipermail/openafs-announce/2014/000467.html">Read the release announcement</a></li>
 </ul>
 
 <h4>13-May-2014 - OpenAFS 1.7.31 - Native File System client for Microsoft Windows</h4>
@@ -165,22 +168,6 @@ This vulnerability is being tracked as CVE-2014-0159.</p>
   <li><a href="/dl/openafs/1.6.7/RELNOTES-1.6.7" target="_top">Read the 1.6.7 release notes</a></li>
   <li><a href="/release/openafs-1.6.7.html" target="_top">Go to the distribution page</a>
   <li><a href="/pipermail/openafs-announce/2014/000460.html">Read the release announcement</a>
-</ul>
-
-<h4>24-January-2014 - OpenAFS 1.6.6 - Maintenance release for UNIX/Linux</h4>
-<p>OpenAFS 1.6.6 is the next in the current series of OpenAFS stable releases for UNIX/Linux systems. Significant changes on top of the fixes in 1.6.5.1 and 1.6.5.2 include:</p>
-<ul>
-  <li> Improved documentation, diagnostics and error messages
-  <li> Support for the latest Linux kernels
-  <li> New command to flush all data from the client cache, which was previously available on Windows only
-  <li> New switch for the cache manager to limit UDP fragmentation
-  <li> Dozens of bug fixes and other improvements
-</ul>
-<p>For more information:</p>
-<ul>
-  <li><a href="/dl/openafs/1.6.6/RELNOTES-1.6.6" target="_top">Read the 1.6.6 release notes</a></li>
-  <li><a href="/release/openafs-1.6.6.html" target="_top">Go to the distribution page</a>
-  <li><a href="/pipermail/openafs-announce/2014/000455.html">Read the release announcement</a>
 </ul>
 
 <h4>24-July-2013 - SECURITY RELEASES - OpenAFS 1.4.15, 1.6.5 and 1.7.26 available</h4>
