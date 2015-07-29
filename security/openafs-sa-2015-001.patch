@@ -1,0 +1,73 @@
+From 888c21f454be96b6855a2bb7ef1d8f468c5cd841 Mon Sep 17 00:00:00 2001
+From: Daria Brashear <shadow@your-file-system.com>
+Date: Wed, 8 Jul 2015 13:51:47 -0400
+Subject: [PATCH 1/7] vos: Clear nvldbentry before sending on the wire
+
+Don't leak stack data onto the wire. Clear nvldbentry before use.
+
+FIXES 131907 (CVE-2015-3282)
+
+(cherry picked from commit 97aa1caec396ff0c3ff30e6f9e359c91d26e9eb0)
+
+Change-Id: Ic245a2b5ef5cc54a2a5fdfb5d458b6892c4bcf34
+---
+ src/volser/vos.c     |    2 ++
+ src/volser/vsprocs.c |    8 ++++++++
+ 2 files changed, 10 insertions(+), 0 deletions(-)
+
+diff --git a/src/volser/vos.c b/src/volser/vos.c
+index 0376025..77007e9 100644
+--- a/src/volser/vos.c
++++ b/src/volser/vos.c
+@@ -5522,6 +5522,8 @@ ConvertRO(struct cmd_syndesc *as, void *arock)
+     struct rx_connection *aconn;
+     int c, dc;
+ 
++    memset(&storeEntry, 0, sizeof(struct nvldbentry));
++
+     server = GetServer(as->parms[0].items->data);
+     if (!server) {
+ 	fprintf(STDERR, "vos: host '%s' not found in host table\n",
+diff --git a/src/volser/vsprocs.c b/src/volser/vsprocs.c
+index b4b17e9..6cbf9c3 100644
+--- a/src/volser/vsprocs.c
++++ b/src/volser/vsprocs.c
+@@ -743,6 +743,8 @@ UV_CreateVolume3(afs_uint32 aserver, afs_int32 apart, char *aname,
+     aconn = (struct rx_connection *)0;
+     error = 0;
+ 
++    memset(&storeEntry, 0, sizeof(struct nvldbentry));
++
+     init_volintInfo(&tstatus);
+     tstatus.maxquota = aquota;
+ 
+@@ -873,6 +875,8 @@ UV_AddVLDBEntry(afs_uint32 aserver, afs_int32 apart, char *aname,
+     afs_int32 vcode;
+     struct nvldbentry entry, storeEntry;	/*the new vldb entry */
+ 
++    memset(&storeEntry, 0, sizeof(struct nvldbentry));
++
+     aconn = (struct rx_connection *)0;
+     error = 0;
+ 
+@@ -931,6 +935,8 @@ UV_DeleteVolume(afs_uint32 aserver, afs_int32 apart, afs_uint32 avolid)
+     afs_int32 avoltype = -1, vtype;
+     int notondisk = 0, notinvldb = 0;
+ 
++    memset(&storeEntry, 0, sizeof(struct nvldbentry));
++
+     /* Find and read bhe VLDB entry for this volume */
+     code = ubik_VL_SetLock(cstruct, 0, avolid, avoltype, VLOP_DELETE);
+     if (code) {
+@@ -7495,6 +7501,8 @@ MapNetworkToHost(struct nvldbentry *old, struct nvldbentry *new)
+ {
+     int i, count;
+ 
++    memset(new, 0, sizeof(struct nvldbentry));
++
+     /*copy all the fields */
+     strcpy(new->name, old->name);
+ /*    new->volumeType = old->volumeType;*/
+-- 
+1.7.1
+

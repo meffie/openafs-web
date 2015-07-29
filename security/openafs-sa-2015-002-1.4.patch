@@ -1,0 +1,224 @@
+From 0392217538a4f01176c89381973f102065555bea Mon Sep 17 00:00:00 2001
+From: Daria Brashear <shadow@your-file-system.com>
+Date: Wed, 8 Jul 2015 14:11:33 -0400
+Subject: [PATCH 2/6] bos: Use crypt for commands where spoofing could be a risk
+
+bos defaults to not requiring crypt in a lot of cases, instead using clear.
+
+As the simplest way to secure the channel is to enable crypt, do so.
+
+FIXES 131782 (CVE-2015-3283)
+
+(cherry picked from commit 7c376ede8678339771a6032918f6454c5f5780f3)
+(cherry picked from commit e35e1f8d1ff54b63e7ae2be551a810de407bf321)
+
+Change-Id: Ieed61d20896ef3575d15a0dfa318e542581cc32e
+---
+ src/bozo/bos.c |   44 ++++++++++++++++++++++----------------------
+ 1 files changed, 22 insertions(+), 22 deletions(-)
+
+diff --git a/src/bozo/bos.c b/src/bozo/bos.c
+index c4a95fa..ed3c026 100644
+--- a/src/bozo/bos.c
++++ b/src/bozo/bos.c
+@@ -285,7 +285,7 @@ SetAuth(struct cmd_syndesc *as, void *arock)
+     afs_int32 flag;
+     register char *tp;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     tp = as->parms[1].items->data;
+     if (strcmp(tp, "on") == 0)
+ 	flag = 0;		/* auth req.: noauthflag is false */
+@@ -354,7 +354,7 @@ Prune(register struct cmd_syndesc *as, void *arock)
+     register struct rx_connection *tconn;
+     register afs_int32 flags;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     flags = 0;
+     if (as->parms[1].items)
+ 	flags |= BOZO_PRUNEBAK;
+@@ -376,7 +376,7 @@ Exec(register struct cmd_syndesc *as, void *arock)
+     register struct rx_connection *tconn;
+     register afs_int32 code;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     code = BOZO_Exec(tconn, as->parms[1].items->data);
+     if (code)
+ 	printf("bos: failed to execute command (%s)\n", em(code));
+@@ -442,7 +442,7 @@ UnInstall(register struct cmd_syndesc *as, void *arock)
+     register struct cmd_item *ti;
+     register struct rx_connection *tconn;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     if (!as->parms[1].items) {
+ 	printf("bos: no files to uninstall\n");
+ 	return 1;
+@@ -503,7 +503,7 @@ Install(struct cmd_syndesc *as, void *arock)
+     struct rx_call *tcall;
+     char destDir[256];
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     if (!as->parms[1].items) {
+ 	printf("bos: no files to install\n");
+ 	return 1;
+@@ -555,7 +555,7 @@ Shutdown(struct cmd_syndesc *as, void *arock)
+     register afs_int32 code;
+     register struct cmd_item *ti;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     if (as->parms[1].items == 0) {
+ 	code = BOZO_ShutdownAll(tconn);
+ 	if (code)
+@@ -662,7 +662,7 @@ SetRestartCmd(struct cmd_syndesc *as, void *arock)
+     struct rx_connection *tconn;
+ 
+     count = 0;
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     if (as->parms[2].items) {
+ 	count++;
+ 	type = 1;
+@@ -699,7 +699,7 @@ Startup(struct cmd_syndesc *as, void *arock)
+     register afs_int32 code;
+     register struct cmd_item *ti;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     if (as->parms[1].items == 0) {
+ 	code = BOZO_StartupAll(tconn);
+ 	if (code)
+@@ -722,7 +722,7 @@ Restart(struct cmd_syndesc *as, void *arock)
+     register afs_int32 code;
+     register struct cmd_item *ti;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     if (as->parms[2].items) {
+ 	/* this is really a rebozo command */
+ 	if (as->parms[1].items) {
+@@ -766,7 +766,7 @@ SetCellName(struct cmd_syndesc *as, void *arock)
+     register struct rx_connection *tconn;
+     register afs_int32 code;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     code = BOZO_SetCellName(tconn, as->parms[1].items->data);
+     if (code)
+ 	printf("bos: failed to set cell (%s)\n", em(code));
+@@ -781,7 +781,7 @@ AddHost(register struct cmd_syndesc *as, void *arock)
+     register struct cmd_item *ti;
+     char name[MAXHOSTCHARS];
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	if (as->parms[2].items) {
+ 	    if (strlen(ti->data) > MAXHOSTCHARS - 3) {
+@@ -807,7 +807,7 @@ RemoveHost(register struct cmd_syndesc *as, void *arock)
+     register afs_int32 code;
+     register struct cmd_item *ti;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	code = BOZO_DeleteCellHost(tconn, ti->data);
+ 	if (code)
+@@ -924,7 +924,7 @@ RemoveKey(register struct cmd_syndesc *as, void *arock)
+     afs_int32 temp;
+     register struct cmd_item *ti;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	temp = atoi(ti->data);
+ 	code = BOZO_DeleteKey(tconn, temp);
+@@ -985,7 +985,7 @@ AddSUser(register struct cmd_syndesc *as, void *arock)
+     register struct cmd_item *ti;
+ 
+     failed = 0;
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	code = BOZO_AddSUser(tconn, ti->data);
+ 	if (code) {
+@@ -1005,7 +1005,7 @@ RemoveSUser(register struct cmd_syndesc *as, void *arock)
+     int failed;
+ 
+     failed = 0;
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	code = BOZO_DeleteSUser(tconn, ti->data);
+ 	if (code) {
+@@ -1104,7 +1104,7 @@ CreateServer(register struct cmd_syndesc *as, void *arock)
+     register int i;
+     char *type, *name, *notifier = NONOTIFIER;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (i = 0; i < 6; i++)
+ 	parms[i] = "";
+     for (i = 0, ti = as->parms[3].items; (ti && i < 6); ti = ti->next, i++) {
+@@ -1134,7 +1134,7 @@ DeleteServer(register struct cmd_syndesc *as, void *arock)
+     register struct cmd_item *ti;
+ 
+     code = 0;
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	code = BOZO_DeleteBnode(tconn, ti->data);
+ 	if (code) {
+@@ -1156,7 +1156,7 @@ StartServer(register struct cmd_syndesc *as, void *arock)
+     register struct cmd_item *ti;
+ 
+     code = 0;
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	code = BOZO_SetStatus(tconn, ti->data, BSTAT_NORMAL);
+ 	if (code)
+@@ -1174,7 +1174,7 @@ StopServer(register struct cmd_syndesc *as, void *arock)
+     register struct cmd_item *ti;
+ 
+     code = 0;
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     for (ti = as->parms[1].items; ti; ti = ti->next) {
+ 	code = BOZO_SetStatus(tconn, ti->data, BSTAT_SHUTDOWN);
+ 	if (code)
+@@ -1410,7 +1410,7 @@ GetLogCmd(register struct cmd_syndesc *as, void *arock)
+     int error;
+ 
+     printf("Fetching log file '%s'...\n", as->parms[1].items->data);
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     tcall = rx_NewCall(tconn);
+     code = StartBOZO_GetLog(tcall, as->parms[1].items->data);
+     if (code) {
+@@ -1456,7 +1456,7 @@ SalvageCmd(struct cmd_syndesc *as, void *arock)
+     memset(&mrafsParm, 0, sizeof(mrafsParm));
+ 
+     /* parm 0 is machine name, 1 is partition, 2 is volume, 3 is -all flag */
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+ 
+     /* Find out whether fileserver is running MR-AFS (has a scanner instance) */
+     /* XXX this should really be done some other way, potentially by RPC */
+@@ -1855,7 +1855,7 @@ SetRestrict(struct cmd_syndesc *as, void *arock)
+     register struct rx_connection *tconn;
+     afs_int32 code, val;
+ 
+-    tconn = GetConn(as, 0);
++    tconn = GetConn(as, 1);
+     util_GetInt32(as->parms[1].items->data, &val);
+     code = BOZO_SetRestrictedMode(tconn, val);
+     if (code)
+-- 
+1.7.1
+

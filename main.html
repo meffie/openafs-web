@@ -55,19 +55,14 @@ OpenAFS Foundation website</a>.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
-<h4>26-June-2015 - OpenAFS 1.6.12 - Maintenance release for UNIX/Linux</h4>
-<p>OpenAFS 1.6.12 is the next in the current series of OpenAFS stable releases
-for UNIX/Linux systems. Significant changes include:</p>
-<ul>
-  <li> With all prior releases of OpenAFS there was a risk of database corruption if a database server is shut down and then brought up again quickly with an altered database. This happened if the coordinating server (the "sync site") hadn't noticed that the peer server is down before the latter is started again, which could take up to 75 seconds. Please see <a href="http://grand.central.org/rt/Ticket/Display.html?id=131997&user=guest&pass=guest">this bug report</a> for details. This issue is fixed in this release by introducing additional checks of the server state and the validity of the local database.
-  <li> Support for Linux kernels up to 4.1 (but not 4.2)
-  <li> A fix for spurious errors during memory mapped I/O on Linux clients
-</ul>
+<h4>29-July-2015 - OpenAFS 1.6.13 - Security release for UNIX/Linux</h4>
+<p>OpenAFS 1.6.13 is the next in the current series of OpenAFS stable releases
+for UNIX/Linux systems. Versions through 1.6.12 contained a number of security issues, fixed here. Patches for each issue are also individually available. 
 <p>For more information:</p>
 <ul>
-  <li><a href="/dl/openafs/1.6.12/RELNOTES-1.6.12" target="_top">Read the 1.6.12 release notes</a></li>
-  <li><a href="/release/openafs-1.6.12.html" target="_top">Go to the distribution page</a></li>
-  <li><a href="/pipermail/openafs-announce/2015/000485.html">Read the release announcement</a></li>
+  <li><a href="/dl/openafs/1.6.12/RELNOTES-1.6.13" target="_top">Read the 1.6.12 release notes</a></li>
+  <li><a href="/release/openafs-1.6.13.html" target="_top">Go to the distribution page</a></li>
+  <li><a href="/pipermail/openafs-announce/2015/000486.html">Read the release announcement</a></li>
 </ul>
 
 <h4>14-April-2015 - OpenAFS 1.6.11.1 - Maintenance release for UNIX/Linux</h4>

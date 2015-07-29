@@ -25,6 +25,165 @@ with PGP.
 
 <hr>
 
+<a name="OPENAFS-SA-2015-001"></a>
+<h2>OPENAFS-SA-2015-001 - vos leaks stack data onto the wire in the clear when creating vldb entries</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-001.patch">
+  http://www.openafs.org/security/openafs-sa-2015-001.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-001-master.patch">
+  http://www.openafs.org/security/openafs-sa-2015-001-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-001-1.4.patch">
+  http://www.openafs.org/security/openafs-sa-2015-001-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-001.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-001.txt</a>
+</td></tr>
+</table>
+<p>Memory allocated by vos for VLDB entry structures was not cleared prior to use, meaning stack data could be sent over the network, possibly in the clear if crypt mode was not in use.
+<p>
+This vulnerability is being tracked as CVE-2015-3282.<p>
+
+<a name="OPENAFS-SA-2015-002"></a>
+<h2>OPENAFS-SA-2015-002 - bos commands can be spoofed, including some which alter server state</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-002.patch">
+  http://www.openafs.org/security/openafs-sa-2015-002.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-002-master.patch">
+  http://www.openafs.org/security/openafs-sa-2015-002-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-002-1.4.patch">
+  http://www.openafs.org/security/openafs-sa-2015-002-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-002.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-002.txt</a>
+</td></tr>
+</table>
+<p>The default use by bos of clear rather than crypt mode can allow spoofing commands, including some which modify server state if restricted mode was not enabled.<p>
+This vulnerability is being tracked as CVE-2015-3283.<p>
+
+<a name="OPENAFS-SA-2015-003"></a>
+<h2>OPENAFS-SA-2015-003 - pioctls leak kernel memory contents</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.6.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-003.patch">
+  http://www.openafs.org/security/openafs-sa-2015-003.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-003-master.patch">
+  http://www.openafs.org/security/openafs-sa-2015-003-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-003-1.4.patch">
+  http://www.openafs.org/security/openafs-sa-2015-003-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-003.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-003.txt</a>
+</td></tr>
+</table>
+<p>Kernel memory could be leaked to a local user in the return of a pioctl command.
+<p>
+This vulnerability is being tracked as CVE-2015-3284.<p>
+
+<a name="OPENAFS-SA-2015-004"></a>
+<h2>OPENAFS-SA-2015-004 - kernel pioctl support for OSD command passing can trigger a panic</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0.3 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-004.patch">
+  http://www.openafs.org/security/openafs-sa-2015-004.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-004-master.patch">
+  http://www.openafs.org/security/openafs-sa-2015-004-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-004-1.4.patch">
+  http://www.openafs.org/security/openafs-sa-2015-004-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-004.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-004.txt</a>
+</td></tr>
+</table>
+<p>Local users can panic a machine by causing an incorrect buffer to be writter to with the OSD fscommand pioctl support</p>
+This vulnerability is being tracked as CVE-2015-3285.<p>
+
+<a name="OPENAFS-SA-2015-005"></a>
+<h2>OPENAFS-SA-2015-005 - Solaris grouplist modifications for PAGs can panic or overwrite memory</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS Solaris client versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-005.patch">
+  http://www.openafs.org/security/openafs-sa-2015-005.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-005-master.patch">
+  http://www.openafs.org/security/openafs-sa-2015-005-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-005-1.4.patch">
+  http://www.openafs.org/security/openafs-sa-2015-005-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-005.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-005.txt</a>
+</td></tr>
+</table>
+<p>Solaris hosts can overflow the buffer allocated for the user's group list or hang the kernel when handling an error due to too many groups.
+<p>
+This vulnerability is being tracked as CVE-2015-3286.<p>
+
+<a name="OPENAFS-SA-2015-006"></a>
+<h2>OPENAFS-SA-2015-006 - Buffer overflow in OpenAFS vlserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-006.patch">
+  http://www.openafs.org/security/openafs-sa-2015-006.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-006-master.patch">
+  http://www.openafs.org/security/openafs-sa-2015-006-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-006-1.4.patch">
+  http://www.openafs.org/security/openafs-sa-2015-006-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-006.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-006.txt</a>
+</td></tr>
+</table>
+<p>Disable regular expression support in the vlserver handling of ListAttributes RPCs given likely safety issues.
+</p>
+
 <a name="OPENAFS-SA-2014-002"></a>
 <h2>OPENAFS-SA-2014-002 - Use of uninitialized memory in OpenAFS fileserver</h2>
 <table border=0>
@@ -506,6 +665,36 @@ for this vulnerability.
   <td>2014-002</td><td>12-Jun-2014</td><td>12-Jun-2014</td>
   <td>High</td><td>1.6.8</td>
   <td><a href="#OPENAFS-SA-2014-002">Use of uninitialized memory in OpenAFS fileserver</a></td>
+</tr>
+<tr>
+  <td>2015-001</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-001">vos leaks stack data onto the wire in the clear when creating vldb entries</a></td>
+</tr>
+<tr>
+  <td>2015-002</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-002">bos commands can be spoofed, including some which alter server state</a></td>
+</tr>
+<tr>
+  <td>2015-003</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-003">pioctls leak kernel memory contents</a></td>
+</tr>
+<tr>
+  <td>2015-004</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0.3-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-004">kernel pioctl support for OSD command passing can trigger a panic</a></td>
+</tr>
+<tr>
+  <td>2015-005</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-005">Solaris grouplist modifications for PAGs can panic or overwrite memory</a></td>
+</tr>
+<tr>
+  <td>2015-006</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-006">Buffer overflow in OpenAFS vlserver</a></td>
 </tr>
 </table>
 
