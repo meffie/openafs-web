@@ -55,9 +55,39 @@ OpenAFS Foundation website</a>.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>13-August-2015 - OpenAFS 1.6.14 - Maintenance release for UNIX/Linux</h4>
+<p>OpenAFS 1.6.14 is the next in the current series of OpenAFS stable releases
+for UNIX/Linux systems. It is limited to a fix for an issue introduced in release 1.6.13:
+
+Prior to the OpenAFS security release 1.6.13, the Volume Location Server (vlserver) RPC
+VL_ListAttributesN2() supported wildcard volume name lookups via regular expression (regex)
+pattern matching. This support was completely disabled in 1.6.13 because it was judged to be
+a security risk due to buffer overruns in the implementation, as well as the possibility of
+denial of service attacks where certain regular expressions could cause excessive CPU usage
+in some regex implementations. After 1.6.13 was released, it was discovered that the native
+OpenAFS 'backup' system uses the VL_ListAttributesN2() regex support to evaluate configured
+volume sets.
+<p>
+As a result of this issue, OpenAFS 1.6.14 replaces the 1.6.13 changes to  VL_ListAttributesN2.
+1.6.14 prevents the buffer overruns and reenables  the regex support, but restricts it to
+OpenAFS super-users and -localauth only. This is sufficient to restore the OpenAFS 'backup'
+system's ability to work correctly with any previously supported volume set. The OpenAFS
+'backup' commands are already documented to require super-user authorization,
+so this restriction is moot for the backup system.
+i<p>
+None of the other security fixes in OpenAFS 1.6.13 are known to have any issues, and are still
+included unchanged in OpenAFS 1.6.14.
+
+<p>For more information:</p>
+<ul>
+  <li><a href="/dl/openafs/1.6.14/RELNOTES-1.6.14" target="_top">Read the 1.6.14 release notes</a></li>
+  <li><a href="/release/openafs-1.6.14.html" target="_top">Go to the distribution page</a></li>
+  <li><a href="/pipermail/openafs-announce/2015/000487.html">Read the release announcement</a></li>
+</ul>
+
 <h4>29-July-2015 - OpenAFS 1.6.13 - Security release for UNIX/Linux</h4>
 <p>OpenAFS 1.6.13 is the next in the current series of OpenAFS stable releases
-for UNIX/Linux systems. Versions through 1.6.12 contained a number of security issues, fixed here. Patches for each issue are also individually available. 
+for UNIX/Linux systems. Versions through 1.6.12 contained a number of security issues, fixed here. Patches for each issue are also individually available.
 <p>For more information:</p>
 <ul>
   <li><a href="/dl/openafs/1.6.13/RELNOTES-1.6.13" target="_top">Read the 1.6.13 release notes</a></li>
