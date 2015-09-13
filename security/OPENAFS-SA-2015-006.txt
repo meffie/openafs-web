@@ -1,5 +1,5 @@
 Topic: Buffer overflow in OpenAFS vlserver
-       CVE-2015-3287
+       CVE-2015-6587
 
 Issued:         29-July-2015
 Last Update:    29-July-2015
