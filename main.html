@@ -55,6 +55,27 @@ OpenAFS Foundation website</a>.</p>
 
 <h2>Recent OpenAFS News</h2>
 <div id="news">
+<h4>17-September-2015 - OpenAFS 1.6.14.1 - Maintenance release for UNIX/Linux</h4>
+<p>OpenAFS 1.6.14.1 is the next in the current series of OpenAFS stable releases
+for UNIX/Linux systems. It adds client support for Linux kernel 4.2 .
+
+Note that due to changes to internal data structures with this kernel release,
+the OpenAFS client can no longer reset the link count during path
+lookups. Since volume root directories must behave like symlinks
+instead of normal directories in order to satisfy Linux kernel
+invariants, looking up paths containing more than 40 mount points
+will fail with ELOOP on such kernels.
+
+There are no further changes. Systems not affected by the Linux 4.2 VFS changes can
+continue to use the OpenAFS 1.6.14 release.
+
+<p>For more information:</p>
+<ul>
+  <li><a href="/dl/openafs/1.6.14.1/RELNOTES-1.6.14.1" target="_top">Read the 1.6.14.1 release notes</a></li>
+  <li><a href="/release/openafs-1.6.14.1.html" target="_top">Go to the distribution page</a></li>
+  <li><a href="/pipermail/openafs-announce/2015/000488.html">Read the release announcement</a></li>
+</ul>
+
 <h4>13-August-2015 - OpenAFS 1.6.14 - Maintenance release for UNIX/Linux</h4>
 <p>OpenAFS 1.6.14 is the next in the current series of OpenAFS stable releases
 for UNIX/Linux systems. It is limited to a fix for an issue introduced in release 1.6.13:
