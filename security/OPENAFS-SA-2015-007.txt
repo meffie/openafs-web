@@ -1,0 +1,164 @@
+OpenAFS Security Advisory 2015-007 "Tattletale"
+
+Topic: Rx ACK packets leak plaintext of previous packets
+       CVE-2015-7762, CVE-2015-7763
+       
+
+Issued: 28 October 2015
+Last Updated: 28 October 2015
+Affected: OpenAFS client and server versions prior to 1.7.32, 1.6.15,
+          IBM AFS, Arla, and other protocols using Rx implementations
+          derived from Project Andrew
+
+The packet paylod of Rx ACK packets is not fully initialized, leaking
+plaintext from packets previously processed.
+
+SUMMARY
+=======
+
+The AFS-3 protocol is built upon remote procedure calls (RPCs) using the
+Rx RPC protocol.  Rx is a UDP-based protocol that provides reliable
+in-order data transfer.  In order to ensure reliable delivery, all
+transmitted data packets must be explicitly acknowledge by the peer,
+or they will be retransmitted until acknowledgment is received.
+
+When constructing an Rx acknowledgment (ACK) packet, Andrew-derived Rx
+implementations do not initialize three octets of data that are padding
+in the C language structure and were inadvertently included in the wire
+protocol (CVE-2015-7762).  Additionally, OpenAFS Rx in versions 1.5.75
+through 1.5.78, 1.6.0 through 1.6.14, and 1.7.0 through 1.7.32 include
+a variable-length padding at the end of the ACK packet, in an attempt to
+detect the path MTU, but only four octets of the additional padding are
+initialized (CVE-2015-7763).
+
+Rx implementations derived from Project Andrew use a pool of packet
+structures, so that the uninitialized data sent on the wire in an
+ACK packet is the plaintext of some previous packet, including
+packets that were received encrypted and then decrypted in-place.
+(All packet decryption is performed in-place.)
+
+Furthermore, when the packet being acknowledged is a duplicate or outside
+the valid window of sequence numbers, the decrypted packet is immediately
+used to construct the return ACK packet, giving an attacker control
+over what plaintext will be leaked.
+
+IMPACT
+======
+
+An attacker can gain portions of the plaintext of arbitrary encrypted
+packets by replaying them against the original recipient and observing
+the responding ACK packet.
+
+Additionally, a passive attacker can obtain portions of the plaintext
+of previously processed packets by observing ACK packets transmitted
+over the network.  Such an attacker does not have direct knowledge of
+which plaintext was received, but that information can potentially
+be determined by analyzing the structure of the received plaintext.
+
+The amount of plaintext revealed is three octets, due to CVE-2015-7762,
+and up to the interface MTU minus approximately forty octets, due
+to CVE-2015-7763.
+
+AFFECTED SOFTWARE
+=================
+
+All current releases of OpenAFS.  That is, all releases prior to
+and including 1.4.15 (CVE-2015-7762), releases 1.5.75 through 1.5.78 from
+the 1.5 series (CVE-2015-7762 and CVE-2015-7763), all releases from the 1.6
+series prior to 1.6.15 (CVE-2015-7762 and CVE-2015-7763), and all releases
+from the 1.7 series prior to 1.7.32 (CVE-2015-7762 and CVE-2015-7763).
+
+Additionally, other software including Rx implementations derived from
+Project Andrew are affected by CVE-2015-7762.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all cache
+managers, servers, and administrative tools to OpenAFS 1.6.15 (Unix) or
+1.7.32 (Windows).  Additionally, patch files are provided for the master
+and 1.6.x branches.
+
+All OpenAFS software will need to be restarted in order for the fixes
+to take effect.
+
+DETAILS
+=======
+
+In the original Project Andrew implementation, the size of the ACK
+packet was determined using the C expression sizeof(struct rx_ackPacket).
+However, the rx_ackPacket structure contains 32-bit elements, which C
+generally requires to be aligned at an address that is a multiple of 4,
+and also some 8-bit elements at the end of the structure.  The presence
+of the 32-bit elements causes the structure as a whole to require 4-byte
+alignment, so the size of the structure as computed by the sizeof
+operator must be a multiple of 4.  However, the number of 8-bit elements
+at the end of the structure was not a multiple of 4, so three octets
+of padding were left at the end of the structure as reported by the
+sizeof operator.  Subsequent additions to the end of the ACK packet
+format did not account for the padding octets, thus leaving a
+three-octet hole in the middle of the wire protocol data structure.
+In OpenAFS commit 4916d4b4221213bb6950e76dbe464a09d7a51cc3, Nickolai
+Zeldovich <kolya@mit.edu> noticed that the padding was included in the
+sizeof() output, but the lack of initialization of the padding was not
+noticed at that time.
+
+In OpenAFS commit c7f9307c35c0c89f7ec8ada315c81ebc47517f86, the ACK
+packet structure was further extended with a variable-length trailer
+in an attempt to allow the path MTU between two peers to be determined
+in real-time.  An attempt was made to initialize the padding octets to a
+value represnting the length of the added padding, but several bugs were
+present that resulted in only the first four octets of padding being
+initialized.
+
+Rx implementations derived from Project Andrew maintain a per-process
+pool of packet buffers that are reused over the lifetime of the process.
+These packet structures are not reinitialized or zeroed out when they
+are put into or pulled from the pool, reflecting the environment in
+which Project Andrew was born, where computing power was scarce and the
+cost of zeroing out memory was a significant expenditure of resources.
+It was expected that the next consumer of the packet would write the
+appropriate data into the memory location of the packet data structure
+before sending its contents over the network.
+
+However, due to the two bugs mentioned, some portions of the packet data
+structure were not written to before the packet contents, and thus
+contained the contents of memory from when the packet had previously
+been returned to the pool of free packets.  In general, when a packet is
+returned to the free pool, its memory is just the cleartext left over
+after that packet was processed.  This could be the plaintext of some
+other ACK packet, or an unmodified packet that was sent using
+authenticated-but-unencrypted rxkad, or the plaintext of an encrypted
+rxkad packet, etc..  The main risk occurs when the memory contents are
+those from a previously encrypted rxkad packet that had been decrypted,
+since decryption is always performed in-place.  That situation causes
+information to leak out to the network that had previously only been
+sent in encrypted form.
+
+As a reminder, rxkad encryption uses the fcrypt cipher, which is similar
+to but slightly weaker than single-DES, and single-DES is known to be
+critically weak.  Single-DES keys can be brute-forced in under a day's
+time for under $100 of computational effort, but the fcrypt encryption
+keys used by rxkad are (generally) krb5 session keys, which are
+refreshed on approximately a daily basis.  So, rxkad encryption is still
+expected to provide some modicum of confidentiality in the general case,
+absent a specific threat.
+
+Compounding the leaked plaintext in ACK packets is a quirk of how the
+packet pool is used when processing received packets that are duplicates
+of ones that have already been processed, or that are outside of the
+current processing window of sequence numbers.  In those cases, the
+packet structure that held the incoming packet is decrypted and then
+immediately reused to send the outgoing ACK packet.  So, by sending
+such a duplicate or out-of-window packet, an attacker can know exactly
+which plaintext will be revealed by the returned ACK packet.  In the
+case of CVE-2015-7763, the leaked data can be a major portion of the
+packet, providing a near-complete loss of confidentiality.
+
+ACKNOWLEDGEMENTS
+================
+
+Both issues were identified by John Stumpo.
+
+The patches were developed by Simon Wilkinson, with assistance from
+Jeffrey Altman and Benjamin Kaduk.
