@@ -184,6 +184,34 @@ This vulnerability is being tracked as CVE-2015-3286.<p>
 <p>Disable regular expression support in the vlserver handling of ListAttributes RPCs given likely safety issues.
 </p>
 
+<a name="OPENAFS-SA-2015-007"></a>
+<h2>OPENAFS-SA-2015-007 "Tattletale" - Rx ACK packets leak plaintext of previous packets</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>28-Oct-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>28-Oct-2015</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th>
+<td>OpenAFS client and server versions prior to 1.7.32, 1.6.15, IBM AFS, Arla, and other protocols using Rx implementations derived from Project Andrew</td></tr>
+<tr><th align="left">Patch:</th>
+<td>
+  <a href="openafs-sa-2015-007-master.patch">
+  http://www.openafs.org/security/OPENAFS-SA-2015-007-master.patch</a><br>
+</td>
+<td>
+  <a href="openafs-sa-2015-007-1.6.patch">
+  http://www.openafs.org/security/OPENAFS-SA-2015-007-1.6.patch</a><br>
+</td>
+</tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-007.txt">
+  http://www.openafs.org/security/OPENAFS-SA-2015-007.txt</a>
+</td></tr>
+</table>
+<p>The packet paylod of Rx ACK packets is not fully initialized, leaking
+plaintext from packets previously processed.
+</p>
+<p>This security advisory is being tracked by CVE-2015-7762 and CVE-2015-7763.</p>
+
 <a name="OPENAFS-SA-2014-002"></a>
 <h2>OPENAFS-SA-2014-002 - Use of uninitialized memory in OpenAFS fileserver</h2>
 <table border=0>
@@ -695,6 +723,11 @@ for this vulnerability.
   <td>2015-006</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
   <td>Medium</td><td>1.0-1.6.12</td>
   <td><a href="#OPENAFS-SA-2015-006">Buffer overflow in OpenAFS vlserver</a></td>
+</tr>
+<tr>
+  <td>2015-007</td><td>28-Oct-2015</td><td>28-Oct-2015</td>
+  <td>High</td><td>1.0-1.6.14, 1.7.0-1.7.32</td>
+  <td><a href="#OPENAFS-SA-2015-006">Rx ACK packets leak plaintext of previous packets</a></td>
 </tr>
 </table>
 
