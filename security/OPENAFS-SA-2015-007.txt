@@ -1,3 +1,6 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
 OpenAFS Security Advisory 2015-007 "Tattletale"
 
 Topic: Rx ACK packets leak plaintext of previous packets
@@ -6,7 +9,7 @@ Topic: Rx ACK packets leak plaintext of previous packets
 
 Issued: 28 October 2015
 Last Updated: 28 October 2015
-Affected: OpenAFS client and server versions prior to 1.7.32, 1.6.15,
+Affected: OpenAFS client and server versions prior to 1.7.33, 1.6.15,
           IBM AFS, Arla, and other protocols using Rx implementations
           derived from Project Andrew
 
@@ -26,7 +29,7 @@ When constructing an Rx acknowledgment (ACK) packet, Andrew-derived Rx
 implementations do not initialize three octets of data that are padding
 in the C language structure and were inadvertently included in the wire
 protocol (CVE-2015-7762).  Additionally, OpenAFS Rx in versions 1.5.75
-through 1.5.78, 1.6.0 through 1.6.14, and 1.7.0 through 1.7.32 include
+through 1.5.78, 1.6.0 through 1.6.14, and 1.7.0 through 1.7.33 include
 a variable-length padding at the end of the ACK packet, in an attempt to
 detect the path MTU, but only four octets of the additional padding are
 initialized (CVE-2015-7763).
@@ -66,7 +69,7 @@ All current releases of OpenAFS.  That is, all releases prior to
 and including 1.4.15 (CVE-2015-7762), releases 1.5.75 through 1.5.78 from
 the 1.5 series (CVE-2015-7762 and CVE-2015-7763), all releases from the 1.6
 series prior to 1.6.15 (CVE-2015-7762 and CVE-2015-7763), and all releases
-from the 1.7 series prior to 1.7.32 (CVE-2015-7762 and CVE-2015-7763).
+from the 1.7 series prior to 1.7.33 (CVE-2015-7762 and CVE-2015-7763).
 
 Additionally, other software including Rx implementations derived from
 Project Andrew are affected by CVE-2015-7762.
@@ -76,7 +79,7 @@ FIXES
 
 The OpenAFS project recommends that administrators upgrade all cache
 managers, servers, and administrative tools to OpenAFS 1.6.15 (Unix) or
-1.7.32 (Windows).  Additionally, patch files are provided for the master
+1.7.33 (Windows).  Additionally, patch files are provided for the master
 and 1.6.x branches.
 
 All OpenAFS software will need to be restarted in order for the fixes
@@ -151,9 +154,7 @@ current processing window of sequence numbers.  In those cases, the
 packet structure that held the incoming packet is decrypted and then
 immediately reused to send the outgoing ACK packet.  So, by sending
 such a duplicate or out-of-window packet, an attacker can know exactly
-which plaintext will be revealed by the returned ACK packet.  In the
-case of CVE-2015-7763, the leaked data can be a major portion of the
-packet, providing a near-complete loss of confidentiality.
+which plaintext will be revealed by the returned ACK packet.
 
 ACKNOWLEDGEMENTS
 ================
@@ -162,3 +163,24 @@ Both issues were identified by John Stumpo.
 
 The patches were developed by Simon Wilkinson, with assistance from
 Jeffrey Altman and Benjamin Kaduk.
+
+CORRECTIONS
+===========
+
+A prior version of this announcement indicated that:
+
+1. version 1.7.32 is not vulnerable.
+
+2. CVE-2015-7763 can be triggered by duplicate and out of window packets.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJWMWVGAAoJENxm1CNJffh4zEwH/2gZrSgBeaqDnO2zCzICkKMm
+i7v4J4nIQwegfd5qApotpB/8IDKCzs5Ae4hTQAvZ4UGHNa34uFNq3YIS0Vg4hVEh
+LQrKKDS5NuxMDug8Iu+iOILvaBp9tl9ts8GlZW0t103b++YlDAtADlNXDeuqmMam
+NKcq/Ll5sNhUK6j65inx9SXk963bCnNXHcssyaOOuii3vvC/ZcY32pmDG0DtJZDG
+vXSE/XA/YFp6NrslSN4wJ03bsuGJRv6MhHBkzzznaiPGYfCacMhJGs54rn7tjmsr
+di2qULiuQAHysrq3wLrKrxCaPvwYzsEq2mSuUk+48WnpLPSFjYVhKOmaL9rOqws=
+=7m89
+-----END PGP SIGNATURE-----
