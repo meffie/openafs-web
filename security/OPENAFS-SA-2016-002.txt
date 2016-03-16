@@ -1,0 +1,102 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory 2016-002
+
+Topic: information leakage from client memory
+
+Issued: 16 March, 2016
+Affected: OpenAFS client versions prior to 1.6.17
+
+The contents of uninitialized memory are sent on the wire when
+clients perform certain RPCs.  Depending on the RPC, the information
+leaked may come from kernel memory or userspace.
+
+SUMMARY
+=======
+
+The AFS-3 filesystem service is built upon a collection of UDP remote
+procedure calls (RPCs).  Some RPCs provide very general interfaces,
+allowing for various attributes or fields to be queried or set by the
+client in a single call, with a bitmask indicating which field(s) the
+client is requesting.  The client still sends the entire RPC-L structure
+on the wire, but the server, correctly, only examines those fields
+indicated in the bitmask.  In some cases, the client was only
+initializing the fields corresponding to the bits it set in the bitmask,
+leaving uninitialized memory in the other portions of the structure it
+sends to the server.  In some cases, this uninitialized memory comes
+from the kernel stack and thus leaks kernel memory; in other cases, the
+information comes from the userspace stack.
+
+IMPACT
+======
+
+Small quantities (at most a few tens of bytes per call) of information
+from kernel memory or a long-running userspace process could be revealed
+to an observer on the network or the remote server.  This could
+potentially cause a loss of confidentiality for user data or leak
+information about the memory layout in the kernel or a long-running
+process.  Learning information about the memory layout, such as the
+value of a valid pointer, can be used in certain remote attacks that
+exploit other vulnerabilities, especially when attempting to bypass
+Address Space Layout Randomization (ASLR).
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.17 are affected.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all servers
+to OpenAFS 1.6.17 (Unix).  Additionally, patch files are provided for
+the master and 1.6.x branches.
+
+Clients will need to be restarted in order for the fixes to take effect.
+
+DETAILS
+=======
+
+The following data structures are impacted:
+
+AFSStoreStatus
+AFSStoreVolumeStatus
+VldbListByAttributes
+ListAddrByAttributes
+
+The affected cases for AFSStoreStatus are: when setting file attributes;
+creating files, directories, or symlinks; and writing using the
+standalone afsio or afscp tools.
+
+The affected cases for AFSStoreVolumeStatus are when a cache manager is
+used to adjust a volume's quota (i.e., with fs setquota or equivalent).
+
+The affected cases for VldbListByAttributes are: when the backup
+coordinator is evaluating a volume set, when a fileserver is
+synchronizing its list of volumes with the VLDB, when a client is
+listing VLDB entries, and when a client is unlocking a volume in the VLDB.
+
+The affected cases for ListAddrByAttributes are: when libadmin is
+querying server information, when the standalone cacheout utility is
+listing servers, and when the standalone vlclient utility is querying
+server information.
+
+ACKNOWLEDGEMENTS
+================
+
+This issue was reported by Marc Dionne.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQGgBAEBCgAGBQJW6VjhAAoJECjZpvNk63US3ksMH2nu/+JCQRM8+82j6VFt/st9
+r9V5F9pAvpVBlMXc87E4OQ9R8e3vL5SvuucqZgyciVP0zgDeaWLuwlkGr3MKEvMu
+UBgp4UOYBKUmT8wscKtP6OgrmiUmHYH8dWXj71L0Ycd3mIJ95O/dA4ZB1EhUYJhK
+H+vDjWlnE7mrTBrgtgYt8h3aHZxc3qS7/K6y/5RshA5uAw4I474+1KdVIiMEYaUT
+6QEQgcnQF1M6vJB5Vk21AB6ptaznqRhBA+MxDhcts3w23sKoPjoAd/Bnw2OzbAfI
+v/+NFUulorF+KYqNYiXVBAZxbtcRvlbJ65C79ja059JxLSWbIZv6QcpU9HomVKCa
+lJ97g6JBNZgXYH/Q/9is5y+GdZfeNtk1GA7sAV97pdrWF9PLqUicBOUDFbMOb4R8
+x9eXoNObp5zH1exbRNs93Q2CFX6sLiPiaL4hM658b6PaGcZZvMkXeI81DKiJqLWZ
+WhfOFDG8/ixn6DgIDjDaFsBElcSYqryk9sh6TK4qcu+okWE=
+=7O4D
+-----END PGP SIGNATURE-----

@@ -1,0 +1,243 @@
+diff --git a/src/WINNT/afsd/cm_dcache.c b/src/WINNT/afsd/cm_dcache.c
+index 031ce29..b65fe1c 100644
+--- a/src/WINNT/afsd/cm_dcache.c
++++ b/src/WINNT/afsd/cm_dcache.c
+@@ -416,6 +416,7 @@ long cm_StoreMini(cm_scache_t *scp, cm_user_t *userp, cm_req_t *reqp)
+     int call_was_64bit = 0;
+ 
+     memset(&volSync, 0, sizeof(volSync));
++    memset(&inStatus, 0, sizeof(inStatus);
+ 
+     osi_Log2(afsd_logp, "cm_StoreMini scp 0x%p userp 0x%p", scp, userp);
+ 
+diff --git a/src/WINNT/afsd/cm_ioctl.c b/src/WINNT/afsd/cm_ioctl.c
+index db32eec..172cbc0 100644
+--- a/src/WINNT/afsd/cm_ioctl.c
++++ b/src/WINNT/afsd/cm_ioctl.c
+@@ -632,6 +632,7 @@ cm_IoctlSetVolumeStatus(struct cm_ioctl *ioctlp, struct cm_user *userp, cm_scach
+     clientchar_t *strp;
+     struct rx_connection * rxconnp;
+ 
++    memset(&storeStat, 0, sizeof(storeStat));
+ #ifdef AFS_FREELANCE_CLIENT
+     if ( scp->fid.cell == AFS_FAKE_ROOT_CELL_ID && scp->fid.volume == AFS_FAKE_ROOT_VOL_ID ) {
+ 	code = CM_ERROR_NOACCESS;
+diff --git a/src/afs/VNOPS/afs_vnop_attrs.c b/src/afs/VNOPS/afs_vnop_attrs.c
+index 2eb228f..2633db3 100644
+--- a/src/afs/VNOPS/afs_vnop_attrs.c
++++ b/src/afs/VNOPS/afs_vnop_attrs.c
+@@ -360,6 +360,7 @@ afs_VAttrToAS(struct vcache *avc, struct vattr *av,
+ {
+     int mask;
+     mask = 0;
++
+     AFS_STATCNT(afs_VAttrToAS);
+ #if     defined(AFS_DARWIN80_ENV)
+     if (VATTR_IS_ACTIVE(av, va_mode)) {
+@@ -485,6 +486,8 @@ afs_setattr(OSI_VC_DECL(avc), struct vattr *attrs,
+     if ((code = afs_CreateReq(&treq, acred)))
+ 	return code;
+ 
++    memset(&astat, 0, sizeof(astat));
++
+     AFS_DISCON_LOCK();
+ 
+     afs_InitFakeStat(&fakestate);
+diff --git a/src/afs/VNOPS/afs_vnop_create.c b/src/afs/VNOPS/afs_vnop_create.c
+index fc87018..f33da96 100644
+--- a/src/afs/VNOPS/afs_vnop_create.c
++++ b/src/afs/VNOPS/afs_vnop_create.c
+@@ -64,6 +64,7 @@ afs_create(OSI_VC_DECL(adp), char *aname, struct vattr *attrs,
+ 
+     OutFidStatus = osi_AllocSmallSpace(sizeof(struct AFSFetchStatus));
+     OutDirStatus = osi_AllocSmallSpace(sizeof(struct AFSFetchStatus));
++    memset(&InStatus, 0, sizeof(InStatus));
+ 
+     if ((code = afs_CreateReq(&treq, acred)))
+ 	goto done2;
+diff --git a/src/afs/VNOPS/afs_vnop_dirops.c b/src/afs/VNOPS/afs_vnop_dirops.c
+index 8b49a68..33455cb 100644
+--- a/src/afs/VNOPS/afs_vnop_dirops.c
++++ b/src/afs/VNOPS/afs_vnop_dirops.c
+@@ -61,6 +61,7 @@ afs_mkdir(OSI_VC_DECL(adp), char *aname, struct vattr *attrs,
+ 
+     OutFidStatus = osi_AllocSmallSpace(sizeof(struct AFSFetchStatus));
+     OutDirStatus = osi_AllocSmallSpace(sizeof(struct AFSFetchStatus));
++    memset(&InStatus, 0, sizeof(InStatus));
+ 
+     if ((code = afs_CreateReq(&treq, acred)))
+ 	goto done2;
+diff --git a/src/afs/VNOPS/afs_vnop_symlink.c b/src/afs/VNOPS/afs_vnop_symlink.c
+index 993d5ac..bd22639 100644
+--- a/src/afs/VNOPS/afs_vnop_symlink.c
++++ b/src/afs/VNOPS/afs_vnop_symlink.c
+@@ -94,6 +94,7 @@ afs_symlink(OSI_VC_DECL(adp), char *aname, struct vattr *attrs,
+ 
+     OutFidStatus = osi_AllocSmallSpace(sizeof(struct AFSFetchStatus));
+     OutDirStatus = osi_AllocSmallSpace(sizeof(struct AFSFetchStatus));
++    memset(&InStatus, 0, sizeof(InStatus));
+ 
+     if ((code = afs_CreateReq(&treq, acred)))
+ 	goto done2;
+diff --git a/src/afs/afs_disconnected.c b/src/afs/afs_disconnected.c
+index 04107f0..cfd5d63 100644
+--- a/src/afs/afs_disconnected.c
++++ b/src/afs/afs_disconnected.c
+@@ -671,6 +671,7 @@ afs_ProcessOpCreate(struct vcache *avc, struct vrequest *areq,
+     tname = afs_osi_Alloc(AFSNAMEMAX);
+     if (!tname)
+ 	return ENOMEM;
++    memset(&InStatus, 0, sizeof(InStatus));
+ 
+     code = afs_GetParentVCache(avc, 0, &pdir_fid, tname, &tdp);
+     if (code)
+diff --git a/src/afs/afs_pioctl.c b/src/afs/afs_pioctl.c
+index 0c96172..19a4865 100644
+--- a/src/afs/afs_pioctl.c
++++ b/src/afs/afs_pioctl.c
+@@ -2051,6 +2051,7 @@ DECL_PIOCTL(PSetVolumeStatus)
+     AFS_STATCNT(PSetVolumeStatus);
+     if (!avc)
+ 	return EINVAL;
++    memset(&storeStat, 0, sizeof(storeStat));
+ 
+     tvp = afs_GetVolume(&avc->f.fid, areq, READ_LOCK);
+     if (tvp) {
+diff --git a/src/afs/afs_segments.c b/src/afs/afs_segments.c
+index 1ea3311..2dd89cf 100644
+--- a/src/afs/afs_segments.c
++++ b/src/afs/afs_segments.c
+@@ -55,6 +55,7 @@ afs_StoreMini(struct vcache *avc, struct vrequest *areq)
+ 	tlen = avc->f.truncPos;
+     avc->f.truncPos = AFS_NOTRUNC;
+     avc->f.states &= ~CExtendedFile;
++    memset(&InStatus, 0, sizeof(InStatus));
+ 
+     do {
+ 	tc = afs_Conn(&avc->f.fid, areq, SHARED_LOCK, &rxconn);
+diff --git a/src/bucoord/commands.c b/src/bucoord/commands.c
+index a1c1385..531c3c5 100644
+--- a/src/bucoord/commands.c
++++ b/src/bucoord/commands.c
+@@ -219,6 +219,7 @@ EvalVolumeSet2(struct bc_config *aconfig,
+     *avols = (struct bc_volumeDump *)0;
+     bulkentries.nbulkentries_len = 0;
+     bulkentries.nbulkentries_val = 0;
++    memset(&attributes, 0, sizeof(attributes));
+ 
+     /* For each of the volume set entries - collect the volumes that match it */
+     for (tve = avs->ventries; tve; tve = tve->next) {
+diff --git a/src/libadmin/vos/afs_vosAdmin.c b/src/libadmin/vos/afs_vosAdmin.c
+index bed8c49..557feb9 100644
+--- a/src/libadmin/vos/afs_vosAdmin.c
++++ b/src/libadmin/vos/afs_vosAdmin.c
+@@ -1199,6 +1199,7 @@ GetServerRPC(void *rpc_specific, int slot, int *last_item,
+     bulkaddrs addr_multi;
+     int i;
+ 
++    memset(&m_attrs, 0, sizeof(m_attrs));
+     /*
+      * Check to see if this is a multihomed address server
+      */
+diff --git a/src/libadmin/vos/vsprocs.c b/src/libadmin/vos/vsprocs.c
+index 060cbf2..2fb11de 100644
+--- a/src/libadmin/vos/vsprocs.c
++++ b/src/libadmin/vos/vsprocs.c
+@@ -3621,6 +3621,7 @@ UV_SyncServer(afs_cell_handle_p cellHandle, struct rx_connection *server,
+ 
+     noError = 1;
+     arrayEntries.nbulkentries_val = 0;
++    memset(&attributes, 0, sizeof(attributes));
+ 
+     /* Set up attributes to search VLDB  */
+     attributes.server = ntohl(rx_HostOf(rx_PeerOf(server)));
+diff --git a/src/libafscp/afscp_file.c b/src/libafscp/afscp_file.c
+index c71f601..a3985e3 100644
+--- a/src/libafscp/afscp_file.c
++++ b/src/libafscp/afscp_file.c
+@@ -124,6 +124,7 @@ afscp_PWrite(const struct afscp_venusfid * fid, const void *buffer,
+     off_t filesize;
+     time_t now;
+ 
++    memset(&sst, 0, sizeof(sst));
+     vol = afscp_VolumeById(fid->cell, fid->fid.Volume);
+     if (vol == NULL) {
+ 	afscp_errno = ENOENT;
+diff --git a/src/venus/afsio.c b/src/venus/afsio.c
+index c6de1e3..409b397 100644
+--- a/src/venus/afsio.c
++++ b/src/venus/afsio.c
+@@ -898,6 +898,7 @@ writeFile(struct cmd_syndesc *as, void *unused)
+     /* stdin on Windows defaults to _O_TEXT mode */
+     _setmode(0, _O_BINARY);
+ #endif
++    memset(&InStatus, 0, sizeof(InStatus));
+ 
+     CmdProlog(as, &cell, &realm, &fname, &sSynthLen);
+     afscp_AnonymousAuth(1);
+diff --git a/src/venus/cacheout.c b/src/venus/cacheout.c
+index 2a390ad..3d44fd9 100644
+--- a/src/venus/cacheout.c
++++ b/src/venus/cacheout.c
+@@ -71,6 +71,7 @@ ListServers(void)
+     char hoststr[16];
+     ListAddrByAttributes m_attrs;
+ 
++    memset(&m_attrs, 0, sizeof(m_attrs));
+     memset(&addrs, 0, sizeof(addrs));
+     memset(&spare3, 0, sizeof(spare3));
+     code =
+diff --git a/src/vlserver/vlclient.c b/src/vlserver/vlclient.c
+index c7bfa7e..b29c5d8 100644
+--- a/src/vlserver/vlclient.c
++++ b/src/vlserver/vlclient.c
+@@ -824,6 +824,7 @@ handleit(struct cmd_syndesc *as, void *arock)
+ 
+ 			printf("[0x%x %u] (special multi-homed entry)\n",
+ 			       *addrp, *addrp);
++			memset(&attrs, 0, sizeof(attrs));
+ 			attrs.Mask = VLADDR_INDEX;
+ 			mhaddrs.bulkaddrs_val = 0;
+ 			mhaddrs.bulkaddrs_len = 0;
+@@ -899,6 +900,7 @@ handleit(struct cmd_syndesc *as, void *arock)
+ 
+ 			addrs2.bulkaddrs_val = 0;
+ 			addrs2.bulkaddrs_len = 0;
++			memset(&attrs, 0, sizeof(attrs));
+ 			attrs.Mask = VLADDR_INDEX;
+ 			attrs.index = (base * VL_MHSRV_PERBLK) + index;
+ 			code =
+diff --git a/src/volser/vos.c b/src/volser/vos.c
+index 3922a93..28b63a3 100644
+--- a/src/volser/vos.c
++++ b/src/volser/vos.c
+@@ -4506,7 +4506,7 @@ ListVLDB(struct cmd_syndesc *as, void *arock)
+     aserver = 0;
+     apart = 0;
+ 
+-    attributes.Mask = 0;
++    memset(&attributes, 0, sizeof(attributes));
+     lock = (as->parms[3].items ? 1 : 0);	/* -lock   flag */
+     quiet = (as->parms[4].items ? 1 : 0);	/* -quit   flag */
+     sort = (as->parms[5].items ? 0 : 1);	/* -nosort flag */
+@@ -5009,7 +5009,7 @@ UnlockVLDB(struct cmd_syndesc *as, void *arock)
+ 
+     apart = -1;
+     totalE = 0;
+-    attributes.Mask = 0;
++    memset(&attributes, 0, sizeof(attributes));
+ 
+     if (as->parms[0].items) {	/* server specified */
+ 	aserver = GetServer(as->parms[0].items->data);
+diff --git a/src/volser/vsprocs.c b/src/volser/vsprocs.c
+index 845af9e..6ef13d7 100644
+--- a/src/volser/vsprocs.c
++++ b/src/volser/vsprocs.c
+@@ -6999,6 +6999,7 @@ UV_SyncServer(afs_uint32 aserver, afs_int32 apart, int flags, int force)
+     aconn = UV_Bind(aserver, AFSCONF_VOLUMEPORT);
+ 
+     /* Set up attributes to search VLDB  */
++    memset(&attributes, 0, sizeof(attributes));
+     attributes.server = ntohl(aserver);
+     attributes.Mask = VLLIST_SERVER;
+     if ((flags & 1)) {

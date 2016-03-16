@@ -24,6 +24,61 @@ When sending sensitive information, we ask that you encrypt it
 with PGP.
 
 <hr>
+<a name="OPENAFS-SA-2016-002"></a>
+<h2>OPENAFS-SA-2016-002 - various client functionality leak stack data onto the wire in the clear</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Last Update:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Severity:</th><td>Low</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.16 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2016-002.patch">
+  https://www.openafs.org/security/openafs-sa-2016-002.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2016-002-master.patch">
+  https://www.openafs.org/security/openafs-sa-2016-002-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2016-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2016-002.txt</a>
+</td></tr>
+</table>
+<p>Several structures used as RPC arguments contain a mask field that indicates
+which other fields should be processed by the server.  In some cases, fields
+not not indicated in the mask were transmitted over the network without
+being written to, exposing the previous contents of that memory.  Both
+kernel stack and userspace stack data can be leaked.
+<p>
+
+<a name="OPENAFS-SA-2016-001"></a>
+<h2>OPENAFS-SA-2016-001 - ptserver allows foreign users to create arbitrary groups</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Last Update:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.16 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2016-001.patch">
+  https://www.openafs.org/security/openafs-sa-2016-001.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2016-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2016-001-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2016-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2016-001.txt</a>
+</td></tr>
+</table>
+<p>Access checking for the creation of new entries in the PRDB was performed
+in multiple steps.  For requests coming from foreign users, the creator ID
+was replaced with the ID of system:administrators after the first round of
+checks, letting requests from foreign users bypass most other access control
+checks and create groups as if they were an administrator.
+<p>
+This vulnerability is being tracked as CVE-2016-2860.<p>
+
 <a name="OPENAFS-SA-2015-007"></a>
 <h2>OPENAFS-SA-2015-007 "Tattletale" - Rx ACK packets leak plaintext of previous packets</h2>
 <table border=0>

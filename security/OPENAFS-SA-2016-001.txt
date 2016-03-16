@@ -1,0 +1,166 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory 2016-001
+
+Topic: ptserver allows foreign users to create arbitrary groups
+       CVE-2016-2860
+       
+
+Issued: 16 March, 2016
+Affected: OpenAFS server versions prior to 1.6.17
+          IBM AFS servers
+
+Foreign users can bypass access controls to create groups as
+system:administrators, including in the user namespace and the
+system: namespace.
+
+SUMMARY
+=======
+
+The Kerberos authentication protocol is used to control access to
+AFS services.  Modern AFS deployments use Kerberos 5, though previous
+versions used Kerberos 4 or a native service similar to Kerberos 4
+called kaserver, but both Kerberos 4 and kaserver are now considered
+insecure.  Kerberos deployments ("realms") are usually local to a
+single site, but two realms can cooperate and create a cross-realm
+key or keys that permit users from one site to authenticate to
+services in the other.
+
+The AFS-3 protocol includes a facility wherein users from foreign realms
+can be added to groups and other access control lists in a local cell;
+these foreign users are identified by the '@' symbol in their names,
+separating the username and the name of the remote realm.  In order to
+avoid burdening the local cell administrators with having to manually
+create entries in the protection database for foreign users, a
+self-registration facility is present whereby a CreateUser request
+can be authenticated by the foreign principal whose user entry is being
+created.
+
+A bug in the implementation of the self-service registration caused
+requests from foreign users to be handled as if the creator and owner
+were system:administrators.  Since administrators can bypass many
+restrictions on group creation, this allows the foreign user to create
+groups in the system: namespace or user namespace (with no colon), and
+the group quota is not enforced for these requests.
+
+The newly created groups are owned by system:administrators, so the
+attacker is not able to modify them after creation.
+
+IMPACT
+======
+
+An AFS cell that authenticates against a Kerberos realm that
+shares crossrealm keys with any other Kerberos realms is vulnerable
+to the creation of AFS groups with arbitrary names.  Any attacker
+that controls a Kerberos principal in the foreign realm can create
+an arbitrary number of AFS groups, owned by system:administrators.
+These groups can conflict with the namespace used for user names,
+and with the system:-prefixed family of groups.
+
+The attacker only needs a Kerberos principal from the foreign
+realm; a foreign user entry in the protection database is not needed.
+Running the ptserver in the "restricted mode" that prevents creation
+of cross-realm users will not mitigate the attack.
+
+Sites that use a separate service to manage users and groups that
+synchronizes with AFS, such as the Moira server that emerged from
+Project Athena, are subject to additional impact.  An attacker that
+knows the name of a group (or user) that will be created in the future
+can pre-create the new group and cause a disparity between AFS and the
+external service.  Several variations are possible once the AFS group
+for the target name has been created, such as creating an
+attacker-controlled list of a different name, renaming it to the target
+name, adding attacker-controlled entities to the list via the external
+service, then renaming the list away again.  This will leave the
+attacker-controlled entities in the AFS group for when the external
+service attempts to create the AFS group for the target name,
+potentially leading to a loss of confidentiality or integrity if the
+target group is later used for access control.
+
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.17 are affected.  Additionally,
+all releases of AuriStor prior to 0.110 are affected, and IBM AFS
+is affected.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all servers
+to OpenAFS 1.6.17 (Unix).  Additionally, patch files are provided for
+the master and 1.6.x branches.
+
+The ptservers will need to be restarted in order for the fixes to
+take effect.
+
+DETAILS
+=======
+
+IBM AFS 3.3 supported foreign-cell users as a build-time option, on by
+default.  The foreign user entries in the prdb could be created via a
+self-service RPC, as the ptserver would detect the foreign principal
+authenticating the request and allow creation of the remote user entry
+from an otherwise unprivileged principal.  By the time of the OpenAFS
+1.0 import, this code was enabled unconditionally.
+
+In order to have these foreign user prdb entries recorded with actual
+extant creator and owner IDs, the creator and owner fields are set to
+system:administrators when the creator in the request is from a foreign
+realm, since the ID for the user being created is not known until later
+in the process.  This is the first step in the newEntry() RPC handler,
+and unfortunately, the creator reassignment is done for all requests
+from foreign principals, not just self-creation requests.
+
+The next step in creating a new PTS entry is to call the function
+CreateOK(), which performs some basic sanity checking on the type of
+request being handled, but does not perform detailed access control
+checking.  This function restricts the creation of user entries to
+administrators, but permits all authenticated users to create group
+entries, since each user has their own group namespace.  When the
+newEntry() RPC handler calls CreateOK() for requests from foreign users,
+the parameter for "acting as administrator" is set only when the name to
+be created matches the name of the authenticated client, permitting user
+self-registration but denying other user creation requests.  All group
+creation requests succeed at the time of CreateOK(), since regular users
+are normally allowed to create groups in their own namespace or other
+users' namespaces, so processing continues with  the creator and owner
+IDs set to system:administrators.
+
+Later on, when actually creating the group, access checks intended to
+restrict user-created groups to the group namespace of their owner are
+bypassed because the creator has been set to system:administrators.
+Administrators are permitted to create groups with arbitrary names, and
+are not charged a group quota when creating groups.
+
+As a result, unprivileged foreign users can create groups that
+unprivileged users from the local cell would not be able to create.  It
+is not possible for foreign users to create user entries.  It is not
+possible for foreign users to create groups with specific group IDs,
+since creation of groups with specific ID values occurs via a different
+RPC that does not permit foreign-user registration.
+
+ACKNOWLEDGEMENTS
+================
+
+This issue was reported by Peter Iannucci.
+
+The patches were developed by Jeffrey Altman and Benjamin Kaduk, with
+assistance from Jeffrey Hutzelman and Simon Wilkinson.  Jeffrey
+Hutzelman and Nickolai Zeldovich contributed to the analysis of the bug.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQGgBAEBCgAGBQJW6W7gAAoJECjZpvNk63USNAIMIIs3iGhv4VsDgSQIQNN4ZnVW
++TUQIxhNES2nffmeyw9rIyCaYMj4INMPhG0exAYH7rpJpWCUPSeVYRXYP3PD9GLk
+l6ndlPyVptx6Y4TbEHZKcKRDL2xRbIutugFBtfFs7QDg6I8jOmOO/ub0au5FC3u5
+WrwbQMnCwSpMbqE+J3Jay6KSZAOScYvFvQE/ngwXsCCo/QHQWpyc42cVa7MnQN93
+P5tqDTT2jt9kjnPZbqu/EF33Uixv/P8/cyOBr63USoLtfq3fxDtg+fKo5WEoRti9
+EH1AG9SqndF6NQf1TZ0AzlbEVCrM6+mM8OmYO6aRACy5xHkM6ewZqW3ligKA8VZn
+MblvYFi293uPZkzM4+OiJIVUmT9GqG9TpQsPd++9+gMLPro5mINtcYnyvOMMZaIV
+Tgeb/nI9dK+9+fxkeI82OdPlZf264MhRaQ5gVMOqB+FslTMtxqI7vserCQk5iIw1
+eazw1GacdSJKpl6mCTl8LcRJNs9udWD67y1HJjKX0soSmvI=
+=3fck
+-----END PGP SIGNATURE-----
