@@ -1,0 +1,89 @@
+diff --git a/src/afs/afs_buffer.c b/src/afs/afs_buffer.c
+index 7d856c2..83a30fc 100644
+--- a/src/afs/afs_buffer.c
++++ b/src/afs/afs_buffer.c
+@@ -368,6 +368,8 @@ afs_newslot(struct dcache *adc, afs_int32 apage, struct buffer *lp)
+ 	AFS_STATS(afs_stats_cmperf.bufFlushDirty++);
+     }
+ 
++    /* Zero out the data so we don't leak something we shouldn't. */
++    memset(lp->data, 0, AFS_BUFFER_PAGESIZE);
+     /* Now fill in the header. */
+     lp->fid = adc->index;
+     afs_copy_inode(&lp->inode, &adc->f.inode);
+diff --git a/src/bozo/bos.c b/src/bozo/bos.c
+index b65961d..8d0cb68 100644
+--- a/src/bozo/bos.c
++++ b/src/bozo/bos.c
+@@ -1562,9 +1562,18 @@ SalvageCmd(struct cmd_syndesc *as, void *arock)
+ 
+ 	for (i = MRAFS_OFFSET; i < ADDPARMOFFSET; i++) {
+ 	    if (as->parms[i].items) {
+-		printf(" %s only possible for MR-AFS fileserver.\n",
+-		       as->parms[i].name);
+-		stop = 1;
++		if (i == MRAFS_OFFSET + 5) { /* -salvagedirs */
++		    if (as->parms[4].items) { /* -all */
++			mrafsParm.Optsalvagedirs = 1; /* Let this one slide. */
++		    } else {
++			printf(" -salvagedirs only possible with -all.\n");
++			stop = 1;
++		    }
++		} else {
++		    printf(" %s only possible for MR-AFS fileserver.\n",
++			   as->parms[i].name);
++		    stop = 1;
++		}
+ 	    }
+ 	}
+ 	if (stop)
+diff --git a/src/dir/buffer.c b/src/dir/buffer.c
+index 3379159..e4df861 100644
+--- a/src/dir/buffer.c
++++ b/src/dir/buffer.c
+@@ -11,6 +11,7 @@
+ #include <afs/param.h>
+ 
+ 
++#include <string.h>
+ #include <stdlib.h>
+ #include <lock.h>
+ 
+@@ -449,7 +450,9 @@ DNew(afs_int32 *fid, int page)
+     }
+     ObtainWriteLock(&tb->lock);
+     tb->lockers++;
++    memset(tb->data, 0, BUFFER_PAGE_SIZE);  /* don't leak other people's dirs */
+     ReleaseWriteLock(&afs_bufferLock);
+     ReleaseWriteLock(&tb->lock);
++
+     return tb->data;
+ }
+diff --git a/src/dir/dir.c b/src/dir/dir.c
+index 51a78eb..1b8ec5c 100644
+--- a/src/dir/dir.c
++++ b/src/dir/dir.c
+@@ -206,7 +206,9 @@ Delete(void *dir, char *entry)
+     DRelease(previtem, 1);
+     index = DVOffset(firstitem) / 32;
+     nitems = NameBlobs(firstitem->name);
+-    DRelease(firstitem, 0);
++    /* Clear entire DirEntry and any DirXEntry extensions */
++    memset(firstitem, 0, nitems * sizeof(*firstitem));
++    DRelease(firstitem, 1);
+     FreeBlobs(dir, index, nitems);
+     return 0;
+ }
+diff --git a/src/vol/salvaged.c b/src/vol/salvaged.c
+index cd33dab..014fcd3 100644
+--- a/src/vol/salvaged.c
++++ b/src/vol/salvaged.c
+@@ -206,6 +206,8 @@ handleit(struct cmd_syndesc *as, void *arock)
+ 	OKToZap = 1;
+     if (as->parms[6].items)	/* -rootinodes */
+ 	ShowRootFiles = 1;
++    if (as->parms[7].items)	/* -salvagedirs */
++	RebuildDirs = 1;
+     if (as->parms[8].items)	/* -ForceReads */
+ 	forceR = 1;
+     if ((ti = as->parms[9].items)) {	/* -Parallel # */

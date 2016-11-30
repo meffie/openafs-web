@@ -1,0 +1,120 @@
+OpenAFS Security Advisory 2016-003
+
+Topic: directory information leakage
+
+Issued: 30 November, 2016
+Affected: OpenAFS client versions 1.0 through 1.6.19
+	  OpenAFS servers versions 1.0 through 1.6.19
+
+The contents of OpenAFS directories may be leaked in client cache partitions,
+in fileserver vice partitions, and on the wire for certain RPCs.
+
+SUMMARY
+=======
+
+Due to incomplete initialization or clearing of reused memory, OpenAFS
+directory objects are likely to contain "dead" directory entry information.
+This extraneous information is not active - that is, it is logically invisible
+to the fileserver and client. However, the leaked information is physically
+visible on the fileserver vice partition, on the wire in FetchData replies and
+other RPCs, and on the client cache partition. This constitutes a leak of
+directory information.
+
+CHARACTERIZATION
+================
+
+There are three different kinds of "dead" residual directory entry leaks, each
+with a different cause:
+
+1. There may be partial name data after the null terminator in a live directory
+entry. This happens when a previously used directory entry becomes free, then
+is reused for a directory entry with a shorter name.
+
+2. "Dead" directory entries are left uncleared after an object is deleted or
+renamed.
+
+3. Residual directory entries may be inadvertently picked up when a new
+directory is created or an existing directory is extended by a 2kiBi page.
+This happens because the fileserver shares a buffer pool for directories of all
+AFS users, but does not clear each buffer upon reuse. This is the most severe
+problem because the leaked information may be from other directories or volumes
+for which the AFS user is not authorized.
+
+IMPACT
+======
+
+This is primarily a client and fileserver issue.  However, directory
+information is also manipulated or transmitted by volume operations (e.g.,
+dump, restore, release) and by salvage operations.  The fixes included in this
+advisory address all known issues with directory information leaks.
+
+The leaked information may only be viewed via access to at least one of the
+following:
+- unencrypted OpenAFS wire traffic
+- a fileserver vice partition
+- a cache manager cache partition
+
+Any AFS user authorized to read directories may passively exploit this leak by
+capturing wire traffic or examining his local cache as he/she performs
+authorized reads on existing directories. Any leaked data will be for other
+directories the fileserver had in the buffer pool at the time the authorized
+directories were created or extended.
+
+Any AFS user authorized to write a new directory may actively exploit this leak
+by creating a new directory, flushing cache, then re-reading the newly created
+directory. Any leaked data will be for other directories the fileserver had in
+the buffer pool within the last few seconds. In this way an authorized user may
+sample current fileserver directory buffer contents for as long as he/she
+desires, without being detected.
+
+Directories already containing leaked data may themselves be leaked, leading to
+multiple layers of leaked data propagating with every new or extended
+directory. The names of files and directories are the most obvious source of
+information in this leak, but the FID vnode and uniqueid are leaked as well.
+Careful examination of the sequences of leaked vnode numbers and uniqueids may
+allow an attacker to:
+- Discern each layer of old directories by observing breaks in consecutive runs
+  of vnode and/or uniqueid numbers.
+- Infer which objects may reside on the same volume.
+- Discover the order in which objects were created (vnode) or modified
+  (uniqueid).
+- Know whether an object is a file (even vnode) or a directory (odd vnode).
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.19 are affected.
+
+FIXES
+=====
+
+The OpenAFS project recommends that adminstrators upgrade all fileservers and
+cache managers to OpenAFS 1.6.20 (Unix).  Additionally, patch files are
+provided for the master and 1.6.x branches.  This will prevent new leaks from
+occurring.
+
+We further recommend that adminstrators salvage all volumes with the
+-salvagedirs option, in order to remove existing leaks.
+
+This announcement and code patches related to it may be found on the
+OpenAFS security advisory page at:
+
+  http://www.openafs.org/security/
+
+The main OpenAFS web page is at:
+
+  http://www.openafs.org/
+
+DETAILS
+=======
+
+The fixes ensure that both client and fileserver clear directory entries upon
+deletion, and that the fileserver clears internal directory buffers before
+reuse.  In addition, fixes are included to allow administrators to remove
+existing leaks by salvaging volumes and partitions with the -salvagedirs option,
+
+ACKNOWLEGEMENTS
+===============
+
+This issue was reported by Mark Vitale.
+

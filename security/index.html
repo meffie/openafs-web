@@ -24,6 +24,35 @@ When sending sensitive information, we ask that you encrypt it
 with PGP.
 
 <hr>
+<a name="OPENAFS-SA-2016-003"></a>
+<h2>OPENAFS-SA-2016-003 - directory information leaks</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>30-Nov-2016</td></tr>
+<tr><th align="left">Last Update:</th><td>30-Nov-2016</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.19 .</td></tr>
+  OpenAFS fileserver versions 1.0 through 1.6.19 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2016-003.patch">
+  https://www.openafs.org/security/openafs-sa-2016-003.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2016-003-master.patch">
+  https://www.openafs.org/security/openafs-sa-2016-003-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2016-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2016-003.txt</a>
+</td></tr>
+</table>
+<p>Due to insufficient clearing of directory entries and internal buffers,
+directory information may be leaked over the network, as well as in cache manager
+cache partitions and fileserver vice partitions.  This information may
+include file and directory names, vnode number and uniqueid, and may include
+information from other directories or volumes for which the user is not
+authorized.
+<p>
+
 <a name="OPENAFS-SA-2016-002"></a>
 <h2>OPENAFS-SA-2016-002 - various client functionality leak stack data onto the wire in the clear</h2>
 <table border=0>
