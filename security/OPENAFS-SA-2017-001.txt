@@ -1,0 +1,117 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory 2017-001
+
+Topic: Rx denial of service (assertion failure)
+
+Issued: 05 December, 2017
+Affected: OpenAFS client versions 1.0 through 1.6.21.1
+	  OpenAFS servers versions 1.0 through 1.6.21.1
+
+OpenAFS Rx processes use unchecked transport parameters from Rx
+ack packets, leading to integer underflow and assertion failure.
+
+SUMMARY
+=======
+
+As the AFS protocol evolved over time, various additional fields were
+added to the end of the Rx ack packet structure, including preferred and
+actual MTU values, transmit window size, and number of packets permitted in an
+(Rx) jumbogram.  No validation was performed on most of the received values,
+and a peer that sent a small MTU value would cause an integer underflow when
+computing a (usable) packet size, as a negative size value was converted to a
+(large) unsigned value, which subsequently triggered an assertion failure when
+constructing an outgoing packet on the same connection.
+
+IMPACT
+======
+
+Any Rx exchange involving more than a single request-response pair of
+packets is vulnerable.  This includes a client issuing multiple calls
+to a fileserver on a single connection, long-lived single RPCs such
+as for volume dumps, and certain other Rx usage.  Both clients (including
+Cache Managers) and servers are vulnerable.
+
+The assertion failure terminates the affected process (or causes a
+BUG or panic when the kernel cache manager is affected.  Unauthenticated
+connections can be vulnerable, such as for an anonymous client accessing
+a fileserver (when either peer can trigger the vulnerability in the other).
+If fileserver process(es) are uncleanly terminated during certain volume
+accesses, explicit salvage may be necessary, even for demand-attach fileservers.
+
+It is also possible for the peer to specify a transmit window of zero,
+which could prevent forward progress on the connection and consume
+resources needlessly, though a malicious peer has similar capabilities even in
+the absence of this bug, so the additional impact is minimal.
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.22 are affected.
+
+FIXES
+=====
+
+The OpenAFS project recommends that adminstrators upgrade all servers and
+cache managers to OpenAFS 1.6.22 (Unix).  Additionally, patch files are
+provided for the master, 1.8.x, and 1.6.x branches.  The fix is also included
+as part of the 1.8.0pre3 beta release.
+
+It is necessary to restart processes/cache managers in order for the fixes
+to take effect.
+
+DETAILS
+=======
+
+The AFS protocol is built on top of the Rx transport protocol, which itself
+is built on top of UDP/IP datagrams.  Rx supplies reliable in-order
+delivery and congestion control, using acknowledgment (ack) packets in
+order to communicate to the peer that a given chunk of data has been received,
+and that the peer can advance its window of data to transmit.  As the Rx
+and AFS protocols evolved, the protocol designers realized a need for
+additional information about the peer state; this information was added
+at the end of the Rx ack packet structure.  These fields are each encoded
+on the wire as 32-bit (unsigned) integers and indicate the recommended
+(interface) transmission unit, actual connection maximum transmission unit
+(MTU), transmission window size (number of unacknowledged packets permitted to
+be in-flight), and the number of individual Rx packets to include into an Rx
+jumbogram.  However, the internal fields that store the corresponding values in
+per-connection/per-call data structures use (unsigned) 16-bit fields.
+To further complicate matters, some intermediate calculations are performed
+using the regular C 'int' type, which is a 32-bit signed integer on platforms
+supported by OpenAFS.
+
+The advertised MTU values (in bytes) include the size of the Rx packet header,
+so when determining how much usable space is available in a packet, it is
+common to subtract the size of the Rx header (28 bytes), and C's type
+promotion rules make it easy for this calculation to be perfomed as the 'int'
+type, which admits a negative value.  If the resulting (negative) adjusted MTU
+value is then stored back into a 16-bit unsigned value, the C standard
+specifies that the value 2**16 is repeatedly added to the negative value in
+order to obtain a value that is in the range from 0 to 2**16-1 (inclusive).
+This results in a value between 65508 and 65535 being stored as the effective
+MTU, and subsequently used when calculating if there is sufficient data to fill
+the entire packet being prepared to be sent, in the function
+rxi_PrepareSendPacket().  Since this 65000+-byte value is absurdly large, there
+is never expected to be enough data, and the assertion that the packet will be
+completely filled triggers, causing the application to crash.
+
+ACKNOWLEGEMENTS
+===============
+
+Thanks to the team at AuriStor, Inc. for the detailed report.
+-----BEGIN PGP SIGNATURE-----
+
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAlomtt0ACgkQKNmm82Tr
+dRKxogwfRazpnLtEdI8/uqkyqQIw4Jr+syOQdDKn4a8x3RA7QfomXxnG3Nx6zhSP
+Rn80tHtQX2v7AuQ7gtU8SJ8OzMCiyuPjlYVyqSJNJmLsmDky0vIUfLa75xlPoArP
+25+G3/LVnfOVhRNHQduJOM1hFftYEcH4vZkgwUWyLYAe4ra1k0V7sJP1XzY0b3ZU
+6AWCGO7iCH8XV1J9LaGgzYI7Ef04HZZ12ogoYp4BnhA8O9XuZTbhiLgcFK2nQ3RS
+Qkgg2NNAl9XXctZDeq6+LJgfJP4nbA1tbcprUykOMB/qf5MsuRBXokDRcewiJnLW
+wM8rv0jYFHGLprELESn4q052drnNHgES+r1cyrvdaLv1Vr0Z8//cFdtU0Ikewi1y
+3XqHqw2dzMK994ML1Je6hFDWovK+q0o3ofS5gHqci/a5w991ocLRU5wjvq6KO6V0
+qp5/Tl9+XNoYglEkV3qn8aypWELnRrMxKrnhPfpPqmk5PZSLu7lTcIzyvwF5oSS5
+ubO9VohqhmTILA==
+=AxiL
+-----END PGP SIGNATURE-----
