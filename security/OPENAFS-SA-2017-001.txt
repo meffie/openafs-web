@@ -4,6 +4,7 @@ Hash: SHA512
 OpenAFS Security Advisory 2017-001
 
 Topic: Rx denial of service (assertion failure)
+       CVE-2017-17432
 
 Issued: 05 December, 2017
 Affected: OpenAFS client versions 1.0 through 1.6.21.1
@@ -103,15 +104,15 @@ ACKNOWLEGEMENTS
 Thanks to the team at AuriStor, Inc. for the detailed report.
 -----BEGIN PGP SIGNATURE-----
 
-iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAlomtt0ACgkQKNmm82Tr
-dRKxogwfRazpnLtEdI8/uqkyqQIw4Jr+syOQdDKn4a8x3RA7QfomXxnG3Nx6zhSP
-Rn80tHtQX2v7AuQ7gtU8SJ8OzMCiyuPjlYVyqSJNJmLsmDky0vIUfLa75xlPoArP
-25+G3/LVnfOVhRNHQduJOM1hFftYEcH4vZkgwUWyLYAe4ra1k0V7sJP1XzY0b3ZU
-6AWCGO7iCH8XV1J9LaGgzYI7Ef04HZZ12ogoYp4BnhA8O9XuZTbhiLgcFK2nQ3RS
-Qkgg2NNAl9XXctZDeq6+LJgfJP4nbA1tbcprUykOMB/qf5MsuRBXokDRcewiJnLW
-wM8rv0jYFHGLprELESn4q052drnNHgES+r1cyrvdaLv1Vr0Z8//cFdtU0Ikewi1y
-3XqHqw2dzMK994ML1Je6hFDWovK+q0o3ofS5gHqci/a5w991ocLRU5wjvq6KO6V0
-qp5/Tl9+XNoYglEkV3qn8aypWELnRrMxKrnhPfpPqmk5PZSLu7lTcIzyvwF5oSS5
-ubO9VohqhmTILA==
-=AxiL
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAloov/8ACgkQKNmm82Tr
+dRJR8AwfZIzLnMwZ6R7R0t/f/MP5Xh+bKsfWZzLubA73Dl4mK2yGfBQldxjsTbzK
+hh8E+0p0yzHyRJb9PyRdxqsKoyvNNkc7/VvaqZQaYS9v6m2NANvDta0OicOyg+E2
+mGcM5ASYsR8+I7Jyq9Ec9gU2puZstcOTIH+oDYgVQ7HkjMt4UNXQraiOwDjftbjj
+CAXvcCxOFnxMZsd2h/ReEqr8ItcyLYb8GFeCkSSEznqaUJiup3srCtj8JYV79fNU
+IDqC3x9vVJY3nqpHhKG1Cpbcr8dpXHMVGBezvnB24V3vnm6giFihmzc7NNUDK/R4
+4cfsr9qwAtUMJqeAuV74JAg1zOjowL1zRSJy6AOZl864dXOe3/dyGXk5Kmkm816z
+kMExg9Se6eLPrqFf+Pd9jlmAaFd/NjhmA0LS5loV7Vz9e3ky7ZKbIdyAVS//Q5Fp
+GijMAxGU3XwMcKQwINQNxsTZUmC4NRbRM6XBTSaMPAmkRKylrvMhdq9M4mtKlVLe
+MjPuEC/ZVkWljw==
+=K0Uf
 -----END PGP SIGNATURE-----
