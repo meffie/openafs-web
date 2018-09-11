@@ -24,6 +24,93 @@ When sending sensitive information, we ask that you encrypt it
 with PGP.
 
 <hr>
+<a name="OPENAFS-SA-2018-003"></a>
+<h2>OPENAFS-SA-2018-003 - denial of service due to excess resource consumption</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Last Update:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2018-003-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2018-003-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-003-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2018-003-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-003-master.patch">
+  https://www.openafs.org/security/openafs-sa-2018-003-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2018-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2018-003.txt</a>
+</td></tr>
+</table>
+<p>Several data types used as RPC input variables were implemented as unbounded
+array types, limited only by the inherent 32-bit length field to 4GB.
+An unauthenticated attacker could send, or claim to send, large input
+values and consume server resources waiting for those inputs, denying service
+to other valid connections.
+
+<a name="OPENAFS-SA-2018-002"></a>
+<h2>OPENAFS-SA-2018-002 - information leakage from uninitialized RPC output variables</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Last Update:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 ;
+  OpenAFS server versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2018-002-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2018-002-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-002-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2018-002-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-002-master.patch">
+  https://www.openafs.org/security/openafs-sa-2018-002-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2018-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2018-002.txt</a>
+</td></tr>
+</table>
+<p>Several RPC server routines did not fully initialize their output variables
+before returning, leaking memory contents from both the stack and the heap.
+Because the OpenAFS cache manager functions as an Rx server for the AFSCB service,
+clients are also susceptible to information leakage.
+
+<a name="OPENAFS-SA-2018-001"></a>
+<h2>OPENAFS-SA-2018-001 - volume-level data replacement via unauthenticated butc connections</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Last Update:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS butc server versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2018-001-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2018-001-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-001-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2018-001-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2018-001-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2018-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2018-001.txt</a>
+</td></tr>
+</table>
+<p> The backup tape controller process accepts incoming RPCs but does not
+require (or allow for) authentication of those RPCs.  Handling those RPCs
+results in operations being performed with administrator credentials,
+including dumping/restoring volume contents and manipulating the backup
+database.
+
 <a name="OPENAFS-SA-2017-001"></a>
 <h2>OPENAFS-SA-2017-001 - remote triggered rx assertion failure</h2>
 <table border=0>
@@ -867,6 +954,21 @@ for this vulnerability.
   <td>2017-001</td><td>05-Dec-2017</td><td>05-Dec-2017</td>
   <td>High</td><td>1.0-1.6.21.1</td>
   <td><a href="#OPENAFS-SA-2017-001">remotely triggerable assertion failure in Rx</a></td>
+</tr>
+<tr>
+  <td>2018-001</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>High</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
+  <td><a href="#OPENAFS-SA-2018-001">volume-level-data-replacement via unauthenticated butc connections</a></td>
+</tr>
+<tr>
+  <td>2018-002</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>Medium</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
+  <td><a href="#OPENAFS-SA-2018-002">information leakage from uninitialized RPC output variables</a></td>
+</tr>
+<tr>
+  <td>2018-002</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>Medium</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
+  <td><a href="#OPENAFS-SA-2018-003">denial of service due to excess resource consumption</a></td>
 </tr>
 </table>
 

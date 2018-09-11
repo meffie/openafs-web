@@ -1,0 +1,146 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory 2018-001
+
+Topic: Volume-level data replacement via unauthenticated butc connections
+
+Issued: 11 September, 2018
+Affected: OpenAFS server versions 1.0 through 1.6.22.4, and 1.8.0 through 1.8.1.1
+
+The backup tape controller process accepts incoming RPCs but does not
+require (or allow for) authentication of those RPCs.  Handling those RPCs
+results in operations being performed with administrator credentials,
+including dumping/restoring volume contents and manipulating the backup
+database.
+
+SUMMARY
+=======
+
+Initial versions of the AFS protocol were developed with no authentication
+at all, and at the time that the in-tree backup system was developed, all
+volume operations were performed unauthenticated.  This meant that the
+backup tape controller (butc) was also performing unauthenticated volume
+operations when dumping/restoring volumes to/from tape.  Eventually,
+authentication was introduced throughout the protocol, and the model for
+butc became that butc runs locally on the device with the tape drive, and
+is run by a user with administrative tokens (to perform those volume
+operations) or to authenticate with the cell-wide key (via -localauth).
+However, because "the machine with the tape drive" was not expected to be
+a regular fileserver, the architecture did not assume that butc would have
+access to a stable long-term key, and so butc remained in the original state
+of not performing authentication for incoming RPCs.  Because butc still must
+run with some form of administrative credentials in order to perform volume
+operations, it is in effect by design a mechanism for privilege escalation,
+allowing unauthenticated users to perform various actions with administrative
+privilege.
+
+IMPACT
+======
+
+Any cell with a butc process that is accessible to untrusted users is
+vulnerable.  The in-tree backup suite is not believed to be in common
+use, so in that sense the impact is limited.  Applying a strict firewall
+policy can also reduce the exposure of the butc to untrusted input and
+provide some level of remediation.  However, for vulnerable cells, the
+impact is quite severe: an unauthenticated, anonymous attacker can
+create volume dumps with contents of their own choosing, create and restore
+(potentially modified) backup database contents, and restore volumes from
+those modified backup database.  These restored volumes can be at different
+paths/names than the corresponding dumps were created from (and can be
+restored on top of existing volumes), and the backup database can be restored
+to a pristene state after volume modifications.  Taken together, this allows
+the attacker to silently replace the contents of arbitrary volumes, leaving
+the backup database unchanged.  (Volume-header timestamps would still provide
+some indication of when a volume was changed, though this is difficult to
+distinguish from normal operations.)
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.23 are affected, as are OpenAFS
+1.8.0, 1.8.1, and 1.8.1.1.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all servers
+to the 1.8.2 or 1.6.23 releases.  It is necessary to restart the butc
+processes in order for the fixes to take effect.
+
+It may be possible to sufficiently mitigate the risk of attack by using
+a firewall to partition the butc and trusted backup clients from all
+untrusted network traffic.  The butc listens on one of a range of ports
+starting at 7025, controlled by the "port offset" parameter.  Consult your
+firewall documentation for how to block unwanted traffic.
+
+DETAILS
+=======
+
+The backup tape controller (butc) is a program that runs locally on the
+machine with the tape drive being used for backups (or, if the XBSA TSM
+integration is in use, with the TSM credentials).  It must function as
+both an Rx client (to interact with the backup database and volume
+and volume location servers), and as an Rx server (to accept commands for
+what to backup and/or restore).  In modern deployments, modifying the
+backup database and performing volume dumps/restores require administrative
+privilege, which can be supplied either via a user's token or the cell-wide
+key (using butc -localauth).  However, because only the cell-wide key can
+be used to authenticate incoming RPCs, and it was envisioned that butc would
+be run using a user's token (which is potentially less trusted than the
+cell-wide key, and more auditable), no facility was provided to authenticate
+the incoming RPCs to the butc.
+
+The butc, acting as a privilege escalation service from unauthenticated
+inbound RPCs to privileged administrative operations, allows for a great
+deal of operations, including snapshotting/restoring the backup database,
+dumping volume contents to the local tape device, restoring contents from
+the local tape device to arbitrary volume names, and the like.  There are
+many damaging workflows available to an attacker given this privilege
+escalation service, too many to reasonably enumerate here.  Perhaps the
+most damaging is:
+
+  0. Wait until there are no active backups
+  1. Save the current backup database
+  2. Write one or more volume dumps containing arbitrary contents to the tape device
+  3. Restore the volume dump just written to a volserver potentially overwriting
+     the original volume contents
+  4. Erase the dump from the tape device
+  5. Restore the backup database to its prior state removing the history
+
+which effectively allows for the (unauthenticated) attacker to replace the
+contents of an arbitrary volume with attacker-controlled data, leaving no
+traces of the changes in the backup system's state.
+
+In modern deployments, the division between using a user's token and using
+the cell-wide key to authenticate the butc's outgoing connections has largely
+evaporated, with nearly all sites running butc with access to the cell-wide
+key.  Combining this fact with the internet security model of an untrusted
+network, it is clear that the cell-wide key should be used to authenticate
+the incoming connections to the butc in the vast majority of cases.
+The patch for this vulnerability in effect makes this the default behavior --
+if the -localauth flag is used, authentication will be required for incoming
+connections, and if the -localauth flag is not used, the butc will by default
+not start, since that is an insecure configuration.  The new butc
+- -allow_unauthenticated flag will revert either case back to the (insecure)
+historical behavior.
+
+ACKNOWLEDGMENTS
+===============
+
+Thanks to Jeffrey Altman for the detailed report and suggested
+mitigation strategies.
+-----BEGIN PGP SIGNATURE-----
+
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluX/SUACgkQKNmm82Tr
+dRKNAgwghH0AoFXn81vTYePxdSbw+dpsPRQKjbhZ9DenJxsyGhYRO5Hhn1LNwsu7
+TQc1aoFLc8GTjKL4NGt3W/apyFZoxyhf6bTgZ6mVE/ISJSBDIktli8us092xQvJB
+W9AtOrSjkNQ0y2ZsBjtqaUQVgyHzVo8idwxkjdmHqfGP15THBrqRgt20OZM4xFPz
+3vDHI1yhm6JBTE7fBmzvXuM4Z694UUaVoFxNPwJXamPpW7TFOQ5WIQYz/zJjopUG
+7nGtMccfuRpDYC26mesiSWAl6d+tcIAnMxUo0lv58Vj5hSHizcCcNwHcOx88FfL2
+nGZeJHxoOsAAb6ZPOe98x/o/eYG+T4Ep9fiREvfhh9piyrprF5BS+moflFQdQr+3
+DPh6v9E4BSG4mOSPRXKnII4uuU4Pou8s44WUlqqs6h+VS0isHSl3xWgZZGgEbnJ5
+vMs7Ilz18AKZ33xsdUFlhUoI+pXK3RcdGhETWGa6cpTJknBLjhL2RgG882+7xJ8c
+U8Yiwxrq4mgJXQ==
+=pv5u
+-----END PGP SIGNATURE-----

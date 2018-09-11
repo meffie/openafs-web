@@ -1,0 +1,167 @@
+diff --git a/src/WINNT/afsd/cm_callback.c b/src/WINNT/afsd/cm_callback.c
+index 3ef9f258b4..0118f7b3fa 100644
+--- a/src/WINNT/afsd/cm_callback.c
++++ b/src/WINNT/afsd/cm_callback.c
+@@ -1243,6 +1243,7 @@ SRXAFSCB_TellMeAboutYourself( struct rx_call *callp,
+     }
+ 
+     /* return all network interface addresses */
++    memset(addr, 0, sizeof(*addr));
+     addr->numberOfInterfaces = cm_noIPAddr;
+     addr->uuid = cm_data.Uuid;
+     for ( i=0; i < cm_noIPAddr; i++ ) {
+diff --git a/src/afs/afs_callback.c b/src/afs/afs_callback.c
+index 51b6b61d35..6a95ed491e 100644
+--- a/src/afs/afs_callback.c
++++ b/src/afs/afs_callback.c
+@@ -309,6 +309,7 @@ SRXAFSCB_GetLock(struct rx_call *a_call, afs_int32 a_index,
+     XSTATS_START_CMTIME(AFS_STATS_CM_RPCIDX_GETLOCK);
+ 
+     AFS_STATCNT(SRXAFSCB_GetLock);
++    memset(a_result, 0, sizeof(*a_result));
+     nentries = sizeof(ltable) / sizeof(struct ltable);
+     if (a_index < 0 || a_index >= nentries+afs_cellindex) {
+ 	/*
+@@ -1632,6 +1633,7 @@ SRXAFSCB_TellMeAboutYourself(struct rx_call *a_call,
+     ObtainReadLock(&afs_xinterface);
+ 
+     /* return all network interface addresses */
++    memset(addr, 0, sizeof(*addr));
+     addr->numberOfInterfaces = afs_cb_interface.numberOfInterfaces;
+     addr->uuid = afs_cb_interface.uuid;
+     for (i = 0; i < afs_cb_interface.numberOfInterfaces; i++) {
+diff --git a/src/budb/procs.c b/src/budb/procs.c
+index 51f3102636..de55834475 100644
+--- a/src/budb/procs.c
++++ b/src/budb/procs.c
+@@ -437,6 +437,7 @@ FillDumpEntry(struct ubik_trans *ut, dbadr da, void *rock)
+     struct budb_dumpEntry *dump = (struct budb_dumpEntry *)rock;
+     struct dump d, ad;
+ 
++    memset(dump, 0, sizeof(*dump));
+     if (dbread(ut, da, &d, sizeof(d)))
+ 	return BUDB_IO;
+     dump->id = ntohl(d.id);
+diff --git a/src/butc/tcprocs.c b/src/butc/tcprocs.c
+index 9efcbe89a5..c1177808c1 100644
+--- a/src/butc/tcprocs.c
++++ b/src/butc/tcprocs.c
+@@ -388,6 +388,9 @@ STC_ReadLabel(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *task
+ {
+     afs_int32 code;
+ 
++    memset(label, 0, sizeof(*label));
++    /* Synchronous, so no "real" ID; don't send stack garbage on the wire */
++    *taskId = 0;
+ #ifdef xbsa
+     if (CONF_XBSA)
+ 	return (TC_BADTASK);	/* ReadLabel does not apply if XBSA */
+diff --git a/src/butc/tcstatus.c b/src/butc/tcstatus.c
+index 1bd280f2d1..3f98ba31d5 100644
+--- a/src/butc/tcstatus.c
++++ b/src/butc/tcstatus.c
+@@ -56,14 +56,13 @@ STC_GetStatus(struct rx_call *call, afs_uint32 taskId,
+     statusP ptr;
+     int retval = 0;
+ 
++    memset(statusPtr, 0, sizeof(*statusPtr));
+     if (callPermitted(call) == 0)
+ 	return (TC_NOTPERMITTED);
+ 
+     lock_Status();
+     ptr = findStatus(taskId);
+     if (ptr) {
+-	/* strcpy(statusPtr->status, ptr->status); */
+-
+ 	strcpy(statusPtr->taskName, ptr->taskName);
+ 	strcpy(statusPtr->volumeName, ptr->volumeName);
+ 	statusPtr->taskId = ptr->taskId;
+@@ -143,6 +142,7 @@ STC_ScanStatus(struct rx_call *call, afs_uint32 *taskId,
+     statusP ptr = 0;
+     dlqlinkP dlqPtr;
+ 
++    memset(statusPtr, 0, sizeof(*statusPtr));
+     if (callPermitted(call) == 0)
+ 	return (TC_NOTPERMITTED);
+ 
+diff --git a/src/kauth/kaprocs.c b/src/kauth/kaprocs.c
+index e2c058c6fb..faaad1ee6d 100644
+--- a/src/kauth/kaprocs.c
++++ b/src/kauth/kaprocs.c
+@@ -1695,6 +1695,7 @@ kamListEntry(struct rx_call *call,
+     afs_int32 caller;
+     struct kaentry tentry;
+ 
++    memset(name, 0, sizeof(*name));
+     COUNT_REQ(ListEntry);
+     if ((code = InitAuthServ(&tt, LOCKREAD, this_op)))
+ 	return code;
+diff --git a/src/ptserver/ptprocs.c b/src/ptserver/ptprocs.c
+index f9f48fc689..2303c7399d 100644
+--- a/src/ptserver/ptprocs.c
++++ b/src/ptserver/ptprocs.c
+@@ -687,7 +687,7 @@ idToName(struct rx_call *call, idlist *aid, namelist *aname)
+ 	return 0;
+     if (size < 0 || size > INT_MAX / PR_MAXNAMELEN)
+ 	return PRTOOMANY;
+-    aname->namelist_val = (prname *) malloc(size * PR_MAXNAMELEN);
++    aname->namelist_val = (prname *) calloc(size, PR_MAXNAMELEN);
+     aname->namelist_len = 0;
+     if (aname->namelist_val == 0)
+ 	return PRNOMEM;
+@@ -1647,6 +1647,7 @@ put_prentries(struct prentry *tentry, prentries *bulkentries)
+     entry = (struct prlistentries *)bulkentries->prentries_val;
+     entry += bulkentries->prentries_len;
+ 
++    memset(entry, 0, sizeof(*entry));
+     entry->flags = tentry->flags >> PRIVATE_SHIFT;
+     if (entry->flags == 0) {
+ 	entry->flags =
+@@ -1661,7 +1662,6 @@ put_prentries(struct prentry *tentry, prentries *bulkentries)
+     entry->nusers = tentry->nusers;
+     entry->count = tentry->count;
+     strncpy(entry->name, tentry->name, PR_MAXNAMELEN);
+-    memset(entry->reserved, 0, sizeof(entry->reserved));
+     bulkentries->prentries_len++;
+     return 0;
+ }
+diff --git a/src/ubik/vote.c b/src/ubik/vote.c
+index e4fbdef219..b2d7c00997 100644
+--- a/src/ubik/vote.c
++++ b/src/ubik/vote.c
+@@ -412,6 +412,7 @@ SVOTE_Debug(struct rx_call * rxcall, struct ubik_debug * aparm)
+     /* fill in the basic debug structure.  Note the the RPC protocol transfers,
+      * integers in host order. */
+ 
++    memset(aparm, 0, sizeof(*aparm));
+     aparm->now = FT_ApproxTime();
+     aparm->lastYesTime = ubik_lastYesTime;
+     aparm->lastYesHost = ntohl(lastYesHost);
+diff --git a/src/volser/volprocs.c b/src/volser/volprocs.c
+index d6cd1047a6..e4a459c107 100644
+--- a/src/volser/volprocs.c
++++ b/src/volser/volprocs.c
+@@ -432,6 +432,7 @@ SAFSVolPartitionInfo(struct rx_call *acid, char *pname, struct diskPartition
+     struct diskPartition64 *dp = (struct diskPartition64 *)
+ 	malloc(sizeof(struct diskPartition64));
+ 
++    memset(partition, 0, sizeof(*partition));
+     code = VolPartitionInfo(acid, pname, dp);
+     if (!code) {
+ 	strncpy(partition->name, dp->name, 32);
+@@ -451,6 +452,7 @@ SAFSVolPartitionInfo64(struct rx_call *acid, char *pname, struct diskPartition64
+ {
+     afs_int32 code;
+ 
++    memset(partition, 0, sizeof(*partition));
+     code = VolPartitionInfo(acid, pname, partition);
+     osi_auditU(acid, VS_ParInfEvent, code, AUD_STR, pname, AUD_END);
+     return code;
+@@ -2851,6 +2853,7 @@ VolMonitor(struct rx_call *acid, transDebugEntries *transInfo)
+ 	goto done;		/*no active transactions */
+     for (tt = allTrans; tt; tt = nt) {	/*copy relevant info into pntr */
+ 	nt = tt->next;
++	memset(pntr, 0, sizeof(*pntr));
+         VTRANS_OBJ_LOCK(tt);
+ 	pntr->tid = tt->tid;
+ 	pntr->time = tt->time;
