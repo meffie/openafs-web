@@ -4,6 +4,7 @@ Hash: SHA512
 OpenAFS Security Advisory 2018-001
 
 Topic: Volume-level data replacement via unauthenticated butc connections
+       CVE-2018-16947
 
 Issued: 11 September, 2018
 Affected: OpenAFS server versions 1.0 through 1.6.22.4, and 1.8.0 through 1.8.1.1
@@ -132,15 +133,15 @@ Thanks to Jeffrey Altman for the detailed report and suggested
 mitigation strategies.
 -----BEGIN PGP SIGNATURE-----
 
-iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluX/SUACgkQKNmm82Tr
-dRKNAgwghH0AoFXn81vTYePxdSbw+dpsPRQKjbhZ9DenJxsyGhYRO5Hhn1LNwsu7
-TQc1aoFLc8GTjKL4NGt3W/apyFZoxyhf6bTgZ6mVE/ISJSBDIktli8us092xQvJB
-W9AtOrSjkNQ0y2ZsBjtqaUQVgyHzVo8idwxkjdmHqfGP15THBrqRgt20OZM4xFPz
-3vDHI1yhm6JBTE7fBmzvXuM4Z694UUaVoFxNPwJXamPpW7TFOQ5WIQYz/zJjopUG
-7nGtMccfuRpDYC26mesiSWAl6d+tcIAnMxUo0lv58Vj5hSHizcCcNwHcOx88FfL2
-nGZeJHxoOsAAb6ZPOe98x/o/eYG+T4Ep9fiREvfhh9piyrprF5BS+moflFQdQr+3
-DPh6v9E4BSG4mOSPRXKnII4uuU4Pou8s44WUlqqs6h+VS0isHSl3xWgZZGgEbnJ5
-vMs7Ilz18AKZ33xsdUFlhUoI+pXK3RcdGhETWGa6cpTJknBLjhL2RgG882+7xJ8c
-U8Yiwxrq4mgJXQ==
-=pv5u
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluYc2wACgkQKNmm82Tr
+dRKWgAwcD178ANyWV+3DG5KR2kKXhMZWFAtfdM/Tqi581zOHuBNxZ+WROX3qE80P
+RUU96sb/Kyob8jZigwbdi94T8AoojsfX3SYsfdzsPU2grobAoiGJu3J9x8Dj0kVb
+VEXypDrdgNlSF4wH9hDneDkroqqYRItq0SEVAEMO9DTzu03Wm1n+lELpYJaeTqNu
+psm1ZcGIbEn/99X9sXjxG7q80DeaWbScSdtUdNJC3SMwnHxwg1dLygLSqY4LSKQ8
+ulKqGxK1UjwT0Roe6O4hZJvUF7DMvon2jIDvPcp+feUIxwOFqjEu0r/A2GfuqQg3
+7chUFuBU19ACyxJbeIm+zObhRda7H+J3W1bpfl81uiilDMUbxuqizL+dReg1kIYr
+CbCLFmrTPqRddSGAA/TKdaZxHNF7u1YrVewfajlAW1zD7WC/ZaTZ+befabPkrjxH
+E/2AU3Fad0oaNKE4+Zs0iml8ffPoNEeWM5FG1ExEcZ4boi3ZjOJX1y3y229SNXZQ
+0+2YnOiugWsqsw==
+=/7YM
 -----END PGP SIGNATURE-----

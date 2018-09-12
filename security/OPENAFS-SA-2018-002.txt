@@ -5,6 +5,7 @@ OpenAFS Security Advisory-2018-002
 
 Issued: 11 September, 2018
 Topic: information leakage from uninitialized RPC output variables
+       CVE-2018-16948
 Affected: OpenAFS client versions 1.0 through 1.6.22.4 and 1.8.0 through 1.8.1.1
           OpenAFS server versions 1.0 through 1.6.22.4 and 1.8.0 through 1.8.1.1
 
@@ -152,15 +153,15 @@ ACKNOWLEDGMENTS
 Thanks to Mark Vitale for the detailed report and patches.
 -----BEGIN PGP SIGNATURE-----
 
-iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluX/TYACgkQKNmm82Tr
-dRK0nwwgtW7cPNtKHwUl274oPIkTMXQScaOc2dScUN1nORP3LVCnp6wv9nXvaQCC
-E0bhfhRbvlK8Ifmmo4hzN2UDgeah318KL46DB/MP76TU4Lpgoic0vhHb6UlNvTWV
-F1x6nZbbaiOnd4xWw9gf1/oZfZMxqj02GVAvHNSB3Ks3ORv3ZQ6LZUQsXBdpOO0d
-8RQ9VO7Dpza+2CTlIbmjcAnp51Pg3+R/sSrU3NwO1tqjpVs3A418T1XqDKKuXodW
-kzkjT/78AnIst0zm7vYTFGH2m5eagYy62BrRNnNd8+KvpLZm20O5SG8Q4qJX2/Ht
-vHE5F5rPdE6H1GL1kCJlX98E3O+v2KLjsuaY2W3CbJGtEeG3tpvwbmiAcTKWdFJj
-VcMMq30bIEQa5v8jNs8GhvVsvSGecvDy/kNXzWJSt/CliCxCs/8bnQ83OSntbx34
-vcKY6Cr+5/HDK3dlOgf9XhgKbKxNRly0bNU5JKf0cxDn8ouCa1VGWJIcb90jf8t9
-hfEJnxe1Dg6/AQ==
-=rTMI
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluYc3IACgkQKNmm82Tr
+dRJIAQwdG2iL9vsw8udigmTw2Ps8hx7iQLNc2NocHgmqB4mR0+FvARuQQDtkeSD7
+PVl48MfGgAwGQtddVd57Mh3pEcTxTNyb3F8nYoz5Wk9YAo1s64W2UgA3mKJ8ii9V
+LuyrjJLE7HKlJyLYWMl99c+HiD5CNSsgye5p27KQRsPutfzjDnoh80v2CaTxPTKp
+KdMnrxkmXNf0UwhIfo36yr/jVKVfuyVh11stvcMCt9lyi5yhCY7cCammiNW/ZZm1
+nxuG7ZKRtGzOJu8PsK8+ZS4tOR15f6BGA4umPjWmsfbrei/fNN+XyWhqAHwmpjik
+tIjYGkYE0TwqBTCrlMWj/KnmyrC9JD3SYdr146/mSfo/gj866+ZVDAZUSYitVLPc
+12MeTvxK22jh1vaSwtuY+PTQfOpq4r8FpL0u3SqTYcHMM/sIcHZ0JOzluFhVEs/n
+aPZhdW9iKqDC0SSRicg3poAL6SXfmj+WC5AOBN55Lpxl6civKcJi34PBoVRMJbgN
+wCchBKdCbAurSg==
+=PCzu
 -----END PGP SIGNATURE-----

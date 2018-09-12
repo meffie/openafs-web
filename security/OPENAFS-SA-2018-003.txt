@@ -5,6 +5,7 @@ OpenAFS Security Advisory-2018-003
 
 Issued: 11 September, 2018
 Topic: Denial of service due to excess resource consumption
+       CVE-2018-16949
 Affected: OpenAFS server versions 1.0 through 1.6.22.4 and 1.8.0 through 1.8.1.1
 
 Several data types used as RPC input variables were implemented as unbounded
@@ -106,15 +107,15 @@ ACKNOWLEDGMENTS
 Thanks to Mark Vitale for the detailed report and patches.
 -----BEGIN PGP SIGNATURE-----
 
-iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluX/TwACgkQKNmm82Tr
-dRI1dAwfXCFDC6APwDkjIp3/uP6hHSxcbYl1ehKJn5oamhIKYUz1s3UNTaAoa0P+
-mDgd6xQ5itUi7X2JS5Ip8RWU6L2YsCgGXoEyIw0qgJF8tDT+qb2JAQQJ3AjtV8qP
-ehJxYEJ8OoIoVRjsL6dKNSgy2PfqbjEmgTgUbSTggQewe7FUNB6F90ELfAOdkyRD
-wSH6gPXxXKalRP5XdEP0ctWq9f8p6nyEAWdMADxL+Wg0nykCb7dEhw+ktmEZ3IJi
-yiPeqTF6G5Pj9S93WW3N+DD7qBjh/8bJGQKeFmUe2F+vKX/oQ1woJS8ww8ZxgGu2
-5mH1VglfCgg3Ibdg9ODKLb2HNFD8dlJT7CHlm581ScWbQZta9Mp2TjiTZphc8qlZ
-+8XaT8OHYhArEir7InpcLhnNmVzveGCp4foL5RLvp2D3d52iCsOVmpVlxQQLM/Hl
-mJ3EcsapC8+2Fig8NQNG5c1BTdEpqpjeSeX2ockDFH43Y5i+s8P5r/NqlKgfuKW6
-gEazcle9sUsU+g==
-=LvrE
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluYc2EACgkQKNmm82Tr
+dRInbgweOdkDDnCJmaMH5faXS7ID58v+QWb8cJR3fKMNjaAJIldOF/lqFOtMptxb
+MmndpTDAkMyZ2nB6RZPNqyCLw29anVV4glueOFlYaFOZNG7sdCG0C7mWrov4oljN
++Zi+7SETBcsFNUHfYcCgwokouDdp7ADOUDNF+9i+Ho+w0BosBR/9p64qRAzbOIiG
+gUdVKjed+o+sOAfVsURQMo+foA6YuxDKYheB5zfVMmQWnw7nrieBG7ZU2yJOPE5N
+9DGPt15Z4qNdLXvyTSotNEpUkVi45MdKAq61yDHYlrgZURKGqYbxkrNMrikDggsY
+lbPV0/r2mCa/lM5713OHRySWJ34sM8Mh4VCUsxoyRUfikTzyNa0iIjbdi3NbVKZb
+TSfgPlrt/rYCxYuwvAYUd2P8DBQYvqfqlIqLBunnr93Ke3Br7r6YLcBAUGWGwrH0
+n6DqpBAGHWl1fhX5488Y50oPCrKEdKnFOLy97QiH+361Zes5RX9C8+Luhtr6BbeV
+oGdU2zc+tL2dXA==
+=YfnF
 -----END PGP SIGNATURE-----
