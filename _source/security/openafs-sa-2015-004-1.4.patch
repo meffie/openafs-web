@@ -1,0 +1,45 @@
+From ba697d90cdc19fc8722cc2672d2620d5c99f3201 Mon Sep 17 00:00:00 2001
+From: Daria Brashear <shadow@your-file-system.com>
+Date: Wed, 8 Jul 2015 14:16:41 -0400
+Subject: [PATCH 4/6] afs: Clear pioctl data interchange buffer before use
+
+Avoid leaking data in pioctl interchange buffers; clear the memory
+when one is allocated.
+
+FIXES 131892 (CVE-2015-3284)
+
+(cherry picked from commit f6ac8f66d79b8012697500c7d0a72d45e681074a)
+(cherry picked from commit f9fdee28a40f7da0b310a06519a2b1f5e511e76b)
+
+Change-Id: I24a0d2a32f106c966271b6533a0f04f3dcaf9078
+---
+ src/afs/afs_pioctl.c |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+
+diff --git a/src/afs/afs_pioctl.c b/src/afs/afs_pioctl.c
+index ce3e5b3..8c8bf48 100644
+--- a/src/afs/afs_pioctl.c
++++ b/src/afs/afs_pioctl.c
+@@ -1171,6 +1171,11 @@ afs_HandlePioctl(struct vnode *avp, afs_int32 acom,
+     }
+     if (!inData)
+ 	return ENOMEM;
++    if (inSize > AFS_LRALLOCSIZ) {
++	memset(inData, 0, inSize + 1);
++    } else {
++	memset(inData, 0, AFS_LRALLOCSIZ);
++    }	
+     if (inSize > 0) {
+ 	AFS_COPYIN(ablob->in, inData, inSize, code);
+ 	inData[inSize] = '\0';
+@@ -1201,6 +1206,7 @@ afs_HandlePioctl(struct vnode *avp, afs_int32 acom,
+ 	afs_PutFakeStat(&fakestate);
+ 	return ENOMEM;
+     }
++    memset(outData, 0, outSizeMax);
+     outSize = 0;
+     code =
+ 	(*pioctlSw[function]) (avc, function, &treq, inData, outData, inSize,
+-- 
+1.7.1
+

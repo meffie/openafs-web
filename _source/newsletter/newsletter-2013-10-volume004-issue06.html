@@ -1,0 +1,485 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>OpenAFS Newsletter, Volume 4, Issue 6, October 2013</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#openafs_newsletter__volume_4__issue_6__october_2013">OpenAFS Newsletter, Volume 4, Issue 6, October 2013</a></li>
+	<ul>
+
+		<li><a href="#_afs_introduction">/afs/Introduction</a></li>
+		<li><a href="#update_from_the_openafs_foundation_working_group">Update from the OpenAFS Foundation working group</a></li>
+		<ul>
+
+			<li><a href="#update">Update</a></li>
+			<li><a href="#details">Details</a></li>
+			<li><a href="#next_steps_and_how_you_can_help">Next steps and how you can help</a></li>
+		</ul>
+
+		<li><a href="#did_you_know____krb5_auth_dialog">Did You Know... krb5-auth-dialog</a></li>
+		<li><a href="#single_des">Single DES</a></li>
+		<li><a href="#openafs_1_4_end_of_life_process">OpenAFS 1.4 end-of-life process</a></li>
+		<li><a href="#did_you_know____openafs_rhel_yum_repositories">Did You Know... OpenAFS RHEL YUM Repositories</a></li>
+		<li><a href="#openafs_tuning__part_ii___vicepx_partitions">OpenAFS tuning, part II: /vicepX partitions</a></li>
+		<ul>
+
+			<li><a href="#a_few_words_of_caution">A few words of caution</a></li>
+			<li><a href="#_vicepx_filesystem_tuning">/vicepX filesystem tuning</a></li>
+			<li><a href="#straightforward_tweaks">Straightforward tweaks</a></li>
+			<li><a href="#when_afs_is_the_same_as_local_disk">When AFS is the same as local disk</a></li>
+			<li><a href="#when_afs_is_different">When AFS is different</a></li>
+			<li><a href="#_vicepx_partitions">/vicepX partitions</a></li>
+			<li><a href="#more_to_come">More to come</a></li>
+		</ul>
+
+		<li><a href="#afs_backup_to_tsm_using_tsmafs">AFS backup to TSM using tsmafs</a></li>
+		<ul>
+
+			<li><a href="#tsm_peculiarities">TSM peculiarities</a></li>
+			<li><a href="#tsmafs_first_steps">Tsmafs first steps</a></li>
+			<li><a href="#using_tabackup">Using tabackup</a></li>
+			<li><a href="#using_tarestore">Using tarestore</a></li>
+			<li><a href="#todo">TODO</a></li>
+			<li><a href="#downloading">Downloading</a></li>
+		</ul>
+
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="openafs_newsletter__volume_4__issue_6__october_2013">OpenAFS Newsletter, Volume 4, Issue 6, October 2013</a></h1>
+<p>
+</p>
+<h2><a name="_afs_introduction">/afs/Introduction</a></h2>
+<p>While long overdue, I am happy to present to you this current edition of the
+OpenAFS newsletter. Valuing quality over quantity, newsletters are released
+when we feel we have quality content for you to peruse. And, we certainly feel that about this edition of the newsletter.</p>
+<p>The world of OpenAFS keeps plowing ahead, as you will read below with announcements concerning the first steps in retiring single DES and the up coming End of Life of the 1.4 series of OpenAFS.</p>
+<p>In addition to our &quot;Did You Know&quot; tidbits, I am excited to present part II of &quot;OpenAFS Tuning&quot; as well as an overview of &quot;tsmafs&quot;, a utility helping one to backup and restore AFS with IBM's Tivoli Storage Manager (TSM).</p>
+<p>But first, the newsletter starts off with an update from the OpenAFS
+Foundation working group.</p>
+<p>Feedback, suggestions for future case studies and stories, and offers of contributing pieces should be emailed to: <a href="mailto:newsletter@openafs.org">newsletter@openafs.org</a></p>
+<p>Happy Fall!</p>
+<p>
+</p>
+<h2><a name="update_from_the_openafs_foundation_working_group">Update from the OpenAFS Foundation working group</a></h2>
+<pre>
+	Roman Mitz
+	Senior Manager, Systems Development
+	Carnegie Mellon University</pre>
+<p>
+</p>
+<h3><a name="update">Update</a></h3>
+<ul>
+<li><strong><a name="a_signed_agreement_has_been_struck_between_ibm_and_representatives_of_the_creation_committee" class="item">A signed agreement has been struck between IBM and representatives of the Creation Committee.</a></strong>
+
+</li>
+<li><strong><a name="our_lawyers_reviewed_then_submitted_the_incorporation_papers_for_the_openafs_foundation_inc" class="item">Our lawyers reviewed, then submitted the incorporation papers for The OpenAFS Foundation, Inc.</a></strong>
+
+</li>
+<li><strong><a name="the_foundation_has_been_created" class="item">The foundation has been created.</a></strong>
+
+</li>
+<li><strong><a name="a_bank_account_has_been_opened" class="item">A bank account has been opened.</a></strong>
+
+</li>
+<li><strong><a name="years" class="item">All funds remaining from previous years (not dedicated to the OpenAFS Workshops) have been transferred into the new bank account.</a></strong>
+
+</li>
+<li><strong><a name="working_on_filing_non_profit_status_with_the_irs" class="item">Working on filing non-profit status with the IRS.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="details">Details</a></h3>
+<ul>
+<li><strong><a name="todd_has_been_instrumental_in_facilitating_the_complicated_process_of_getting_a_signed_agreement_and_of_having_ibm_agree_that_we_may_use_the_terms_afs_and_openafs_in_the_name_and_description_of_the_foundation_this_was_a_critical_step_in_preventing_potential_legal_issues_over_naming_and_terminology_in_the_future_which_many_of_us_had_been_fearing_and_hoping_to_avoid_future_agreements_covering_other_aspects_will_likely_have_to_be_forged_but_the_first_step_has_been_done_successfully" class="item">Todd has been instrumental in facilitating the complicated process of getting a signed agreement and of having IBM agree that we may use the terms &quot;AFS&quot; and &quot;OpenAFS&quot; in the name and description of the Foundation.  This was a critical step in preventing potential legal issues over naming and terminology in the future, which many of us had been fearing and hoping to avoid.  Future agreements covering other aspects will likely have to be forged, but the first step has been done successfully.</a></strong>
+
+</li>
+<li><strong><a name="the_firm_s_team_reviewed_what_our_group_had_compiled_to_date_as_required_materials_going_into_the_application_package_for_the_foundation_of_the_foundation_openafs_foundation_inc_is_now_incorporated_and_marked_as_non_profit_to_be_in_the_incorporation_categorization_this_means_that_the_foundation_now_exists_as_a_legal_independent_entity_for_the_purposes_of_the_incorporation_all_five_of_us_had_to_be_listed_as_preliminary_directors_but_we_will_hand_over_this_role_when_the_first_true_board_members_have_been_chosen" class="item">The firm's team reviewed what our group had compiled to-date as required materials going into the application package for the foundation of the Foundation.  OpenAFS Foundation, Inc., is now incorporated and marked as non-profit-to-be in the incorporation categorization.  This means that the Foundation now exists as a legal, independent entity.  For the purposes of the incorporation, all five of us had to be listed as preliminary directors, but we will hand over this role when the first true board members have been chosen.</a></strong>
+
+</li>
+<li><strong><a name="also_roman_opened_an_independent_bank_account_for_the_foundation_with_the_pnc_bank_as_the_minimal_number_of_authorized_signors_should_be_two_the_pittsburgh_location_was_the_logical_choice" class="item">Also, Roman opened an independent bank account for the Foundation with the PNC Bank.  As the minimal number of authorized signors should be two, the Pittsburgh location was the logical choice.</a></strong>
+
+</li>
+<li><strong><a name="all_moneys_previously_donated_to_the_cause_of_openafs_were_transferred_from_the_previous_account_at_cmu_into_the_new_bank_account_funds_for_the_current_openafs_workshops_are_kept_separately_in_that_existing_organization_we_are_happy_that_we_could_meet_the_fiscal_year_deadline_by_carnegie_mellon_and_all_went_smoothly_these_moneys_are_now_available_to_the_foundation_as_operating_funds" class="item">All moneys previously donated to the cause of OpenAFS were transferred from the previous account at CMU into the new bank account.  Funds for the current OpenAFS Workshops are kept separately in that existing organization.  We are happy that we could meet the fiscal year deadline by Carnegie Mellon, and all went smoothly.  These moneys are now available to the Foundation as operating funds.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="next_steps_and_how_you_can_help">Next steps and how you can help</a></h3>
+<ul>
+<li><strong><a name="the_creation_committee_after_having_procured_a_tax_id_for_the_newly_incorporated_foundation_will_need_to_compile_the_packet_of_materials_supporting_our_application_for_official_non_profit_status_with_the_irs_it_is_the_irs_that_awards_this_status_if_our_application_is_approved_if_the_approval_fails_we_will_have_the_opportunity_to_improve_the_organization_and_or_application_and_re_try_at_a_later_date" class="item">The Creation Committee, after having procured a tax ID for the newly incorporated Foundation, will need to compile the packet of materials supporting our application for official non-profit status with the IRS.  It is the IRS that awards this status, if our application is approved; if the approval fails, we will have the opportunity to improve the organization and/or application and re-try at a later date.</a></strong>
+
+</li>
+<li><strong><a name="board" class="item">In the not too distant future, the preliminary board (i.e. Our Creation Committee) wants to hand over the baton to the initial Board of Directors.  Thus, we are seeking individuals with a proven track record of business success and with the good connections.  You may help us with suggestions or volunteering; resumes would be most helpful.  The Creation Committee can then contact viable candidates and invite them to serve pro-bono on our initial Board of Directors.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="did_you_know____krb5_auth_dialog">Did You Know... krb5-auth-dialog</a></h2>
+<p>Krb5-auth-dialog is a nifty little application running in the Gnome desktop notification tray. Krb5-auth-dialog can auto renew Kerberos tickets, list existing Kerberos tickets, obtain new Kerberos tickets (via a single click), notify the user when Kerberos tickets are about to finally expire, and via a plugin also obtain and renew AFS tokens when obtaining or renewing Kerberos tickets. The application icon changes from a normal key when one's tickets/tokens are valid and auto-renewable to a key icon with a yellow exclamation when tickets/tokens are close to expiring to a key icon with a red X when tickets/tokens have finally expired.</p>
+<p>At the Cornell NanoScale Facility, we now use the gui krb5-auth-dialog for GUI logins (replacing krenew, which is now only used for ssh logins) to display to the user his or her Kerberos ticket (and AFS token) status.</p>
+<p>Krb5-auth-dialog's home page is at <a href="https://honk.sigxcpu.org/piki/projects/krb5-auth-dialog/">https://honk.sigxcpu.org/piki/projects/krb5-auth-dialog/</a> . Please note that any version included with your favorite linux distribution may not include the AFS plugin.</p>
+<p>
+</p>
+<h2><a name="single_des">Single DES</a></h2>
+<p>Until OpenAFS 1.6.5/1.4.15, a major requirement of running an OpenAFS cell was
+for the afs/cellname Kerberos principal to use single DES encryption of its
+Kerberos tickets. Single DES has been long known to be weak, but for historical
+reasons OpenAFS had continued to only support the DES encryption algorithm.</p>
+<p>It was recently demonstrated that &quot;the small size of the DES key space permits an attacker to brute force a cell's service key ... in under 1 day at a cost of around $100 using publicly available services&quot;. Once the key is compromised, the attacker can &quot;forge traffic from any user within the cell.&quot; Including the AFS super user.</p>
+<p>Enter rxkad-k5 and rxkad-kdf.</p>
+<p>Rxkad-k5 adds support to OpenAFS for non-DES encryption of the afs/cellname
+Kerberos principal's ticket. The administrator can use any encryption type
+available to the KDC. However, the kerberos session key is still encrypted with
+single DES.</p>
+<p>Rxkad-kdf allows one to completely disable single DES on the KDC. With Rxkad-kdf, the Kerberos session keys are also no longer DES encrypted.</p>
+<p>Once all OpenAFS server and clients are updated to 1.6.5, 1.4.15, or 1.7.26 on Windows and once rxkad-k5 and rxkad-kdf have been properly enabled and deployed on the OpenAFS servers (and afs/cellname Kerberos principal), the administrator can safely disable single DES on the KDC.</p>
+<p>However, one should note that even with single DES completely disabled, communications encrypted between OpenAFS clients and servers still use single DES (the single DES key is derived from the stronger encryption types).</p>
+<p>Additional documentation is available on the OpenAFS security advisories page at <a href="http://www.openafs.org/security">http://www.openafs.org/security</a>. See advisory OPENAFS-SA-2013-003.</p>
+<p>This first major step in elimination of single DES is an exciting and positive
+move forward for OpenAFS.</p>
+<p>
+</p>
+<h2><a name="openafs_1_4_end_of_life_process">OpenAFS 1.4 end-of-life process</a></h2>
+<p>OpenAFS 1.6.0 was released in September 2011, and since that time, the
+OpenAFS community has focused on pushing the 1.6 series forward. The
+OpenAFS project now considers 1.6 superior in terms of stability and
+reliability for every AFS user and administrator.</p>
+<p>Effective immediately, there will be no new tarball releases of 1.4.</p>
+<p>For any future security updates to 1.4, the OpenAFS project will only
+provide individual source-code patches. After May 4th, 2014, no
+security patches will be issued for 1.4.</p>
+<p>We encourage all sites to upgrade to the OpenAFS 1.6 series.</p>
+<p>-the OpenAFS gatekeepers</p>
+<p>
+</p>
+<h2><a name="did_you_know____openafs_rhel_yum_repositories">Did You Know... OpenAFS RHEL YUM Repositories</a></h2>
+<p>If you use RedHat Enterprise Linux or Fedora Linux, you probably install the RPM packages for OpenAFS. Instead of downloading and creating your own local repository of OpenAFS RPMs, you can make use of 3rd party repositories or make use of the existing repositories directly off of the OpenAFS website.</p>
+<p>One third party source is elrepo.org at <a href="http://elrepo.org/tiki/tiki-index.php">http://elrepo.org/tiki/tiki-index.php</a></p>
+<p>To use the openafs.org website directly, you only need a working repository configuration file for YUM. Two good sources for the 1.6.5 release of OpenAFS are at:</p>
+<p><a href="https://wiki.ncsa.illinois.edu/display/ITS/OpenAFS+Install+via+RPM+for+RHEL+6">https://wiki.ncsa.illinois.edu/display/ITS/OpenAFS+Install+via+RPM+for+RHEL+6</a></p>
+<p>and</p>
+<p><a href="https://confluence.cornell.edu/display/CNF/Installing+AFS">https://confluence.cornell.edu/display/CNF/Installing+AFS</a></p>
+<p>
+</p>
+<h2><a name="openafs_tuning__part_ii___vicepx_partitions">OpenAFS tuning, part II: /vicepX partitions</a></h2>
+<pre>
+	Andrew Deason
+	Senior Software Engineer, Sine Nomine Associates</pre>
+<p>In our last installment of the this series ( <a href="http://www.openafs.org/pages/newsletter/newsletter-2013-03-volume004-issue05.html#openafs_tuning__part_i__fileservers__general">http://www.openafs.org/pages/newsletter/newsletter-2013-03-volume004-issue05.html#openafs_tuning__part_i__fileservers__general</a> ), we explored some of the solutions to
+the more serious fileserver performance problems I've seen at various sites. Now
+we'll start moving into tips for more modest improvements; while these
+improvements are minor compared to the first installment, they are generally
+more applicable to more sites, so it's more likely that each tip is relevant to
+you.</p>
+<p>For this specific installment, we'll be looking at tips related to the /vicepX
+partitions on fileservers. This includes a few specific tweaks, and some
+information about how /vicepX partitions are used.</p>
+<p>As always, this article does not cover anywhere near all possible
+performance-related options or tweaks. Stay tuned for more installments to
+learn more.</p>
+<p>
+</p>
+<h3><a name="a_few_words_of_caution">A few words of caution</a></h3>
+<p>It can be helpful to just go looking around in /vicepX to get a better
+understanding of what goes on behind the scenes. You can see how the fileserver
+interacts with what files by using the <em>strace/truss</em> utilities and by looking at the fileserver's file
+descriptor table ( <em>lsof</em> on linux). However, if you do go looking around in /vicepX, <strong>do NOT modify anything in there in any way. Do not modify any data, do not move files around, and do not even chmod/chown anything</strong>. Doing any of those can cause data loss or
+cause a volume to become unusable; if you accidentally do something like that,
+you should probably salvage the partition to try to correct any breakage.</p>
+<p>This installment assumes you are using &quot;namei&quot; fileservers. Fileservers using
+the &quot;inode&quot; storage backend are beyond the scope of this article, and are
+relatively uncommon these days. If you are not sure which you are using, you're
+probably using &quot;namei&quot;. While &quot;inode&quot; servers are actually faster, making them
+work becomes more difficult as time goes on, and I personally have not had to
+deal with any &quot;inode&quot;-specific issues in some time. Some parts of this
+installment may be completely wrong for &quot;inode&quot; servers.</p>
+<p>
+</p>
+<h3><a name="_vicepx_filesystem_tuning">/vicepX filesystem tuning</a></h3>
+<p>Since various systems and filesystems vary so much, we cannot hope to provide
+exact commands or configuration directives to implement some of these
+recommendations. Since this is more of a high-level guide, some tips may mention
+optimizing for large files, or optimizing for reading/writing in certain sized
+chunks. If no more detail is provided, it is up to you to figure out how to do
+that for your particular system.</p>
+<p>
+</p>
+<h3><a name="straightforward_tweaks">Straightforward tweaks</a></h3>
+<p>Most systems have a way of mounting a /vicepX partition with the 'noatime'
+option, to turn off updating the 'atime' status information whenever a file is
+accessed. This is generally a good idea for any filesystem, unless you have some
+application that requires 'atime's to be correct. OpenAFS
+servers never pay attention to atime, so feel free to turn it off.</p>
+<p>Some filesystems, such as Linux's ext* filesystems, have the option of turning
+on or off directory indexing. Regardless of the directory structure inside
+volumes, the directories inside /vicepX can get quite large, and OpenAFS almost
+always looks up files directly (instead of traversing directory contents). So,
+if given a choice, you should turn on directory indexing (so that /vicepX file
+accesses are faster).</p>
+<p>On systems that have a configurable Directory Name Lookup Cache (DNLC) size
+(such as Solaris), you may want to increase the DNLC size from the default,
+since the fileserver will cause a lot of lookups in /vicepX if you have a lot
+of files. On Solaris, you can check the DNLC hit rate with:</p>
+<pre>
+	$ vmstat -s | grep lookups 572512236 total name lookups (cache hits 95%)</pre>
+<p>and the DNLC size can be changed by altering the 'ncsize' kernel parameter.</p>
+<p>
+</p>
+<h3><a name="when_afs_is_the_same_as_local_disk">When AFS is the same as local disk</a></h3>
+<p>One question that I hear often when talking about performance is &quot;What workload
+should I assume when tuning vice partitions?&quot; The easiest answer to this is that
+you should generally tune the filesystems the same as if you were accessing your
+files on local disk, without AFS.</p>
+<p>There are many filesystem and mount options not covered here that are not really
+specific to AFS. For example, increasing the commit interval on Linux may
+improve performance, but may cause you to lose data that was written longer ago
+than the commit interval during an unclean shutdown. That may or may not be
+acceptable to you, but it doesn't have much to do with whether you're running
+AFS or just using local disk. Many options are similar.</p>
+<p>When tuning the filesystem for file size and access patterns, many things are
+also still the same for AFS as local disk. Regular files in AFS are stored
+inside /vicepX as entire regular files, so there is not much special about
+these files.  That is, if you put a PNG file inside a volume in AFS, there will
+be a file inside /vicepX on the relevant fileserver that will be that exact PNG
+file. The filename will be different, and the file will be inside a
+weird-looking directory structure, but the file contents themselves are
+identical.</p>
+<p>So, this means if you have a volume with lots of tiny files, the /vicepX
+partition for that volume ideally would be optimized for lots of tiny files. If
+you have huge files, the /vicepX partition should be optimized for huge files.</p>
+<p>
+</p>
+<h3><a name="when_afs_is_different">When AFS is different</a></h3>
+<p>However, of course, there are some differences between accessing files on local
+disk and accessing files in AFS via a fileserver. One difference is that,
+currently, directories are stored in /vicepX as regular files that are
+relatively small (between 2KB and about 2MB, depending on how many directory
+entries the directory has). One such &quot;directory&quot; file will exist for every
+directory in the volume, which you may want to consider if optimizing the
+/vicepX filesystem for file size. This may be slightly different than
+optimizing a directory tree on a regular filesystem, since some filesystem
+implementations may behave slightly differently when modifying/accessing
+directory objects vs plain files. If you have a volume full of mountpoints or
+symlinks, keep in mind that each mountpoint or symlink is also stored as a very
+small file on the fileserver.</p>
+<p>Another difference is file access patterns. Obviously, file server access
+patterns will be different due not only to the caching nature of AFS but also
+due to the differing directory structure on disk. We almost never walk the
+directory structure (walking only occurs during salvaging and certain 'vos'
+operations); even if a client runs 'ls -lR', this still results in just reading
+regular files and in regular directory lookup operations (since our directory
+objects are stored in regular files, and processed by clients).</p>
+<p>For considering block sizes / record sizes / etc, the actual sizes used by
+client application <code>read()</code> and <code>write()</code> calls don't usually matter. At least
+current Unix OpenAFS clients will only ever read or write to regular files on
+the fileserver a <em>chunksize</em> at a time (assuming the file is at least as large
+as a chunk). So, if a client is configured with a 1 MB chunksize, the client
+will only write to files 1 MB at a time. If you don't have any control over
+clients, modern Unix clients will typically default to between 256 KB and 1 MB
+(or as low as 8 KB for memcache clients).</p>
+<p>Within that chunksize limit, the fileserver will issue individual <code>read()</code> or
+<code>write()</code> calls in <em>-sendsize</em> chunks. That is, if -sendsize is set to 32 KB,
+the fileserver will read()/write() up to 32 KB at a time for a single client
+chunk.</p>
+<p>Tuning a filesystem to account for those patterns is specific to each
+filesystem. Since performance bottlenecks are often found in different parts of the AFS environment, depending on usage you may not notice any performance differences when tuning the
+above.</p>
+<p>
+</p>
+<h3><a name="_vicepx_partitions">/vicepX partitions</a></h3>
+<p>Usually, how many /vicepX partitions you have doesn't matter that much, so
+administrators tend to create one per physical disk, or per LUN, or per zpool,
+etc. However, some server operations are limited per partition, due to a
+per-partition lock that needs to be held for some operations. Additionally, if
+you've ever looked inside /vicepX, you may have noticed that there is a header
+file for each volume that exists on the partition; if you have a lot of volumes
+in a partition, the /vicepX directory can grow quite large. So in some cases,
+spreading volumes out amongst more /vicepX partitions can be helpful, even if
+the number of physical disks/LUNs/etc did not change.</p>
+<p>The server operations that may be affected by spreading out volumes over
+/vicepX partitions are: server startup (primarily DAFS), server shutdown
+(primarily DAFS), volume creation, volume deletion, listing volume information,
+and salvages (primarily non-DAFS).  Performance of normal client&lt;-&gt;fileserver
+reads and writes is generally not affected.</p>
+<p>There aren't any easily-viewable metrics to look at to see if you could improve
+performance by changing the number of /vicepX partitions, but it's something to
+keep in mind if the server isn't going as fast as you would like when performing
+lots of the above operations in parallel. You're probably more likely to be
+visibly impacted by DAFS startup time than any of the other operations, so this
+is one likely thing to look at if that startup time is taking too long.</p>
+<p>
+</p>
+<h3><a name="more_to_come">More to come</a></h3>
+<p>That's all for Part II. Look for Part III in a future OpenAFS Newsletter!</p>
+<p>
+</p>
+<h2><a name="afs_backup_to_tsm_using_tsmafs">AFS backup to TSM using tsmafs</a></h2>
+<pre>
+	Anders Magnusson
+	Consultant/Happy Hacker</pre>
+<p>TSM (Tivoli Storage Manager) is a very common backup system from IBM. However, backing up AFS with TSM can be a challenge. There were two main existing ways to backup AFS with TSM backups. The first was to do a &quot;vos dump&quot; that was stored in TSM as one or more files. The second was to use the IBM AFS backup client. The IBM client, however, is only supported on an old version of TSM and also requires an AIX TSM server.</p>
+<p>Neither of these was good enough for us. Hence, we wrote the tsmafs backup client.</p>
+<p>
+</p>
+<h3><a name="tsm_peculiarities">TSM peculiarities</a></h3>
+<p>TSM is quite different in how it works compared to most other backup systems.
+It stores individual files instead of partition dumps and keeps track of
+versions and numbers for each file. This means that an individual user file can
+be directly retrieved out of TSM without the need to restore a parition dump
+first and then extract the file.  This also means that no duplicate data is
+stored in TSM (on file level), since a file that is backed up will not be
+backed up again until it is modified.</p>
+<p>The last version of a file that is backed up is set &quot;Active&quot;, and all older
+versions of the file are set &quot;Inactive&quot;. When a file is deleted from AFS space,
+all versions in TSM are set &quot;Inactive&quot;. Only &quot;Inactive&quot; files are subject to be
+removed from TSM when the time or version is passed.</p>
+<p>TSM uses a hierarchy of four levels to keep track of and to keep files
+together.  This hierarchy must be mapped to the AFS structure in a convenient
+way. Our requirement that AFS volumes must be able to move around servers
+without affecting the backup system resulted in the below schema:</p>
+<pre>
+	TSM name                Normal fileserver       AFS structure
+	-------------------------------------------------------------
+	NODENAME                Server name             &quot;OpenAFS&quot; (can be overridden)
+	FILESPACE               Partition               Cell name (can be overridden)
+	High-level name         Path in partition       Volume name/Path in volume
+	Low-level name          Filename                Filename</pre>
+<p>Using the tsmafs utilties first requires the following steps:</p>
+<p>
+</p>
+<h3><a name="tsmafs_first_steps">Tsmafs first steps</a></h3>
+<ul>
+<li><strong><a name="compile_and_install_tsmafs_on_a_machine_with_the_afs_client" class="item">Compile and install tsmafs on a machine with the AFS client.</a></strong>
+
+</li>
+<li><strong><a name="create" class="item">Create (via the usual tsm tools) an environment that uses <em>password=generate</em>, so that the
+tsmafs programs don't have to care about tsm auth.  Use the same TSM nodename in
+TSM even if you have multiple AFS file servers, so that a moved volume will be
+backed up only once.</a></strong>
+
+</li>
+<li><strong><a name="fetch_an_afs_token_for_an_user_that_has_enough_power_to_read_the_volumes_that_shall_be_backed_up_this_can_be_for_example_a_backup_user_that_belongs_to_the_system_administrators_group" class="item">Fetch an AFS token for an user that has enough power to read the volumes
+that shall be backed up.  This can be, for example, a backup user that belongs to the
+system:administrators group.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="using_tabackup">Using tabackup</a></h3>
+<p>The utility <em>tabackup</em> is used to fetch files out of AFS space and then to store
+those files into TSM.</p>
+<p>Tabackup only reads AFS backup volumes -- it does not create them. So, you must first create your AFS backup volumes with a command such as &quot;vos backupsys&quot;.</p>
+<p>Overview of the (most useful) options to tabackup:</p>
+<ul>
+<li><strong><a name="v_volume" class="item">-v volume</a></strong>
+
+<p>Only backup volume &quot;volume&quot; -- &quot;volume&quot; can contain wildcards, like &quot;staff.r*&quot;,
+and the wildcard globbing uses the same syntax as the shell.  If no volume
+given, take all volumes. Only one -v argument allowed.</p>
+</li>
+<li><strong><a name="s_server" class="item">-s server</a></strong>
+
+<p>Only backup volumes from AFS &quot;server&quot;. The default is all AFS servers.</p>
+</li>
+<li><strong><a name="f_filespace" class="item">-f filespace</a></strong>
+
+<p>Store volumes in &quot;filespace&quot; instead of the cell name.</p>
+</li>
+<li><strong><a name="p_partition" class="item">-p partition</a></strong>
+
+<p>Only backup volumes from AFS &quot;partition&quot;. The default is all partitions.</p>
+</li>
+<li><strong><a name="n" class="item">-n</a></strong>
+
+<p>Do everything except commiting files to TSM by aborting the transaction before the TSM commit.</p>
+</li>
+<li><strong><a name="i" class="item">-i</a></strong>
+
+<p>Only set files inactive, do not backup anything.</p>
+</li>
+<li><strong><a name="i" class="item">-I</a></strong>
+
+<p>Do not set files inactive even if they are missing.</p>
+</li>
+<li><strong><a name="x_name" class="item">-x name</a></strong>
+
+<p>Exclude file or directory named &quot;name&quot; from backup. Useful if people want to
+store large amount of data without backup in specific sumdirectories (like
+&quot;nobackup&quot;). A max of 10 -x options can be given.</p>
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="using_tarestore">Using tarestore</a></h3>
+<p>The utility tarestore is used to retrieve files from TSM. Tarestore cannot create
+AFS volumes itself but instead only restore in paths from the current position. Tarestore will
+restore Unix permission bits as well as AFS ACL's.</p>
+<p>Overview of the (most useful) options to tarestore:</p>
+<ul>
+<li><strong><a name="v_volume2" class="item">-v volume</a></strong>
+
+<p>Restore &quot;volume&quot; from TSM.  Must be given.</p>
+</li>
+<li><strong><a name="f_filespace2" class="item">-f filespace</a></strong>
+
+<p>Restore from &quot;filespace&quot;. Must be given.</p>
+</li>
+<li><strong><a name="t_time" class="item">-t time</a></strong>
+
+<p>Set PIT (point-in-time) to &quot;time&quot;. Shall be given in ISO format. If not given, use the latest versions.</p>
+</li>
+<li><strong><a name="q" class="item">-q</a></strong>
+
+<p>Only query about files, do not retrieve them.</p>
+</li>
+<li><strong><a name="h_highlevel" class="item">-h highlevel</a></strong>
+
+<p>Give the path starting with '/' for the file to find. May contain wildcards (parsed by TSM).</p>
+</li>
+<li><strong><a name="l_lowlevel" class="item">-l lowlevel</a></strong>
+
+<p>Give the file name to find.  May contain wildcard.</p>
+</li>
+</ul>
+<p>The <em>h</em> and <em>l</em> options are very useful when helping users. Not uncommon are
+questions like &quot;I had a file named 'foo' something seven days ago somewhere in
+my home directory, can you restore it for me?&quot;. So, just use &quot;-h /* -l /foo*&quot; (and
+reasonable PIT and volname) and tarestore will find it for you. Easy!</p>
+<p>
+</p>
+<h3><a name="todo">TODO</a></h3>
+<p>There is much functionality that should be added to tsmafs. For example, we would like to do interactive
+restores in the same way as the unix restore utility works. As with any software project, there are probably also a large number of bugs needing to be fixed in tsmafs.</p>
+<p>
+</p>
+<h3><a name="downloading">Downloading</a></h3>
+<p>As of this writing, the latest version available is: /afs/ltu.se/misc/tsmafs/tsmafs-0.2.tgz</p>
+
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+From f6ac8f66d79b8012697500c7d0a72d45e681074a Mon Sep 17 00:00:00 2001
+From: Daria Brashear <shadow@your-file-system.com>
+Date: Wed, 8 Jul 2015 14:16:41 -0400
+Subject: [PATCH 3/6] afs: Clear pioctl data interchange buffer before use
+
+Avoid leaking data in pioctl interchange buffers; clear the memory
+when one is allocated.
+
+FIXES 131892 (CVE-2015-3284)
+
+Change-Id: I880bbaa75b07b491a08c62fb17527b9fff47ec8c
+---
+ src/afs/afs_pioctl.c |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+diff --git a/src/afs/afs_pioctl.c b/src/afs/afs_pioctl.c
+index 53681e5..7cdc075 100644
+--- a/src/afs/afs_pioctl.c
++++ b/src/afs/afs_pioctl.c
+@@ -64,6 +64,11 @@ afs_pd_alloc(struct afs_pdata *apd, size_t size)
+     if (apd->ptr == NULL)
+ 	return ENOMEM;
+ 
++    if (size > AFS_LRALLOCSIZ)
++	memset(apd->ptr, 0, size + 1);
++    else
++	memset(apd->ptr, 0, AFS_LRALLOCSIZ);
++
+     apd->remaining = size;
+ 
+     return 0;
+-- 
+1.7.1
+

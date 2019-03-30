@@ -1,0 +1,55 @@
+Topic: kernel pioctl support for OSD command passing can trigger a panic
+       CVE-2015-3285
+
+Issued:         29-July-2015
+Last Update:    29-July-2015
+Affected:       OpenAFS versions 1.0.3 through 1.6.12
+
+A local user executing the OSD FS command pioctl can trigger a panic
+due to an incorrect buffer being used for return status of the command.
+
+SUMMARY
+=======
+
+The kernel handling of the FS command for OSD (and previously, the
+residency command for MR-AFS) used a pointer to the wrong in-kernel memory
+when returning the result of the RPC, and could cause a panic by
+overwriting unrelated memory.
+
+
+IMPACT
+======
+
+A local user of the client can cause a panic or other kernel memory
+corruption, although not with arbitrary contents.
+
+
+AFFECTED SOFTWARE
+=================
+
+The kernel extension in versions 1.0.3 through 1.6.12 is affected.
+
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators of fileservers upgrade
+to OpenAFS version 1.6.13 or newer.
+
+For those sites unable, or unwilling, to upgrade a patch which resolves this
+issue is available directly from:
+
+  http://www.openafs.org/security/openafs-sa-2015-004.patch
+
+The latest stable OpenAFS release is always available from
+http://www.openafs.org/release/latest.html
+
+This announcement and code patches related to it may be found on the
+OpenAFS security advisory page at:
+
+  http://www.openafs.org/security/
+
+The main OpenAFS web page is at:
+
+  http://www.openafs.org/
+

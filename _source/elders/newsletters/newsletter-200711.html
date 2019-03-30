@@ -1,0 +1,278 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><META http-equiv="Content-Type" content="text/html; charset=utf-8"><style type="text/css" media="print">.hide{display:none}</style></head><body style="margin:0;padding:0"><div class="hide"><div style="background:#ffffcc;padding:4 8;border-bottom:thin solid #eeeeee;font-family:Arial,sans-serif"></div></div><div style="margin:1ex">
+
+
+
+
+
+
+
+
+
+
+
+<div>
+
+
+
+  <p><font size="4" face="Times New Roman"><b>OpenAFS Newsletter – November 2007</b></font></p>
+
+<p><font size="3" face="Times New Roman"><i>An Update to the OpenAFS Community 
+compiled by the Advisory Council</i></font></p>
+
+<h1><font size="3" face="Times New Roman"><b>Introduction</b></font><br>
+
+	</h1>
+
+<p><font size="3" face="Times New Roman">The OpenAFS Newsletter is intended to 
+be a regular communiqué from the OpenAFS Elders to the community of OpenAFS 
+administrators and end users.&nbsp; In these newsletters the Elders will 
+summarize the activities of the OpenAFS community, the progress that has been 
+achieved in OpenAFS development, and outline the road map of future development 
+that could be accomplished with the availability of sufficient resources. It is 
+hoped that these newsletters will strengthen the community and foster additional 
+dialogues and participation.</font></p>
+
+<h1><font size="3" face="Times New Roman"><b>Council of Elders Monthly Meeting</b></font><br>
+
+	</h1>
+
+<p><font size="3" face="Times New Roman">The OpenAFS Advisory Council met on 
+November 13.&nbsp; The following topics were discussed in the meeting:&nbsp; 
+Development, AFS &amp; Kerberos Best Practices Workshop, Documentation, and OpenAFS 
+communications.&nbsp; Minutes of the meeting can be found at:&nbsp; <u><font color="#0000FF">
+<a target="_blank" href="http://www.openafs.org/pages/elders/minutes-20071113.html">
+http://www.openafs.org/pages/elders/minutes-20071113.html</a></font></u></font>.<br></p>
+
+<p><font size="3" face="Times New Roman"><b>Council of Elders - Member 
+Resignation</b></font>&nbsp;<br></p>
+
+<p><font size="3" face="Times New Roman">Warren Yenson has resigned from the 
+OpenAFS Council of Elders because he is no longer actively involved in OpenAFS 
+development or with OpenAFS customers.&nbsp;&nbsp; Warren had been closely 
+involved with OpenAFS in his position at Morgan Stanley, but he has not been 
+involved with AFS in his position at Google.&nbsp; The Council of Elders would 
+like to thank Warren for his contributions to OpenAFS and wish him well in the 
+future.</font></p>
+
+<h1><font size="3" face="Times New Roman"><b>OpenAFS Development Update</b></font><br>
+
+	</h1>
+
+<p><font size="3" face="Times New Roman">Below is a summary of recent OpenAFS 
+development activity. </font>
+
+</p>
+
+<p><font size="3" face="Times New Roman"><u>UNIX/Linux Servers</u></font>&nbsp;<br>
+
+</p>
+
+<ul type="DISC">
+
+  <li><font size="3" face="Times New Roman">1.4.5 packages have been uploaded to 
+	Debian.&nbsp; </font></li>
+
+  <li><font size="3" face="Times New Roman">The 1.4 backport of the Kerberos 
+	multiple-realm patch will be pulled into the Debian packages so that it can 
+	be more broadly tested.</font></li>
+
+  <li><font size="3" face="Times New Roman">There will be additional work to 
+	improve Documentation, including Russ committing pending contributions from 
+	Jason Edgecomb.&nbsp; </font></li>
+
+  <li><font size="3" face="Times New Roman">Stanford and Sine Nomine are 
+	persuing a file server problem that&#39;s causing periodic segfaults due to an 
+	apparent free list corruption.&nbsp; Once this bug is identified and fixed, 
+	it should be included in a 1.4.6 release.</font></li>
+
+  <li><font size="3" face="Times New Roman">Russ is going to try to get some 
+	resources at Stanford to start testing the demand-attach fileservers.</font></li>
+
+</ul>
+	<p>
+
+	<font size="3" face="Times New Roman"><u>UNIX/Linux Clients</u></font>&nbsp;<br>
+
+	</p>
+
+<ul type="DISC">
+
+  <li><font size="3" face="Times New Roman">OpenAFS 1.4.5 was released and 
+	includes support for Leopard, Solaris 10-update 4, and new Linux support.</font></li>
+
+  <li><font size="3" face="Times New Roman">Bug fixes proposed for 1.4.6 include 
+	verifying viced-accurately-track-file<WBR>-callbacks-20071112 fixes the bug 
+	seen with CBFree/FEFree corruption, viced-missing-lock-20071109, 
+	libafsrpc-makefile-fix-20071110 for RPMS, linux-nsec-timestamp-zero<WBR>-20071106, 
+	linux-splice-support-2007-1106 and solaris-nevada-update-2007<WBR>-1101, 
+	linux-afs-unlinked-file-dentry<WBR>-flagging-20071031, and various Mac and 
+	RPM packaging files.</font></li>
+
+  <li><font size="3" face="Times New Roman">Pending work includes module unload 
+	cleanup, afs_HashOutDCache panic, and an Rx error.&nbsp; </font></li>
+
+  <li><font size="3" face="Times New Roman">Longer term, there is work planned 
+	to stabilize 1.5 so that we are able to put out 1.6 series releases.&nbsp; 
+	There has also been discussion with the HePiX community regarding a timeout 
+	issue which limits AFS throughput.&nbsp; Derrick is working with Rainer 
+	Toebbicke regarding his Rx test tool to resolve this matter.&nbsp; He is 
+	also working with Hartmut Reuter to integrate his AFS OSD code.&nbsp; 
+	However, the timing of this work depends on the availability of resources.</font></li>
+
+</ul>
+
+	&nbsp;<font size="3" face="Times New Roman"><u>Windows Clients</u></font>&nbsp;<br>
+
+<p><font size="3" face="Times New Roman">There have been three OpenAFS for 
+Windows releases since the last Elders meeting:&nbsp;OpenAFS 
+<a href="https://lists.openafs.org/pipermail/openafs-announce/2007/000206.html">1.5.25 (9/20/07)</a>,
+<a href="https://lists.openafs.org/pipermail/openafs-announce/2007/000212.html">1.5.26 (10/23/07)</a>,
+<a href="https://lists.openafs.org/pipermail/openafs-announce/2007/000215.html">1.5.27 (11/7/07)</a>.</font></p>
+
+<p><font size="3" face="Times New Roman">The following work is changes have been 
+made post 1.5.27::</font></p>
+
+<ul type="DISC">
+
+  <li><font size="3" face="Times New Roman">Optimization of the performance of 
+	the Windows cache manager.</font></li>
+
+  <li><font size="3" face="Times New Roman">A new option which permits .readonly 
+	callbacks to be automatically renewed prior to expiration.&nbsp; This option 
+	can reduce load on .readonly volumes over long periods of time. However, it 
+	is an optional feature since it will resulte in a single FetchStgatus 
+	request being sent per .readonly volume whether or not the client is 
+	actively using that volume.</font></li>
+
+</ul>
+	<p><font size="3" face="Times New Roman">Future work plans for OpenAFS Windows 
+Development include:</font></p>
+
+<ul type="DISC">
+
+  <li><font size="3" face="Times New Roman">OpenAFS Redirector work (in 
+	progress)</font></li>
+
+  <li><font size="3" face="Times New Roman">OpenAFS File System Filter Driver 
+	that will permit \\AFS to be used without requiring the presence of the 
+	Microsoft Loopback Adapter.</font></li>
+
+  <li><font size="3" face="Times New Roman">Implementation of Extended 
+	Attributes by storing data in the Apple Double Files as described in RFC 
+	1740.</font></li>
+
+</ul>
+
+<h2><font size="3" face="Times New Roman"><b>In-depth Focus on Ongoing 
+Development:&nbsp; Documentation</b></font></h2>
+
+	<font size="3" face="Times New Roman">Work is slowly proceeding on improving 
+the OpenAFS documentation and</font>
+
+<font size="3" face="Times New Roman">manuals, but there&#39;s a lot of work to do, 
+and we can always use more</font>
+
+<font size="3" face="Times New Roman">volunteers.</font>&nbsp;<br>
+
+<p><font size="3" face="Times New Roman">The OpenAFS Admin Reference Manual has 
+been converted to manual pages</font>
+
+<font size="3" face="Times New Roman">(written in POD), and significant work has 
+been done to update them and</font>
+
+<font size="3" face="Times New Roman">write additional entries for new commands.&nbsp; 
+The current manual pages can</font>
+
+<font size="3" face="Times New Roman">be found in OpenAFS CVS in the 
+doc/man-pages directory and have been</font>
+
+<font size="3" face="Times New Roman">shipped with all recent OpenAFS releases.&nbsp; 
+doc/man-pages/README contains a</font>
+
+<font size="3" face="Times New Roman">list of work that still needs to be done, 
+and all of the manual pages</font>
+
+<font size="3" face="Times New Roman">would benefit from further review and 
+editing.&nbsp; Additionally, we need a</font>
+
+<font size="3" face="Times New Roman">volunteer to work on automating the 
+process of converting these manual</font>
+
+<font size="3" face="Times New Roman">pages to HTML and hooking that into the 
+process for generating the OpenAFS</font>
+
+<font size="3" face="Times New Roman">web site.</font>&nbsp;<br>
+
+</p>
+
+<p><font size="3" face="Times New Roman">The other OpenAFS manuals have been 
+converted to DocBook, but now need</font>
+
+<font size="3" face="Times New Roman">cleanup, updates for all the changes since 
+OpenAFS 1.0, removal of</font>
+
+<font size="3" face="Times New Roman">obsolete information, and removal of 
+additional IBM-specific sections,</font>
+
+<font size="3" face="Times New Roman">language, and assumptions.&nbsp; The 
+Quick Start Guide is our first priority,</font>
+
+<font size="3" face="Times New Roman">but work on any of the manuals is welcome.</font>&nbsp;<br>
+
+<font size="3" face="Times New Roman">The protocol documentation which we 
+received from IBM in PDF format has</font>
+
+<font size="3" face="Times New Roman">been converted to Microsoft Word .DOC 
+files.&nbsp; These documents need to be</font>
+
+<font size="3" face="Times New Roman">further converted to DocBook, be 
+reformatted, and have the Table of</font>
+
+<font size="3" face="Times New Roman">Contents and Index sections rebuilt using 
+the appropriate tags. After</font>
+
+<font size="3" face="Times New Roman">this work is complete, the OpenAFS 
+developers can work to update the</font>
+
+<font size="3" face="Times New Roman">documentation to match the current 
+implementation.</font>&nbsp;<br></p>
+
+<p><font size="3" face="Times New Roman">Work on OpenAFS&#39;s documentation is 
+coordinated on the</font>
+
+<font size="3" face="Times New Roman"><a href="mailto:openafs-doc@openafs.org" target="_blank">
+openafs-doc@openafs.org</a> mailing list.&nbsp; Before starting work on a large</font>
+
+<font size="3" face="Times New Roman">project, please mention the work on that 
+mailing list so that we can</font>
+
+<font size="3" face="Times New Roman">avoid duplicating effort.</font>&nbsp;<br>
+
+</p>
+
+<h2><font size="3" face="Times New Roman"><b>AFS &amp; Kerberos Best Practices 
+Workshop</b></font></h2>
+
+	<font size="3" face="Times New Roman">The 2008 Workshop will be held at NJIT 
+in Newark, NJ, the week of May 19-23, 2008.&nbsp;&nbsp; There is a block of 
+rooms available at Newark Penn Station Hilton.&nbsp; For more information on the 
+workshop, please visit: <a href="http://workshop.openafs.org/afsbpw08/" target="_blank">
+http://workshop.openafs.org<WBR>/afsbpw08/</a>.</font>&nbsp;<br>
+
+&nbsp;<br><font size="3" face="Times New Roman"><b>OpenAFS Council of Elders – Next 
+Meeting</b></font>&nbsp;<br>
+
+<p><font size="3" face="Times New Roman">December 11, 2007</font>&nbsp;<br>
+
+&nbsp;<br></p>
+
+
+
+
+
+</div>
+
+
+
+</div></body></html>
+

@@ -1,0 +1,134 @@
+From 63b339b9b2f8140ebaff8d5c9615e3687a227324 Mon Sep 17 00:00:00 2001
+From: Jeffrey Altman <jaltman@your-file-system.com>
+Date: Thu, 8 Oct 2015 22:22:12 -0400
+Subject: [PATCH] rx: OPENAFS-SA-2015-007 "Tattletale"
+
+CVE-2015-7762:
+
+The CMU/Transarc/IBM definition of rx_AckDataSize(nAcks) was mistakenly
+computed from sizeof(struct rx_ackPacket) and inadvertently added three
+octets to the computed ack data size due to C language alignment rules.
+When constructing ack packets these three octets are not assigned a
+value before writing them to the network.
+
+Beginning with AFS 3.3, IBM extended the ACK packet with the "maxMTU" ack
+trailer value which was appended to the packet according to the
+rx_AckDataSize() computation.  As a result the three unassigned octets
+were unintentionally cemented into the ACK packet format.
+
+In OpenAFS commit 4916d4b4221213bb6950e76dbe464a09d7a51cc3 Nickolai
+Zeldovich <kolya@mit.edu> noticed that the size produced by the
+rx_AckDataSize(nAcks) macro was dependent upon the compiler and processor
+architecture.  The rx_AckDataSize() macro was altered to explicitly
+expose the three octets that are included in the computation.
+Unfortunately, the failure to initialize the three octets went unnoticed.
+
+The Rx implementation maintains a pool of packet buffers that are reused
+during the lifetime of the process.  When an ACK packet is constructed
+three octets from a previously received or transmitted packets will be
+leaked onto the network.  These octets can include data from a
+received packet that was encrypted on the wire and then decrypted.
+
+If the received encrypted packet is a duplicate or if it is outside the
+valid window, the decrypted packet will be used immediately to construct
+an ACK packet.
+
+CVE-2015-7763:
+
+In OpenAFS commit c7f9307c35c0c89f7ec8ada315c81ebc47517f86 the ACK packet
+was further extended in an attempt to detect the path MTU between two
+peers.  When the ACK reason is RX_ACK_PING a variable number of octets is
+appended to the ACK following the ACK trailers.
+
+The implementation failed to initialize all of the padding region.
+A variable amount of data from previous packets can be leaked onto the
+network.  The padding region can include data from a received packet
+that was encrypted on the wire and then decrypted.
+
+OpenAFS 1.5.75 through 1.5.78 and all 1.6.x releases (including release
+candidates) are vulnerable.
+
+Credits:
+
+  Thanks to John Stumpo for identifying both vulnerabilities.
+
+  Thanks to Simon Wilkinson for patch development.
+
+  Thanks to Ben Kaduk for managing the security release cycle.
+
+Change-Id: I29e47610e497c0ea94033450f434da11c367027c
+---
+ src/rx/rx.c | 32 +++++++++++++++++++++-----------
+ 1 file changed, 21 insertions(+), 11 deletions(-)
+
+diff --git a/src/rx/rx.c b/src/rx/rx.c
+index 5ca7793..ca94527 100644
+--- a/src/rx/rx.c
++++ b/src/rx/rx.c
+@@ -5514,6 +5514,9 @@ rxi_ResetCall(struct rx_call *call, int newcall)
+     int	reason;			 Reason an acknowledge was prompted
+ */
+ 
++#define RX_ZEROS 1024
++static char rx_zeros[RX_ZEROS];
++
+ struct rx_packet *
+ rxi_SendAck(struct rx_call *call,
+ 	    struct rx_packet *optionalPacket, int serial, int reason,
+@@ -5669,6 +5672,11 @@ rxi_SendAck(struct rx_call *call,
+     ap->nAcks = offset;
+     p->length = rx_AckDataSize(offset) + 4 * sizeof(afs_int32);
+ 
++    /* Must zero the 3 octets that rx_AckDataSize skips at the end of the
++     * ACK list.
++     */
++    rx_packetwrite(p, rx_AckDataSize(offset) - 3, 3, rx_zeros);
++
+     /* these are new for AFS 3.3 */
+     templ = rxi_AdjustMaxMTU(call->conn->peer->ifMTU, rx_maxReceiveSize);
+     templ = htonl(templ);
+@@ -5687,6 +5695,8 @@ rxi_SendAck(struct rx_call *call,
+     rx_packetwrite(p, rx_AckDataSize(offset) + 3 * sizeof(afs_int32),
+ 		   sizeof(afs_int32), &templ);
+ 
++    p->length = rx_AckDataSize(offset) + 4 * sizeof(afs_int32);
++
+     p->header.serviceId = call->conn->serviceId;
+     p->header.cid = (call->conn->cid | call->channel);
+     p->header.callNumber = *call->callNumber;
+@@ -5695,21 +5705,21 @@ rxi_SendAck(struct rx_call *call,
+     p->header.epoch = call->conn->epoch;
+     p->header.type = RX_PACKET_TYPE_ACK;
+     p->header.flags = RX_SLOW_START_OK;
+-    if (reason == RX_ACK_PING) {
++    if (reason == RX_ACK_PING)
+ 	p->header.flags |= RX_REQUEST_ACK;
+-	if (padbytes) {
+-	    p->length = padbytes +
+-		rx_AckDataSize(call->rwind) + 4 * sizeof(afs_int32);
+ 
+-	    while (padbytes--)
+-		/* not fast but we can potentially use this if truncated
+-		 * fragments are delivered to figure out the mtu.
+-		 */
+-		rx_packetwrite(p, rx_AckDataSize(offset) + 4 *
+-			       sizeof(afs_int32), sizeof(afs_int32),
+-			       &padbytes);
++    while (padbytes > 0) {
++	if (padbytes > RX_ZEROS) {
++	    rx_packetwrite(p, p->length, RX_ZEROS, rx_zeros);
++	    p->length += RX_ZEROS;
++	    padbytes -= RX_ZEROS;
++	} else {
++	    rx_packetwrite(p, p->length, padbytes, rx_zeros);
++	    p->length += padbytes;
++	    padbytes = 0;
+ 	}
+     }
++
+     if (call->conn->type == RX_CLIENT_CONNECTION)
+ 	p->header.flags |= RX_CLIENT_INITIATED;
+ 
+-- 
+2.6.2.windows.1
+

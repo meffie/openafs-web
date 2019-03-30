@@ -1,0 +1,988 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3c.org/TR/html4/loose.dtd">
+<html><head>
+<title>OpenAFS Security Info</title>
+<link href="/openafs.css" rel="stylesheet" type="text/css">
+</head>
+<body bgcolor="#ffffff" text="#000000"
+      link="#000fff" vlink="#0000ff" alink="#0000ff">
+
+<h1>OpenAFS Security Advisories</h1>
+<p>The following are overviews of security advisories issued by the
+OpenAFS Project regarding known security problems in OpenAFS and its
+components.  Each overview includes a summary of the problem, a link
+to the full text of the advisory.  When they are available, patches
+are also included.
+
+At the end of this document is a <a href="#salist">table of all
+OpenAFS security advisories</a>.
+
+<p>If you want to report security problems or issues with OpenAFS,
+you may send mail to the OpenAFS security officer at
+<a href="mailto:security@openafs.org">security@openafs.org</a>.
+When sending sensitive information, we ask that you encrypt it
+with PGP.
+
+<hr>
+<a name="OPENAFS-SA-2018-003"></a>
+<h2>OPENAFS-SA-2018-003 - denial of service due to excess resource consumption</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Last Update:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2018-003-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2018-003-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-003-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2018-003-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-003-master.patch">
+  https://www.openafs.org/security/openafs-sa-2018-003-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2018-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2018-003.txt</a>
+</td></tr>
+</table>
+<p>Several data types used as RPC input variables were implemented as unbounded
+array types, limited only by the inherent 32-bit length field to 4GB.
+An unauthenticated attacker could send, or claim to send, large input
+values and consume server resources waiting for those inputs, denying service
+to other valid connections.
+
+<a name="OPENAFS-SA-2018-002"></a>
+<h2>OPENAFS-SA-2018-002 - information leakage from uninitialized RPC output variables</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Last Update:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 ;
+  OpenAFS server versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2018-002-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2018-002-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-002-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2018-002-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-002-master.patch">
+  https://www.openafs.org/security/openafs-sa-2018-002-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2018-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2018-002.txt</a>
+</td></tr>
+</table>
+<p>Several RPC server routines did not fully initialize their output variables
+before returning, leaking memory contents from both the stack and the heap.
+Because the OpenAFS cache manager functions as an Rx server for the AFSCB service,
+clients are also susceptible to information leakage.
+
+<a name="OPENAFS-SA-2018-001"></a>
+<h2>OPENAFS-SA-2018-001 - volume-level data replacement via unauthenticated butc connections</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Last Update:</th><td>11-Sep-2018</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS butc server versions 1.0 through 1.6.22.4, 1.8.0 through 1.8.1.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2018-001-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2018-001-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-001-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2018-001-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2018-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2018-001-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2018-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2018-001.txt</a>
+</td></tr>
+</table>
+<p> The backup tape controller process accepts incoming RPCs but does not
+require (or allow for) authentication of those RPCs.  Handling those RPCs
+results in operations being performed with administrator credentials,
+including dumping/restoring volume contents and manipulating the backup
+database.
+
+<a name="OPENAFS-SA-2017-001"></a>
+<h2>OPENAFS-SA-2017-001 - remote triggered rx assertion failure</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>05-Dec-2017</td></tr>
+<tr><th align="left">Last Update:</th><td>05-Dec-2017</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.21.1 .</td></tr>
+  OpenAFS fileserver versions 1.0 through 1.6.21.1 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2017-001-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2017-001-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2017-001-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2017-001-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2017-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2017-001-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2017-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2017-001.txt</a>
+</td></tr>
+</table>
+<p>Due to insufficient validation of transport parameters received in
+unauthenticated ack packets, Rx participants can be coerced into using
+very small MTU values that become negative when converted into effective
+MTU values.  Subsequent usage as an unsigned packet size produces a very large
+packet size, that subsequently triggers an assertion failure.
+<p>
+This vulnerability is being tracked as CVE-2017-17432.<p>
+
+<a name="OPENAFS-SA-2016-003"></a>
+<h2>OPENAFS-SA-2016-003 - directory information leaks</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>30-Nov-2016</td></tr>
+<tr><th align="left">Last Update:</th><td>30-Nov-2016</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.19 .</td></tr>
+  OpenAFS fileserver versions 1.0 through 1.6.19 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2016-003.patch">
+  https://www.openafs.org/security/openafs-sa-2016-003.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2016-003-master.patch">
+  https://www.openafs.org/security/openafs-sa-2016-003-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2016-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2016-003.txt</a>
+</td></tr>
+</table>
+<p>Due to insufficient clearing of directory entries and internal buffers,
+directory information may be leaked over the network, as well as in cache manager
+cache partitions and fileserver vice partitions.  This information may
+include file and directory names, vnode number and uniqueid, and may include
+information from other directories or volumes for which the user is not
+authorized.
+<p>
+
+<a name="OPENAFS-SA-2016-002"></a>
+<h2>OPENAFS-SA-2016-002 - various client functionality leak stack data onto the wire in the clear</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Last Update:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Severity:</th><td>Low</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.16 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2016-002.patch">
+  https://www.openafs.org/security/openafs-sa-2016-002.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2016-002-master.patch">
+  https://www.openafs.org/security/openafs-sa-2016-002-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2016-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2016-002.txt</a>
+</td></tr>
+</table>
+<p>Several structures used as RPC arguments contain a mask field that indicates
+which other fields should be processed by the server.  In some cases, fields
+not not indicated in the mask were transmitted over the network without
+being written to, exposing the previous contents of that memory.  Both
+kernel stack and userspace stack data can be leaked.
+<p>
+
+<a name="OPENAFS-SA-2016-001"></a>
+<h2>OPENAFS-SA-2016-001 - ptserver allows foreign users to create arbitrary groups</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Last Update:</th><td>16-Mar-2016</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.16 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2016-001.patch">
+  https://www.openafs.org/security/openafs-sa-2016-001.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2016-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2016-001-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2016-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2016-001.txt</a>
+</td></tr>
+</table>
+<p>Access checking for the creation of new entries in the PRDB was performed
+in multiple steps.  For requests coming from foreign users, the creator ID
+was replaced with the ID of system:administrators after the first round of
+checks, letting requests from foreign users bypass most other access control
+checks and create groups as if they were an administrator.
+<p>
+This vulnerability is being tracked as CVE-2016-2860.<p>
+
+<a name="OPENAFS-SA-2015-007"></a>
+<h2>OPENAFS-SA-2015-007 "Tattletale" - Rx ACK packets leak plaintext of previous packets</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>28-Oct-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>28-Oct-2015</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th>
+<td>OpenAFS client and server versions prior to 1.7.33, 1.6.15, IBM AFS, Arla, and other protocols using Rx implementations derived from Project Andrew</td></tr>
+<tr><th align="left">Patch:</th>
+<td>
+  <a href="OPENAFS-SA-2015-007.master.patch">
+  https://www.openafs.org/security/OPENAFS-SA-2015-007.master.patch</a><br>
+</td>
+<td>
+  <a href="OPENAFS-SA-2015-007.1.6.patch">
+  https://www.openafs.org/security/OPENAFS-SA-2015-007.1.6.patch</a><br>
+</td>
+<td>
+  <a href="OPENAFS-SA-2015-007.1.7.patch">
+  https://www.openafs.org/security/OPENAFS-SA-2015-007.1.7.patch</a><br>
+</td>
+</tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-007.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-007.txt</a>
+</td></tr>
+</table>
+<p>The packet paylod of Rx ACK packets is not fully initialized, leaking
+plaintext from packets previously processed.
+</p>
+<p>This security advisory is being tracked by CVE-2015-7762 and CVE-2015-7763.</p>
+
+<a name="OPENAFS-SA-2015-006"></a>
+<h2>OPENAFS-SA-2015-006 - Buffer overflow in OpenAFS vlserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-006.patch">
+  https://www.openafs.org/security/openafs-sa-2015-006.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-006-master.patch">
+  https://www.openafs.org/security/openafs-sa-2015-006-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-006-1.4.patch">
+  https://www.openafs.org/security/openafs-sa-2015-006-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-006.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-006.txt</a>
+</td></tr>
+</table>
+<p>Disable regular expression support in the vlserver handling of ListAttributes RPCs given likely safety issues.
+</p>
+
+<a name="OPENAFS-SA-2015-005"></a>
+<h2>OPENAFS-SA-2015-005 - Solaris grouplist modifications for PAGs can panic or overwrite memory</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS Solaris client versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-005.patch">
+  https://www.openafs.org/security/openafs-sa-2015-005.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-005-master.patch">
+  https://www.openafs.org/security/openafs-sa-2015-005-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-005-1.4.patch">
+  https://www.openafs.org/security/openafs-sa-2015-005-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-005.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-005.txt</a>
+</td></tr>
+</table>
+<p>Solaris hosts can overflow the buffer allocated for the user's group list or hang the kernel when handling an error due to too many groups.
+<p>
+This vulnerability is being tracked as CVE-2015-3286.<p>
+
+<a name="OPENAFS-SA-2015-004"></a>
+<h2>OPENAFS-SA-2015-004 - kernel pioctl support for OSD command passing can trigger a panic</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0.3 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-004.patch">
+  https://www.openafs.org/security/openafs-sa-2015-004.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-004-master.patch">
+  https://www.openafs.org/security/openafs-sa-2015-004-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-004-1.4.patch">
+  https://www.openafs.org/security/openafs-sa-2015-004-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-004.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-004.txt</a>
+</td></tr>
+</table>
+<p>Local users can panic a machine by causing an incorrect buffer to be writter to with the OSD fscommand pioctl support</p>
+This vulnerability is being tracked as CVE-2015-3285.<p>
+
+<a name="OPENAFS-SA-2015-003"></a>
+<h2>OPENAFS-SA-2015-003 - pioctls leak kernel memory contents</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.6.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-003.patch">
+  https://www.openafs.org/security/openafs-sa-2015-003.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-003-master.patch">
+  https://www.openafs.org/security/openafs-sa-2015-003-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-003-1.4.patch">
+  https://www.openafs.org/security/openafs-sa-2015-003-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-003.txt</a>
+</td></tr>
+</table>
+<p>Kernel memory could be leaked to a local user in the return of a pioctl command.
+<p>
+This vulnerability is being tracked as CVE-2015-3284.<p>
+
+<a name="OPENAFS-SA-2015-002"></a>
+<h2>OPENAFS-SA-2015-002 - bos commands can be spoofed, including some which alter server state</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-002.patch">
+  https://www.openafs.org/security/openafs-sa-2015-002.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-002-master.patch">
+  https://www.openafs.org/security/openafs-sa-2015-002-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-002-1.4.patch">
+  https://www.openafs.org/security/openafs-sa-2015-002-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-002.txt</a>
+</td></tr>
+</table>
+<p>The default use by bos of clear rather than crypt mode can allow spoofing commands, including some which modify server state if restricted mode was not enabled.<p>
+This vulnerability is being tracked as CVE-2015-3283.<p>
+
+<a name="OPENAFS-SA-2015-001"></a>
+<h2>OPENAFS-SA-2015-001 - vos leaks stack data onto the wire in the clear when creating vldb entries</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Last Update:</th><td>29-Jul-2015</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.12 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2015-001.patch">
+  https://www.openafs.org/security/openafs-sa-2015-001.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2015-001-master.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2015-001-1.4.patch">
+  https://www.openafs.org/security/openafs-sa-2015-001-1.4.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2015-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2015-001.txt</a>
+</td></tr>
+</table>
+<p>Memory allocated by vos for VLDB entry structures was not cleared prior to use, meaning stack data could be sent over the network, possibly in the clear if crypt mode was not in use.
+<p>
+This vulnerability is being tracked as CVE-2015-3282.<p>
+
+<a name="OPENAFS-SA-2014-002"></a>
+<h2>OPENAFS-SA-2014-002 - Use of uninitialized memory in OpenAFS fileserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>12-Jun-2014</td></tr>
+<tr><th align="left">Last Update:</th><td>12-Jun-2014</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS fileserver version 1.6.8 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2014-002.patch">
+  https://www.openafs.org/security/openafs-sa-2014-002.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2014-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2014-002.txt</a>
+</td></tr>
+</table>
+<p>The 1.6.8 release of the OpenAFS fileserver and dafileserver
+processes introduced a security vulnerability in the host package
+due to the use of uninitialized memory allocations from the process
+heap.
+<p>
+An attacker with the ability to connect to an OpenAFS fileserver over
+the network can trigger the use of uninitialized memory and, potentially, 
+execution of arbitrary code with the privileges of the fileserver
+process. 
+
+<a name="OPENAFS-SA-2014-001"></a>
+<h2>OPENAFS-SA-2014-001 - Denial of service attack against OpenAFS fileserver processes</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>9-Apr-2014</td></tr>
+<tr><th align="left">Last Update:</th><td>9-Apr-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.4.8 through 1.6.6. Also 1.6.8pre1.</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2014-001.patch">
+  https://www.openafs.org/security/openafs-sa-2014-001.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2014-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2014-001.txt</a>
+</td></tr>
+</table>
+<p>An attacker with the ability to connect to an OpenAFS fileserver can
+trigger a buffer overflow, crashing the server.</p>
+
+<a name="OPENAFS-SA-2013-004"></a>
+<h2>OPENAFS-SA-2013-004 - vos -encrypt doesn't encrypt connection data</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.6.1 through 1.6.4</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2013-004.patch">
+  https://www.openafs.org/security/openafs-sa-2013-004.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-004.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2013-004.txt</a>
+</td></tr>
+</table>
+<p>An attacker can read data which an administrator expected to remain private.</p>
+
+<a name="OPENAFS-SA-2013-003"></a>
+<h2>OPENAFS-SA-2013-003 - Brute force DES attack permits compromise of AFS cell</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>24-Jul-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS servers before versions 1.4.15 and 1.6.5</td></tr>
+<tr><th align="left">Instructions:</th><td>
+  <a href="how-to-rekey.txt">
+  How to rekey your cell</a><br>
+  <a href="install-rxkad-k5-1.6.txt">
+  How to install rxkad k5 support for servers running OpenAFS 1.6</a><br>
+  <a href="install-rxkad-k5-1.4.txt">
+  How to install rxkad k5 support for servers running OpenAFS 1.4</a>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2013-003.txt</a>
+</td></tr>
+</table>
+<p>The small size of the DES key space permits an attacker to brute
+force a cell's service key and then forge traffic from any user
+within the cell. The key space search can be performed in under 1
+day at a cost of around $100 using publicly available services.</p>
+
+<a name="OPENAFS-SA-2013-002"></a>
+<h2>OPENAFS-SA-2013-002 - Buffer overflow in OpenAFS ptserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS servers before version 1.6.2</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2013-002.patch">
+  https://www.openafs.org/security/openafs-sa-2013-002.patch</a><br>
+  <a href="openafs-sa-2013-002-1_4_14_1.patch">
+  https://www.openafs.org/security/openafs-sa-2013-002-1_4_14_1.patch (for 1.4.14.1)</a>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2013-002.txt</a>
+</td></tr>
+</table>
+<p>An attacker can crash an OpenAFS ptserver by sending an IdToName RPC with
+a large payload. This vulnerability is being tracked as CVE-2013-1795.</p>
+
+<a name="OPENAFS-SA-2013-001"></a>
+<h2>OPENAFS-SA-2013-001 - Buffer overflows in OpenAFS fileserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Last Update:</th><td>27-Feb-2013</td></tr>
+<tr><th align="left">Affected:</th><td>
+ OpenAFS servers before version 1.6.2</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2013-001.patch">
+  https://www.openafs.org/security/openafs-sa-2013-001.patch</a><br>
+  <a href="openafs-sa-2013-001-1_4_14_1.patch">
+  https://www.openafs.org/security/openafs-sa-2013-001-1_4_14_1.patch (for 1.4.14.1)</a>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2013-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2013-001.txt</a>
+</td></tr>
+</table>
+<p>By carefully crafting an ACL entry an attacker may overflow fixed length 
+buffers within the OpenAFS fileserver, crashing the fileserver, and 
+potentially permitting the execution of arbitrary code. To perform the
+exploit, the attacker must already have permissions to create ACLs on the
+fileserver in question. This vulnerability is being tracked as CVE-2013-1794.</p>
+
+<a name="OPENAFS-SA-2011-001"></a>
+<h2>OPENAFS-SA-2011-001 - Denial of service attack against Rx server processes</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>23-Feb-2011</td></tr>
+<tr><th align="left">Last Update:</th><td>23-Feb-2011</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS servers versions 1.2.8 - 1.4.12.1, 1.5.0-1.5.74 for all platforms</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2011-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2011-001.txt</a>
+</td></tr>
+</table>
+<p>An attacker with control of a client, or the ability to forge RX packets,
+can crash a server of affected hosts.
+This vulnerability is being tracked as CVE-2011-0430.</p>
+
+<p>Currently the advisory erroneously states 1.4.14 is vulnerable.</p>
+
+<p>CVE-2011-0431, while correctly describing 1.4.14 as containing the fix
+for this issue, describes in its summary the release as broken. It is not.
+We recommend sites upgrade to 1.4.14; However, the impact of the issue
+is limited to a denial of service attack by a user with the ability to
+affect a lock of AFS though the client on a host.</p>
+
+<a name="OPENAFS-SA-2009-002"></a>
+<h2>OPENAFS-SA-2009-002 - Denial of service attack against Linux cache manager</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Last Update:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.4.8, OpenAFS 1.5.0-1.5.58</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2009-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2009-002.txt</a>
+</td></tr>
+</table>
+
+<p>AFS may pass an error code obtained from the fileserver directly to the
+Linux kernel, using a Linux mechanism that merges error codes and pointers 
+into a single value. However, this mechanism is unable to distinguish certain
+error codes from pointers. When AFS returns a code of this type to the kernel,
+the kernel treats it as a pointer and attempts to dereference it. This causes a
+kernel panic, and results in a denial of service attack.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+<a name="OPENAFS-SA-2009-001"></a>
+<h2>OPENAFS-SA-2009-001 - Network based buffer overflow attack against Unix cache manager</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Last Update:</th><td>6-Apr-2009</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.4.8, OpenAFS 1.5.0-1.5.58</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2009-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2009-001.txt</a>
+</td></tr>
+</table>
+
+<p>AFS's XDR data marshalling language permits the construction of arrays with a
+size constrained by the interface definition. The XDR decoding language will
+accept data from the server up to this maximum size, which in some cases is
+stored into a buffer allocated by the client. 
+
+In several locations, the AFS client assumes that the server will never
+return more data than requested, and so allocates a buffer smaller than this
+maximum size. Whilst this causes no problems when communicating with valid
+servers, an attacker can return more data than expected, and overflow the
+client's buffer.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+<a name="OPENAFS-SA-2007-003"></a>
+<h2>OPENAFS-SA-2007-003 - denial of service in OpenAFS fileserver</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>20-Dec-2007</td></tr>
+<tr><th align="left">Last Update:</th><td>21-Dec-2007</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.3.50-1.4.5, OpenAFS 1.5.0-1.5.27</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2007-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2007-003.txt</a>
+</td></tr>
+</table>
+
+<p>The AFS fileserver tracks client callbacks on files via a series of 
+linked lists internally. When a client acquires a new callback or gives up
+an old one, these lists must be updated. Beginning in 1.3.50, a bulk disposal
+mechanism was added. Due to a failure to hold a lock, unsafe access to data
+could result in a crash. No data compromise is known.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+
+<a name="OPENAFS-SA-2007-002"></a>
+<h2>OPENAFS-SA-2007-002 - OpenAFS for Windows clients denial of service vulnerability</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>19-Apr-2007</td></tr>
+<tr><th align="left">Last Update:</th><td>19-Apr-2007</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.3.64-1.3.99, OpenAFS 1.4.0-1.4.4, OpenAFS 1.5.0-1.5.18</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2007-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2007-002.txt</a>
+</td></tr>
+</table>
+
+<p>OpenAFS for Windows installs a Network Provider module, afslogon.dll, which
+is loaded by the Windows Logon service, winlogon.exe. When MIT Kerberos for
+Windows is installed, afslogon.dll will attempt to perform operations that
+involve the Kerberos v5 libraries. Successful use of Kerberos v5 requires
+the ability to establish a krb5_context. Parsing errors in the Kerberos v5
+configuration profile, krb5.ini, will prevent the successful creation of a
+krb5_context. afslogon.dll attempts to free a krb5_context whether or
+not it was successfully established. This produces a memory access error that
+in turn forces the Windows Logon Service to terminate unexpectedly and causes
+Microsoft Windows to halt.</p>
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+
+<a name="OPENAFS-SA-2007-001"></a>
+<h2>OPENAFS-SA-2007-001 - setuid (privilege escalation) in OpenAFS Unix based clients</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>20-Mar-2007</td></tr>
+<tr><th align="left">Last Update:</th><td>20-Mar-2007</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.4.3, OpenAFS 1.5.0-1.5.16</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2007-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2007-001.txt</a>
+</td></tr>
+</table>
+
+<p>Because AFS cache managers do not use authenticated connections for 
+non-user-authenticated sessions, checks for cache coherency are done 
+over an unprotected connection if they are not being done for an
+authenticated user. Because of this it is possible to spoof a false
+status for files in the cache.
+
+<p>The AFS cache manager on platforms which offer privilege based on file modes
+are vulnerable to such attacks.  
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time. 
+
+<hr>
+
+<a name="OPENAFS-SA-2003-002"></a>
+<h2>OPENAFS-SA-2003-002 - Rx connection hijacking vulnerability</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>18-Apr-2003</td></tr>
+<tr><th align="left">Last Update:</th><td>18-Apr-2003</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.2.7, OpenAFS 1.3.0-1.3.2</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2003-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2003-002.txt</a>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2003-002.patch">
+  https://www.openafs.org/security/openafs-sa-2003-002.patch</a>
+  <a href="openafs-sa-2003-002.patch.asc">(PGP signature)</a>
+</td></tr>
+</table>
+
+<p>There is a bug in the Rx RPC protocol, used by AFS, which can be exploited
+by an attacker to hijack arbitrary Rx connections.  This allows the
+attacker to mount a denial of service attack by breaking arbitrary Rx
+connections.  Additionally, unless encryption is used, such as rxkad mode
+crypt ("fs setcrypt on") and the user accessing files is authenticated
+(has valid tokens), the attacker can observe and modify the data being
+transferred.
+
+<p>The AFS cache manager and other AFS administrative clients (such as pts,
+fs, vos, etc) are vulnerable to these attacks.  Vulnerable AFS servers
+allow connections from AFS cache managers to be hijacked, but not
+connections from the other AFS administrative clients (such as pts, fs,
+vos, etc).
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time.
+
+<hr>
+
+<a name="OPENAFS-SA-2003-001"></a>
+<h2>OPENAFS-SA-2003-001 - Cryptographic weakness in Kerberos v4</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>25-Mar-2003</td></tr>
+<tr><th align="left">Last Update:</th><td>25-Mar-2003</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.2.8, OpenAFS 1.3.0-1.3.2</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2003-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2003-001.txt</a>
+<tr><th align="left">Patch:</th><td>
+  <a href="kaserver-disable-krb4-crossrealm-20030317.delta">
+  https://www.openafs.org/security/kaserver-disable-krb4-crossrealm-20030317.delta</a>
+  <a href="kaserver-disable-krb4-crossrealm-20030317.delta.asc">(PGP signature)</a>
+</td></tr>
+</table>
+
+<p>A cryptographic weakness in version 4 of the Kerberos protocol allows an
+attacker to use a chosen-plaintext attack to impersonate any principal in
+a realm.  OpenAFS kaserver implements version 4 of the Kerberos protocol,
+and therefore is vulnerable.  An attacker that knows a shared cross-realm
+key between any remote realm and the local realm can impersonate any
+principal in the local realm to AFS database servers and file servers in
+the local cell, and other services in the local realm.  An attacker that
+can create arbitrary principal names in a realm can also impersonate any
+principal in that realm.
+
+<p>If your realm has no shared keys, and does not allow users to create
+arbitrary principal names, you are not exposed to this vulnerability.
+
+<p>There are no known publicly-available exploits for this vulnerability at
+this time.
+
+<hr>
+
+<a name="OPENAFS-SA-2002-001"></a>
+<h2>OPENAFS-SA-2002-001 - xdr_array integer overflow</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>03-Aug-2002</td></tr>
+<tr><th align="left">Last Update:</th><td>03-Aug-2002</td></tr>
+<tr><th align="left">Severity:</th><td>High</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS 1.0-1.2.5, OpenAFS 1.3.0-1.3.2</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2002-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2002-001.txt</a>
+<tr><th align="left">Patch:</th><td>
+  <a href="xdr-updates-20020731.delta">
+  https://www.openafs.org/security/xdr-updates-20020731.delta</a> <a href="xdr-updates-20020731.delta.asc">(PGP signature)</a>
+</td></tr>
+</table>
+
+<p>There is an integer overflow bug in the SUNRPC-derived RPC library
+used by OpenAFS that could be exploited to crash certain OpenAFS
+servers (volserver, vlserver, ptserver, buserver) or to obtain
+unauthorized root access to a host running one of these processes.
+
+<p>In addition, it is possible for a rogue server to attack certain
+administrative clients (vos, pts, backup, butc, rxstat), but only
+if certain RPC requests are made to the rogue server.
+
+<p>The OpenAFS fileserver and cache manager (client) are not vulnerable
+to these attacks.  No exploits are presently known to be available
+for this vulnerability.
+
+<hr>
+
+<a name="salist"></a>
+<h2>Overview of all OpenAFS Security Advisories</h2>
+<table border=1>
+<tr>
+  <th>ID</th><th>Issued</th><th>Updated</th>
+  <th>Severity</th><th>Versions Affected</th><th>topic</th>
+</tr>
+<tr>
+  <td>2002-001</td><td>03-Aug-2002</td><td>03-Aug-2002</td>
+  <td>High</td><td>1.0-1.2.5, 1.3.0-1.3.2</td>
+  <td><a href="#OPENAFS-SA-2002-001">xdr_array integer overflow</a></td>
+</tr>
+<tr>
+  <td>2003-001</td><td>25-Mar-2003</td><td>25-Mar-2003</td>
+  <td>High</td><td>1.0-1.2.8, 1.3.0-1.3.2</td>
+  <td><a href="#OPENAFS-SA-2003-001">Cryptographic weakness in Kerberos v4</a></td>
+</tr>
+<tr>
+  <td>2003-002</td><td>18-Apr-2003</td><td>18-Apr-2003</td>
+  <td>Medium</td><td>1.0-1.2.7, 1.3.0-1.3.2</td>
+  <td><a href="#OPENAFS-SA-2003-002">Rx connection hijacking vulnerability</a></td>
+</tr>
+<tr>
+  <td>2007-001</td><td>20-Mar-2007</td><td>20-Mar-2007</td>
+  <td>Medium</td><td>1.0-1.4.3, 1.5.0-1.5.16</td>
+  <td><a href="#OPENAFS-SA-2007-001">setuid (privilege escalation) in OpenAFS Unix based clients</a></td>
+</tr>
+<tr>
+  <td>2007-002</td><td>19-Apr-2007</td><td>19-Apr-2007</td>
+  <td>Medium</td><td>1.3.64-1.4.4, 1.5.0-1.5.18</td>
+  <td><a href="#OPENAFS-SA-2007-002">OpenAFS for Windows clients denial of service vulnerability</a></td>
+</tr>
+<tr>
+  <td>2007-003</td><td>20-Dec-2007</td><td>21-Dec-2007</td>
+  <td>Medium</td><td>1.3.50-1.4.5, 1.5.0-1.5.27</td>
+  <td><a href="#OPENAFS-SA-2007-003">denial of service in OpenAFS fileserver</a></td>
+</tr>
+<tr>
+  <td>2009-001</td><td>06-Apr-2009</td><td>06-Apr-2009</td>
+  <td>Medium</td><td>1.0-1.4.8, 1.5.0-1.5.58</td>
+  <td><a href="#OPENAFS-SA-2009-001">Network based buffer overflow attack against Unix cache manager</a></td>
+</tr>
+<tr>
+  <td>2009-002</td><td>06-Apr-2009</td><td>06-Apr-2009</td>
+  <td>Medium</td><td>1.0-1.4.8, 1.5.0-1.5.58</td>
+  <td><a href="#OPENAFS-SA-2009-002">Denial of service attack against Linux cache manager</a></td>
+</tr>
+<tr>
+  <td>2011-001</td><td>23-Feb-2011</td><td>23-Feb-2011</td>
+  <td>Medium</td><td>1.2.8-1.4.12.1, 1.5.0-1.5.74</td>
+  <td><a href="#OPENAFS-SA-2011-001">Denial of service attack against Rx server processes</a></td>
+</tr>
+<tr>
+  <td>2013-001</td><td>27-Feb-2013</td><td>27-Feb-2013</td>
+  <td>High</td><td>1.0-1.6.1</td>
+  <td><a href="#OPENAFS-SA-2013-001">Buffer overflows in OpenAFS fileserver</a></td>
+</tr>
+<tr>
+  <td>2013-002</td><td>27-Feb-2013</td><td>27-Feb-2013</td>
+  <td>High</td><td>1.0-1.6.1</td>
+  <td><a href="#OPENAFS-SA-2013-002">Buffer overflow in OpenAFS ptserver</a></td>
+</tr>
+<tr>
+  <td>2013-003</td><td>24-Jul-2013</td><td>24-Jul-2013</td>
+  <td>High</td><td>1.0-1.4.14,1.5.0-1.6.4</td>
+  <td><a href="#OPENAFS-SA-2013-003">Brute force DES attack permits compromise of AFS cell</a></td>
+</tr>
+<tr>
+  <td>2013-004</td><td>24-Jul-2013</td><td>24-Jul-2013</td>
+  <td>High</td><td>1.6.1-1.6.4</td>
+  <td><a href="#OPENAFS-SA-2013-004">vos -encrypt doesn't encrypt connection data</a></td>
+</tr>
+<tr>
+  <td>2014-001</td><td>9-Apr-2014</td><td>9-Apr-2014</td>
+  <td>High</td><td>1.4.8-1.6.6</td>
+  <td><a href="#OPENAFS-SA-2014-001">Buffer overflow in OpenAFS fileserver</a></td>
+</tr>
+<tr>
+  <td>2014-002</td><td>12-Jun-2014</td><td>12-Jun-2014</td>
+  <td>High</td><td>1.6.8</td>
+  <td><a href="#OPENAFS-SA-2014-002">Use of uninitialized memory in OpenAFS fileserver</a></td>
+</tr>
+<tr>
+  <td>2015-001</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-001">vos leaks stack data onto the wire in the clear when creating vldb entries</a></td>
+</tr>
+<tr>
+  <td>2015-002</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-002">bos commands can be spoofed, including some which alter server state</a></td>
+</tr>
+<tr>
+  <td>2015-003</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-003">pioctls leak kernel memory contents</a></td>
+</tr>
+<tr>
+  <td>2015-004</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0.3-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-004">kernel pioctl support for OSD command passing can trigger a panic</a></td>
+</tr>
+<tr>
+  <td>2015-005</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-005">Solaris grouplist modifications for PAGs can panic or overwrite memory</a></td>
+</tr>
+<tr>
+  <td>2015-006</td><td>29-Jul-2015</td><td>29-Jul-2015</td>
+  <td>Medium</td><td>1.0-1.6.12</td>
+  <td><a href="#OPENAFS-SA-2015-006">Buffer overflow in OpenAFS vlserver</a></td>
+</tr>
+<tr>
+  <td>2015-007</td><td>28-Oct-2015</td><td>28-Oct-2015</td>
+  <td>High</td><td>1.0-1.6.14, 1.7.0-1.7.33</td>
+  <td><a href="#OPENAFS-SA-2015-007">Rx ACK packets leak plaintext of previous packets</a></td>
+</tr>
+<tr>
+  <td>2016-001</td><td>16-Mar-2016</td><td>16-Mar-2016</td>
+  <td>Medium</td><td>1.0-1.6.16</td>
+  <td><a href="#OPENAFS-SA-2016-001">ptserver allows foreign users to create arbitrary groups</a></td>
+</tr>
+<tr>
+  <td>2016-002</td><td>16-Mar-2016</td><td>16-Mar-2016</td>
+  <td>Low</td><td>1.0-1.6.16</td>
+  <td><a href="#OPENAFS-SA-2016-002">information leakage from client memory</a></td>
+</tr>
+<tr>
+  <td>2016-003</td><td>30-Nov-2016</td><td>30-Nov-2016</td>
+  <td>Medium</td><td>1.0-1.6.19</td>
+  <td><a href="#OPENAFS-SA-2016-003">directory information leaks</a></td>
+</tr>
+<tr>
+  <td>2017-001</td><td>05-Dec-2017</td><td>05-Dec-2017</td>
+  <td>High</td><td>1.0-1.6.21.1</td>
+  <td><a href="#OPENAFS-SA-2017-001">remotely triggerable assertion failure in Rx</a></td>
+</tr>
+<tr>
+  <td>2018-001</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>High</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
+  <td><a href="#OPENAFS-SA-2018-001">volume-level-data-replacement via unauthenticated butc connections</a></td>
+</tr>
+<tr>
+  <td>2018-002</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>Medium</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
+  <td><a href="#OPENAFS-SA-2018-002">information leakage from uninitialized RPC output variables</a></td>
+</tr>
+<tr>
+  <td>2018-002</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>Medium</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
+  <td><a href="#OPENAFS-SA-2018-003">denial of service due to excess resource consumption</a></td>
+</tr>
+</table>
+
+
+<div id="footer"><hr>
+<address>&lt;webmaster@openafs.org&gt;</address>
+<address>Last modified: $Date$</address>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5995928-1");
+pageTracker._trackPageview();
+</script>
+</body></html>

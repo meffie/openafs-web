@@ -1,0 +1,121 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory-2018-003
+
+Issued: 11 September, 2018
+Topic: Denial of service due to excess resource consumption
+       CVE-2018-16949
+Affected: OpenAFS server versions 1.0 through 1.6.22.4 and 1.8.0 through 1.8.1.1
+
+Several data types used as RPC input variables were implemented as unbounded
+array types, limited only by the inherent 32-bit length field to 4GB.
+An unauthenticated attacker could send, or claim to send, large input
+values and consume server resources waiting for those inputs, denying service
+to other valid connections.
+
+SUMMARY
+=======
+
+OpenAFS uses the Rx RPC protocol for all remote operations; RPC inputs
+and outputs are described using the XDR data description language.  XDR
+includes a facility for variable-length (up to 4GB) arrays, optionally
+subject to a smaller bound on their size.  For several RPCs, OpenAFS
+servers would accept and attempt to unmarshall into memory input arrays
+up to the full 4GB limit; length and authentication checks in RPC handler
+functions would be applied only after low-level memory allocation and
+unmarshalling.  This allows unauthenticated attackers to consume large
+amounts of server memory and network bandwidth, producing service degradation
+or denial of service to legitimate clients.
+
+IMPACT
+======
+
+In general, an unauthenticated attacker can cause the affected server process
+to allocate up to the maximum malloc size, or 4GB, whichever is smaller, per
+RPC.  Some systems will use memory overcommit and not actually allocate the
+full storage request at malloc time, in which case the attacker can send
+junk data contents but trickle off the flow of data towards the end, effectively
+causing the full allocation to be made and stalled.  By forcing such allocations
+but keeping the connection open, the attacker can consume large amounts of
+memory on the server and cause a denial of service condition.  There is no
+particular amplifcation on the network bandwidth consumption other than that
+caused by keeping multiple connections open for bulk data transfer, but since
+the bandwidth consumption is prior to any authentication checks or rate limiting
+of failed RPCs, it may still present an impact in some operational environments.
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.23 are affected, as are OpenAFS
+1.8.0, 1.8.1, and 1.8.1.1.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all servers
+to the 1.8.2 or 1.6.23 releases.  It is necessary to restart
+affected processes in order for the fixes to take effect.
+
+DETAILS
+=======
+
+The Rx RPCs used by OpenAFS include marshalling the XDR input types on
+the client into a stream of data over the network; the corresponding
+RPC server is responsible for unmarshalling the stream of bytes from the
+network into the corresponding data types/structures on the server.  This
+unmarshalling occurs at a very low level and must happen before any
+application-level RPC handler code is run, since the RPC handler expects
+to be called with the assembled C data types as arguments.  Authentication
+and certain sanity checking of input values is performed in the RPC handler
+layer, after data has been unmarshalled into memory.  An attacker can use
+an Rx connection with the "null" security class (so no Rx-layer authentication
+requirement) to cause the unmarshalling to occur in an unauthenticated
+context, since enforcement of "authentication required" RPCs occurs in the
+application-layer RPC handler.  As such, the limits in the XDR data description
+for the RPC inputs are the only limit on how much resources the low-level
+decoder will consume in processing the RPC.  When an XDR unbounded array type
+is used, the resulting resource consumption can be quite large, even if the
+call is doomed to fail once control passes into the application's RPC handler.
+The attacker can continue responding to Rx keepalives while failing to send
+the final amount of data, in order to keep control flow in the low-level
+unmarshalling code for minutes while still consuming the large amount of memory.
+Even for data types for which there is no abstract limit on the amount of
+input data, implementations should place an arbitrary implementation-specific
+limit (that could be raised later as necessary) on input arrays, in order to
+limit the scope of this denial of service attack.
+
+The affected RPCs are as follows:
+
+AFSVolCreateVolume, AFSVolClone, AFSVolSignalRestore, and AFSVolSetIdsTypes
+accepted input volume names as unbounded string arrays, and
+AFSVolPartitionInfo and AFSVolPartitionInfo64 accepted partition names
+as unbounded string arrays.
+
+AFSVolForwardMultiple accepted an unbounded array of (replica) destinations,
+even though OpenAFS does not support more than 13 replicas in its database
+per volume.
+
+BUDB_SaveText accepted an unbounded character list array as input, even though
+all in-tree consumers are limited to about 2KB at most.
+
+VL_RegisterAddrs accepted an unbounded array of fileserver addresses.
+
+ACKNOWLEDGMENTS
+===============
+
+Thanks to Mark Vitale for the detailed report and patches.
+-----BEGIN PGP SIGNATURE-----
+
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluYc2EACgkQKNmm82Tr
+dRInbgweOdkDDnCJmaMH5faXS7ID58v+QWb8cJR3fKMNjaAJIldOF/lqFOtMptxb
+MmndpTDAkMyZ2nB6RZPNqyCLw29anVV4glueOFlYaFOZNG7sdCG0C7mWrov4oljN
++Zi+7SETBcsFNUHfYcCgwokouDdp7ADOUDNF+9i+Ho+w0BosBR/9p64qRAzbOIiG
+gUdVKjed+o+sOAfVsURQMo+foA6YuxDKYheB5zfVMmQWnw7nrieBG7ZU2yJOPE5N
+9DGPt15Z4qNdLXvyTSotNEpUkVi45MdKAq61yDHYlrgZURKGqYbxkrNMrikDggsY
+lbPV0/r2mCa/lM5713OHRySWJ34sM8Mh4VCUsxoyRUfikTzyNa0iIjbdi3NbVKZb
+TSfgPlrt/rYCxYuwvAYUd2P8DBQYvqfqlIqLBunnr93Ke3Br7r6YLcBAUGWGwrH0
+n6DqpBAGHWl1fhX5488Y50oPCrKEdKnFOLy97QiH+361Zes5RX9C8+Luhtr6BbeV
+oGdU2zc+tL2dXA==
+=YfnF
+-----END PGP SIGNATURE-----

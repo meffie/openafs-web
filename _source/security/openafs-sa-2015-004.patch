@@ -1,0 +1,35 @@
+From e654fe67bfb56aa1139e8e626f3b36ea4b524e15 Mon Sep 17 00:00:00 2001
+From: Andrew Deason <adeason@sinenomine.net>
+Date: Wed, 8 Jul 2015 14:20:13 -0400
+Subject: [PATCH 4/7] afs: Use correct output buffer for FSCmd pioctl
+
+MRAFS added the FsCmd pioctl for passing messages to the fileserver;
+a bug causes it to write into the wrong memory and potentially panic
+clients.
+
+FIXES 131896 (CVE-2015-3285)
+
+(cherry picked from commit eecfba8ffd097813001e06c64c62fa5a1728f7a7)
+
+Change-Id: I1ee1fa7dff1d2594cfe9fab5ae0b7fc9245803de
+---
+ src/afs/afs_pioctl.c |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/src/afs/afs_pioctl.c b/src/afs/afs_pioctl.c
+index 89a56b9..fe76a71 100644
+--- a/src/afs/afs_pioctl.c
++++ b/src/afs/afs_pioctl.c
+@@ -5030,8 +5030,7 @@ DECL_PIOCTL(PFsCmd)
+ 	    if (tc) {
+ 		RX_AFS_GUNLOCK();
+ 		code =
+-		    RXAFS_FsCmd(rxconn, Fid, Inputs,
+-					(struct FsCmdOutputs *)aout);
++		    RXAFS_FsCmd(rxconn, Fid, Inputs, Outputs);
+ 		RX_AFS_GLOCK();
+ 	    } else
+ 		code = -1;
+-- 
+1.7.1
+

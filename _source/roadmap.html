@@ -1,0 +1,142 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+                      "http://www.w3c.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<title>OpenAFS Road Map / Development Wish List</title>
+<link href="/openafs.css" rel="stylesheet" type="text/css">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#000fff" vlink="#0000ff" alink="#0000ff">
+
+<h1 align="center">Road Map / Development Wish List for OpenAFS</h1>
+<p>In its fifteen-plus years as an open-source project, OpenAFS has made
+great progress and proved to be a mature project, providing clients
+and servers on all UNIX/Linux variants.</p>
+
+<h1 align="center"><a name="release_schedule"></a>Road Map</h1>
+<p align="left">As an independent open-source project, OpenAFS has no paid staff or
+full-time developers to maintain the software and add new features.  The
+contributions of volunteers drive the pace of progress, so there cannot be
+fixed timelines for future plans.  Regardless, there is still an overarching
+plan for the desired trend of future development, with major features and
+milestones to be reached.  Please send inquiries, comments, and offers of support to
+<a href="mailto:openafs-gatekeepers@openafs.org?subject=OpenAFS Roadmap Feedback">
+openafs-gatekeepers@openafs.org</a>. Where external contributors have promised
+contributions, they are included, as are timelines when those are provided.
+The following release schedule is subject to change.</p>
+
+<h2 align="left">1.6.19</h2>
+<p>The next release in the stable series for Unix will bring additional incremental
+improvements in line with previous stable branch releases. Most noteworthy,
+it will include fixes that prevent cases where a database write could be lost
+or an old version of the database be used instead of the latest version.</p>
+<p>The 1.6 stable release series is nearing the end of its development lifecycle;
+development resources are shifting to the forthcoming 1.8 release series.
+Non-invasive bugfixes and OS support will continue to be merged to the 1.6
+series, with OS support expected to drive the release schedule.</p>
+<p>No firm end-of-life date is yet set, as that will depend on the timeline for
+the 1.8 release to be available.</p>
+
+<h2 align="left">1.7.33</h2>
+<p>The 1.7.33 release is the latest release from the 1.7 series of stable
+releases for Windows clients.  No additional releases from this series
+are currently planned.</p>
+<p>Starting from the 1.7.32 release, 1.7-series releases are only distributed
+from <a href="/">openafs.org</a> in source form.  Pre-built installers are
+available from third-party organzations.</p>
+
+<h2 align="left">1.8</h2>
+<p>Preparation for a new stable release series for Unix has begun.
+This release will bring a wide variety of improvements and features that
+have been developed on the master branch for the past several years.
+In addition to the general code cleanup that has accumulated,
+it will include support for pthreaded database servers, shared libraries
+built with libtool, and use the crypto and roken libraries from Heimdal,
+eliminating the broad reliance on libkrb5 for rxkad-k5 support.  The
+Rx protocol performance is improved, and private structures have been
+removed from the public header files.  The most recent status update
+for this release was posted to openafs-devel is available
+<a href="https://lists.openafs.org/pipermail/openafs-devel/2016-September/020355.html">here</a>.</p>
+
+<h2 align="left">1.9</h2>
+<p>The 1.9 series will be an experimental release series, producing
+a rapidly updating set of releases to facilitate access to the features
+being developed for the 2.0 release.
+
+<h2 align="left">2.0</h2>
+<p>One of the goals of the 1.8 release is to open up the tree for
+more invasive (and more rewarding) feature development.  One long-desired
+feature that is expected to be in 2.0 is the rxgk Rx security class;
+some preliminary changes toward that feature are in gerrit waiting
+for review.  Other desired features such as IPv6 support are listed
+below, but as always, are contingent on the contributions of
+volunteers and companies to make them happen.</p>
+
+<h1 align="center">Development Wish List</h1>
+
+<h2 wrap><a name="modernization"></a>Modernization of crypto and network support</h2>
+<p>Over the years, the AFS protocol has not kept up with developments in
+cryptography and network protocols, sticking with single-DES-grade encryption
+and remaining an IPv4-only service.  The 2013 security release moved
+the long-term krb5 cell-wide keys off of single-DES, but wire encryption
+remains unchanged since the original AFS release.</p>
+
+<ul>
+<li><strong>rxgk</strong>
+<p>rxgk is the long-established new security class that uses the GSSAPI
+for authentication and RFC 3961 cryptography for wire encryption and
+integrity checking.  The use of the RFC 3961 framework allows for new
+cryptographic methods to be introduced without additional protocol
+changes.</p>
+<p>Work towards rxgk has already begun, but some major pieces remain
+to be designed.  In particular, the cache manager needs to be rearchitected
+to support the separation of connections to database servers and
+connections to fileservers; before connecting to a fileserver, the cache
+manager must first connect to a vlserver and learn about the fileserver.
+On the server side, a new vldb format must be designed to store the
+extended fileserver information and track which fileservers are rxgk-capable;
+the prdb should have mechanisms to store extended authentication names
+from arbitrary GSS-API clients.  A procedure must be developed
+(and software to support it) for a seamless transition from an
+existing deployment to using rxgk for server-to-server communication
+and enable rxgk for client usage.</p>
+</li>
+<li><strong>IPv6</strong>
+<p>At present, OpenAFS represents IP addresses as uint32.  This
+is fundamentally incompatible with IPv6, which is increasingly becoming
+a necessary part of the Internet ecosystem.  In order to remain
+a fully viable solution, OpenAFS must develop support for at least
+clients with IPv6 addresses, but also for servers with IPv6 addresses
+as well.</p>
+<p>The path to proper IPv6 support in the client is fairly clear:
+first, to convert
+all variables that hold IP addresses to be a distince type specific
+to IP addresses, then to convert that type to a structure containing
+the IPv4 address and use accessor routines for all operations with it,
+then adapt the accessors to be compatible with IPv6 addresses and
+abstract away address-family specific knowledge from the code that
+interacts with the accessors.  On the server side, though,
+additional database work is needed to support storing multiple types
+of adderess, and RPCs developed to manage them.
+No commitments have been made for contributions toward this goal.</p>
+</li>
+</ul>
+&nbsp;<div id="footer">
+	<hr>
+	<address>
+		&lt;webmaster@openafs.org&gt;</address>
+	<address>
+		Last modified: 2016/10/19 22:00:05 CDT</address>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5995928-1");
+pageTracker._trackPageview();
+</script>
+</body>
+
+</html>

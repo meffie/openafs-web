@@ -1,0 +1,57 @@
+Topic: Buffer overflow in OpenAFS vlserver
+       CVE-2015-6587
+
+Issued:         29-July-2015
+Last Update:    29-July-2015
+Affected:       OpenAFS versions through 1.6.12
+
+A network user running a VL_ListAttributesN2 RPC could attack
+regular expression handling code in the vlserver.
+
+SUMMARY
+=======
+
+The vlserver allows pattern matching on volume names via regular expressions
+when listing attributes. Because the regular expression is not checked for
+situations which can overflow the buffers used, an attack is possible which
+reads arbitrary memory beyond the end of the buffer and can act on it
+as part of the expression evaluation, potentially crashing the process.
+
+
+IMPACT
+======
+
+A caller could cause a denial of service by causing a vlserver to evaluate
+memory beyond was provided in the regular expression or exploit issues
+in the local regular expression handling implementation.
+
+
+AFFECTED SOFTWARE
+=================
+
+The vlserver executable in versions through 1.6.12 is affected.
+
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators of fileservers upgrade
+to OpenAFS version 1.6.13 or newer.
+
+For those sites unable, or unwilling, to upgrade a patch which resolves this
+issue is available directly from:
+
+  http://www.openafs.org/security/openafs-sa-2015-006.patch
+
+The latest stable OpenAFS release is always available from
+http://www.openafs.org/release/latest.html
+
+This announcement and code patches related to it may be found on the
+OpenAFS security advisory page at:
+
+  http://www.openafs.org/security/
+
+The main OpenAFS web page is at:
+
+  http://www.openafs.org/
+

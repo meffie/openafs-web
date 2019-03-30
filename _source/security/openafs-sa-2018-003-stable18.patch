@@ -1,0 +1,129 @@
+diff --git a/src/budb/budb.rg b/src/budb/budb.rg
+index 1ec45f1cac..6e61652ff2 100644
+--- a/src/budb/budb.rg
++++ b/src/budb/budb.rg
+@@ -224,7 +224,7 @@ typedef struct budb_volumeEntry budb_volumeList<BUDB_MAX_RETURN_LIST>;
+ typedef struct budb_dumpEntry budb_dumpList<BUDB_MAX_RETURN_LIST>;
+ typedef struct budb_tapeEntry budb_tapeList<BUDB_MAX_RETURN_LIST>;
+ typedef afs_int32                  budb_dumpsList<BUDB_MAX_RETURN_LIST>;
+-typedef char charListT<>;
++typedef char charListT<4096>;
+ 
+ %#define BUDB_TEXT_COMPLETE	1
+ 
+diff --git a/src/rxgen/rpc_parse.c b/src/rxgen/rpc_parse.c
+index ab26c954a4..f5d7c70338 100644
+--- a/src/rxgen/rpc_parse.c
++++ b/src/rxgen/rpc_parse.c
+@@ -411,6 +411,9 @@ get_declaration(declaration * dec, defkind dkind)
+ 	}
+ 	dec->rel = REL_ARRAY;
+ 	if (peekscan(TOK_RANGLE, &tok)) {
++	    if ((dkind == DEF_INPARAM) || (dkind == DEF_INOUTPARAM)) {
++		error("input arrays must specify a max size");
++	    }
+ 	    dec->array_max = "~0u";	/* unspecified size, use max */
+ 	} else {
+ 	    scan_num(&tok);
+@@ -953,7 +956,7 @@ hdle_param_tok(definition * defp, declaration * dec, token * tokp,
+     Proc_list->component_kind = DEF_PARAM;
+     Proc_list->code = alloc(250);
+     Proc_list->scode = alloc(250);
+-    get_declaration(dec, DEF_PARAM);
++    get_declaration(dec, par_kind);
+     Proc_list->pl.param_name = dec->name;
+     get1_param_type(defp, dec, &Proc_list->pl.param_type);
+     print_param(dec);
+diff --git a/src/vlserver/vldbint.xg b/src/vlserver/vldbint.xg
+index ff34d12d45..523fe801e7 100644
+--- a/src/vlserver/vldbint.xg
++++ b/src/vlserver/vldbint.xg
+@@ -208,7 +208,12 @@ const VLOP_DUMP        = 0x100;
+ typedef	vldbentry bulkentries<>;
+ typedef	nvldbentry nbulkentries<>;
+ typedef	uvldbentry ubulkentries<>;
+-typedef afs_uint32 bulkaddrs<>;
++/*
++ * 500 is an arbitrary implementation limit, larger than what we support storing.
++ * It lets the XDR decoder detect an attack (excessively large input) and reject
++ * it without incurring excessive resource usage.
++ */
++typedef afs_uint32 bulkaddrs<500>;
+ 
+ struct VLCallBack {
+     afs_uint32 CallBackVersion;
+diff --git a/src/volser/volint.xg b/src/volser/volint.xg
+index 5febc63308..3c982e5cdd 100644
+--- a/src/volser/volint.xg
++++ b/src/volser/volint.xg
+@@ -65,6 +65,7 @@ statindex 16
+ %#define     VOLDUMPV2_OMITDIRS 1
+ 
+ const SIZE = 1024;
++const NMAXNSERVERS = 13;
+ 
+ struct volser_status {
+ 	afs_uint32 volID;		/* Volume id--unique over all systems */
+@@ -247,7 +248,7 @@ struct volintSize {
+     afs_uint64 dump_size;
+ };
+ 
+-typedef  replica manyDests<>;
++typedef  replica manyDests<NMAXNSERVERS>;
+ typedef  afs_int32 manyResults<>;
+ typedef  transDebugInfo transDebugEntries<>;
+ typedef  volintInfo volEntries<>;
+@@ -256,7 +257,7 @@ typedef  volintXInfo volXEntries<>;
+ 
+ proc CreateVolume(
+   IN afs_int32 partition,
+-  string name<>,
++  string name<VNAMESIZE>,
+   IN afs_int32 type,
+   IN afs_uint32 parent,
+   INOUT afs_uint32 *volid,
+@@ -290,7 +291,7 @@ proc Clone(
+   IN afs_int32 trans,
+   IN afs_uint32 purgeVol,
+   IN afs_int32 newType,
+-  IN string newName<>,
++  IN string newName<VNAMESIZE>,
+   INOUT afs_uint32 *newVol
+ ) = VOLCLONE;
+ 
+@@ -338,7 +339,7 @@ proc GetStatus(
+ ) = VOLGETSTATUS;
+ 
+ proc SignalRestore(
+-  IN string name<>,
++  IN string name<VNAMESIZE>,
+   int type,
+   afs_uint32 pid,
+   afs_uint32 cloneid
+@@ -356,7 +357,7 @@ proc ListVolumes(
+ 
+ proc SetIdsTypes(
+   IN afs_int32 tId,
+-  string name<>,
++  string name<VNAMESIZE>,
+   afs_int32 type,
+   afs_uint32 pId,
+   afs_uint32 cloneId,
+@@ -368,7 +369,7 @@ proc Monitor(
+ ) = VOLMONITOR;
+ 
+ proc PartitionInfo(
+-  IN string name<>,
++  IN string name<4096>,
+   OUT struct diskPartition *partition
+ ) = VOLDISKPART;
+ 
+@@ -441,7 +442,7 @@ proc DumpV2(
+ ) split = VOLDUMPV2;
+ 
+ proc PartitionInfo64(
+-    IN string name<>,
++    IN string name<4096>,
+     OUT struct diskPartition64 *partition
+ ) = VOLDISKPART64;
+ 

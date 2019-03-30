@@ -1,0 +1,1003 @@
+diff --git a/Makefile.in b/Makefile.in
+index 5483d77e24..7a5401846a 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -158,7 +158,7 @@ util: opr $(DIR_roken) procmgmt hcrypto lwp
+ libafscp: util afs volser vlserver rx auth fsint
+ 	+${COMPILE_PART1} libafscp ${COMPILE_PART2}
+ 
+-audit: util rx rxkad fsint
++audit: util rx rxkad fsint bubasics
+ 	+${COMPILE_PART1} audit ${COMPILE_PART2} #TODO
+ 
+ comerr: util $(DIR_roken)
+diff --git a/doc/man-pages/pod8/backup.pod b/doc/man-pages/pod8/backup.pod
+index f8e2ebcc3f..0900fe6ede 100644
+--- a/doc/man-pages/pod8/backup.pod
++++ b/doc/man-pages/pod8/backup.pod
+@@ -194,6 +194,18 @@ interactive mode. The local identity and AFS tokens with which the
+ B<backup> command interpreter enters interactive mode apply to all
+ commands issued during the interactive session.
+ 
++=item B<-nobutcauth>
++
++Prior to the fix for OPENAFS-SA-2018-001, B<butc> did not allow incoming
++connections to be authenticated.  As part of that fix, B<backup> was modified
++to authenticate to the B<butc> services when possible, but a B<backup> utility
++with the security fix will not interoperate with a B<butc> that lacks the fix
++unless this option is passed, which forces the use of unauthenticated
++connections to the B<butc>.  Use of this option is strongly disrecommended,
++and it is provided only for backwards compatibility in environments where
++B<backup> and B<butc> communicate over a secure network environment that denies
++access to untrusted parties.
++
+ =item B<-portoffset> <I<TC port offset>>
+ 
+ Specifies the port offset number of the Tape Coordinator that is to
+diff --git a/doc/man-pages/pod8/butc.pod b/doc/man-pages/pod8/butc.pod
+index 730ce83975..42c72daf25 100644
+--- a/doc/man-pages/pod8/butc.pod
++++ b/doc/man-pages/pod8/butc.pod
+@@ -8,10 +8,14 @@ butc - Initializes the Tape Coordinator process
+ <div class="synopsis">
+ 
+ B<butc> S<<< [B<-port> <I<port offset>>] >>> S<<< [B<-debuglevel> (0 | 1 | 2)] >>>
+-    S<<< [B<-cell> <I<cell name>>] >>> [B<-noautoquery>] [B<-rxbind>] [B<-localauth>] [B<-help>]
++    S<<< [B<-cell> <I<cell name>>] >>> [B<-noautoquery>] [B<-rxbind>] [B<-localauth>]
++    [B<-auditlog> <I<file | sysvmq>> [B<-audit-interface> <I<interface>>]]
++    [B<-allow_unauthenticated>] [B<-help>]
+ 
+ B<butc> S<<< [B<-p> <I<port offset>>] >>> S<<< [B<-d> (0 | 1 | 2)] >>>
+-    S<<< [B<-c> <I<cell name>>] >>> [B<-n>] [B<-r>] [B<-l>] [B<-h>]
++    S<<< [B<-c> <I<cell name>>] >>> [B<-n>] [B<-r>] [B<-l>]
++    [B<-auditl> <I<file | sysvmq>> [-B<-audit-i> <I<interface>>]]
++    [B<-al>] [B<-h>]
+ 
+ =for html
+ </div>
+@@ -186,6 +190,29 @@ logged on to a server machine as the local superuser C<root>; client
+ machines do not have F</usr/afs/etc/KeyFile> or F</usr/afs/etc/KeyFileExt>
+ files.
+ 
++=item B<-auditlog> <I<log path>>
++
++Turns on audit logging, and sets the path for the audit log.  The audit
++log records information about RPC calls, including the name of the RPC
++call, the host that submitted the call, the authenticated entity (user)
++that issued the call, the parameters for the call, and if the call
++succeeded or failed.
++
++=item B<-audit-interface> <(file | sysvmq)>
++
++Specifies what audit interface to use. Defaults to C<file>. See
++L<fileserver(8)> for an explanation of each interface.
++
++=item B<-allow_unauthenticated>
++
++By default the B<butc> requires clients performing TC_ RPCs to authenticate
++themselves, behavior introduced in the fix for OPENAFS-SA-2018-001.
++This option reverts to the historical behavior of only using the rxnull
++security class for incoming connections.  Use of this option is strongly
++disrecommended; it is provided only for backwards compatibility with older
++clients in environments where B<backup> and B<butc> communicate over a secure
++network that denies access to untrusted parties.
++
+ =item B<-help>
+ 
+ Prints the online help for this command. All other valid options are
+diff --git a/src/audit/audit.c b/src/audit/audit.c
+index 4701d61d1d..1f641f0c52 100644
+--- a/src/audit/audit.c
++++ b/src/audit/audit.c
+@@ -24,6 +24,7 @@
+ 
+ #include <afs/opr.h>
+ #include "afs/afsint.h"
++#include "afs/butc.h"
+ #include <rx/rx.h>
+ #include <rx/rxkad.h>
+ #include "audit.h"
+@@ -138,6 +139,95 @@ audmakebuf(char *audEvent, va_list vaList)
+ 		bufferPtr += sizeof(struct AFSFid);
+ 		break;
+ 	    }
++	/* butc tape label */
++	case AUD_TLBL:
++	    {
++		struct tc_tapeLabel *label;
++
++		label = (struct tc_tapeLabel *)va_arg(vaList,
++						      struct tc_tapeLabel *);
++		if (label)
++		    memcpy(bufferPtr, label, sizeof(*label));
++		else
++		    memset(bufferPtr, 0, sizeof(*label));
++		bufferPtr += sizeof(label);
++		break;
++	    }
++	/* butc dump interface */
++	case AUD_TDI:
++	    {
++		struct tc_dumpInterface *di;
++
++		di = (struct tc_dumpInterface *)
++			va_arg(vaList, struct tc_dumpInterface *);
++		if (di)
++		    memcpy(bufferPtr, di, sizeof(*di));
++		else
++		    memset(bufferPtr, 0, sizeof(*di));
++		bufferPtr += sizeof(*di);
++		break;
++	    }
++	/*
++	 * butc dump array
++	 * An array of dump descriptions, but the AIX audit package assumes fixed
++	 * length, so we can only do the first one for now.
++	 */
++	case AUD_TDA:
++	    {
++		struct tc_dumpArray *da;
++
++		da = (struct tc_dumpArray *)
++			va_arg(vaList, struct tc_dumpArray *);
++		if (da && da->tc_dumpArray_len) {
++		    memcpy(bufferPtr, &da->tc_dumpArray_len, sizeof(u_int));
++		    bufferPtr += sizeof(u_int);
++		    memcpy(bufferPtr, da->tc_dumpArray_val,
++			   sizeof(da->tc_dumpArray_val[0]));
++		} else {
++		    memset(bufferPtr, 0, sizeof(u_int));
++		    bufferPtr += sizeof(u_int);
++		    memset(bufferPtr, 0, sizeof(da->tc_dumpArray_val[0]));
++		}
++		bufferPtr += sizeof(da->tc_dumpArray_val[0]);
++		break;
++	    }
++	/*
++	 * butc restore array
++	 * An array of restore descriptions, but the AIX audit package assumes
++	 * fixed length, so we can only do the first one for now.
++	 */
++	case AUD_TRA:
++	    {
++		struct tc_restoreArray *ra;
++
++		ra = (struct tc_restoreArray *)
++			va_arg(vaList, struct tc_restoreArray *);
++		if (ra && ra->tc_restoreArray_len) {
++		    memcpy(bufferPtr, &ra->tc_restoreArray_len, sizeof(u_int));
++		    bufferPtr += sizeof(u_int);
++		    memcpy(bufferPtr, ra->tc_restoreArray_val,
++			   sizeof(ra->tc_restoreArray_val[0]));
++		} else {
++		    memset(bufferPtr, 0, sizeof(u_int));
++		    bufferPtr += sizeof(u_int);
++		    memset(bufferPtr, 0, sizeof(ra->tc_restoreArray_val[0]));
++		}
++		bufferPtr += sizeof(ra->tc_restoreArray_val[0]);
++		break;
++	    }
++	/* butc tape controller status */
++	    {
++		struct tciStatusS *status;
++
++		status = (struct tciStatusS *)va_arg(vaList,
++						     struct tciStatusS *);
++		if (status)
++		    memcpy(bufferPtr, status, sizeof(*status));
++		else
++		    memset(bufferPtr, 0, sizeof(*status));
++		bufferPtr += sizeof(*status);
++		break;
++	    }
+ 	default:
+ #ifdef AFS_AIX32_ENV
+ 	    code =
+@@ -163,6 +253,11 @@ printbuf(int rec, char *audEvent, char *afsName, afs_int32 hostId,
+     char *vaStr;
+     struct AFSFid *vaFid;
+     struct AFSCBFids *vaFids;
++    struct tc_tapeLabel *vaLabel;
++    struct tc_dumpInterface *vaDI;
++    struct tc_dumpArray *vaDA;
++    struct tc_restoreArray *vaRA;
++    struct tciStatusS *vaTCstatus;
+     int num = LogThreadNum();
+     struct in_addr hostAddr;
+     time_t currenttime;
+@@ -258,6 +353,102 @@ printbuf(int rec, char *audEvent, char *afsName, afs_int32 hostId,
+ 
+             }
+ 	    break;
++	case AUD_TLBL:		/* butc tape label */
++	    vaLabel = va_arg(vaList, struct tc_tapeLabel *);
++
++	    if (vaLabel) {
++		audit_ops->append_msg("TAPELABEL %d:%.*s:%.*s:%u ",
++				      vaLabel->size,
++				      TC_MAXTAPELEN, vaLabel->afsname,
++				      TC_MAXTAPELEN, vaLabel->pname,
++				      vaLabel->tapeId);
++	    } else {
++		audit_ops->append_msg("TAPELABEL <null>");
++	    }
++	    break;
++	case AUD_TDI:
++	    vaDI = va_arg(vaList, struct tc_dumpInterface *);
++
++	    if (vaDI) {
++		audit_ops->append_msg(
++    "TCDUMPINTERFACE %.*s:%.*s:%.*s:%d:%d:%d:%d:%.*s:%.*s:%d:%d:%d:%d:%d ",
++    TC_MAXDUMPPATH, vaDI->dumpPath, TC_MAXNAMELEN, vaDI->volumeSetName,
++    TC_MAXNAMELEN, vaDI->dumpName, vaDI->parentDumpId, vaDI->dumpLevel,
++    vaDI->doAppend,
++    vaDI->tapeSet.id, TC_MAXHOSTLEN, vaDI->tapeSet.tapeServer,
++    TC_MAXFORMATLEN, vaDI->tapeSet.format, vaDI->tapeSet.maxTapes,
++    vaDI->tapeSet.a, vaDI->tapeSet.b, vaDI->tapeSet.expDate,
++    vaDI->tapeSet.expType);
++	    } else {
++		audit_ops->append_msg("TCDUMPINTERFACE <null>");
++	    }
++	    break;
++	case AUD_TDA:
++	    vaDA = va_arg(vaList, struct tc_dumpArray *);
++
++	    if (vaDA) {
++		u_int i;
++		struct tc_dumpDesc *desc;
++		struct in_addr hostAddr;
++
++		desc = vaDA->tc_dumpArray_val;
++		if (desc) {
++		    audit_ops->append_msg("DUMPS %d ", vaDA->tc_dumpArray_len);
++		    for (i = 0; i < vaDA->tc_dumpArray_len; i++, desc++) {
++			hostAddr.s_addr = desc->hostAddr;
++			audit_ops->append_msg("DUMP %d:%d:%.*s:%d:%d:%d:%s ",
++			    desc->vid, desc->vtype, TC_MAXNAMELEN, desc->name,
++			    desc->partition, desc->date, desc->cloneDate,
++			    inet_ntoa(hostAddr));
++		    }
++		} else {
++		    audit_ops->append_msg("DUMPS 0 DUMP 0:0::0:0:0:0.0.0.0");
++		}
++	    }
++	    break;
++	case AUD_TRA:
++	    vaRA = va_arg(vaList, struct tc_restoreArray *);
++
++	    if (vaRA) {
++		u_int i;
++		struct tc_restoreDesc *desc;
++		struct in_addr hostAddr;
++
++		desc = vaRA->tc_restoreArray_val;
++		if (desc) {
++		    audit_ops->append_msg("RESTORES %d ",
++					  vaRA->tc_restoreArray_len);
++		    for(i = 0; i < vaRA->tc_restoreArray_len; i++, desc++) {
++			hostAddr.s_addr = desc->hostAddr;
++			audit_ops->append_msg(
++			    "RESTORE %d:%.*s:%d:%d:%d:%d:%d:%d:%d:%s:%.*s:%.*s ",
++			    desc->flags, TC_MAXTAPELEN, desc->tapeName,
++			    desc->dbDumpId, desc->initialDumpId,
++			    desc->position, desc->origVid, desc->vid,
++			    desc->partition, desc->dumpLevel,
++			    inet_ntoa(hostAddr), TC_MAXNAMELEN,
++			    desc->oldName, TC_MAXNAMELEN, desc->newName);
++		    }
++		} else {
++		    audit_ops->append_msg(
++			"RESTORES 0 RESTORE 0::0:0:0:0:0:0:0:0.0.0.0::: ");
++		}
++	    }
++	    break;
++	case AUD_TSTT:
++	    vaTCstatus = va_arg(vaList, struct tciStatusS *);
++
++	    if (vaTCstatus)
++		audit_ops->append_msg("TCSTATUS %.*s:%d:%d:%d:%d:%.*s:%d:%d ",
++				      TC_MAXNAMELEN, vaTCstatus->taskName,
++				      vaTCstatus->taskId, vaTCstatus->flags,
++				      vaTCstatus->dbDumpId, vaTCstatus->nKBytes,
++				      TC_MAXNAMELEN, vaTCstatus->volumeName,
++				      vaTCstatus->volsFailed,
++				      vaTCstatus->lastPolled);
++	    else
++		audit_ops->append_msg("TCSTATUS <null>");
++	    break;
+ 	default:
+ 	    audit_ops->append_msg("--badval-- ");
+ 	    break;
+diff --git a/src/audit/audit.h b/src/audit/audit.h
+index f8b4100b5a..6188cf60dd 100644
+--- a/src/audit/audit.h
++++ b/src/audit/audit.h
+@@ -23,6 +23,12 @@
+ #define AUD_RESID 20		/* resid         in variable list */
+ #define AUD_RSSIZERANGE 21	/* rssizerange   in variable list */
+ #define AUD_LOOKUPINFO 22	/* LookupInfo    in variable list */
++/* next 5 lines for butc */
++#define AUD_TLBL 30             /* Tape Controller label */
++#define AUD_TDI  31             /* Tape Controller dump interface */
++#define AUD_TDA  32             /* Tape Controller dump array */
++#define AUD_TRA  33             /* Tape Controller restore array */
++#define AUD_TSTT 34             /* Tape Controller status struct */
+ 
+ /*
+  * Note: the master definitions of these error codes come from *.et
+@@ -296,6 +302,21 @@
+ #define SREMIORemoteGetHSMdata  "AFS_RE_HSMdata"
+ #define SREMIOPrefetch          "AFS_RE_Prefetch"
+ 
++#define TC_StartEvent           "AFS_TC_Start"
++#define TC_LabelTapeEvent       "AFS_TC_LabelTape"
++#define TC_PerformDumpEvent     "AFS_TC_PerformDump"
++#define TC_PerformRestoreEvent  "AFS_TC_PerformRestore"
++#define TC_ReadLabelEvent       "AFS_TC_ReadLabel"
++#define TC_RestoreDbEvent       "AFS_TC_RestoreDb"
++#define TC_SaveDbEvent          "AFS_TC_SaveDb"
++#define TC_ScanDumpsEvent       "AFS_TC_ScanDumps"
++#define TC_TCInfoEvent          "AFS_TC_TCInfo"
++#define TC_DeleteDumpEvent      "AFS_TC_DeleteDump"
++#define TC_GetStatusEvent       "AFS_TC_GetStatus"
++#define TC_EndStatusEvent       "AFS_TC_EndStatus"
++#define TC_RequestAbortEvent    "AFS_TC_RequestAbort"
++#define TC_ScanStatusEvent      "AFS_TC_ScanStatus"
++
+ 
+ /* prototypes for audit functions */
+ int osi_audit(char *audEvent, afs_int32 errCode, ...);
+diff --git a/src/bucoord/bucoord_internal.h b/src/bucoord/bucoord_internal.h
+index 543bf00090..7866f47cde 100644
+--- a/src/bucoord/bucoord_internal.h
++++ b/src/bucoord/bucoord_internal.h
+@@ -117,6 +117,8 @@ extern afs_int32 bc_UpdateDumpSchedule(void);
+ extern int bc_SaveDumpSchedule(void);
+ 
+ /* main.c */
++extern int localauth, nobutcauth;
++extern char tcell[];
+ extern time_t tokenExpires;
+ extern afs_int32 doDispatch(afs_int32, char *[], afs_int32);
+ extern void bc_HandleMisc(afs_int32 code);
+diff --git a/src/bucoord/dump.c b/src/bucoord/dump.c
+index 5d1f58aa3a..e0b3ced57a 100644
+--- a/src/bucoord/dump.c
++++ b/src/bucoord/dump.c
+@@ -17,6 +17,7 @@
+ #include <roken.h>
+ 
+ #include <afs/cmd.h>
++#include <afs/cellconfig.h>
+ #include <lwp.h>
+ #include <rx/rx.h>
+ #include <afs/bubasics.h>
+@@ -470,15 +471,40 @@ bc_GetConn(struct bc_config *aconfig, afs_int32 aport,
+ 	   struct rx_connection **tconn)
+ {
+     afs_uint32 host;
++    afs_int32 code;
+     unsigned short port;
+     static struct rx_securityClass *rxsc;
++    static afs_int32 scIndex;
+     struct bc_hostEntry *te;
+ 
+     *tconn = (struct rx_connection *)0;
+ 
+     /* use non-secure connections to butc */
+-    if (!rxsc)
+-	rxsc = rxnull_NewClientSecurityObject();
++    if (!rxsc) {
++	struct afsconf_dir *dir;
++	afsconf_secflags flags = AFSCONF_SECOPTS_FALLBACK_NULL;
++	char *cname;
++
++	if (nobutcauth)
++	    flags |= AFSCONF_SECOPTS_NOAUTH;
++	if (localauth) {
++	    flags |= AFSCONF_SECOPTS_LOCALAUTH;
++	    dir = afsconf_Open(AFSDIR_SERVER_ETC_DIRPATH);
++	} else {
++	    dir = afsconf_Open(AFSDIR_CLIENT_ETC_DIRPATH);
++	}
++	if (tcell[0] == '\0')
++	    cname = NULL;
++	else
++	    cname = tcell;
++	/* No need for cell info since butc is not a registered service */
++	code = afsconf_PickClientSecObj(dir, flags, NULL, cname, &rxsc, &scIndex,
++					NULL);
++	if (dir)
++	    afsconf_Close(dir);
++	if (code)
++	    return -1;
++    }
+     if (!rxsc || !aconfig)
+ 	return (-1);
+ 
+@@ -491,8 +517,8 @@ bc_GetConn(struct bc_config *aconfig, afs_int32 aport,
+ 
+ 	    port = htons(BC_TAPEPORT + aport);
+ 
+-	    /* servers is 1; sec index is 0 */
+-	    *tconn = rx_NewConnection(host, port, 1, rxsc, 0);
++	    /* servers is 1 */
++	    *tconn = rx_NewConnection(host, port, 1, rxsc, scIndex);
+ 	    return ((*tconn ? 0 : -1));
+ 	}
+     }
+diff --git a/src/bucoord/main.c b/src/bucoord/main.c
+index 34a3a7926c..d2a5f368bd 100644
+--- a/src/bucoord/main.c
++++ b/src/bucoord/main.c
+@@ -41,7 +41,7 @@
+ #include "bucoord_internal.h"
+ #include "bucoord_prototypes.h"
+ 
+-int localauth, interact;
++int localauth, interact, nobutcauth;
+ char tcell[64];
+ 
+ /*
+@@ -292,6 +292,7 @@ MyBeforeProc(struct cmd_syndesc *as, void *arock)
+     /* Handling the command line opcode */
+     if (!bcInit) {
+ 	localauth = ((as && as->parms[14].items) ? 1 : 0);
++	nobutcauth = ((as && as->parms[16].items) ? 1 : 0);
+ 	if (as && as->parms[15].items)
+ 	    strcpy(tcell, as->parms[15].items->data);
+ 	else
+@@ -432,6 +433,8 @@ add_std_args(struct cmd_syndesc *ts)
+     cmd_AddParm(ts, "-localauth", CMD_FLAG, CMD_OPTIONAL,
+ 		"local authentication");
+     cmd_AddParm(ts, "-cell", CMD_SINGLE, CMD_OPTIONAL, "cell name");
++    cmd_AddParm(ts, "-nobutcauth", CMD_FLAG, CMD_OPTIONAL,
++		"no authentication to butc");
+ }
+ 
+ int
+diff --git a/src/butc/Makefile.in b/src/butc/Makefile.in
+index 4648f96b7a..5d942222e7 100644
+--- a/src/butc/Makefile.in
++++ b/src/butc/Makefile.in
+@@ -38,6 +38,7 @@ LIBS=${TOP_LIBDIR}/libbudb.a \
+         ${TOP_LIBDIR}/libsys.a  \
+ 	${TOP_LIBDIR}/librx.a \
+         ${TOP_LIBDIR}/libsys.a  \
++	${TOP_LIBDIR}/libaudit.a \
+ 	${TOP_LIBDIR}/liblwp.a \
+         ${TOP_LIBDIR}/libcmd.a \
+ 	${TOP_LIBDIR}/libafscom_err.a \
+diff --git a/src/butc/butc_prototypes.h b/src/butc/butc_prototypes.h
+index 1c62c34b4d..85a379963a 100644
+--- a/src/butc/butc_prototypes.h
++++ b/src/butc/butc_prototypes.h
+@@ -32,5 +32,10 @@ extern void *saveDbToTape(void *);
+ extern void *restoreDbFromTape(void *);
+ extern void *KeepAlive(void *);
+ 
++/* tcmain.c */
++
++extern struct afsconf_dir *butc_confdir;
++extern int allow_unauth;
++
+ #endif
+ 
+diff --git a/src/butc/tcmain.c b/src/butc/tcmain.c
+index 197fe256a0..c5399396ee 100644
+--- a/src/butc/tcmain.c
++++ b/src/butc/tcmain.c
+@@ -41,6 +41,7 @@
+ #include <afs/keys.h>
+ #include <afs/volser.h>
+ #include <ubik.h>
++#include <afs/audit.h>
+ #include <afs/com_err.h>
+ #include <afs/cmd.h>
+ #include <afs/tcdata.h>
+@@ -105,18 +106,12 @@ afs_int32 BufferSize;		/* Size in B stored for data */
+ char *centralLogFile;
+ afs_int32 lastLog;		/* Log last pass info */
+ int rxBind = 0;
++struct afsconf_dir *butc_confdir;
++int allow_unauth = 0;
+ 
+ #define ADDRSPERSITE 16         /* Same global is in rx/rx_user.c */
+ afs_uint32 SHostAddrs[ADDRSPERSITE];
+ 
+-/* dummy routine for the audit work.  It should do nothing since audits */
+-/* occur at the server level and bos is not a server. */
+-int
+-osi_audit(void)
+-{
+-    return 0;
+-}
+-
+ static afs_int32
+ SafeATOL(char *anum)
+ {
+@@ -831,11 +826,26 @@ xbsa_shutdown(int x)
+ }
+ #endif
+ 
++static int
++tc_IsLocalRealmMatch(void *rock, char *name, char *inst, char *cell)
++{
++    struct afsconf_dir *dir = (struct afsconf_dir *)rock;
++    afs_int32 islocal = 0;	/* default to no */
++    int code;
++
++    code = afsconf_IsLocalRealmMatch(dir, &islocal, name, inst, cell);
++    if (code) {
++	TLog(0, ("Failed local realm check; code=%d, name=%s, inst=%s, cell=%s\n",
++		 code, name, inst, cell));
++    }
++    return islocal;
++}
++
+ static int
+ WorkerBee(struct cmd_syndesc *as, void *arock)
+ {
+-    afs_int32 code;
+-    struct rx_securityClass *(securityObjects[1]);
++    afs_int32 code, numClasses;
++    struct rx_securityClass *(nullObjects[1]), **secObjs, **allObjs;
+     struct rx_service *service;
+     time_t tokenExpires;
+     char cellName[64];
+@@ -850,6 +860,8 @@ WorkerBee(struct cmd_syndesc *as, void *arock)
+     PROCESS dbWatcherPid;
+ #endif
+     afs_uint32 host = htonl(INADDR_ANY);
++    char *auditFileName = NULL;
++    char *auditInterface = NULL;
+ 
+     debugLevel = 0;
+ 
+@@ -995,6 +1007,30 @@ WorkerBee(struct cmd_syndesc *as, void *arock)
+ 	}
+     }
+ 
++    /* Open the configuration directory */
++    butc_confdir = afsconf_Open(AFSDIR_SERVER_ETC_DIRPATH);
++    if (butc_confdir == NULL) {
++	TLog(0, "Failed to open server configuration directory");
++	exit(1);
++    }
++
++    /* Start auditing */
++    osi_audit_init();
++    if (as->parms[9].items) {
++	auditFileName = as->parms[9].items->data;
++    }
++    if (auditFileName != NULL)
++	osi_audit_file(auditFileName);
++    if (as->parms[10].items) {
++	auditInterface = as->parms[10].items->data;
++	if (osi_audit_interface(auditInterface)) {
++	    TLog(0, "Invalid audit interface '%s'\n", auditInterface);
++	    exit(1);
++	}
++    }
++    osi_audit(TC_StartEvent, 0, AUD_END);
++    osi_audit_set_user_check(butc_confdir, tc_IsLocalRealmMatch);
++
+     if (as->parms[1].items) {
+ 	debugLevel = SafeATOL(as->parms[1].items->data);
+ 	if (debugLevel == -1) {
+@@ -1035,6 +1071,13 @@ WorkerBee(struct cmd_syndesc *as, void *arock)
+ 
+     localauth = (as->parms[5].items ? 1 : 0);
+     rxBind = (as->parms[8].items ? 1 : 0);
++    allow_unauth = (as->parms[11].items ? 1 : 0);
++
++    if (!allow_unauth && !localauth) {
++	const char *errstr = "Neither -localauth nor -allow_unauthenticated was provided; refusing to start in unintended insecure configuration\n";
++	TLog(0, "%s", (char *)errstr);
++	exit(1);
++    }
+ 
+     if (rxBind) {
+         afs_int32 ccode;
+@@ -1079,19 +1122,48 @@ WorkerBee(struct cmd_syndesc *as, void *arock)
+ 
+     /* initialize database support, volume support, and logs */
+ 
+-    /* Create a single security object, in this case the null security
+-     * object, for unauthenticated connections, which will be used to control
+-     * security on connections made to this server
++    /*
++     * Create security objects for the Rx server functionality.  Historically
++     * this was a single rxnull security object, since the tape controller was
++     * run by an operator that had local access to the tape device and some
++     * administrative privilege in the cell (to be able to perform volume-level
++     * accesses), but on a machine that was not necessarily trusted to hold the
++     * cell-wide key.
++     *
++     * Such a configuration is, of course, insecure because anyone can make
++     * inbound RPCs and manipulate the database, including creating bogus
++     * dumps and restoring them!  Additionally, in modern usage, butc is
++     * frequently run with -localauth to authenticate its outbound connections
++     * to the volservers and budb with the cell-wide key, in which case the
++     * cell-wide key is present and could be used to authenticate incoming
++     * connections as well.
++     *
++     * If -localauth is in use, create the full barrage of server security
++     * objects, including rxkad, so that inbound connections can be verified
++     * to only be made by authenticated clients.  Otherwise, only the rxnull
++     * class is in use with a single server security object.  Note that butc
++     * will refuse to start in this configuration unless the
++     * "-allow_unauthenticated" flag is provided, indicating that the operator
++     * has ensured that incoming connections are appropriately restricted by
++     * firewall configuration or network topology.
+      */
+ 
+-    securityObjects[RX_SECIDX_NULL] = rxnull_NewServerSecurityObject();
+-    if (!securityObjects[RX_SECIDX_NULL]) {
+-	TLog(0, "rxnull_NewServerSecurityObject");
+-	exit(1);
++    if (allow_unauth) {
++	nullObjects[RX_SECIDX_NULL] = rxnull_NewServerSecurityObject();
++	if (!nullObjects[RX_SECIDX_NULL]) {
++	    TLog(0, "rxnull_NewServerSecurityObject");
++	    exit(1);
++	}
++	numClasses = 1;
++	secObjs = nullObjects;
++    } else {
++	/* Must be -localauth, so the cell keys are available. */
++	afsconf_BuildServerSecurityObjects(butc_confdir, &allObjs, &numClasses);
++	secObjs = allObjs;
+     }
+ 
+     service =
+-	rx_NewServiceHost(host, 0, 1, "BUTC", securityObjects, 1, TC_ExecuteRequest);
++	rx_NewServiceHost(host, 0, 1, "BUTC", secObjs, numClasses, TC_ExecuteRequest);
+     if (!service) {
+ 	TLog(0, "rx_NewService");
+ 	exit(1);
+@@ -1194,6 +1266,11 @@ main(int argc, char **argv)
+ 		"Force multiple XBSA server support");
+     cmd_AddParm(ts, "-rxbind", CMD_FLAG, CMD_OPTIONAL,
+ 		"bind Rx socket");
++    cmd_AddParm(ts, "-auditlog", CMD_SINGLE, CMD_OPTIONAL, "location of audit log");
++    cmd_AddParm(ts, "-audit-interface", CMD_SINGLE, CMD_OPTIONAL,
++		"interface to use for audit logging");
++    cmd_AddParm(ts, "-allow_unauthenticated", CMD_FLAG, CMD_OPTIONAL,
++		"allow unauthenticated inbound RPCs (requires firewalling)");
+ 
+     /* Initialize dirpaths */
+     if (!(initAFSDirPath() & AFSDIR_SERVER_PATHS_OK)) {
+diff --git a/src/butc/tcprocs.c b/src/butc/tcprocs.c
+index cc19e532d5..c51b1f14d2 100644
+--- a/src/butc/tcprocs.c
++++ b/src/butc/tcprocs.c
+@@ -33,21 +33,41 @@
+ #include "butc_xbsa.h"
+ #include "butc_prototypes.h"
+ #include "butc_internal.h"
++#include "afs/audit.h"
+ 
+ static int CopyDumpDesc(struct tc_dumpDesc *, tc_dumpArray *);
+ static int CopyRestoreDesc(struct tc_restoreDesc *, tc_restoreArray *);
+ static int CopyTapeSetDesc(struct tc_tapeSet *, struct tc_tapeSet *);
+ 
++/* Helpers implementing RPC backends */
++static afs_int32 SLabelTape(struct rx_call *acid, struct tc_tapeLabel *label,
++			    afs_uint32 *taskId);
++static afs_int32 SPerformDump(struct rx_call *rxCallId,
++			      struct tc_dumpInterface *tcdiPtr,
++			      tc_dumpArray *tc_dumpArrayPtr, afs_int32 *taskId);
++static afs_int32 SPerformRestore(struct rx_call *acid, char *dumpSetName,
++				 tc_restoreArray *arestores, afs_int32 *taskId);
++static afs_int32 SReadLabel(struct rx_call *acid, struct tc_tapeLabel *label,
++			    afs_uint32 *taskId);
++static afs_int32 SRestoreDb(struct rx_call *rxCall, afs_uint32 *taskId);
++static afs_int32 SSaveDb(struct rx_call *rxCall, Date archiveTime,
++			 afs_uint32 *taskId);
++static afs_int32 SScanDumps(struct rx_call *acid, afs_int32 addDbFlag,
++			    afs_uint32 *taskId);
++static afs_int32 STCInfo(struct rx_call *acid, struct tc_tcInfo *tciptr);
++static afs_int32 SDeleteDump(struct rx_call *acid, afs_uint32 dumpID,
++			     afs_uint32 *taskId);
++
+ int
+ callPermitted(struct rx_call *call)
+ {
+     /*
+-     * Before this code can be used, the rx connection, on the bucoord side,
+-     * must be changed so that it will set up for token passing instead of
+-     * using a simple rx connection that, below, returns a value of
+-     * RX_SECIDX_NULL from rx_SecurityClassOf.
++     * If in backwards compat mode, allow anyone; otherwise, only
++     * superusers are allowed.
+      */
+-    return 1;
++    if (allow_unauth)
++	return 1;
++    return afsconf_SuperIdentity(butc_confdir, call, NULL);
+ }
+ 
+ /* -----------------------------
+@@ -129,6 +149,17 @@ CopyTapeSetDesc(struct tc_tapeSet *toPtr, struct tc_tapeSet *fromPtr)
+ 
+ afs_int32
+ STC_LabelTape(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *taskId)
++{
++    afs_int32 code;
++
++    code = SLabelTape(acid, label, taskId);
++    osi_auditU(acid, TC_LabelTapeEvent, code,
++	       AUD_TLBL, label, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SLabelTape(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *taskId)
+ {
+ #ifdef AFS_PTHREAD_ENV
+     pthread_t pid;
+@@ -204,7 +235,20 @@ STC_LabelTape(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *task
+  */
+ 
+ afs_int32
+-STC_PerformDump(struct rx_call *rxCallId, struct tc_dumpInterface *tcdiPtr, tc_dumpArray *tc_dumpArrayPtr, afs_int32 *taskId)
++STC_PerformDump(struct rx_call *call, struct tc_dumpInterface *di,
++		tc_dumpArray *da, afs_int32 *taskId)
++{
++    afs_int32 code;
++
++    code = SPerformDump(call, di, da, taskId);
++    osi_auditU(call, TC_PerformDumpEvent, code,
++	       AUD_TDI, di, AUD_TDA, da, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SPerformDump(struct rx_call *rxCallId, struct tc_dumpInterface *tcdiPtr,
++	     tc_dumpArray *tc_dumpArrayPtr, afs_int32 *taskId)
+ {
+     struct dumpNode *newNode = 0;
+     statusP statusPtr = 0;
+@@ -295,7 +339,20 @@ STC_PerformDump(struct rx_call *rxCallId, struct tc_dumpInterface *tcdiPtr, tc_d
+ }
+ 
+ afs_int32
+-STC_PerformRestore(struct rx_call *acid, char *dumpSetName, tc_restoreArray *arestores, afs_int32 *taskID)
++STC_PerformRestore(struct rx_call *call, char *dumpSetName,
++		   tc_restoreArray *ra, afs_int32 *taskId)
++{
++    afs_int32 code;
++
++    code = SPerformRestore(call, dumpSetName, ra, taskId);
++    osi_auditU(call, TC_PerformRestoreEvent, code,
++	       AUD_STR, dumpSetName, AUD_TRA, ra, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SPerformRestore(struct rx_call *acid, char *dumpSetName,
++	        tc_restoreArray *arestores, afs_int32 *taskID)
+ {
+     struct dumpNode *newNode;
+     statusP statusPtr;
+@@ -368,7 +425,18 @@ STC_PerformRestore(struct rx_call *acid, char *dumpSetName, tc_restoreArray *are
+ }
+ 
+ afs_int32
+-STC_ReadLabel(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *taskId)
++STC_ReadLabel(struct rx_call *call, struct tc_tapeLabel *label, afs_uint32 *taskId)
++{
++    afs_int32 code;
++
++    code = SReadLabel(call, label, taskId);
++    osi_auditU(call, TC_ReadLabelEvent, code,
++	       AUD_TLBL, label, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SReadLabel(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *taskId)
+ {
+     afs_int32 code;
+ 
+@@ -392,7 +460,17 @@ STC_ReadLabel(struct rx_call *acid, struct tc_tapeLabel *label, afs_uint32 *task
+  */
+ 
+ afs_int32
+-STC_RestoreDb(struct rx_call *rxCall, afs_uint32 *taskId)
++STC_RestoreDb(struct rx_call *call, afs_uint32 *taskId)
++{
++    afs_int32 code;
++
++    code = SRestoreDb(call, taskId);
++    osi_auditU(call, TC_RestoreDbEvent, code, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SRestoreDb(struct rx_call *rxCall, afs_uint32 *taskId)
+ {
+ #ifdef AFS_PTHREAD_ENV
+     pthread_t pid;
+@@ -458,7 +536,18 @@ STC_RestoreDb(struct rx_call *rxCall, afs_uint32 *taskId)
+  */
+ 
+ afs_int32
+-STC_SaveDb(struct rx_call *rxCall, Date archiveTime, afs_uint32 *taskId)
++STC_SaveDb(struct rx_call *call, Date archiveTime, afs_uint32 *taskId)
++{
++    afs_int32 code;
++
++    code = SSaveDb(call, archiveTime, taskId);
++    osi_auditU(call, TC_SaveDbEvent, code,
++	       AUD_DATE, archiveTime, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SSaveDb(struct rx_call *rxCall, Date archiveTime, afs_uint32 *taskId)
+ {
+ #ifdef AFS_PTHREAD_ENV
+     pthread_t pid;
+@@ -537,7 +626,18 @@ STC_SaveDb(struct rx_call *rxCall, Date archiveTime, afs_uint32 *taskId)
+  */
+ 
+ afs_int32
+-STC_ScanDumps(struct rx_call *acid, afs_int32 addDbFlag, afs_uint32 *taskId)
++STC_ScanDumps(struct rx_call *call, afs_int32 addDbFlag, afs_uint32 *taskId)
++{
++    afs_int32 code;
++
++    code = SScanDumps(call, addDbFlag, taskId);
++    osi_auditU(call, TC_ScanDumpsEvent, code,
++	       AUD_INT, addDbFlag, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SScanDumps(struct rx_call *acid, afs_int32 addDbFlag, afs_uint32 *taskId)
+ {
+ #ifdef AFS_PTHREAD_ENV
+     pthread_t pid;
+@@ -612,7 +712,17 @@ STC_ScanDumps(struct rx_call *acid, afs_int32 addDbFlag, afs_uint32 *taskId)
+  */
+ 
+ afs_int32
+-STC_TCInfo(struct rx_call *acid, struct tc_tcInfo *tciptr)
++STC_TCInfo(struct rx_call *call, struct tc_tcInfo *ti)
++{
++    afs_int32 code;
++
++    code = STCInfo(call, ti);
++    osi_auditU(call, TC_TCInfoEvent, code, AUD_INT, ti->tcVersion, AUD_END);
++    return code;
++}
++
++static afs_int32
++STCInfo(struct rx_call *acid, struct tc_tcInfo *tciptr)
+ {
+     if (callPermitted(acid) == 0)
+ 	return (TC_NOTPERMITTED);
+@@ -624,7 +734,18 @@ STC_TCInfo(struct rx_call *acid, struct tc_tcInfo *tciptr)
+ /* STC_DeleteDump
+  */
+ afs_int32
+-STC_DeleteDump(struct rx_call *acid, afs_uint32 dumpID, afs_uint32 *taskId)
++STC_DeleteDump(struct rx_call *call, afs_uint32 dumpID, afs_uint32 *taskId)
++{
++    afs_int32 code;
++
++    code = SDeleteDump(call, dumpID, taskId);
++    osi_auditU(call, TC_DeleteDumpEvent, code,
++	       AUD_DATE, dumpID, AUD_INT, *taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SDeleteDump(struct rx_call *acid, afs_uint32 dumpID, afs_uint32 *taskId)
+ {
+     afs_int32 code = TC_BADTASK;	/* If not compiled -Dxbsa then fail */
+ #ifdef xbsa
+diff --git a/src/butc/tcstatus.c b/src/butc/tcstatus.c
+index db06b514fe..b67ae1eee4 100644
+--- a/src/butc/tcstatus.c
++++ b/src/butc/tcstatus.c
+@@ -23,6 +23,7 @@
+ #include "butc_internal.h"
+ #include "error_macros.h"
+ #include "butc_xbsa.h"
++#include "afs/audit.h"
+ 
+ /* tape coordinator - task status management */
+ extern afs_int32 xbsaType;
+@@ -31,6 +32,13 @@ dlqlinkT statusHead;
+ struct Lock statusQueueLock;
+ struct Lock cmdLineLock;
+ 
++static afs_int32 SGetStatus(struct rx_call *call, afs_uint32 taskId,
++			    struct tciStatusS *statusPtr);
++static afs_int32 SEndStatus(struct rx_call *call, afs_uint32 taskId);
++static afs_int32 SRequestAbort(struct rx_call *call, afs_uint32 taskId);
++static afs_int32 SScanStatus(struct rx_call *call, afs_uint32 *taskId,
++			     struct tciStatusS *statusPtr, afs_uint32 *flags);
++
+ /* STC_GetStatus
+  *	get the status of a task
+  * entry:
+@@ -41,7 +49,19 @@ struct Lock cmdLineLock;
+ 
+ afs_int32
+ STC_GetStatus(struct rx_call *call, afs_uint32 taskId,
+-	      struct tciStatusS *statusPtr)
++	      struct tciStatusS *status)
++{
++    afs_int32 code;
++
++    code = SGetStatus(call, taskId, status);
++    osi_auditU(call, TC_GetStatusEvent, code,
++	       AUD_INT, taskId, AUD_TSTT, status, AUD_END);
++    return code;
++}
++
++static afs_int32
++SGetStatus(struct rx_call *call, afs_uint32 taskId,
++	   struct tciStatusS *statusPtr)
+ {
+     statusP ptr;
+     int retval = 0;
+@@ -71,6 +91,16 @@ STC_GetStatus(struct rx_call *call, afs_uint32 taskId,
+ 
+ afs_int32
+ STC_EndStatus(struct rx_call *call, afs_uint32 taskId)
++{
++    afs_int32 code;
++
++    code = SEndStatus(call, taskId);
++    osi_auditU(call, TC_EndStatusEvent, code, AUD_INT, taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SEndStatus(struct rx_call *call, afs_uint32 taskId)
+ {
+     statusP ptr;
+     int retval = 0;
+@@ -92,6 +122,16 @@ STC_EndStatus(struct rx_call *call, afs_uint32 taskId)
+ 
+ afs_int32
+ STC_RequestAbort(struct rx_call *call, afs_uint32 taskId)
++{
++    afs_int32 code;
++
++    code = SRequestAbort(call, taskId);
++    osi_auditU(call, TC_RequestAbortEvent, code, AUD_INT, taskId, AUD_END);
++    return code;
++}
++
++static afs_int32
++SRequestAbort(struct rx_call *call, afs_uint32 taskId)
+ {
+     statusP ptr;
+     int retval = 0;
+@@ -127,7 +167,19 @@ STC_RequestAbort(struct rx_call *call, afs_uint32 taskId)
+ 
+ afs_int32
+ STC_ScanStatus(struct rx_call *call, afs_uint32 *taskId,
+-	       struct tciStatusS *statusPtr, afs_uint32 *flags)
++	       struct tciStatusS *status, afs_uint32 *flags)
++{
++    afs_int32 code;
++
++    code = SScanStatus(call, taskId, status, flags);
++    osi_auditU(call, TC_ScanStatusEvent, code,
++	       AUD_INT, *taskId, AUD_TSTT, status, AUD_INT, *flags, AUD_END);
++    return code;
++}
++
++static afs_int32
++SScanStatus(struct rx_call *call, afs_uint32 *taskId,
++	    struct tciStatusS *statusPtr, afs_uint32 *flags)
+ {
+     statusP ptr = 0;
+     dlqlinkP dlqPtr;

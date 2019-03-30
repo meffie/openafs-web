@@ -1,0 +1,80 @@
+/*
+ * There's no reason to yell.  CSS selectors can be lowercase
+*/
+
+body {
+    background: #ffffff;
+    color: #000000;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 100%;
+}
+
+p {
+    line-height: 1.3em;
+}
+
+a:link {
+    color: #000fff
+}
+a:visited {
+    color: #0000ff
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: Verdana, sans-serif;
+}
+
+dl dt {
+    font-family: Verdana, sans-serif;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+dl dd {
+    padding-bottom: 10px;
+}
+
+body.navbar {
+    background: #99ccff;
+    color: #000000;
+    font-size: 0.9em;
+}
+table.navbar {
+    background: #99ccff;
+    color: #000000;
+    font-family: Verdana, sans-serif;
+}
+table.navbar :link {
+    background: #99ccff;
+    color: #000fff;
+}
+table.navbar :visited { 
+    background: #99ccff;
+    color: #0000ff
+}
+
+table.navbar tr td, table.navbar tr th {
+    background: #99ccff;
+    color: #000000;
+}
+
+table.navbar td.navbar-win {
+    background: #99ccff;
+    color: #000000;
+    background-image: url(/images/ico-win.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    padding: 2px 0 2px 23px;
+    display: block;
+}
+
+table.navbar td.navbar-mac {
+    background: #99ccff;
+    color: #000000;
+    background-image: url(/images/ico-osx-uni.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    padding: 2px 0 2px 23px;
+    display: block;
+}
+

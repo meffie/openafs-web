@@ -1,0 +1,34 @@
+<!--NO-FRAMELESS-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+             "http://www.w3c.org/TR/html4/frameset.dtd">
+<script language="JavaScript" type="text/javascript">
+<!--
+if (window.name == "openafs_main") {
+  top.location = location;
+}
+//-->
+</script>
+<html><head>
+<meta name="verify-v1" content="I/X2Wfxkt50ZaXkdbfIow6iFQIZ71o0o2b6sPTOGmPE=" /><!-- shadow -->
+<META name="verify-v1" content="THAFicQcPIBMrawRwzaJg3JK8FArpvoecAy5Zx7v9DM=" /><!-- cg2v    -->
+<META name="verify-v1" content="VMsthPusbXnedJuKjM0/lhH0uzVj79aQ/lPfk2FLXsA=" /><!-- jaltman -->
+<META name="verify-v1" content="fijqhqC5PvhJOATNi4e6h2uSK0v1deFiKXL+yItw/5w=" /><!-- jhutz   -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5995928-1");
+pageTracker._trackPageview();
+</script>
+<title>OpenAFS</title>
+<link href="/openafs.css" rel="stylesheet" type="text/css">
+</head>
+<frameset cols="265,*">
+  <frame src="/navbar.html" name="navbar" frameborder=0>
+  <frameset rows="170,*">
+    <frame src="/top.html" scrolling=no name="top" frameborder=0>
+    <frame src="/pages<!--#echo var="PATH_INFO" -->" name="openafs_main" frameborder=0>
+  </frameset>
+</frameset>
+</html>

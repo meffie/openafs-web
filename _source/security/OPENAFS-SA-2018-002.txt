@@ -1,0 +1,167 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory-2018-002
+
+Issued: 11 September, 2018
+Topic: information leakage from uninitialized RPC output variables
+       CVE-2018-16948
+Affected: OpenAFS client versions 1.0 through 1.6.22.4 and 1.8.0 through 1.8.1.1
+          OpenAFS server versions 1.0 through 1.6.22.4 and 1.8.0 through 1.8.1.1
+
+Several RPC server routines did not fully initialize their output variables
+before returning, leaking memory contents from both the stack and the heap.
+Because the OpenAFS cache manager functions as an Rx server for the AFSCB service,
+clients are also susceptible to information leakage.
+
+SUMMARY
+=======
+
+OpenAFS uses the Rx RPC protocol for all remote operations, and uses the
+rxgen utility to generate the server RPC stubs.  Output variables are
+allocated either on the stack (for scalars) or on the heap, by the RPC
+handler (for variable-length arrays).  Many RPC handlers did not fully
+initialize these output variables, leaking memory contents to the remote
+caller for otherwise-successful RPCs.
+
+IMPACT
+======
+
+Many of the affected RPCs do not require authentication (and are simple
+"data lookup" functions), so an unauthenticated attacker could obtain
+tens to hundreds of bytes of memory contents from the affected process,
+per RPC call.  Over time, this may be sufficient to build up a picture
+of interesting data, such as file or datbase contents, but the amount and
+rate of data exposure is highly context dependent.
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.23 are affected, as are OpenAFS
+1.8.0, 1.8.1, and 1.8.1.1.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all clients
+and servers to the 1.8.2 or 1.6.23 releases.  It is necessary to restart
+affected processes in order for the fixes to take effect.
+
+DETAILS
+=======
+
+Only successful RPCs will trigger the information leakage; unsuccessful
+RPCs are replied to with Rx abort packets that do not include the output
+variable contents.  For RPCs that require authentication, this limits
+the scope of information disclosure, but many of the following RPCs
+do not require any form of authentication and will leak information even
+to anonymous callers.
+
+STC_ReadLabel does not initialize the 32-bit taskId output parameter.
+
+VOTE_Debug and VOTE_XDebug (udebug) both leave a single field
+uninitialized if there is no current transaction.  This leaks the memory
+contents of the ubik server over the wire:
+  struct ubik_debug
+  - 4 bytes in member writeTrans
+
+KAM_ListEntry (kas list) does not initialize its output correctly.  It
+leaks kaserver memory contents over the wire:
+  struct kaindex
+  - up to 64 bytes for member name
+  - up to 64 bytes for member instance
+
+TC_ScanStatus (backup status) and TC_GetStatus (internal backup status
+watcher) do not initialize their output buffers.  They leak memory
+contents over the wire:
+  struct tciStatusS
+  - up to 64 bytes in member taskName (TC_MAXNAMELEN 64)
+  - up to 64 bytes in member volumeName  (TC_MAXNAMELEN 64)
+
+TC_ReadLabel (backup readlabel) does not initialize its output buffer
+completely.  It leaks butc memory contents over the wire:
+  struct tc_tapeLabel
+  - up to 32 bytes from member afsname (TC_MAXTAPELEN 32)
+  - up to 32 bytes from member pname (TC_MAXTAPELEN 32)
+
+The following budb RPCs do not initialize their output correctly.
+This leaks buserver memory contents over the wire:
+  BUDB_FindLatestDump (backup dump)
+  BUDB_FindDump (backup volrestore, diskrestore, volsetrestore)
+  BUDB_GetDumps (backup dumpinfo)
+  BUDB_FindLastTape (backup dump)
+  
+  struct budb_dumpEntry
+  - up to 32 bytes in member volumeSetName
+  - up to 256 bytes in member dumpPath
+  - up to 32 bytes in member name
+  - up to 32 bytes in member tape.tapeServer
+  - up to 32 bytes in member tape.format
+  - up to 256 bytes in member dumper.name
+  - up to 128 bytes in member dumper.instance
+  - up to 256 bytes in member dumper.cell
+
+RXAFSCB_TellMeAboutYourself does not completely initialize its output
+buffers.  This leaks kernel memory over the wire:
+  struct interfaceAddr
+
+  Unix cache manager (libafs)
+  - up to 124 bytes in array addr_in ((AFS_MAX_INTERFACE_ADDR 32 * 4) - 4))
+  - up to 124 bytes in array subnetmask   (the same)
+  - up to 124 bytes in array mtu          (the same)
+  
+  Windows cache manager
+  - 64 bytes in array addr_in ((AFS_MAX_INTERFACE_ADDR 32-CM_MAXINTERFACE_ADDR 16)* 4)
+  - 64 bytes in array subnetmask  (the same)
+  - 64 bytes in array mtu         (the same)
+
+RXAFSCB_GetLock (cmdebug) does not correctly initialize its output.
+This leaks kernel memory over the wire:
+  struct AFSDBLock
+  - up to 14 bytes for member name (16 - '<cellname>\0')
+
+PR_ListEntries (pts listentries) does not properly initialize its output
+buffers.  This leaks ptserver memory over the wire:
+  struct prlistentries
+  - up to 62 bytes for each entry name (PR_MAXNAMELEN 64 - 'a\0')
+
+AFSVolMonitor (vos status) does not properly initialize its output
+buffers.  This leaks information from volserver memory:
+  struct transDebugInfo
+  - up to 29 bytes in member lastProcName (30-'\0')
+  - 16 bytes in members readNext, tranmitNext, lastSendTime,
+    lastReceiveTime
+
+AFSVolPartitionInfo and AFSVolPartitionInfo64 (vos partinfo) do not
+properly initialize their reply buffers.  This leaks the contents of
+volserver memory over the wire:
+  AFSVolPartitionInfo (struct diskPartition)
+  - up to 24 bytes in member name (32-'/vicepa\0'))
+  - up to 12 bytes in member devName (32-'/vicepa/Lock/vicepa\0'))
+  
+  AFSVolPartitionInfo64 (struct diskPartition64)
+  - up to 248 bytes in member name (256-'/vicepa\0'))
+  - up to 236 bytes in member devName (256-'/vicepa/Lock/vicepa\0')
+
+PR_IDToName does not completely initialize the return array of names,
+and thus leaks information from ptserver memory:
+  - up to 62 bytes per requested id (PR_MAXNAMELEN 64 - 'a\0')
+
+ACKNOWLEDGMENTS
+===============
+
+Thanks to Mark Vitale for the detailed report and patches.
+-----BEGIN PGP SIGNATURE-----
+
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAluYc3IACgkQKNmm82Tr
+dRJIAQwdG2iL9vsw8udigmTw2Ps8hx7iQLNc2NocHgmqB4mR0+FvARuQQDtkeSD7
+PVl48MfGgAwGQtddVd57Mh3pEcTxTNyb3F8nYoz5Wk9YAo1s64W2UgA3mKJ8ii9V
+LuyrjJLE7HKlJyLYWMl99c+HiD5CNSsgye5p27KQRsPutfzjDnoh80v2CaTxPTKp
+KdMnrxkmXNf0UwhIfo36yr/jVKVfuyVh11stvcMCt9lyi5yhCY7cCammiNW/ZZm1
+nxuG7ZKRtGzOJu8PsK8+ZS4tOR15f6BGA4umPjWmsfbrei/fNN+XyWhqAHwmpjik
+tIjYGkYE0TwqBTCrlMWj/KnmyrC9JD3SYdr146/mSfo/gj866+ZVDAZUSYitVLPc
+12MeTvxK22jh1vaSwtuY+PTQfOpq4r8FpL0u3SqTYcHMM/sIcHZ0JOzluFhVEs/n
+aPZhdW9iKqDC0SSRicg3poAL6SXfmj+WC5AOBN55Lpxl6civKcJi34PBoVRMJbgN
+wCchBKdCbAurSg==
+=PCzu
+-----END PGP SIGNATURE-----
