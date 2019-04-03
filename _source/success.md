@@ -1,11 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+---
+title: Build Success with OpenAFS!
+layout: doctype-xhtml
+---
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <title>Build Success with OpenAFS!</title>
   <link href="/openafs.css" rel="stylesheet" type="text/css" />
 </head>
-<body bgcolor="#FFFFFF" text="#000000" link="#000FFF" vlink="#0000FF" alink="#0000FF">
+<body bgcolor="#FFFFFF" text="#000000" link="#000FFF" vlink=
+"#0000FF" alink="#0000FF">
   <h1>OpenAFS Success Stories</h1>
   <h2 align="left"><a name="case-slac" id="case-slac"></a>Stanford
   Linear Accelerator Center</h2>
@@ -27,7 +30,8 @@
       AFS.&nbsp;&nbsp; BaBar uses AFS for worldwide collaboration,
       and distribution of their coderepositories.September 28, 2006
       - New Form of CP Violation Discovered<br />
-      <a class="moz-txt-link-freetext" href="http://home.slac.stanford.edu/pressreleases/2006/20060928.htm">
+      <a class="moz-txt-link-freetext" href=
+      "http://home.slac.stanford.edu/pressreleases/2006/20060928.htm">
       http://home.slac.stanford.edu/pressreleases/2006/20060928.htm</a>
       The second one is astrophysics research done at KIPAC (Kavli
       Institute for Particle Astrophysics and Cosmology). They did
@@ -36,29 +40,35 @@
       data itself is again not in AFS but most of the development
       tools and software code is in AFS. August 21, 2006 - Dark
       Matter Observed<br />
-      <a class="moz-txt-link-freetext" href="http://home.slac.stanford.edu/pressreleases/2006/20060821.htm">
+      <a class="moz-txt-link-freetext" href=
+      "http://home.slac.stanford.edu/pressreleases/2006/20060821.htm">
       http://home.slac.stanford.edu/pressreleases/2006/20060821.htm</a>
       The next two are about our Synchrotron Radiation Lab (SSRL).
       They highlight the application of SLAC's physics technology
       for completely different branches of science. August 2, 2006
       - Modern Technology Reveals Ancient Science<br />
-      <a class="moz-txt-link-freetext" href="http://home.slac.stanford.edu/pressreleases/2006/20060802.htm">
+      <a class="moz-txt-link-freetext" href=
+      "http://home.slac.stanford.edu/pressreleases/2006/20060802.htm">
       http://home.slac.stanford.edu/pressreleases/2006/20060802.htm</a>
       <p>Archimedes Manuscript Yields Secrets Under X-Ray
       Gaze<br />
-      <a class="moz-txt-link-freetext" href="http://home.slac.stanford.edu/pressreleases/2005/20050518.htm">
+      <a class="moz-txt-link-freetext" href=
+      "http://home.slac.stanford.edu/pressreleases/2005/20050518.htm">
       http://home.slac.stanford.edu/pressreleases/2005/20050518.htm</a></p>SLAC
       is currently expanding the computer center's relationship
       with SSRL to provide AFS space for their tools like Gaussian
       (sequential and parallel). They have also started to use our
       standard software development tools (compilers, etc.) in AFS
-      space. Lastly, a very widely used toolkit, GEANT4 (<a class="moz-txt-link-freetext" href="http://geant4.web.cern.ch/geant4/">http://geant4.web.cern.ch/geant4/</a>),
+      space. Lastly, a very widely used toolkit, GEANT4 (<a class=
+      "moz-txt-link-freetext" href=
+      "http://geant4.web.cern.ch/geant4/">http://geant4.web.cern.ch/geant4/</a>),
       for the simulation of the passage of particles through matter
       is being co-developed at SLAC. Everything they do is in AFS.
       Among many, many other things, this toolkit is used for
       medical simulations of radiation treatments of tumors in the
       human body. A summary of research performed at SLAC in 2006:
-      <a class="moz-txt-link-freetext" href="http://today.slac.stanford.edu/feature/holiday-message06.asp">
+      <a class="moz-txt-link-freetext" href=
+      "http://today.slac.stanford.edu/feature/holiday-message06.asp">
       http://today.slac.stanford.edu/feature/holiday-message06.asp</a>
       <p>Since 1998, SLAC has stored all user home directories in
       AFS.&nbsp; AFS is available to the several thousand machines
@@ -175,7 +185,8 @@
   Inc.</h2>
   <dl>
     <dd>
-      <p><a href="http://www.pictage.com/">http://www.pictage.com/</a></p>
+      <p><a href=
+      "http://www.pictage.com/">http://www.pictage.com/</a></p>
       <p>Pictage's business is worldwide.&nbsp; They provide
       services to wedding photographers who upload the photos they
       have taken. Pictage then makes the photos available to the
@@ -230,16 +241,20 @@
       <br />
       This page is prettier and has some more concise
       history:<br />
-      <a class="moz-txt-link-freetext" href="http://www.ncsa.uiuc.edu/News/Access/Archive/backissues/96.1/hdf-tng.html">
+      <a class="moz-txt-link-freetext" href=
+      "http://www.ncsa.uiuc.edu/News/Access/Archive/backissues/96.1/hdf-tng.html">
       http://www.ncsa.uiuc.edu/News/Access/Archive/backissues/96.1/hdf-tng.html</a><br />
 
       <br />
       They've recently split off from NCSA to form The HDF
       Group:<br />
-      <a class="moz-txt-link-freetext" href="http://www.hdfgroup.org/">http://www.hdfgroup.org/</a><br />
-      <a class="moz-txt-link-freetext" href="http://www.hdfgroup.org/users5.html">http://www.hdfgroup.org/users5.html</a><br />
+      <a class="moz-txt-link-freetext" href=
+      "http://www.hdfgroup.org/">http://www.hdfgroup.org/</a><br />
+      <a class="moz-txt-link-freetext" href=
+      "http://www.hdfgroup.org/users5.html">http://www.hdfgroup.org/users5.html</a><br />
 
-      <a class="moz-txt-link-freetext" href="http://www.hdfgroup.org/HDF5/release/platforms5.html">http://www.hdfgroup.org/HDF5/release/platforms5.html</a><br />
+      <a class="moz-txt-link-freetext" href=
+      "http://www.hdfgroup.org/HDF5/release/platforms5.html">http://www.hdfgroup.org/HDF5/release/platforms5.html</a><br />
 
       <br />
       Their source tree and everything is in the NCSA AFS cell and
@@ -280,7 +295,9 @@
       and security of AFS make it the<br />
       perfect foundation for this project.</p>
       <p>"As far as timings, we might be able to do some dprof
-      timings between here and Argonne Labs over iwire (<a class="moz-txt-link-freetext" href="http://www.iwire.org/">http://www.iwire.org/</a>).&nbsp;
+      timings between here and Argonne Labs over iwire (<a class=
+      "moz-txt-link-freetext" href=
+      "http://www.iwire.org/">http://www.iwire.org/</a>).&nbsp;
       Ironically, the bottleneck there will be the GigE NIC on the
       AFS servers."</p>
     </dd>
@@ -612,7 +629,8 @@
     </dd>
     <dd></dd>
   </dl>
-  <h1>Sharing your OpenAFS Story</h1>Please contact the <a href="mailto:openafs-gatekeepers@openafs.org">OpenAFS Gatekeepers</a>
+  <h1>Sharing your OpenAFS Story</h1>Please contact the <a href=
+  "mailto:openafs-gatekeepers@openafs.org">OpenAFS Gatekeepers</a>
   to share your success story.
   <div id="footer">
     <hr />
@@ -637,4 +655,3 @@
   </script>
 </body>
 </html>
-
