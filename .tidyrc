@@ -1,0 +1,6 @@
+quiet: yes
+tidy-mark: no
+indent: auto
+indent-spaces: 2
+drop-proprietary-attributes: yes
+output-xhtml: yes
