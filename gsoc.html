@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -97,7 +98,7 @@ infrastructures and developing thread safe code are key skills to develop, and
 we're happy to help you to learn them. Please join us on #openafs on freenode,
 in the Jabber conference openafs@conference.openafs.org, or on the
 openafs-devel@openafs.org mailing list.
-<p>
+</p>
 
 <h3>Background reading</h3>
 If you are interested in working on OpenAFS this 
@@ -186,15 +187,17 @@ OpenAFS.</p>
 
 <h4><a name="kafs"></a>An alternate implementation of a userspace helper interface for Linux kafs</h4>
 <h5>Student: Weylan (Wang) Lei</h5>
-<p />
+<p>
 During last year's Google Summer of Code, an interface for allowing use of OpenAFS userspace programs with kafs was developed. This was found to not be acceptable to the Linux kernel core due to the pioctl ultiplexor system call. An alternate approach using [gs]etxattr(), add_key() and keyctl() and /proc with O_NODE was done; This year's project aims to extend upon that work.
+</p>
 <h4><a name="NetBSD_port"></a>A port of OpenAFS to NetBSD</h4>
 <h5>Student: Matt Smith</h5>
-<p />
+<p>
 Around the same time the original Linux port of AFS was done, a port to NetBSD was also available. While NetBSD has evolved, the original AFS port did not keep pace. Since then, a port to NetBSD has been highly desired. This project will port the OpenAFS client to run on NetBSD.
+</p>
 <h4><a name="Encrypted_storage"></a> Encrypted storage </h4>
 <h5>Student: Sanket Agarwal</h5>
-<p />
+<p>
 The AFS protocol offers encryption for data transport from client to server.
 However, that data is stored on the server in cleartext, where it can
 potentially be read by the administrators of that server. This poses a real
@@ -207,6 +210,7 @@ users of their choosing, and protect the names of files, in addition to their
 contents. This is a challenging project, during which the student will gain
 an in depth knowledge of kernel programming, distributed systems, and
 cryptography.
+</p>
 <h4>Unix or Windows Cache Manager support for Apple Doublefiles (Extended / 
 Posix Attributes)</h4>
 <h5>Student: Kelli Ireland</h5>
@@ -226,8 +230,8 @@ changes to the AFS file servers.</p>
 <h4>Implementing Microsoft's Safe String (StrSafe.h) Library for UNIX/Linux</h4>
 <h5>Student: Jonas Sundberg</h5>
 <p>Microsoft has developed a safe C String manipulation library (StrSafe.h).&nbsp; 
-The advantages of the <font color="#ffffff" style="BACKGROUND-COLOR: #3399ff">
-Strsafe</font> functions include:</p>
+The advantages of the
+<code>Strsafe</code> functions include:</p>
 <ul>
 	<li>The size of the destination buffer is always provided to the function to 
 	ensure that the function does not write past the end of the buffer. </li>
