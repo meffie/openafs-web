@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Language" content="en-us">
@@ -11,7 +12,7 @@
 <h1>OpenAFS Projects from Google Summer of Code 2008</h1>
 <h2>Outcome</h2>
 <p>OpenAFS applied for the second time to be part of the Google Summer of Code, and this year was accepted. Ultimately Google opted to fund 6 projects for OpenAFS; Two more were funded with the same rules using other money including that granted by Google to a sponsoring organization per student.
-<p>
+</p>
 <ul>
 <li><A HREF="#mmc">Microsoft Management Console Snap-ins, Client and Server</A></li>
 <li><A HREF="#kafs">Implementing OpenAFS features into RedHat's kafs kernel module</A></li>
@@ -20,7 +21,7 @@
 <li><A HREF="#discon">Read/Write Disconnected AFS</A></li>
 <li><A HREF="#shellex">Windows Explorer Shell UI extension updates</A></li>
 <li><A HREF="#winserv">OpenAFS servers for Windows</A></li>
-<p>
+
 <li><A HREF="#website">Redesigning the OpenAFS project website</A></li>
 <li><A HREF="#ptsext">Extensions for multiple authentication types to the OpenAFS ptserver</A></li>
 <li><A HREF="#ports">Porting OpenAFS to new platforms</A></li>
@@ -48,7 +49,7 @@ configuring a system service.&nbsp; On Microsoft Windows, system wide services
 should be configured using the Microsoft Management Console (MMC).&nbsp; This 
 project is to implement a MMC Add-on for the OpenAFS Cache Manager. </p>
 <p>Mockups of a proposed MMC user interface can be found at
-<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#client service mmc">
+<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#client%20service%20mmc">
 http://www.secure-endpoints.com/openafs-windows-roadmap.html#client service mmc</a>.&nbsp; 
 This project consists of multiple components that can be successfully 
 implemented one at a time.&nbsp; The successful completion of this project does 
@@ -158,6 +159,7 @@ available through AFS, a pioctl syscall and VFS entry point for the Linux
 kernel and some implemented pioctls for the kAFS call are available.
 <p>
 The goal of this project would be to bring the Linux kernel kAFS client as close to feature-parity with the existing OpenAFS port as possible. Examples include:
+</p>
 <ul>
 <li>DNS AFSDB being able to obtain cell server location without using configuration files.</li>
 <li>A common pioctl implementation between kafs and OpenAFS to allow sharing of userspace binaries.</li>
@@ -166,7 +168,7 @@ The goal of this project would be to bring the Linux kernel kAFS client as close
 <li>A way for OpenAFS and kafs to be running on the same machine using different port numbers.</li>
 <li>Complete the kafs callback interface.</li>
 </ul>
-</p>
+
 <p>Estimated difficulty: <i>moderate to hard</i></p>
 <A NAME="winserv"><h3>Project: Updates AFS servers for Windows</h3></A>
 <h4>Mentor: Jeffrey Altman</h4>
@@ -187,7 +189,7 @@ dialog should permit interactive modification to meta data values when the user
 has the appropriate permissions.&nbsp; All in all, the user should not notice 
 that AFS is not a native part of the operating system and the user interface.</p>
 <p>Mockups of proposals for the Explorer Shell extension can be found at
-<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions">
+<a href="http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell%20extensions">
 http://www.secure-endpoints.com/openafs-windows-roadmap.html#shell extensions</a>.&nbsp; 
 This project consists of multiple components that can be successfully 
 implemented one at a time.&nbsp; The successful completion of this project does 
