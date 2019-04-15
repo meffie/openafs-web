@@ -1,6 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html><head>
   <title>OpenAFS Meeting Summary - November 13, 2007</title>
+<link href="/openafs.css" rel="stylesheet" type="text/css">
 <META http-equiv="Content-Type" content="text/html; charset=utf-8"><style type="text/css" media="print">.hide{display:none}</style></head><body style="margin:0;padding:0"><div class="hide"><div style="background:#ffffcc;padding:4 8;border-bottom:thin solid #eeeeee;font-family:Arial,sans-serif"></div></div><div style="margin:1ex">
 
 
@@ -9,94 +10,93 @@
 
 <div>
 
-  <p><font size="2" face="Helv"><b>OpenAFS Meeting Summary - November 
-13, 2007 </b></font><br></p>
-<p><font size="2" face="Helv"><b>Attendees</b>: Russ Allbery, 
+  <h1>OpenAFS Meeting Summary - November 13, 2007 </h1>
+<p><b>Attendees</b>: Russ Allbery, 
 Jeffrey Altman, Derrick Brashear, Todd DeSantis, Laura Stentz, Warren 
-Yenson.</font><br></p>
-<p><font size="2" face="Helv"><b>Gatekeeper Reports</b> - Russ Allbery, 
+Yenson.<br></p>
+<p><b>Gatekeeper Reports</b> - Russ Allbery, 
 Jeffrey Altman, and Derrick Brashear sent out gatekeeper reports to 
 the Council of Elders on 11/13/07, in advance of the meeting. 
-A summary of their reports appears below:</font><br></p>
-<p><font size="2" face="Helv"><u>Derrick Brashear (UNIX Development)</u></font><br>
+A summary of their reports appears below:<br></p>
+<p><u>Derrick Brashear (UNIX Development)</u><br>
 </p>
 <ul type="DISC">
-  <li><font size="2" face="Helv">OpenAFS 1.4.5 was released 
+  <li>OpenAFS 1.4.5 was released 
   and includes support for Leopard, Solaris 10-update 4, and new Linux 
-  support.</font></li>
-  <li><font size="2" face="Helv">Bug fixes proposed for 1.4.6 
+  support.</li>
+  <li>Bug fixes proposed for 1.4.6 
   include verifying viced-accurately-track-file<WBR>-callbacks-20071112 fixes 
   the bug seen with CBFree/FEFree corruption, viced-missing-lock-20071109, 
   libafsrpc-makefile-fix-20071110 for RPMS, linux-nsec-timestamp-zero<WBR>-20071106, 
   linux-splice-support-2007-1106 and solaris-nevada-update-2007<WBR>-1101, 
   linux-afs-unlinked-file-dentry<WBR>-flagging-20071031, and various Mac and 
-  RPM packaging files.</font></li>
-  <li><font size="2" face="Helv">Pending work includes module 
-  unload cleanup, afs_HashOutDCache panic, and an Rx error.</font></li>
-  <li><font size="2" face="Helv">Longer term, there is work 
+  RPM packaging files.</li>
+  <li>Pending work includes module 
+  unload cleanup, afs_HashOutDCache panic, and an Rx error.</li>
+  <li>Longer term, there is work 
   planned to stabilize 1.5 so that we are able to put out 1.6 series releases. 
   There has also been discussion with the HEPiX community regarding a 
   timeout issue which limits AFS throughput. Derrick is working 
   with Rainer Toebbicke regarding his Rx test tool to resolve this matter.
   He is also working with Hartmut Reuter to integrate his AFS+Object Storage 
   code. However, the timing of this work depends on the availability 
-  of resources.</font></li>
+  of resources.</li>
 </ul>
 <br>
-<p><font size="2" face="Helv"><u>Jeffrey Altman (Windows Development)</u></font><br>
+<p><u>Jeffrey Altman (Windows Development)</u><br>
 </p>
-<p><font size="2" face="Helv">There have been three OpenAFS for Windows 
+<p>There have been three OpenAFS for Windows 
 releases since the last Elders meeting: OpenAFS 1.5.25 (9/20/07), 
 1.5.26 (10/23/07), and 1.5.27 (11/7/07). Details of these releases 
-can be found at <a href="http://openafs.org" target="_blank">openafs.org</a>. </font><br></p>
-<p><font size="2" face="Helv">The following changes have been made post 
-1.5.27:</font></p>
+can be found at <a href="http://openafs.org" target="_blank">openafs.org</a>. <br></p>
+<p>The following changes have been made post 
+1.5.27:</p>
 <ul type="DISC">
-  <li><font size="2" face="Helv">Optimization of the performance 
-  of the Windows cache manager.</font></li>
-  <li><font size="2" face="Helv">A new option which permits 
+  <li>Optimization of the performance 
+  of the Windows cache manager.</li>
+  <li>A new option which permits 
   .readonly callbacks to be automatically renewed prior to expiration. 
   This option can reduce load on .readonly volumes over long periods of 
   time. However, it is an optional feature since it will result in a single 
   FetchStatus request being sent per .readonly volume whether or not the 
-  client is actively using that volume.</font></li>
+  client is actively using that volume.</li>
 </ul>
 <br>
-<p><font size="2" face="Helv">Future work plans for OpenAFS Windows 
-Development include:</font></p>
+<p>Future work plans for OpenAFS Windows 
+Development include:</p>
 <ul type="DISC">
-  <li><font size="2" face="Helv">OpenAFS Redirector work (in 
-  progress)</font></li>
-  <li><font size="2" face="Helv">OpenAFS File System Filter 
+  <li>OpenAFS Redirector work (in 
+  progress)</li>
+  <li>OpenAFS File System Filter 
   Driver that will permit \\AFS to be used without requiring the presence 
-  of the Microsoft Loopback Adapter.</font></li>
-  <li><font size="2" face="Helv">Implementation of Extended 
+  of the Microsoft Loopback Adapter.</li>
+  <li>Implementation of Extended 
   Attributes by storing data in the Apple Double Files as described in 
-  RFC 1740.</font></li>
+  RFC 1740.</li>
 </ul>
 <br>
-<p><font size="2" face="Helv"><u>Russ Allbery (Debian &amp; Documentation)</u></font><br>
+<p><u>Russ Allbery (Debian &amp; Documentation)</u><br>
 </p>
 <ul type="DISC">
-  <li><font size="2" face="Helv">1.4.5 packages have been uploaded 
-  to Debian.</font></li>
-  <li><font size="2" face="Helv">The 1.4 backport of the Kerberos 
+  <li>1.4.5 packages have been uploaded 
+  to Debian.</li>
+  <li>The 1.4 backport of the Kerberos 
   multiple-realm patch will be pulled into the Debian packages so that 
-  it can be more broadly tested.</font></li>
-  <li><font size="2" face="Helv">There will be additional work 
+  it can be more broadly tested.</li>
+  <li>There will be additional work 
   to improve Documentation, including Russ committing pending contributions 
-  from Jason Edgecombe.</font></li>
-  <li><font size="2" face="Helv">Stanford and Sine Nomine are 
+  from Jason Edgecombe.</li>
+  <li>Stanford and Sine Nomine are 
   pursuing a file server problem that&#39;s causing periodic segfaults due 
   to an apparent free list corruption. Once this bug is identified 
-  and fixed, it should be included in a 1.4.6 release.</font></li>
-  <li><font size="2" face="Helv">Russ is going to try to get 
-  some resources at Stanford to start testing the demand-attach fileserver.</font></li>
+  and fixed, it should be included in a 1.4.6 release.</li>
+  <li>Russ is going to try to get 
+  some resources at Stanford to start testing the demand-attach fileserver.</li>
 </ul>
 <br>
-<p><font size="2" face="Helv"><b>Council of Elders - Member Resignation</b></font><br>
+<p><b>Council of Elders - Member Resignation</b><br>
 </p>
-<p><font size="2" face="Helv">Warren Yenson has resigned from the OpenAFS 
+<p>Warren Yenson has resigned from the OpenAFS 
 Council of Elders since he is no longer actively involved in OpenAFS 
 development or with OpenAFS customers.  Warren had been closely 
 involved with OpenAFS in his position at Morgan Stanley, but he has 
@@ -104,28 +104,28 @@ not been involved with AFS in his position at Google.  However,
 Warren has kindly offered to talk with the Google Android team members 
 about possible opportunities with OpenAFS.  The Council of 
 Elders would like to thank Warren for his contributions to OpenAFS and 
-wish him well in the future.</font></p>
-<p><font size="2" face="Helv"><b>AFS &amp; Kerberos Best Practice Workshop</b></font><br>
+wish him well in the future.</p>
+<p><b>AFS &amp; Kerberos Best Practice Workshop</b><br>
 </p>
-<p><font size="2" face="Helv">The 2008 Workshop will be held at NJIT 
+<p>The 2008 Workshop will be held at NJIT 
 in Newark, NJ, the week of May 19-23, 2008.  There is a block 
 of rooms available at Newark Penn Station Hilton.  Registration 
 information will be available on the <a href="http://workshop.openafs.org/afsbpw08/" target="_blank">http://workshop.openafs.org<WBR>/afsbpw08/</a> 
-website once additional details have been sorted out.</font><br>
+website once additional details have been sorted out.<br>
 </p>
-<p><font size="2" face="Helv"><b>OpenAFS Newsletter</b></font><br>
+<p><b>OpenAFS Newsletter</b><br>
 </p>
-<p><font size="2" face="Helv">Laura will summarize this Council meeting 
+<p>Laura will summarize this Council meeting 
 and edit the November OpenAFS Newsletter.  Todd will summarize 
 the top 5 openafs info e-mail threads for the newsletter (some possible 
 topics of interest include:  win 2003 thread, how to integrate 
 cvs differently cvs api with afs tokens, new linux kernels supported, 
 use of ufs logging on solaris, klog integration).  Russ will summarize 
-the status of OpenAFS documentation for the November Newsletter.</font><br>
+the status of OpenAFS documentation for the November Newsletter.<br>
 </p>
-<p><font size="2" face="Helv"><b>Next Meeting</b></font><br>
+<p><b>Next Meeting</b><br>
 </p>
-<p><font size="2" face="Helv">December 11, 2007 - 1:00 Eastern Time</font><br>
+<p>December 11, 2007 - 1:00 Eastern Time<br>
 </p>
 
 
