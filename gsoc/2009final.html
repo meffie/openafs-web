@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -14,7 +15,7 @@
 IBM AFS commercial offering as of 1 November 2000.&nbsp; Since IBM released the 
 source code OpenAFS has thrived adding support for new platforms while enhancing 
 its overall performance, scalability and usability.&nbsp; </p>
-<p>
+
 <h2>GSoC 2009</h2>
 For 2009, OpenAFS has been granted 4 slots. The projects which we accepted for 2009 are:
 <ol><li>
@@ -32,7 +33,7 @@ Project #3: OpenAFS server preference based on network conditions: The OpenAFS c
 This project seeks to change the way the servers in the list are ordered based on network conditions between the client and the possible servers. Rx peer statistics can help provide information about these network conditions. Parts of these statistics can be used to indicate which servers are closest, proximity-wise, to the client as well as create an estimated throughput capacity for the server. These factors can be analyzed to represent performance between the cache manager client and the servers. This will allow for server prioritization based on the best performance of the server and the server's network connection, which subsequently can increase access times. This project will implement this prioritization on both Windows and Unix platforms, taking into account the statistics mechanisms. The Unix implementation will port relatively simply to other Unix implementations (AIX, HP-UX, etc.). 
 </li><li>
 Project #4: Implementing OpenAFS features into the Linux kafs kernel module: kafs is a Linux implementation of the AFS protocols. While kafs has been maturing, many features contained in OpenAFS are still missing from kafs. This project aims to add some of those features.
-<p>
+
 <ul><li>
 DNS AFSDB support. Sharing the mechanism used by CIFS will be investigated.
 </li><li>
@@ -44,7 +45,7 @@ A common pioctl interface. Sharing a pioctl interface between kafs and OpenAFS t
 </ul>
 </li>
 </ol>
-<p>
+
 <h3>GSoC 2009 recruiting</h3>
 <p>
 It is now 2009, the world economy is collapsing, the U.S. dollar has regained 
@@ -320,8 +321,8 @@ and algorithms, preferably in C. </p>
 <p>More detail on this project can be found
 <a href="http://www.openafs.org/pages/gsoc/acls.txt">here</a>.</p>
 <h3>8. <a name="kafs">Implementing OpenAFS features into RedHat's kafs kernel 
-module</h3>
-</a>
+module</a></h3>
+
 <p>The goal of this project would be to bring the Linux kernel kAFS client as 
 close to feature-parity with the existing OpenAFS port as possible. Examples 
 include: </p>
