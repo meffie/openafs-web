@@ -13,6 +13,10 @@ p {
     line-height: 1.3em;
 }
 
+p.warning {
+    color: #ff0000;
+}
+
 a:link {
     color: #000fff
 }
