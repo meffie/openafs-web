@@ -78,8 +78,7 @@
 </div>
 <!-- INDEX END -->
 
-<p>
-</p>
+
 <h1><a name="openafs_newsletter__volume_4__issue_1__april_2012">OpenAFS Newsletter, Volume 4, Issue 1, April 2012</a></h1>
 <p>Welcome back to the OpenAFS newsletter!</p>
 <p>I want to begin by thanking Jason Edgecombe for all his hard work on the
@@ -95,8 +94,7 @@ issues, thoughts, or feedback, please send 'em along. If there is something you
 would like to see featured, please let me know. I can be reached at:
 botsch(at)cnf.cornell.edu.</p>
 <p>As always, past issues can be found at: <a href="http://www.openafs.org/newsletter/">http://www.openafs.org/newsletter/</a></p>
-<p>
-</p>
+
 <h2><a name="case_study__high_availability_with_openafs">Case Study: High Availability with OpenAFS</a></h2>
 <p>As part of a layered setup, OpenAFS adds another important level of redundancy to the
 SysAdmin's High Availability setup. SysAdmins are already familiar with
@@ -214,8 +212,7 @@ an individual server falls over, or something wonky corrupts an OpenAFS volume
 itself, Ken and Arne are well prepared. And it is thanks to the robust and fault
 tolerant design of OpenAFS that Ken and Arne carry a much larger toolbag for
 when the inevitable computer disaster strikes.</p>
-<p>
-</p>
+
 <h2><a name="openafs_1_6_1_released">OpenAFS 1.6.1 Released</a></h2>
 <p>The OpenAFS Gatekeepers are pleased to announce the availability of OpenAFS
 version 1.6.1.  Source files and available binaries can be accessed via
@@ -230,8 +227,7 @@ the web at:</p>
 OpenAFS. Sites running 1.6.0 or prereleases of 1.6.1 are urged
 to upgrade; The 1.6.0 fileserver has a bug which can under some
 circumstances cause data loss in replicated volumes.</p>
-<p>
-</p>
+
 <h3><a name="highlights">Highlights</a></h3>
 <p>Sites running 1.6.0 fileserver are urged to update immediately to avoid data
 loss. A bug which can lose data on a fileserver for volumes which are
@@ -245,15 +241,13 @@ succeed but error and then error on a retry.</p>
 <p>Do not perform Rx keepalives during disk IO to allow timeouts to occur in event IO cannot complete.</p>
 <p>More available in the OpenAFS Release Notes at
 <a href="http://www.openafs.org/dl/openafs/1.6.1/RELNOTES-1.6.1">http://www.openafs.org/dl/openafs/1.6.1/RELNOTES-1.6.1</a></p>
-<p>
-</p>
+
 <h3><a name="known_issues">Known Issues</a></h3>
 <p>Even OpenAFS has bugs. This newsletter, we'll highlight the following:
 in 1.6.1...</p>
 <pre>
         (indented text credited to Jeffrey Altman on openafs-info)</pre>
-<p>
-</p>
+
 <h4><a name="idle_dead_timeouts">Idle Dead Timeouts</a></h4>
 <pre>
         1.6.1pre2 contained a fix for the idle dead issues.</pre>
@@ -266,14 +260,12 @@ in 1.6.1...</p>
         If the request is against a replicated object (read/only) then a shorter
         timeout is used but a retry will not be sent to the same file server that
         failed to respond in a timely manner.</pre>
-<p>
-</p>
+
 <h4><a name="vnode_lock_contention_typing_up_all_the_server_threads">Vnode Lock Contention Typing Up All the Server Threads</a></h4>
 <p>OpenAFS file servers have a limited thread pool size. At the present time, &quot;all
 threads can become blocked on a single vnode&quot;. Unfortunately, this issue is not
 yet fixed.</p>
-<p>
-</p>
+
 <h4><a name="client_side_rx_busy_packet_processing">Client Side &quot;RX Busy&quot; Packet Processing</a></h4>
 <pre>
         A client can receive the response to a call and issue the next call on the
@@ -288,8 +280,7 @@ yet fixed.</p>
 <pre>
         [The] UNIX client was failing to unconditionally retry requests when an RX
         BUSY packet is received.</pre>
-<p>
-</p>
+
 <h2><a name="openafs_1_7_10_for_windows_released">OpenAFS 1.7.10 for Windows Released</a></h2>
 <p>OpenAFS 1.7.10 is the latest in a new series of OpenAFS clients for the
 Microsoft Windows platform that is implemented as a native file system.</p>
@@ -297,8 +288,7 @@ Microsoft Windows platform that is implemented as a native file system.</p>
 for Windows and a few of the highlights of the new 1.7.10 release. Keep in mind
 that OpenAFS for Windows also has some limitations. Please read the OpenAFS for
 Windows release announcements and release notes for more information.</p>
-<p>
-</p>
+
 <h3><a name="major_benefits_of_openafs_1_7_x_for_windows">Major Benefits of OpenAFS 1.7.x for Windows</a></h3>
 <p>Significantly faster than previous release series (up to 800MB/second read
 throughput from Solid State Disk backed cache)</p>
@@ -393,8 +383,7 @@ throughput from Solid State Disk backed cache)</p>
         Each AFS volume is represented in the Windows kernel as a distinct file
         system.  This will permit AFS volume quotas to viewed as Windows file system
         quotas in a future release.</pre>
-<p>
-</p>
+
 <h3><a name="highlights_of_1_7_9_and_1_7_10_">Highlights of 1.7.9 and 1.7.10.</a></h3>
 <p>Improved compatibility with anti-virus and other anti-malware products.</p>
 <p>Fixed kernel deadlocks with Trend Micro</p>
@@ -406,11 +395,9 @@ implementations.Ensure that file data is flushed to the file server before file
 locks are released</p>
 <p>Prevent afsd_service crash if a file is marked delete on close and the file
 server is unreachable</p>
-<p>
-</p>
+
 <h2><a name="project_updates">Project Updates</a></h2>
-<p>
-</p>
+
 <h3><a name="documentation_project">Documentation Project</a></h3>
 <pre>
         No recent process and on hold indefinitely.</pre>
@@ -421,8 +408,7 @@ server is unreachable</p>
         contribute.</pre>
 <pre>
                 --Jeffrey Altman</pre>
-<p>
-</p>
+
 <h3><a name="per_file_acls">Per-File ACLs</a></h3>
 <pre>
         There is some functional code, but:</pre>
@@ -434,8 +420,7 @@ server is unreachable</p>
         done.</pre>
 <pre>
                 --Marc Dionne</pre>
-<p>
-</p>
+
 <h3><a name="read_write_replication">Read-Write Replication</a></h3>
 <pre>
         The work used the code produced during the 2008 Google Summer of Code by
@@ -462,8 +447,7 @@ server is unreachable</p>
         replicas.</pre>
 <pre>
                 --Marc Dionne</pre>
-<p>
-</p>
+
 <h3><a name="tcp_out_of_band_support">TCP Out of Band Support</a></h3>
 <pre>
         The current onus is on me to submit a protocol draft to the standards group;
@@ -474,8 +458,7 @@ server is unreachable</p>
         the latter two are undergoing testing.</pre>
 <pre>
                 --Andrew Deason</pre>
-<p>
-</p>
+
 <h3><a name="extended_callbacks">Extended Callbacks</a></h3>
 <pre>
         An updated Extended Callback Information draft was published.</pre>
@@ -486,8 +469,7 @@ server is unreachable</p>
         callback channel which requires that rxgk be completed.</pre>
 <pre>
                 --Jeffrey Altman</pre>
-<p>
-</p>
+
 <h3><a name="rxgk_proposal__draft_wilkinson_afs3_rxgk_">RXGK proposal (draft-wilkinson-afs3-rxgk)</a></h3>
 <pre>
         The code for rxgk is complete, and being tested in a couple of cells.
@@ -499,14 +481,11 @@ server is unreachable</p>
         issues.</pre>
 <pre>
                 --Simon Wilkinson</pre>
-<p>
-</p>
+
 <h2><a name="gerrit_activity">Gerrit Activity</a></h2>
-<p>
-</p>
+
 <h3><a name="statistics">Statistics</a></h3>
-<p>
-</p>
+
 <h4><a name="patches_merged_into_the_master_branch">Patches merged into the master branch</a></h4>
 <pre>
         Month   Number of commits   
@@ -517,8 +496,7 @@ server is unreachable</p>
         2011-12         121                     
         2011-11         116                     
         2011-10         67</pre>
-<p>
-</p>
+
 <h4><a name="patches_merged_into_the_devel_1_7_x_branch">Patches merged into the devel 1.7.x branch</a></h4>
 <pre>
         Month   Number of commits               
@@ -528,8 +506,7 @@ server is unreachable</p>
         2012-01         73                              
         2011-12         63                              
         2011-11         206</pre>
-<p>
-</p>
+
 <h4><a name="patches_merged_into_the_stable_1_6_x_branch">Patches merged into the stable 1.6.x branch</a></h4>
 <pre>
         Month   Number of commits               
@@ -540,8 +517,7 @@ server is unreachable</p>
         2011-12         83                              
         2011-11         78                              
         2011-10         32</pre>
-<p>
-</p>
+
 <h4><a name="patches_merged_into_the_stable_1_4_x_branch">Patches merged into the stable 1.4.x branch</a></h4>
 <pre>
         Month   Number of commits               
@@ -550,8 +526,7 @@ server is unreachable</p>
         2012-01         2                               
         2011-11         1                               
         2011-10         5</pre>
-<p>
-</p>
+
 <h3><a name="patches_merged_into_the_master_branch">Patches merged into the master branch</a></h3>
 <pre>
  Date       Committer        Change# Description
@@ -1216,8 +1191,7 @@ server is unreachable</p>
  2011-10-23 Simon Wilkinson   (5653) ptserver: Don't check for noauth before rebuilding
  2011-10-23 Benjamin Kaduk    (5572) FBSD: deal with kernel API rename
  2011-10-23 Andrew Deason     (4483) aklog_dynamic_auth: Support new SetToken pioctl</pre>
-<p>
-</p>
+
 <h3><a name="patches_merged_into_the_devel_1_7_x_branch">Patches merged into the devel 1.7.x branch</a></h3>
 <pre>
  Date       Committer        Change# Description
@@ -1699,8 +1673,7 @@ server is unreachable</p>
  2011-11-12 Jeffrey Altman    (5846) rx: arrange for Finalize to really stop running calls
  2011-11-11 Jeffrey Altman    (5845) rx: Don't clear the receive queue when out of packets
  2011-11-11 Jeffrey Altman    (5844) rx: ackall handling</pre>
-<p>
-</p>
+
 <h3><a name="patches_merged_into_the_stable_1_6_x_branch">Patches merged into the stable 1.6.x branch</a></h3>
 <pre>
  Date       Committer        Change# Description
@@ -2011,8 +1984,7 @@ server is unreachable</p>
  2011-10-26 Derrick Brashear  (5561) bypasscache for ukernel
  2011-10-26 Derrick Brashear  (5698) vol_split: avoid using stale open directory vnodes
  2011-10-23 Derrick Brashear  (5611) bozo: bosserver man page updates</pre>
-<p>
-</p>
+
 <h3><a name="patches_merged_into_the_stable_1_4_x_branch">Patches merged into the stable 1.4.x branch</a></h3>
 <pre>
  Date       Committer        Change# Description

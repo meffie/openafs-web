@@ -52,23 +52,19 @@
 </div>
 <!-- INDEX END -->
 
-<p>
-</p>
+
 <h1><a name="openafs_newsletter__volume_4__issue_5__march_2013">OpenAFS Newsletter, Volume 4, Issue 5, March 2013</a></h1>
-<p>
-</p>
+
 <h2><a name="_afs_introduction">/afs/Introduction</a></h2>
 <p>We have an exciting lineup for you in this issue of the OpenAFS Newsletter. If you follow the mailing lists, you may be aware of the &quot;ulimit&quot; issue with recent RedHat Enterprise 6 kernels and OpenAFS servers. Dan Van Der Ster of CERN has been kind enough to tell us the exciting tale of how his was first bitten by, then chased, and finally swatted this particular bug. And we have the first part in a series of articles on OpenAFS tuning. If you are looking to squeeze additional performance out of OpenAFS or to just optimize the AFS experience for your users, you should definitely read on.</p>
 <p>We start off the newsletter with a rare, but important set of OpenAFS security advisories.</p>
 <p>As always, your feedback and suggestions are welcome. Email us at: <a href="mailto:newsletter@openafs.org">newsletter@openafs.org</a></p>
-<p>
-</p>
+
 <h2><a name="security_advisories">Security Advisories</a></h2>
 <p>OpenAFS servers are subject to two security advisories, both dated 27-Feb-2013. Please take a look at</p>
 <p><a href="http://www.openafs.org/security">http://www.openafs.org/security</a></p>
 <p>for details. And update your servers as soon as possible.</p>
-<p>
-</p>
+
 <h2><a name="on_fileserver_segfaults__and_making_the_world_safe">On Fileserver Segfaults, and Making the World Safe</a></h2>
 <pre>
         Dr. Daniel C. van der Ster
@@ -112,8 +108,7 @@
 <p>[1] See &quot;performance and udp buffers&quot; on openafs-info, October 9, 2012.</p>
 <p>[2] The gory gdb debugging details are documented here: <a href="https://afs.web.cern.ch/afs/reports/html/afs200SegFaults.html">https://afs.web.cern.ch/afs/reports/html/afs200SegFaults.html</a></p>
 <p>[3] <a href="http://rt.central.org/rt/Ticket/Display.html?id=74708">http://rt.central.org/rt/Ticket/Display.html?id=74708</a></p>
-<p>
-</p>
+
 <h2><a name="did_you_know____ip_acl_gotchas">Did You Know... IP ACL Gotchas?</a></h2>
 <p>IP ACLs are a common way of allowing a host on a particular IP address access to some portion of AFS-space. And used properly, IP ACLs can be a quick way to allow some set of hosts access to a particular subset of AFS-space. But, IP ACLs have a couple of gotchas...</p>
 <ul>
@@ -129,8 +124,7 @@
 </ul>
 <p>The above are just a few highlights. More can be found on the AFS Wiki at:</p>
 <p><a href="http://wiki.openafs.org/IPAccessControl/">http://wiki.openafs.org/IPAccessControl/</a></p>
-<p>
-</p>
+
 <h2><a name="openafs_tuning__part_i__fileservers__general">OpenAFS tuning, part I: Fileservers, general</a></h2>
 <pre>
         Andrew Deason
@@ -154,8 +148,7 @@ do to the fileserver. We only cover some of the more serious issues
 and improvements I've seen made at various sites. We'll start off with some more
 general or high-level recommendations, and move in to adjusting actual options
 for the fileserver.</p>
-<p>
-</p>
+
 <h3><a name="dafs">DAFS</a></h3>
 <p>If you want a single fileserver to serve a lot of volumes, you should consider
 using the Demand Attach File Server (DAFS). &quot;A lot&quot; of volumes is not well
@@ -168,8 +161,7 @@ those volumes; this problem is simply due to the number of volumes on the
 server.</p>
 <p>If you want to migrate to DAFS, check out Appendix C of the OpenAFS Quick Start
 Guide for UNIX.</p>
-<p>
-</p>
+
 <h3><a name="use_readonly__ro__volumes">Use ReadOnly (RO) Volumes</a></h3>
 <p>[Explaining how RO volumes work and how to use them is beyond the scope of this
 article; this section assumes you are familiar with RO volumes.]</p>
@@ -189,8 +181,7 @@ beneficial for data that changes even up to around once every few hours. Of
 course, using ROs mean you must &quot;vos release&quot; the volumes, so there is some additional
 operational overhead and additional complexity. But purely from a performance
 point of view, in the above situations RO volumes are usually beneficial.</p>
-<p>
-</p>
+
 <h3><a name="load_balancing">Load Balancing</a></h3>
 <p>Another general recommendation is to try to distribute load evenly among all
 fileservers. There are several ways to determine &quot;load&quot;, but one easy way is to use
@@ -219,8 +210,7 @@ sites record this data raw or with minimal preprocessing in SQL databases for la
 automatically: the older &quot;balance&quot; from CMU
 <a href="ftp://ftp.andrew.cmu.edu/pub/AFS-Tools">ftp://ftp.andrew.cmu.edu/pub/AFS-Tools</a>, and the newer &quot;afs-balance&quot; from Russ
 Allbery: <a href="http://www.eyrie.org/~eagle/software/afs-balance/">http://www.eyrie.org/~eagle/software/afs-balance/</a>.</p>
-<p>
-</p>
+
 <h3><a name="clients_preventing_volumes_offlining">Clients Preventing Volumes Offlining</a></h3>
 <p>Sites sometimes see a volume release that seems to take a long time, or sites
 sometimes see a fileserver that takes a long time to shutdown. While there can
@@ -242,13 +232,11 @@ al), but these patches are not yet in any OpenAFS stable release. It is also
 possible to identify which clients are causing this problem (again with server
 cores/dumps), and fix or blacklist those clients, but that requires ongoing
 monitoring.</p>
-<p>
-</p>
+
 <h3><a name="fileserver_options">Fileserver Options</a></h3>
 <p>Here, we move into specific command line options that you can give to the
 fileserver to improve performance.</p>
-<p>
-</p>
+
 <h4><a name="_s_and__l">-S and -L</a></h4>
 <p>These set many options for &quot;small&quot; and &quot;large&quot; fileserver configurations. For
 modern machines, just set -L and you'll get a somewhat reasonable set of options
@@ -257,8 +245,7 @@ relying on the defaults, often results in inappropriate settings and may also re
 in insufficient resources allocated to the fileserver for good performance.
 Whether or not you specify -L, you can still configure specific options to tune
 various parameters, some of which are described below.</p>
-<p>
-</p>
+
 <h4><a name="_p__number_of_processes__and_calls_waiting">-p &lt;number of processes&gt; and &quot;calls waiting&quot;</a></h4>
 <p>The -p option sets the number of threads that handle incoming RPC requests, and
 so also sets how many requests the fileserver can handle at the same time. For
@@ -322,8 +309,7 @@ due to load alone, or due to disk or network problems, is beyond the scope of
 this section, and often involves more thorough investigation.</p>
 <p>The -p option and the general information in this section is also applicable to
 almost any OpenAFS process. It is possible to investigate and adjust the other processes in the same way, although for processes besides the fileserver it may not matter so much.</p>
-<p>
-</p>
+
 <h4><a name="_busyat__limit_">-busyat &lt;limit&gt;</a></h4>
 <p>Related to the -p option and the notion of &quot;calls waiting&quot; is the -busyat
 option. This option says that when the number of &quot;calls waiting&quot; is over a
@@ -338,8 +324,7 @@ fileserver to respond.</p>
 waiting&quot; it does not recover for a long period of time, it may be worth it to
 reduce the -busyat value. Clients will then not wait for a particular
 fileserver to respond when that fileserver will not respond in a timely manner.</p>
-<p>
-</p>
+
 <h4><a name="_cb__number_of_callbacks_">-cb &lt;number of callbacks&gt;</a></h4>
 <p>This option specifies how many &quot;callback promises&quot; the fileserver will keep
 track of in memory. If the number of callback promises required exceeds this
@@ -407,8 +392,7 @@ uncommon.</p>
 <p>In future versions of OpenAFS, the fileserver will also log a message in FileLog
 when it runs out of callback space (gerrit 6334). However, this behavior has not
 yet made it to current stable releases of OpenAFS (as of 1.6.2).</p>
-<p>
-</p>
+
 <h4><a name="_udpsize__socket_buffer_size_">-udpsize &lt;socket buffer size&gt;</a></h4>
 <p>This option dictates the size of the UDP receive buffer in the underlying OS. If
 the fileserver cannot read packets from the wire quickly enough, the fileserver may drop
@@ -434,8 +418,7 @@ affected using DTrace, if you want to narrow things down further.) So, the
 cause is likely to be related to OpenAFS.  The most likely candidates are the
 fileserver and volserver, so you may consider raising this option on both. The
 only downside in practice should be the additional memory usage.</p>
-<p>
-</p>
+
 <h4><a name="_vhashsize__hash_size___dafs_only_">-vhashsize &lt;hash size&gt; (DAFS only)</a></h4>
 <p>The use of this option is only applicable to the Demand Attach File Server
 (DAFS). If you're not using DAFS, this parameter is not configurable (and
@@ -453,8 +436,7 @@ should aim to make the number of hash buckets to be roughly around the number of
 volumes you expect to be on that fileserver. So, for example, if you expect a
 fileserver to serve somewhere around 200,000 volumes, try setting -vhashsize to
 17.</p>
-<p>
-</p>
+
 <h4><a name="other_options">Other options</a></h4>
 <p>Beyond the above, there are many more fileserver options which usually have
 relatively minor impact on performance (you may see -s, -l, -b, and others).

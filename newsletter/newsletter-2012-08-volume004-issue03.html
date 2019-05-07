@@ -43,19 +43,16 @@
 </div>
 <!-- INDEX END -->
 
-<p>
-</p>
+
 <h1><a name="openafs_newsletter__volume_4__issue_3__august_2012">OpenAFS Newsletter, Volume 4, Issue 3, August 2012</a></h1>
-<p>
-</p>
+
 <h2><a name="introduction">Introduction</a></h2>
 <p>Welcome back to the OpenAFS Newsletter.</p>
 <p>This edition features part 2 of our Windows Roaming Profiles Case Study. And, the debut of &quot;Did You Know...&quot; , which will feature lesser known hints,
 tips, and tidbits in addition to more misunderstood pieces of OpenAFS.</p>
 <p>If you have any suggestions for future topics or would like to contribute to the OpenAFS Newsletter, please contact Dave Botsch at newsletter (at)
 openafs.org .</p>
-<p>
-</p>
+
 <h2><a name="passing_of_rl_bob_morgan">Passing of RL &quot;Bob&quot; Morgan</a></h2>
 <p>OpenAFS recently learned of the passing of RL &quot;Bob&quot; Morgan.</p>
 <p>Bob was most recently known for his considerable work on identity management,
@@ -68,13 +65,11 @@ possibility of providing support for this open source AFS as &quot;R L Bob's AFS
 Company&quot;.  Bob will be sorely missed.</p>
 <p>More can be read here: <a href="https://spaces.internet2.edu/display/rlbob/Home">https://spaces.internet2.edu/display/rlbob/Home</a></p>
 <p>-Derrick Brashear</p>
-<p>
-</p>
+
 <h2><a name="openafs_1_6_1a_for_mountain_lion">OpenAFS 1.6.1a for Mountain Lion</a></h2>
 <p>OpenAFS 1.6.1a is a set of patches to 1.6.1 to update the MacOS AFS client, including the preferences pane. Installers for Mac OS X Lion and SnowLeopard are also available.</p>
 <p><a href="http://www.openafs.org/macos.html">http://www.openafs.org/macos.html</a> as always has links to all MacOS installers.</p>
-<p>
-</p>
+
 <h2><a name="openafs_for_windows_8_and_server_2012">OpenAFS for Windows 8 and Server 2012</a></h2>
 <p>On August 15th Microsoft made available the &quot;Release to Manufacturing&quot;
 builds of Windows 8 and Server 2012 to members of the following programs:</p>
@@ -123,8 +118,7 @@ device is if the hardware manufacturer chooses to bundle it.</p>
 <p>While OpenAFS can never be distributed via the Marketplace for X86 and
 AMD64/X64 Windows systems, there are no restrictions on the installation
 of third party file systems on those platforms.</p>
-<p>
-</p>
+
 <h2><a name="did_you_know____about_dkms">Did You Know... About DKMS?</a></h2>
 <p>DKMS stands for Dynamic Kernel Module Support. Designed by Dell, DKMS allows
 one to auto-build kernel modules. The auto build can take place when the system
@@ -139,8 +133,7 @@ dkms-openafs RPM. The install will take a bit longer than an usual RPM install
 since DKMS is building an openafs kernel module for your running kernel.</p>
 <p>And now, with each new kernel install, DKMS will ensure you have a matching OpenAFS kernel module.</p>
 <p>Read more about DKMS in Linux Journal: <a href="http://www.linuxjournal.com/article/6896">http://www.linuxjournal.com/article/6896</a></p>
-<p>
-</p>
+
 <h2><a name="case_study__windows_roaming_profiles__part_2">Case Study: Windows Roaming Profiles, Part 2</a></h2>
 <pre>
         Nathan Hatley
@@ -184,8 +177,7 @@ should instead be stored in the redirected folder.</p>
 <p>Many applications will also not store files in the location pointed to by the %TEMPT% environment variable. %TEMP% by default resolves to C:\Users\&lt;username&gt;\AppData\Local\Temp, on the local hard disk. Instead, the applications will store temporary files inside one of the two Appdata\Roaming folders. If using the redirected to AFS Appdata\Roaming folder, the application will experience a performance hit talking to AFS. This is an application specific configuration that must be attended to during application deployment.</p>
 <p>And for another gotcha, some applications attempt to perform NTFS specific operations in redirected folders. These operations not only fail in AFS but can result in odd behavior. One example is an application attempting to store data in an alternate stream or attempting to hide a file. This will not work in AFS. So, the user may encounter the normally hidden desktop.ini files throughout the user profile. Another example is pinning a program to the taskbar. When Google Chrome is pinned to the taskbar, Windows attempts to store additional data with the shortcut so that jump lists function. Because this operation fails, Google Chrome creates an additional temporary icon that lasts as long as chrome continues running.</p>
 <p>These issues are not show stoppers for us. And these issues will eventually be resolved. The incredible functionality brought about by combining OpenAFS with Windows Roaming Profiles and Windows Folder Redirection far exceeds any other competing solutions.</p>
-<p>
-</p>
+
 <h3><a name="appendix_a1__cross_realm_authentication_">Appendix A1.	Cross realm authentication:</a></h3>
 <p>Create a principal on the KDC with a strong password:</p>
 <pre>
@@ -277,8 +269,7 @@ should instead be stored in the redirected folder.</p>
 <p>NOTE: execute for each kdc server you wish to add</p>
 </li>
 </ol>
-<p>
-</p>
+
 <h3><a name="appendix_a2__afs_access_on_login_">Appendix A2.	AFS Access on login:</a></h3>
 <ul>
 <li><strong><a name="network_security" class="item">Network Security:</a></strong>
@@ -298,8 +289,7 @@ should instead be stored in the redirected folder.</p>
         &quot;LogonOptions&quot;=dword:00000001</pre>
 </li>
 </ul>
-<p>
-</p>
+
 <h3><a name="appendix_b1__roaming_profile_">Appendix B1.	Roaming profile:</a></h3>
 <p>Configure roaming profile for each user in AD: Active Directory users and computers.</p>
 <ol>
@@ -328,8 +318,7 @@ should instead be stored in the redirected folder.</p>
 
 </li>
 </ul>
-<p>
-</p>
+
 <h3><a name="appendix_b2__caching_of_roaming_profiles">Appendix B2. Caching of Roaming Profiles</a></h3>
 <ul>
 <li><strong><a name="delete_cached_copies_of_roaming_profiles_enabled" class="item">Delete cached copies of roaming profiles: enabled</a></strong>
@@ -344,8 +333,7 @@ should instead be stored in the redirected folder.</p>
 <p>The default for the above key is &quot;AppData\Local;AppData\LocalLow;$RecycleBin&quot; . We change the key to &quot;AppData\Local\Temp;$RecycleBin&quot; so that the folders LocalLow and Local (except temp) will be stored with the profile.</p>
 <p>However, &quot;AppData\Local&quot; is not normally a roaming folder. So, Applications will tend to store cache data in &quot;AppData\Local&quot;. To control profile bloat, we exclude the &quot;Temp&quot; subfolder (&quot;AppData\Local\Temp&quot;) from the Roaming Profile.</p>
 <p>Any additional cache data subfolders created by programs should also be added to this exclude list to keep profile size small.</p>
-<p>
-</p>
+
 <h3><a name="appendix_c__folder_redirection_">Appendix C.	Folder redirection:</a></h3>
 <p>User Configuration &gt; Policies &gt; Windows Settings &gt; Folder Redirection.</p>
 <p>Configure all folders except Start Menu to redirect to a common drive letter of your choice (we selected H:).</p>
@@ -405,8 +393,7 @@ should instead be stored in the redirected folder.</p>
 
 </li>
 </ul>
-<p>
-</p>
+
 <h3><a name="appendix_d__openafs_client_configuration">Appendix D.	OpenAFS Client Configuration</a></h3>
 <p>[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\AFD\Parameters]</p>
 <ul>

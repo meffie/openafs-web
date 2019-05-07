@@ -33,16 +33,13 @@
 </div>
 <!-- INDEX END -->
 
-<p>
-</p>
+
 <h1><a name="openafs_newsletter__volume_4__issue_2__may_2012">OpenAFS Newsletter, Volume 4, Issue 2, May 2012</a></h1>
-<p>
-</p>
+
 <h2><a name="introduction">Introduction</a></h2>
 <p>This edition of the OpenAFS newsletter is Part 1 of our Case Study on Windows Roaming Profiles in AFS. Part 1 is contributed by Lars Schimmer of the Graz University of Technology. Future newsletters will follow up with the next parts of our roaming profiles case study.</p>
 <p>But first, a quick update on what's new in AFS-land, starting with what to expect for OpenAFS 1.6.2, contributed by Derrick Brashear.</p>
-<p>
-</p>
+
 <h2><a name="openafs_1_6_2">OpenAFS 1.6.2</a></h2>
 <p>• &quot;No-offline&quot; volume release mechanism
 • Fixed partition statistics
@@ -50,8 +47,7 @@
 • Solaris and Linux changes for current revisions
 • vos convertROtoRW improvements
 • Improved offline volume reporting from the fileserver</p>
-<p>
-</p>
+
 <h2><a name="openafs_windows_1_7_14">OpenAFS Windows 1.7.14</a></h2>
 <p>1.7.14 fixes two major issues discovered in 1.7.13:</p>
 <pre>
@@ -74,19 +70,16 @@
 <pre>
  * Increased maximum path depth from 32 to 512 expanded components
    (symlinks, mount points, @sys substitutions)</pre>
-<p>
-</p>
+
 <h2><a name="2012_european_afs_and_kerberos_conference">2012 European AFS and Kerberos Conference</a></h2>
 <p>The 2012 European AFS and Kerberos Conference will take place in the University
 of Edinburgh School of Informatics from Tuesday 16th to Thursday 18th October
 2012.</p>
 <p>Full details are available at: <a href="http://openafs2012.inf.ed.ac.uk/">http://openafs2012.inf.ed.ac.uk/</a></p>
-<p>
-</p>
+
 <h2><a name="2012_afs_and_kerberos_best_practices_workshop_cancelled">2012 AFS and Kerberos Best Practices Workshop Cancelled</a></h2>
 <p>Unfortunately, the Best Practices Workshop will not take place this year. We look forward to returning in 2013.</p>
-<p>
-</p>
+
 <h2><a name="case_study__windows_roaming_profiles_in_openafs">Case Study: Windows Roaming Profiles in OpenAFS</a></h2>
 <p>The Institute of Computer Graphics and Knowledge Visualization started as a new institute at TU Graz in 2005. Already, we had chosen OpenAFS as the main storage platform for all our data. We had three different locations, a CAVE(tm) setup, and mostly Windows users; and we needed to provide the same data and workspace to our users no matter their work location. So, we decided to use a Windows Active Directory domain with user profiles stored in OpenAFS. As a happy side effect, with all user data saved in the central OpenAFS filespace we also solved the issue of user data backup from client machines.</p>
 <p>Over the past seven years, we have iterated both our hardware and software setups. Now, we have three OpenAFS database servers and three OpenAFS fileservers each offering 1 TeraByte partitions. The partitions themselves are not local to the fileservers but are iSCSI over gigabit network. While the OpenAFS servers are real (bare metal) servers for better performance, our two Windows AD servers are virtual servers. Services provided by these two Windows AD servers are Active Directory authentication to the Windows clients and Kerberos Domain Controller (KDC) servers for our Linux clients.</p>
