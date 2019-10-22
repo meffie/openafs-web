@@ -1,0 +1,133 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+OpenAFS Security Advisory 2019-002
+
+Topic: information leakage from uninitialized scalars
+
+Issued: 22 October, 2019
+Affected: OpenAFS versions 1.0 through 1.6.23, and 1.8.0 through 1.8.4
+
+Generated RPC handler routines only initialized local variables that would
+need to be freed, leaving uninitialized memory contents in RPC
+parameters of scalar type.  When combined with RPC implementations that
+also did not supply output values, this results in the contents of
+uninitialized memory being sent to the peer, even for successful RPCs.
+
+SUMMARY
+=======
+
+AFS-3 RPCs use the XDR data encoding to represent input/output arguments,
+and OpenAFS uses an XDR en/decoder that is tightly integrated to the Rx
+protocol implementation.  The generated RPC handler code takes care of
+allocating storage/variables for the input/output variables and reading the
+input parameters from the network into local storage before calling the
+function that implements the RPC logic.  Similarly, after that function
+call, the generated code takes care of encoding the output parameters into
+Rx packets and sending them to the peer as necessary, then deallocating the
+storage it allocated and returning control flow to the caller.  While
+the generated code is careful to initialize the local variables that
+might contain pointers to allocated memory (to ensure leak-free
+operation), scalar values (e.g., integers, flat structures) were not
+initialized.  Some RPC handlers in OpenAFS do not always write to all output
+variables, even in the case of a successful return, so the contents of these
+uninitialized variables would be encoded into the XDR stream and sent to the
+(potentially unauthenticated) peer.
+
+IMPACT
+======
+
+It is uncommon for the server-side implementation of an RPC to not write
+to its output variables on the success case, though multiple occurrences
+have been found during an incomplete survey, leaking between 4 and 8 bytes
+per call.  However, the actual amount and rate of data exposure is highly
+context-dependent, since the memory allocator behavior and other load on the
+system affect exactly what information is leaked from uninitialized memory.
+
+AFFECTED SOFTWARE
+=================
+
+All releases of OpenAFS prior to 1.6.24 are affected, as are OpenAFS
+1.8.0 through 1.8.4.
+
+FIXES
+=====
+
+The OpenAFS project recommends that administrators upgrade all machines
+to the 1.8.5 or 1.6.24 releases.  It is necessary to restart the server
+processes and cache manager in order for the fixes to take effect.
+
+DETAILS
+=======
+
+The AFS-3 protocol suite and OpenAFS extensions are run over the Rx RPC
+protocol.  A variant of Sun rpcgen, rxgen, is used to generate data
+en/decoding routines and client- and server-side stub functions from an
+interface description file.  In the RPC server, these stubs interface
+between the Rx network protocol layer and the implementation of the RPC
+server-side logic.  The server logic is written as a normal C function,
+taking input variables either as pointer-to-struct or scalar-by-value, and
+returning output variables via pointer arguments (allocating storage as
+appropriate).  The generated stub allocates storage on the stack for local
+variables to hold the input and ouput arguments of the RPC that are passed
+as arguments to the function implementing the server logic, but (as is
+common in code of this vintage) only initializes some of the variables
+to known values.  In particular, only the variables that will need to be
+passed to memory deallocation routines at the end of the function are
+initialized, to ensure that a garbage pointer is not passed to free().
+That leaves scalar types (integers, flat structures, etc.) with no
+explicit initialization, so references to them retrieve whatever
+happened to previously occupy that location in the program's address
+space.
+
+If an RPC implementation does not write to all its output variables (for
+example, if they correspond to some functionality that was not requested
+by the client or is disabled by configuration), then program execution
+will reach the end of the generated stub function without any value
+having been explicitly assigned to these (scalar) variables.  In
+particular, these uninitialized values are passed to the XDR encoder
+routine and  (as is common in code of this vintage) only initializes
+some of the variables to known values.  In particular, only the
+variables that will need to be passed to memory deallocation routines at
+the end of the function are initialized, to ensure that a garbage
+pointer is not passed to free().  That leaves scalar types (integers,
+flat structures, etc.) with no explicit initialization, so references to
+them retrieve whatever happened to previously occupy that location in
+the program's address space.  This includes when these variables are
+passed to the XDR encoder, so the uninitialized memory contents are
+encoded into the Rx stream and sent to the peer.
+
+Investigations surrounding this issue uncovered multiple RPCs known to leave
+output parameters uninitialized while returning success.  However, since the
+risk is systemic and best addressed with a systemic fix, no effort was made
+to perform a comprehensive search and enumerate the RPCs with the flaw.
+
+As with most avenues for information disclosure from uninitialized
+memory, vulnerabilities of this nature can be difficult to exploit, as
+there is not always context for *which* content from uninitialized
+memory is leaked to the caller, and that is in turn dependent on the
+allocation/deallocation patterns in the surrounding application and the
+other load patterns on the server.  However, there are worked examples
+in other software of attackers being able to massage allocator state and
+stack contents in order to exfiltrate specific information, so it should
+be assumed that such attacks are also possible here given a sufficiently
+dedicated attacker.
+
+ACKNOWLEDGMENTS
+===============
+
+Thanks to Andrew Deason for the detailed report and contributed patch.
+-----BEGIN PGP SIGNATURE-----
+
+iQG3BAEBCgAdFiEE2WGV4E2ARf9BYP0XKNmm82TrdRIFAl2vh/oACgkQKNmm82Tr
+dRLFwgweKkZFwtUAtZgpp8o96/yBTZ8iyuvDPYMN8LPobc/OqE6fxIdk8lwEQ696
+5F+N9nVXhwwVMqxP4PGw1qMVOyZFGwf3IXMMhgcZOQSepu6lwUeypRR/Ow0iFlI0
+XmeqI4F0PZGISpZlEc8HQ3/oASYWtMIatEs8vEWWpkrQLdYxKEZF2r9yMCdUwNwa
+QuqlEuORLa3aV4K7/c8JfWA3yi4GtYyoonZTeceS9s8MSHWgYtyH/0k3YQYsq57T
+vhJ+6MWG7WyNbbadJxngYACknaGtrk6Ifw2aIuKK1sUYKCqKvyO+BJXL68cBSupv
+rMG2+4RbKzmQXikQd3MxINTtu8ADhyqwQJi/UYHQXcHgyQJuIDKVu0W0PBJuKLQY
+u1JYB86ewsxOWazKIK1jbcMf15W6Jxhg6e1Wt5KrEFdoOinDgCnR7qWfPMxdLOQK
+UNxRX3T7wKZOFokU18dMX+TCKebb9fzxE0An/U5RsjtXWTodfi1Zo3A76KO1wFOn
+GCk+wKC+4tFeZg==
+=3pYF
+-----END PGP SIGNATURE-----

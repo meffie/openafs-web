@@ -1,0 +1,64 @@
+commit 6ec46ba7773089e1549d27a0d345afeca65c9472
+Author: Andrew Deason <adeason@sinenomine.net>
+Date:   Mon Sep 16 14:06:53 2019 -0500
+
+    OPENAFS-SA-2019-003: ubik: Avoid unlocked ubik_currentTrans deref
+    
+    Currently, SVOTE_Debug/SVOTE_DebugOld examine some ubik internal state
+    without any locks, because the speed of these functions is more
+    important than accuracy.
+    
+    However, one of the pieces of data we examine is ubik_currentTrans,
+    which we dereference to get ubik_currentTrans->type. ubik_currentTrans
+    could be set to NULL while this code is running, so there is a small
+    chance of this code causing a segfault, if SVOTE_Debug() is running
+    when the current transaction ends.
+    
+    We only ever initialize ubik_currentTrans as a write transation (via
+    SDISK_Begin), so this check is pointless anyway. Accordingly, skip the
+    type check, and always assume that any active transaction is a write
+    transaction.  This means we only ever access ubik_currentTrans once,
+    avoiding any risk of the value changing between accesses (and we no
+    longer need to dereference it, anyway).
+    
+    Note that, since ubik_currentTrans is not marked as 'volatile', some C
+    compilers, with certain options, can and do assume that its value will
+    not change between accesses, and thus only fetch the pointer value once.
+    This avoids the risk of NULL dereference (and thus, crash, if pointer
+    stores/loads are atomic), but the value pointed to by ubik_currentTrans->type
+    would be incorrect when the transaction ends during the execution of
+    SVOTE_Debug().
+    
+    Change-Id: Ia36c58e5906f5e8df59936f845ae11e886e8ec38
+    Reviewed-on: https://gerrit.openafs.org/13915
+    Reviewed-by: Benjamin Kaduk <kaduk@mit.edu>
+    Tested-by: Benjamin Kaduk <kaduk@mit.edu>
+
+diff --git a/src/ubik/vote.c b/src/ubik/vote.c
+index 34f285dcd2..1ae7456435 100644
+--- a/src/ubik/vote.c
++++ b/src/ubik/vote.c
+@@ -444,10 +444,7 @@ SVOTE_Debug(struct rx_call * rxcall, struct ubik_debug * aparm)
+ 
+     if (ubik_currentTrans) {
+ 	aparm->currentTrans = 1;
+-	if (ubik_currentTrans->type == UBIK_WRITETRANS)
+-	    aparm->writeTrans = 1;
+-	else
+-	    aparm->writeTrans = 0;
++	aparm->writeTrans = 1;
+     } else {
+ 	aparm->currentTrans = 0;
+     }
+@@ -527,10 +524,7 @@ SVOTE_DebugOld(struct rx_call * rxcall,
+ 
+     if (ubik_currentTrans) {
+ 	aparm->currentTrans = 1;
+-	if (ubik_currentTrans->type == UBIK_WRITETRANS)
+-	    aparm->writeTrans = 1;
+-	else
+-	    aparm->writeTrans = 0;
++	aparm->writeTrans = 1;
+     } else {
+ 	aparm->currentTrans = 0;
+     }

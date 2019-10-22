@@ -1,0 +1,118 @@
+commit 93aee3cf40622993b95bd1af77080a31670c24bb
+Author: Andrew Deason <adeason@sinenomine.net>
+Date:   Wed Aug 7 21:19:47 2019 -0500
+
+    OPENAFS-SA-2019-002: Zero all server RPC args
+    
+    Currently, our server-side RPC argument-handling code generated from
+    rxgen initializes complex arguments like so (for example, in
+    _RXAFS_BulkStatus):
+    
+        AFSCBFids FidsArray;
+        AFSBulkStats StatArray;
+        AFSCBs CBArray;
+        AFSVolSync Sync;
+    
+        FidsArray.AFSCBFids_val = 0;
+        FidsArray.AFSCBFids_len = 0;
+        CBArray.AFSCBs_val = 0;
+        CBArray.AFSCBs_len = 0;
+        StatArray.AFSBulkStats_val = 0;
+        StatArray.AFSBulkStats_len = 0;
+    
+    This is done for any input or output arguments, but only for types we
+    need to free afterwards (arrays, usually). We do not do this for
+    simple types, like single flat structs. In the above example, we do
+    this for the arrays FidsArray, StatArray, and CBArray, but 'Sync' is
+    not initialized to anything.
+    
+    If some server RPC handlers never set a value for an output argument,
+    this means we'll send uninitialized stack memory to our peer.
+    Currently this can happen in, for example,
+    MRXSTATS_RetrieveProcessRPCStats if 'rxi_monitor_processStats' is
+    unset (specifically, the 'clock_sec' and 'clock_usec' arguments are
+    never set when rx_enableProcessRPCStats() has not been called).
+    
+    To make sure we cannot send uninitialized data to our peer, change
+    rxgen to instead 'memset(&arg, 0, sizeof(arg));' for every single
+    parameter. Using memset in this way just makes this a little simpler
+    inside rxgen, since all we need to do this is the name of the
+    argument.
+    
+    With this commit, the rxgen-generated code for the above example now
+    looks like this:
+    
+        AFSCBFids FidsArray;
+        AFSBulkStats StatArray;
+        AFSCBs CBArray;
+        AFSVolSync Sync;
+    
+        memset(&FidsArray, 0, sizeof(FidsArray));
+        memset(&CBArray, 0, sizeof(CBArray));
+        memset(&StatArray, 0, sizeof(StatsArray));
+        memset(&Sync, 0, sizeof(Sync));
+    
+    Change-Id: Iedccc25e50ee32bd1144e652b951496cb7dde5d2
+    Reviewed-on: https://gerrit.openafs.org/13914
+    Reviewed-by: Andrew Deason <adeason@sinenomine.net>
+    Reviewed-by: Benjamin Kaduk <kaduk@mit.edu>
+    Tested-by: BuildBot <buildbot@rampaginggeek.com>
+
+diff --git a/src/rxgen/rpc_parse.c b/src/rxgen/rpc_parse.c
+index 4e1b6141d7..768e42f3ba 100644
+--- a/src/rxgen/rpc_parse.c
++++ b/src/rxgen/rpc_parse.c
+@@ -1435,8 +1435,6 @@ ss_ProcSpecial_setup(definition * defp)
+ 		if (streq(string, structname(plist->pl.param_type))) {
+ 		    plist->pl.string_name = spec->sdef.string_name;
+ 		    plist->pl.param_flag |= FREETHIS_PARAM;
+-		    fprintf(fout, "\n\t%s.%s = 0;", plist->pl.param_name,
+-			    spec->sdef.string_name);
+ 		}
+ 	    }
+ 	}
+@@ -1451,22 +1449,13 @@ ss_ProcSpecial_setup(definition * defp)
+ 		    case REL_ARRAY:
+ 			plist->pl.string_name = alloc(40);
+ 			if (brief_flag) {
+-			    f_print(fout, "\n\t%s.val = 0;",
+-				    plist->pl.param_name);
+-			    f_print(fout, "\n\t%s.len = 0;",
+-				    plist->pl.param_name);
+ 			    s_print(plist->pl.string_name, "val");
+ 			} else {
+-			    f_print(fout, "\n\t%s.%s_val = 0;",
+-				    plist->pl.param_name, defp1->def_name);
+-			    f_print(fout, "\n\t%s.%s_len = 0;",
+-				    plist->pl.param_name, defp1->def_name);
+ 			    s_print(plist->pl.string_name, "%s_val",
+ 				    defp1->def_name);
+ 			}
+ 			break;
+ 		    case REL_POINTER:
+-			f_print(fout, "\n\t%s = 0;", plist->pl.param_name);
+ 			plist->pl.string_name = NULL;
+ 			break;
+ 		    default:
+@@ -1482,13 +1471,19 @@ ss_ProcSpecial_setup(definition * defp)
+ 	    if (plist->component_kind == DEF_PARAM) {
+ 		if (streq(defp1->def_name, structname(plist->pl.param_type))) {
+ 		    plist->pl.param_flag |= FREETHIS_PARAM;
+-		    fprintf(fout, "\n\tmemset(&%s, 0, sizeof(%s));",
+-				 plist->pl.param_name, defp1->def_name);
+ 		}
+ 	    }
+ 	}
+     }
+ 
++    for (plist = defp->pc.plists; plist; plist = plist->next) {
++	if (plist->component_kind == DEF_PARAM) {
++	    fprintf(fout, "\n\tmemset(&%s, 0, sizeof(%s));",
++		    plist->pl.param_name,
++		    plist->pl.param_name);
++	}
++    }
++
+     f_print(fout, "\n");
+ }
+ 

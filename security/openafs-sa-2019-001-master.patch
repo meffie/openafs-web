@@ -1,0 +1,81 @@
+commit ea276e83e37e5bd27285a3d639f2158639172786
+Author: Andrew Deason <adeason@sinenomine.net>
+Date:   Wed Aug 7 20:50:47 2019 -0500
+
+    OPENAFS-SA-2019-001: Skip server OUT args on error
+    
+    Currently, part of our server-side RPC argument-handling code that's
+    generated from rxgen looks like this (for example):
+    
+        z_result = SRXAFS_BulkStatus(z_call, &FidsArray, &StatArray, &CBArray, &Sync);
+        z_xdrs->x_op = XDR_ENCODE;
+        if ((!xdr_AFSBulkStats(z_xdrs, &StatArray))
+             || (!xdr_AFSCBs(z_xdrs, &CBArray))
+             || (!xdr_AFSVolSync(z_xdrs, &Sync)))
+                z_result = RXGEN_SS_MARSHAL;
+    fail:
+        [...]
+        return z_result;
+    
+    When the server routine for implementing the RPC results a non-zero
+    value into z_result, the call will be aborted. However, before we
+    abort the call, we still call the xdr_* routines with XDR_ENCODE for
+    all of our output arguments. If the call has not already been aborted
+    for other reasons, we'll serialize the output argument data into the
+    Rx call. If we push more data than can fit in a single Rx packet for
+    the call, then we'll also send that data to the client. Many server
+    routines for implementing RPCs do not initialize the memory inside
+    their output arguments during certain errors, and so the memory may be
+    leaked to the peer.
+    
+    To avoid this, just jump to the 'fail' label when a nonzero 'z_result'
+    is returned. This means we skip sending the output argument data to
+    the peer, but we still free any argument data that needs freeing, and
+    record the stats for the call (if needed). This makes the above
+    example now look like this:
+    
+        z_result = SRXAFS_BulkStatus(z_call, &FidsArray, &StatArray, &CBArray, &Sync);
+        if (z_result)
+            goto fail;
+        z_xdrs->x_op = XDR_ENCODE;
+        if ((!xdr_AFSBulkStats(z_xdrs, &StatArray))
+             || (!xdr_AFSCBs(z_xdrs, &CBArray))
+             || (!xdr_AFSVolSync(z_xdrs, &Sync)))
+                z_result = RXGEN_SS_MARSHAL;
+    fail:
+        [...]
+        return z_result;
+    
+    Change-Id: I2bdea2e808bb215720492b0ba6ac1a88da61b954
+    Reviewed-on: https://gerrit.openafs.org/13913
+    Reviewed-by: Andrew Deason <adeason@sinenomine.net>
+    Tested-by: BuildBot <buildbot@rampaginggeek.com>
+    Reviewed-by: Benjamin Kaduk <kaduk@mit.edu>
+
+diff --git a/src/rxgen/rpc_parse.c b/src/rxgen/rpc_parse.c
+index 492bfb0853..4e1b6141d7 100644
+--- a/src/rxgen/rpc_parse.c
++++ b/src/rxgen/rpc_parse.c
+@@ -1301,7 +1301,12 @@ cs_ProcTail_setup(definition * defp, int split_flag)
+ static void
+ ss_Proc_CodeGeneration(definition * defp)
+ {
+-    defp->can_fail = 0;
++    extern char zflag;
++
++    if (zflag)
++	defp->can_fail = 0;
++    else
++	defp->can_fail = 1;
+     ss_ProcName_setup(defp);
+     if (!cflag) {
+ 	ss_ProcParams_setup(defp);
+@@ -1546,6 +1551,8 @@ ss_ProcCallRealProc_setup(definition * defp)
+     f_print(fout, ");\n");
+     if (zflag) {
+ 	f_print(fout, "\tif (z_result)\n\t\treturn z_result;\n");
++    } else {
++	f_print(fout, "\tif (z_result)\n\t\tgoto fail;\n");
+     }
+ }
+ 

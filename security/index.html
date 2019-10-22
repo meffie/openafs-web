@@ -25,6 +25,95 @@ When sending sensitive information, we ask that you encrypt it
 with PGP.
 
 <hr>
+<a name="OPENAFS-SA-2019-003"></a>
+<h2>OPENAFS-SA-2019-003 - crash in database servers</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>22-Oct-2019</td></tr>
+<tr><th align="left">Last Update:</th><td>22-Oct-2019</td></tr>
+<tr><th align="left">Severity:</th><td>Medium</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS server versions 1.0 through 1.6.23, 1.8.0 through 1.8.4 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2019-003-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2019-003-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2019-003-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2019-003-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2019-003-master.patch">
+  https://www.openafs.org/security/openafs-sa-2019-003-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2019-003.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2019-003.txt</a>
+</td></tr>
+</table>
+<p>The ubik debugging RPCs prioritize being fast and non-disruptive to
+database operations over strict correctness, and do not adhere to the
+usual locking protocol for data access.  A data race could cause a NULL
+dereference if the second memory load was not optimized out by the
+compiler
+
+<a name="OPENAFS-SA-2019-002"></a>
+<h2>OPENAFS-SA-2019-002 - information leakage from uninitialized scalars</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>22-Oct-2019</td></tr>
+<tr><th align="left">Last Update:</th><td>22-Oct-2019</td></tr>
+<tr><th align="left">Severity:</th><td>Low</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.23, 1.8.0 through 1.8.4 ;
+  OpenAFS server versions 1.0 through 1.6.23, 1.8.0 through 1.8.4 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2019-002-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2019-002-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2019-002-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2019-002-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2019-002-master.patch">
+  https://www.openafs.org/security/openafs-sa-2019-002-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2019-002.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2019-002.txt</a>
+</td></tr>
+</table>
+<p>Generated RPC handler routines did not initialize output variables of
+scalar (fixed-length) type, since they did not require dedicated logic to
+free.  Such variables allocated on the stack could remain uninitialized
+in some cases (including those affected by OPENAFS-SA-2019-001), and the
+contents of uninitialized memory would be returned to the peer.
+
+<a name="OPENAFS-SA-2019-001"></a>
+<h2>OPENAFS-SA-2019-001 - information leakage in failed RPC output</h2>
+<table border=0>
+<tr><th align="left">Issued:</th><td>22-Oct-2019</td></tr>
+<tr><th align="left">Last Update:</th><td>22-Oct-2019</td></tr>
+<tr><th align="left">Severity:</th><td>Low</td></tr>
+<tr><th align="left">Affected:</th><td>
+  OpenAFS client versions 1.0 through 1.6.23, 1.8.0 through 1.8.4 ;
+  OpenAFS server versions 1.0 through 1.6.23, 1.8.0 through 1.8.4 .</td></tr>
+<tr><th align="left">Patch:</th><td>
+  <a href="openafs-sa-2019-001-stable16.patch">
+  https://www.openafs.org/security/openafs-sa-2019-001-stable16.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2019-001-stable18.patch">
+  https://www.openafs.org/security/openafs-sa-2019-001-stable18.patch</a><br>
+</td><td>
+  <a href="openafs-sa-2019-001-master.patch">
+  https://www.openafs.org/security/openafs-sa-2019-001-master.patch</a><br>
+</td></tr>
+<tr><th align="left">Full Text:</th><td>
+  <a href="OPENAFS-SA-2019-001.txt">
+  https://www.openafs.org/security/OPENAFS-SA-2019-001.txt</a>
+</td></tr>
+</table>
+<p>Generated RPC handler routines ran output variables through XDR encoding
+even when the call had failed and would shortly be aborted (and for
+which uninitialized output variables is common); any complete packets
+assembled in the process would be sent to the peer, leaking the contents
+of the uninitialized memory in question.
+
 <a name="OPENAFS-SA-2018-003"></a>
 <h2>OPENAFS-SA-2018-003 - denial of service due to excess resource consumption</h2>
 <table border=0>
@@ -967,9 +1056,24 @@ for this vulnerability.
   <td><a href="#OPENAFS-SA-2018-002">information leakage from uninitialized RPC output variables</a></td>
 </tr>
 <tr>
-  <td>2018-002</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
+  <td>2018-003</td><td>11-Sep-2018</td><td>11-Sep-2018</td>
   <td>Medium</td><td>1.0-1.6.22.4,1.8.0-1.8.1.1</td>
   <td><a href="#OPENAFS-SA-2018-003">denial of service due to excess resource consumption</a></td>
+</tr>
+<tr>
+  <td>2019-001</td><td>22-Oct-2019</td><td>22-Oct-2019</td>
+  <td>Low</td><td>1.0-1.6.23,1.8.0-1.8.4</td>
+  <td><a href="#OPENAFS-SA-2019-001">information leakage in failed RPC output</a></td>
+</tr>
+<tr>
+  <td>2019-002</td><td>22-Oct-2019</td><td>22-Oct-2019</td>
+  <td>Low</td><td>1.0-1.6.23,1.8.0-1.8.4</td>
+  <td><a href="#OPENAFS-SA-2019-002">information leakage from uninitialized scalars</a></td>
+</tr>
+<tr>
+  <td>2019-003</td><td>22-Oct-2019</td><td>22-Oct-2019</td>
+  <td>Medium</td><td>1.0-1.6.23,1.8.0-1.8.4</td>
+  <td><a href="#OPENAFS-SA-2019-003">crash in database servers</a></td>
 </tr>
 </table>
 
