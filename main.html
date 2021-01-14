@@ -55,6 +55,26 @@ OpenAFS Foundation website</a>.</p>
 <h2>Recent OpenAFS News</h2>
 <div id="news">
 
+<h4>14-Jan-2021 - OpenAFS 1.8.7 - Emergency bugfix release for UNIX/Linux</h4>
+<p>OpenAFS 1.8.7 is the next release in the current stable series of OpenAFS
+releases for UNIX/Linux systems.  It fixes a critical issue in the generation
+of Rx connection IDs that prevent Rx clients started after
+14 Jan 2021 08:25:36 AM UTC from being able to successfully make connections.
+In addition to cache managers and client utilities, fileservers and
+database servers are also affected, since they initiate connections to
+(other) database servers during their normal operation.
+</p>
+<p>The issue occurs only at startup, while generating the initial connection
+ID, so cache managers or servers that were already running at the time
+in question will not be affected until they restart.
+</p>
+
+<p>For more information:</p>
+<ul>
+  <li><a href="/dl/openafs/1.8.7/RELNOTES-1.8.7" target="_top">Read the 1.8.7 release notes</a></li>
+  <li><a href="/release/openafs-1.8.7.html" target="_top">Go to the 1.8.7 distribution page</a></li>
+</ul>
+
 <h4>02-Oct-2020 - OpenAFS 1.9.0 - Development release for UNIX/Linux</h4>
 <p>OpenAFS 1.9.0 is the first in a series of OpenAFS development
 releases intended to facilitate testing of new features.  It should not
