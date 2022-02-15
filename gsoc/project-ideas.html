@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Summer of Code Project Ideas</title>
+    <meta http-equiv="Content-Language" content="en-us">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="https://www.openafs.org/openafs.css" rel="stylesheet" type="text/css">
+  </head>
+<body>
+
+<h1>Google Summer of Code Project Ideas</h1>
+
+<p>For information about OpenAFS's participation in the Google Summer of Code
+project, please see <a href="/gsoc.html">this</a> page.</p>
+
+<p>The following list represents some of our ideas and wishes for the project.
+However, suggesting your own idea is always encouraged. Please review the <a
+href="https://gerrit.openafs.org">OpenAFS Gerrit</a> and <a
+href="https://github.com/openafs-contrib">OpenAFS Contrib</a> for projects
+already in progress.</p>
+
+
+<h2><em>Idea:</em> OpenAFS for macOS Preference Pane</h2>
+
+<p><em>Description:</em>
+The OpenAFS for macOS client includes a GUI preference pane for configuring the
+client, as a more user friendly alternative to command line tools. However,
+much of the preference pane is not functional on current versions of macOS due
+to security model changes by Apple.  In this project, the student will update
+the OpenAFS preference pane to use modern security APIs to restore
+functionality and generally update the user interface.</p>
+
+<p><em>Mentor:</em> Marcio Barbosa</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C, Objective-C</p>
+
+
+
+<h2><em>Idea:</em> afsio: Mount point and ACL creation</h2>
+<p><em>Description:</em>
+The <code>afsio</code> is a command line client which can read or write files
+out of the AFS filesystem without the requirement for a kernel module. It is
+currently limited to anonymous reading and writing files. In this project, the
+functionally would be expanded to authenticated access (via a security key),
+and the ability to create mount points within an AFS volume, and the ability to
+read and set access control lists on directories with AFS.  This would allow
+site administrators and developers to create new AFS cells with only userspace
+command line tools on the servers.</p>
+
+<p><em>Mentor:</em> Mark Vitale</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C</p>
+
+
+<h2><em>Idea:</em> Per volume reverse name lookup index</h2>
+
+<p><em>Description:</em> Directory entries are stored within AFS3 directory
+objects in directory vnodes. The directory objects provide a fast lookup of
+directory entry names to vnode id numbers. Code exists to do reverse id to name
+lookup, however reverse lookups are computationally expensive, so does not
+perform well.</p>
+
+<p>In this project, a new per volume index will be introduced which provides a
+id to path name(s) lookup for a given file id within the volume. The index can
+be created when the volume is created or restored, and updated on directory
+updates.  This new index could be used by the <code>volscan</code> utility to
+vastly improve performance of the volume meta data scanning, and in the future
+be used to provide fast file find services.</p>
+
+<p><em>Mentor:</em> Mark Vitale</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Advanced</p>
+
+<p><em>Languages:</em> C</p>
+
+
+<h2><em>Idea:</em> Fileserver memory footprint autotuning</h2>
+
+<p><em>Description:</em>OpenAFS fileserver installations require a set of
+command line options to specify the amount of memory to be used by the
+fileserver process. These options need to be tuned to the target host.  Presets
+are available for classes of machine sizes, but all of them are unusable small
+for modern environments.  Instead of continuing to add new presets, in the
+project a new autotuning mode will be implemented to allow the fileserver to
+automatically adjust it's memory footprint to the available machine memory.  A
+starting point for implementation is available in the OpenAFS gerrit code
+review system.</p>
+
+<p><em>Mentor:</em> Michael Meffie</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C</p>
+
+
+<h2><em>Idea:</em> Program language bindings for OpenAFS tool suite</h2>
+
+<p><em>Description:</em>OpenAFS provides a set of command-line tools to manage
+services, volumes, users, groups, and access controls (i.e., <code>vos</code>,
+<code>pts</code>, <code>fs</code>). A set of C language libraries are also
+available for sites to implement tooling, but these libraries are typically
+lower level and do not include all the functionality included in the
+command-line tools.</p>
+<p>In this project, a C language interface and a set of SWIG binding would
+be introduced to allow the same code executed by the command-line tools
+to be executed programmatically. A good implementation would minimize code
+churn.</p>
+
+<p><em>Mentor:</em> Michael Meffie</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C</p>
+
+
+<h2><em>Idea:</em> OpenAFS Load Testing</h2>
+
+<p><em>Description:</em>
+Develop an OpenAFS plugin for the JMeter open-source stress testing tool to
+support stress testing file servers and volume location servers. The plugin
+will be implemented in Java. A Java-to-C interface (JNI) will be required to
+implement client plugin.</p>
+
+<ul>
+<li>Develop a plugin with JNI to mimic a large number of AFS3 clients by
+  the JMeter stress test tool.</li>
+<li>Support testing of volume location servers (volume lookup queries)</li>
+<li>Support testing of file servers (file read/write accesses)</li>
+<li>Develop and document JMeter setup with OpenAFS to perform
+  various stress testing scenarios.</li>
+</ul>
+
+<p><em>Mentor:</em> Andrew Deason</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> Java, JNI, C</p>
+
+
+
+
+<h2><em>Idea:</em> OpenAFS Integration Testing Improvements</h2>
+
+<p><em>Description:</em>
+In this project, the student would improve the set of basic OpenAFS integration
+tests, implemented with the Robot Framework open source test automation
+framework.  The test cases are implemented in the Robot Framework keyword
+language. A set of OpenAFS specific keywords are implemented in Python.
+Ansible Molecule templates are provided to create working test environments
+quickly using Vagrant or cloud-hosted virtual machines.</p>
+
+<p>Additional tests and keywords would be implemented under the guidance of the
+mentor.</p>
+
+<p><em>Project site:</em> https://github.com/openafs-contrib/openafs-robotest</p>
+
+<p><em>Mentor:</em> Ralf Brunckhorst</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> Python, Robot Framework</p>
+
+
+
+</body>
+</html>
