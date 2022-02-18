@@ -65,10 +65,10 @@ command line tools on the servers.</p>
 <p><em>Description:</em> Directory entries are stored within AFS3 directory
 objects in directory vnodes. The directory objects provide a fast lookup of
 directory entry names to vnode id numbers. Code exists to do reverse id to name
-lookup, however reverse lookups are computationally expensive, so does not
+lookup. However, reverse lookups are computationally expensive, so do not
 perform well.</p>
 
-<p>In this project, a new per volume index will be introduced which provides a
+<p>In this project, a new per volume index will be introduced which provides an
 id to path name(s) lookup for a given file id within the volume. The index can
 be created when the volume is created or restored, and updated on directory
 updates.  This new index could be used by the <code>volscan</code> utility to
@@ -105,7 +105,7 @@ review system.</p>
 <p><em>Languages:</em> C</p>
 
 
-<h2><em>Idea:</em> Program language bindings for OpenAFS tool suite</h2>
+<h2><em>Idea:</em> Language bindings for the OpenAFS tool suite</h2>
 
 <p><em>Description:</em>OpenAFS provides a set of command-line tools to manage
 services, volumes, users, groups, and access controls (i.e., <code>vos</code>,
@@ -127,7 +127,65 @@ churn.</p>
 <p><em>Languages:</em> C</p>
 
 
-<h2><em>Idea:</em> OpenAFS Load Testing</h2>
+
+<h2><em>Idea:</em> Modern, RxGK-only, secure ecosystem</h2>
+
+<p><em>Description:</em> The RxGK security class is available in development
+branches and provides current industry standard encryption types data over the
+wire, as well as other modern features.  In this project the contributor would
+develop a RxGK-only, secure ecosystem that makes a clean break from legacy
+deployments.  The developed code could be integrated into the tree as an
+option.</p>
+
+<p><em>Mentor:</em> </p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C</p>
+
+
+
+<h2><em>Idea:</em> Expanding the Rx selective ACK table</h2>
+
+<p><em>Description:</em>  The Rx transport code contains a 255-byte array to
+indicate whether the corresponding packet has been received - only one bit of
+each byte is in use. Using all the available bits of the data structure would
+allow the transmit window to grow to 2040 packets, which could allow for Rx
+traffic over larger bandwidth delay product (the product of a data link's
+capacity and its round-trip delay time) network links.</p>
+
+<p><em>Mentor:</em> </p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C</p>
+
+
+
+
+<h2><em>Idea:</em> OpenAFS Fuzz Test Automation</h2>
+<p><em>Description:</em> Fuzz testing or fuzzing is an automated software
+testing method that injects invalid, malformed, or unexpected inputs into a
+system to reveal software defects and vulnerabilities. The student would
+implement fuzz testing in the OpenAFS test suite against Rx RPC and other
+OpenAFS inputs to uncover crashes or other bugs.</p>
+
+<p><em>Mentor:</em> Mark Vitale</p>
+
+<p><em>Project Size:</em> 175 hours</p>
+
+<p><em>Skill Level:</em> Intermediate</p>
+
+<p><em>Languages:</em> C</p>
+
+
+
+
+<h2><em>Idea:</em> OpenAFS Load Test Automation</h2>
 
 <p><em>Description:</em>
 Develop an OpenAFS plugin for the JMeter open-source stress testing tool to
@@ -155,13 +213,13 @@ implement client plugin.</p>
 
 
 
-<h2><em>Idea:</em> OpenAFS Integration Testing Improvements</h2>
+<h2><em>Idea:</em> OpenAFS Integration Test Automation</h2>
 
 <p><em>Description:</em>
 In this project, the student would improve the set of basic OpenAFS integration
 tests, implemented with the Robot Framework open source test automation
-framework.  The test cases are implemented in the Robot Framework keyword
-language. A set of OpenAFS specific keywords are implemented in Python.
+framework.  The test cases themselves are implemented in the Robot Framework keyword
+language.  A set of OpenAFS specific keywords are implemented in Python.
 Ansible Molecule templates are provided to create working test environments
 quickly using Vagrant or cloud-hosted virtual machines.</p>
 
@@ -176,7 +234,7 @@ mentor.</p>
 
 <p><em>Skill Level:</em> Intermediate</p>
 
-<p><em>Languages:</em> Python, Robot Framework</p>
+<p><em>Languages:</em> Python, Robot Framework, Ansible</p>
 
 
 
